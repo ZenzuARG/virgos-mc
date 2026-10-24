@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import concurrent.futures
+import time
 import urllib.request
 from pathlib import Path
 
@@ -16,26 +18,37 @@ def fetch(record: dict, target: Path) -> None:
     name = record.get("filename", record.get("file", target.name))
     if target.is_file() and hashlib.new(algorithm, target.read_bytes()).hexdigest() == expected:
         return
-    request = urllib.request.Request(record["url"], headers={"User-Agent": "VirgosMC-ReleaseBuilder/1.0"})
-    with urllib.request.urlopen(request, timeout=180) as response:
-        data = response.read()
-    actual = hashlib.new(algorithm, data).hexdigest()
-    if actual != expected:
-        raise SystemExit(f"Hash mismatch: {name}")
-    temporary = target.with_name(target.name + ".partial")
-    temporary.write_bytes(data)
-    temporary.replace(target)
+    for attempt in range(5):
+        try:
+            request = urllib.request.Request(record["url"], headers={"User-Agent": "VirgosMC-ReleaseBuilder/1.0"})
+            with urllib.request.urlopen(request, timeout=180) as response:
+                data = response.read()
+            actual = hashlib.new(algorithm, data).hexdigest()
+            if actual != expected:
+                raise ValueError(f"Hash mismatch: {name}")
+            temporary = target.with_name(target.name + ".partial")
+            temporary.write_bytes(data)
+            temporary.replace(target)
+            print(f"Fetched {name}", flush=True)
+            return
+        except Exception:
+            if attempt == 4:
+                raise
+            time.sleep(2 ** attempt)
 
 
 def main() -> None:
     lock = json.loads((ROOT / "pack/mods.lock.json").read_text(encoding="utf-8"))
     downloads = ROOT / ".cache/pack/downloads"
     client = [a for a in lock["artifacts"] if "client" in a["sides"] and a["mode"] != "tool"]
-    for record in client:
-        fetch(record, downloads / record["filename"])
+    client_targets = [(record, downloads / record["filename"]) for record in client]
     runtime = json.loads((ROOT / "pack/client-runtime.lock.json").read_text(encoding="utf-8"))
-    fetch(runtime["java"], ROOT / ".cache" / runtime["java"]["file"])
-    fetch(runtime["forge"], ROOT / ".cache/pack" / runtime["forge"]["file"])
+    runtime_targets = [
+        (runtime["java"], ROOT / ".cache" / runtime["java"]["file"]),
+        (runtime["forge"], ROOT / ".cache/pack" / runtime["forge"]["file"]),
+    ]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        list(pool.map(lambda pair: fetch(*pair), client_targets + runtime_targets))
     print(json.dumps({"clientArtifacts": len(client), "runtime": "verified"}))
 
 
