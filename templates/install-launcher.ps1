@@ -20,8 +20,7 @@ try {
     if (Get-Process -Name MinecraftLauncher,TLauncher -ErrorAction SilentlyContinue) { throw 'Cierra el launcher antes de instalar. Luego toca Reintentar.' }
     $gameProcesses = Get-CimInstance Win32_Process -Filter "Name='java.exe' OR Name='javaw.exe'" -ErrorAction SilentlyContinue
     if (@($gameProcesses | Where-Object { $_.CommandLine -and $_.CommandLine.IndexOf($game,[StringComparison]::OrdinalIgnoreCase) -ge 0 -and $_.CommandLine -match 'forgeclient|net\.minecraft\.client' }).Count) { throw 'Cierra Minecraft antes de actualizar esta carpeta. Luego toca Reintentar.' }
-    $memory = [int]$request.memoryMb
-    if ($memory -lt 4096 -or $memory -gt 6144) { throw 'Memoria no valida.' }
+    $memory = Resolve-VirgosClientMemoryMb ([int]$request.memoryMb)
     $tlConfig=if($request.tlauncherConfig){[IO.Path]::GetFullPath($request.tlauncherConfig)}else{Find-TLauncherSettingsPath}
     if($request.launcher -eq 'TLauncher'){Assert-TLauncherClosed;[void](Read-TLauncherSettings $tlConfig)}
     $runtime = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'runtime.lock.json') -Raw -Encoding UTF8 | ConvertFrom-Json

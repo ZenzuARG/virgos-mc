@@ -57,7 +57,7 @@ function Find-TLauncherSettingsPath {
 }
 function Set-VirgosTLauncher([string]$Path,[string]$GameDir,[int]$MemoryMb,[string]$BackupRoot) {
     Assert-TLauncherClosed
-    if($MemoryMb -lt 4096 -or $MemoryMb -gt 6144) { throw 'Memoria fuera del rango permitido.' }
+    if($MemoryMb -lt 4096 -or $MemoryMb -gt 8192) { throw 'Memoria fuera del rango permitido.' }
     $path=[IO.Path]::GetFullPath($Path);$text=Read-TLauncherSettings $path
     $updates=[ordered]@{'minecraft.gamedir'=[IO.Path]::GetFullPath($GameDir);'minecraft.memory.ram2'=[string]$MemoryMb;'minecraft.memory.ram3'=[string]$MemoryMb;'login.version.game'='1.20.1-forge-47.4.22';'minecraft.versions.modified'='true';'minecraft.java.selected'='0';'modpack.combobox.index'='0'}
     $recordPath=Join-Path $BackupRoot 'tlauncher-ajustes.json'

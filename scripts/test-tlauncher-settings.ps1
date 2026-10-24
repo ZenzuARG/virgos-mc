@@ -2,8 +2,10 @@
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 . (Join-Path $root 'templates\installer-common.ps1')
 . (Join-Path $root 'templates\tlauncher-settings.ps1')
-$sandbox=Join-Path $root ('.lab\tlauncher-settings-'+[Guid]::NewGuid().ToString('N'))
+function Assert-TLauncherClosed {} # Fixture-only: no real process inspection.
+$sandbox=Join-Path ([IO.Path]::GetTempPath()) ('virgos-tlauncher-settings-'+[Guid]::NewGuid().ToString('N'))
 [void][IO.Directory]::CreateDirectory($sandbox)
+Write-Host ('SCRATCH='+$sandbox)
 $file=Join-Path $sandbox 'tlauncher-2.0.properties'
 $backup=Join-Path $sandbox 'backup'
 $checks=New-Object Collections.Generic.List[string]
@@ -20,9 +22,9 @@ Assert ((Get-TLProperty $changed 'minecraft.java.selected') -eq '0' -and (Get-TL
 Assert ($changed.Contains('unknown.setting=keep\\:exact') -and $changed.Contains('locale=es_ES')) 'Unmanaged settings preserved literally'
 $record=Get-Content -LiteralPath (Join-Path $backup 'tlauncher-ajustes.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 Assert ([IO.File]::ReadAllText($record.backup) -ceq $original) 'Exact original backup retained'
-[void](Set-VirgosTLauncher $file $game 6144 $backup)
+[void](Set-VirgosTLauncher $file $game 8192 $backup)
 $record=Get-Content -LiteralPath (Join-Path $backup 'tlauncher-ajustes.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-Assert ($record.original.'minecraft.memory.ram2' -eq '3072' -and $record.managed.'minecraft.memory.ram2' -eq '6144') 'Repair keeps first original and updates managed values'
+Assert ($record.original.'minecraft.memory.ram2' -eq '3072' -and $record.managed.'minecraft.memory.ram2' -eq '8192' -and $record.managed.'minecraft.memory.ram3' -eq '8192') 'Eight-GiB repair keeps first original and updates both managed values'
 $changed=Read-TLauncherSettings $file
 [IO.File]::WriteAllText($file,$changed.Replace('locale=es_ES','locale=en_US'),$script:Utf8)
 Restore-VirgosTLauncher $backup
@@ -47,5 +49,5 @@ Assert ((ConvertFrom-TLProperty 'Jos\u00e9\tA') -ceq "José`tA") 'Java unicode a
 # Leave a real patched fixture for the upstream Java Properties parser check.
 [IO.File]::WriteAllText($file,$original,$script:Utf8)
 [void](Set-VirgosTLauncher $file $game 5120 $backup)
-Write-JsonAtomic (Join-Path $root '.lab\reports\tlauncher-settings-v4.json') @{passed=$true;powershell=$PSVersionTable.PSVersion.ToString();checks=$checks.ToArray();fixture=$file;expectedGameDir=$game}
+Write-JsonAtomic (Join-Path $sandbox 'tlauncher-settings-v4.json') @{passed=$true;powershell=$PSVersionTable.PSVersion.ToString();checks=$checks.ToArray();fixture=$file;expectedGameDir=$game}
 Write-Host ($checks.Count.ToString()+' TLauncher settings checks passed.')

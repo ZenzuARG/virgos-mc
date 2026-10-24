@@ -9,18 +9,19 @@ $script:choice = 'TLauncher'
 $script:installRoot = Join-Path $env:LOCALAPPDATA 'Virgos-MC'
 $script:officialRoot = Join-Path $env:APPDATA '.minecraft'
 $script:tlConfig = Find-TLauncherSettingsPath
-$script:memoryMb = 5120
+$script:memoryMb = Get-VirgosClientMemoryMb
+$script:memoryWarning = ''
 try {
     $physicalKb = [long](Get-CimInstance Win32_OperatingSystem -ErrorAction Stop).TotalVisibleMemorySize
-    if ($physicalKb -ge (15 * 1024 * 1024)) { $script:memoryMb = 6144 }
+    if ($physicalKb -lt (15 * 1024 * 1024)) { $script:memoryWarning = ' Aviso: se recomiendan 16 GB de RAM total; cierra otras aplicaciones.' }
 } catch {}
 $script:javaPath = ''
 $script:prefsPath = Join-Path $env:LOCALAPPDATA 'Virgos-MC-Instalador\preferencias.json'
 if (-not $PreviewPath -and [IO.File]::Exists($script:prefsPath)) {
     try {
-        $prefs = Get-Content -LiteralPath $script:prefsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $prefs = Update-VirgosClientMemoryPreference $script:prefsPath
         $script:installRoot = $prefs.installRoot; $script:officialRoot = $prefs.officialRoot
-        $script:choice = $prefs.launcher; $script:memoryMb = [int]$prefs.memoryMb
+        $script:choice = $prefs.launcher
         if($prefs.tlauncherConfig) { $script:tlConfig=$prefs.tlauncherConfig }
     } catch {}
 }
@@ -86,6 +87,7 @@ function Refresh-Choice {
     } else {
         $description.Text='Configuramos carpeta, Forge y memoria de TLauncher. Guardamos sus ajustes anteriores para que puedas restaurarlos.'
     }
+    $description.Text += $script:memoryWarning
     $steps.Text=Get-LauncherInstructions $script:choice (Join-Path $script:installRoot 'juego') $script:javaPath $script:memoryMb
     $restoreTL.Enabled=($script:choice -eq 'TLauncher' -and -not $script:worker); $copyFolder.Enabled=($script:choice -eq 'TLauncher')
 }
@@ -131,8 +133,8 @@ $options.Add_Click({
     }
     $boxes[0].Text=$script:installRoot; $boxes[1].Text=$script:officialRoot; $boxes[2].Text=$script:tlConfig
     $ram=New-Object Windows.Forms.ComboBox; $ram.DropDownStyle='DropDownList'; $ram.SetBounds(18,250,300,30)
-    [void]$ram.Items.AddRange(@('5 GB - PC con 12 GB','6 GB - recomendado con 16 GB o mas'))
-    $ram.SelectedIndex=if($script:memoryMb -eq 6144){1}else{0}; $dlg.Controls.Add($ram)
+    [void]$ram.Items.AddRange(@('8 GB (8192 MB) - configuracion del paquete'))
+    $ram.SelectedIndex=0; $ram.Enabled=$false; $dlg.Controls.Add($ram)
     $save=New-Object Windows.Forms.Button; $save.Text='Guardar'; $save.SetBounds(500,312,145,34); $dlg.Controls.Add($save)
     $save.Add_Click({
         try {
@@ -141,7 +143,7 @@ $options.Add_Click({
             $script:officialRoot=[IO.Path]::GetFullPath($boxes[1].Text).TrimEnd('\')
             $script:tlConfig=[IO.Path]::GetFullPath($boxes[2].Text)
             if($script:installRoot -eq [IO.Path]::GetPathRoot($script:installRoot).TrimEnd('\')) { throw 'Elegi una subcarpeta, por ejemplo D:\Juegos\Virgos-MC.' }
-            $script:memoryMb=if($ram.SelectedIndex -eq 1){6144}else{5120}
+            $script:memoryMb=Get-VirgosClientMemoryMb
             $dlg.DialogResult='OK'; $dlg.Close()
         } catch { [void][Windows.Forms.MessageBox]::Show($dlg,$_.Exception.Message,'Revisa la carpeta') }
     })
@@ -174,7 +176,7 @@ $install.Add_Click({
         $script:statusFile=Join-Path $script:installRoot 'registros\estado.json'
         $requestPath=Join-Path $script:installRoot 'registros\solicitud.json'
         $request=@{launcher=$script:choice;installRoot=$script:installRoot;officialRoot=$script:officialRoot;tlauncherConfig=$script:tlConfig;memoryMb=$script:memoryMb;statusPath=$script:statusFile}
-        Write-JsonAtomic $requestPath $request; Write-JsonAtomic $script:prefsPath $request
+        Write-JsonAtomic $requestPath $request; Save-VirgosClientPreferences $script:prefsPath $request
         Write-JsonAtomic $script:statusFile @{state='running';percent=0;message='Preparando la instalacion...'}
         $install.Enabled=$false; $options.Enabled=$false; $tl.Enabled=$false; $official.Enabled=$false; $openLauncher.Enabled=$false
         $restoreTL.Enabled=$false

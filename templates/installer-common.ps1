@@ -17,6 +17,34 @@ function Write-JsonAtomic($Path, $Value) {
     else { [IO.File]::Move($temp, $Path) }
 }
 
+function Get-VirgosClientMemoryMb { return 8192 }
+
+function Resolve-VirgosClientMemoryMb([int]$RequestedMemoryMb) {
+    if ($RequestedMemoryMb -lt 4096 -or $RequestedMemoryMb -gt 8192) { throw 'Memoria no valida.' }
+    # Managed installations upgrade legacy selections without changing setter APIs.
+    return Get-VirgosClientMemoryMb
+}
+
+function Update-VirgosClientMemoryPreference([string]$Path) {
+    $prefs=Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json
+    if (-not $prefs -or $prefs -is [Array] -or $prefs -is [string]) { throw 'Las preferencias no son validas.' }
+    if ($prefs.memoryMb -ne (Get-VirgosClientMemoryMb)) {
+        Copy-Item -LiteralPath $Path -Destination ($Path+'.memoria-'+[Guid]::NewGuid().ToString('N')+'.bak')
+        $prefs | Add-Member -NotePropertyName memoryMb -NotePropertyValue (Get-VirgosClientMemoryMb) -Force
+        Write-JsonAtomic $Path $prefs
+    }
+    return $prefs
+}
+
+function Save-VirgosClientPreferences([string]$Path,[Collections.IDictionary]$Request) {
+    $Request.memoryMb=Resolve-VirgosClientMemoryMb ([int]$Request.memoryMb)
+    $prefs=if([IO.File]::Exists($Path)){Update-VirgosClientMemoryPreference $Path}else{[pscustomobject]@{}}
+    foreach($entry in $Request.GetEnumerator()) {
+        $prefs | Add-Member -NotePropertyName $entry.Key -NotePropertyValue $entry.Value -Force
+    }
+    Write-JsonAtomic $Path $prefs
+}
+
 function Get-FileDigest([string]$Path, [string]$Algorithm = 'SHA512') {
     $hasher = [Security.Cryptography.HashAlgorithm]::Create($Algorithm)
     $stream = [IO.File]::OpenRead($Path)
@@ -79,6 +107,7 @@ function Get-VerifiedDownload([string]$Url, [string]$Path, [string]$Hash, [strin
 }
 
 function Set-VirgosProfile([string]$Path, [string]$GameDir, [string]$JavaPath, [int]$MemoryMb) {
+    if ($MemoryMb -lt 4096 -or $MemoryMb -gt 8192) { throw 'Memoria fuera del rango permitido.' }
     if ([IO.File]::Exists($Path)) {
         $data = [IO.File]::ReadAllText($Path) | ConvertFrom-Json
         if (-not $data -or $data -is [Array] -or $data -is [string]) { throw 'El archivo de perfiles del launcher no es valido.' }
