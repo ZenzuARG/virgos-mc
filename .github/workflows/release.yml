@@ -1,0 +1,89 @@
+name: Build and publish Virgos-MC release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache locked client downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache
+          key: virgos-client-${{ hashFiles('pack/mods.lock.json', 'pack/client-runtime.lock.json') }}
+
+      - name: Fetch locked client dependencies
+        run: python scripts/fetch-locked-client-deps.py
+
+      - name: Build Virgos Core and Códice
+        working-directory: dev/virgos-core
+        run: bash gradlew check jar codexJar --no-daemon
+
+      - name: Refresh custom artifact hashes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.')
+          core = root / 'dev/virgos-core/build/libs/virgos_core-2.0.0.jar'
+          codex = root / 'dev/virgos-core/build/libs/virgos_codex-2.0.0.jar'
+          lock_path = root / 'pack/custom-artifacts.lock.json'
+          lock = json.loads(lock_path.read_text(encoding='utf-8'))
+          lock['artifacts'][0]['hash'] = hashlib.sha256(core.read_bytes()).hexdigest()
+          lock['artifacts'][1]['hash'] = hashlib.sha256(codex.read_bytes()).hexdigest()
+          lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Build installer and Modrinth pack
+        run: python scripts/build-client-release.py
+
+      - name: Validate release artifacts
+        run: |
+          python - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          root = Path('.')
+          current = json.loads((root / 'pack/current-release.json').read_text(encoding='utf-8'))
+          manifest = json.loads((root / 'dist/release.json').read_text(encoding='utf-8'))
+          assert manifest['installerVersion'] == current['installer']
+          for name in ('Virgos-MC-2.0.0-instalar.zip', 'Virgos-MC-2.0.0.mrpack'):
+              with zipfile.ZipFile(root / 'dist' / name) as archive:
+                  assert archive.testzip() is None
+          with zipfile.ZipFile(root / 'dist/Virgos-MC-2.0.0-instalar.zip') as archive:
+              client = json.loads(archive.read('asistente/cliente.lock.json'))
+              assert client['clientRelease'] == current['clientRelease']
+              assert 'asistente/bundled/virgos_codex-2.0.0.jar' in archive.namelist()
+          PY
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/Virgos-MC-2.0.0-instalar.zip
+            dist/Virgos-MC-2.0.0.mrpack
+            dist/release.json

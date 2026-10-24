@@ -43,6 +43,8 @@ La versión **2.0** estrena mundo y reinicia inventarios, misiones, bases y esta
 
 El repositorio público contiene el sistema reproducible: código de Virgos Core/Códice, scripts, KubeJS, plantillas, locks, overrides, documentación y pruebas. El `.gitignore` excluye mundos, respaldos, cuentas AuthMe, configuraciones vivas, credenciales, logs, cachés, binarios descargados e instaladores generados. Los datos de producción se mantienen fuera de Git; para preparar una copia limpia se usan los manifiestos de `pack/` y las plantillas.
 
+Los tags `vMAJOR.MINOR.PATCH` activan `.github/workflows/release.yml`: descarga las dependencias fijadas, compila Core/Códice, regenera el instalador y publica ZIP, MRPack y `release.json` como GitHub Release.
+
 ## Mundo y mantenimiento
 
 El mundo activo es `virgos_world`; el pueblo del spawn está en **672, 80, 752**. Las carpetas antiguas `world*` se retiraron porque no participan del servidor; para recuperar el estado actual se conservan los respaldos recientes de `backups/full`. No volver a ejecutar `deploy-release.py` sobre un mundo en uso.

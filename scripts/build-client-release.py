@@ -42,7 +42,7 @@ for item in custom:
     bundled[name]=content
     client.append({'filename':name,'sha512':hashlib.sha512(content).hexdigest(),'optional':False,'project':'virgos-codex','source':'Virgos-MC','bundled':True})
 index={'formatVersion':1,'game':'minecraft','versionId':VERSION,'name':'Virgos-MC','summary':'Exploracion, magia e industria; cliente para el servidor Virgos-MC.','files':files,'dependencies':{'minecraft':lock['minecraft'],'forge':lock['forge']}}
-manifest={'version':VERSION,'installerVersion':INSTALLER,'minecraft':lock['minecraft'],'forge':lock['forge'],'files':client}
+manifest={'version':VERSION,'installerVersion':INSTALLER,'clientRelease':current.get('clientRelease',VERSION),'clientFingerprint':current.get('clientFingerprint',''),'minecraft':lock['minecraft'],'forge':lock['forge'],'files':client}
 runtime=json.loads((ROOT/'pack/client-runtime.lock.json').read_text('utf-8'))
 assert runtime['minecraftJson']['url'].startswith('https://piston-meta.mojang.com/')
 for spec,folder in [(runtime['java'],ROOT/'.cache'),(runtime['forge'],ROOT/'.cache/pack')]:
