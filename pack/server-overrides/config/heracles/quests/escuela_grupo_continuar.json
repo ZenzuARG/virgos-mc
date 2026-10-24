@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Saber qué hacer después",
+    "subtitle": "Preparar aventuras juntos · GUÍA · 5/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Tras una expedición, abrí J y reclamá su recompensa. /virgos progreso confirma el reconocimiento. Elegí entre continuar tu especialidad, enseñar a alguien, aportar al pueblo o descubrir otra dimensión. Completar la guía no te obliga a completar todos los mods.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          224,
+          128
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_grupo_arena"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

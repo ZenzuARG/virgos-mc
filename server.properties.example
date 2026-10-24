@@ -1,0 +1,33 @@
+# Base: Minecraft Java 1.20.1
+server-ip=
+server-port=25565
+online-mode=false
+white-list=false
+enforce-whitelist=false
+max-players=10
+motd=Virgos-MC | Minecraft 1.20.1
+gamemode=survival
+difficulty=normal
+hardcore=false
+pvp=true
+allow-flight=false
+allow-nether=true
+level-name=world
+level-seed=
+level-type=minecraft\:normal
+generate-structures=true
+view-distance=8
+simulation-distance=6
+enable-status=true
+enable-query=false
+enable-rcon=false
+enable-command-block=false
+spawn-protection=16
+max-tick-time=60000
+network-compression-threshold=256
+sync-chunk-writes=true
+
+
+
+enforce-secure-profile=false
+

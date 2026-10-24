@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Descanso y regreso",
+    "subtitle": "Primeros pasos · OBJETO · 8/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:white_bed"
+    },
+    "description": "Conseguí una cama de cualquier color. Dormir en cama fija tu regreso; los sacos de Comforts no reemplazan la cama. La misión reconoce la cama en tu inventario, sin consumirla.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          56,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "inicio_hierro"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "#minecraft:beds",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

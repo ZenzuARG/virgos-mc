@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Tu propio lenguaje mágico",
+    "subtitle": "Hechizos y rituales · OBJETO · 7/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:novice_spell_book"
+    },
+    "description": "Ars Nouveau permite combinar glifos. Empezá por un efecto y un método de lanzamiento sencillo.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          0,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:novice_spell_book",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

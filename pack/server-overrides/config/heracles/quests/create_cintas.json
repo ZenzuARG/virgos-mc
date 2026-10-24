@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Una línea clara",
+    "subtitle": "Ingeniería Create · OBJETO · 5/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:belt_connector"
+    },
+    "description": "Las cintas hacen visible el flujo de materiales. Evitá soltar miles de entidades como almacenamiento.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_mezcla"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:belt_connector",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

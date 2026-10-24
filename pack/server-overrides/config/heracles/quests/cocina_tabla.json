@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Preparar ingredientes",
+    "subtitle": "Cocina y vida cotidiana · OBJETO · 2/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:cutting_board"
+    },
+    "description": "Colocá la tabla en una cocina accesible. Las estaciones del Bastión sirven para preparar el primer viaje.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cocina_cuchillo"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:cutting_board",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Probar un lote pequeño",
+    "subtitle": "Create y las cuevas · GUÍA · 3/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Procesá una unidad manualmente y comprobá el resultado. Después conectá un cofre de entrada, filtro y salida suficiente. Conservá muestras de los materiales de investigación antes de enviar todo a una línea.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "industria_cueva_receta"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

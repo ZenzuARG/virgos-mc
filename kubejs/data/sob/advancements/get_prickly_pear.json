@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "unused_in_virgos": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

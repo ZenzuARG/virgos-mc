@@ -1,0 +1,45 @@
+{
+  "display": {
+    "title": "Islas sobre las nubes",
+    "subtitle": "Grandes aventuras · VIAJE · 3/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:glowstone"
+    },
+    "description": "El Aether y Deep Aether ofrecen islas, biomas y mazmorras. Prepará su portal y una forma segura de moverte y regresar. El sección «07 · Aventuras» continúa la guía.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          112,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:changed_dimension",
+      "to": "aether:the_aether"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 8
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Afinar tu escuela",
+    "subtitle": "Hechizos y rituales · OBJETO · 4/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:rare_ink"
+    },
+    "description": "La tinta rara permite avanzar. Combiná ataque, movilidad y apoyo en vez de equipar sólo daño.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:rare_ink",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

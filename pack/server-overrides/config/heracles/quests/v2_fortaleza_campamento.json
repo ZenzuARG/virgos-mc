@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Un regreso posible",
+    "subtitle": "Grandes fortalezas · OBJETO · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:white_bed"
+    },
+    "description": "Prepará un punto seguro fuera de la estructura y marcá el camino. Probá el punto de reaparición cuando el mundo permita camas. Nunca uses camas en Nether o End. Guardá equipo de rescate en tu base.\n\nObjetivo detectado: llevá el objeto en el inventario, sin consumirlo. Tener un trofeo no certifica una muerte propia; también podés conseguirlo comerciando.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          112,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_fortaleza_roles"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:white_bed",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

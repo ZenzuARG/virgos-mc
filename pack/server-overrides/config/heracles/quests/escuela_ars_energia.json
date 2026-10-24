@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Producir fuente",
+    "subtitle": "Aprender Ars Nouveau · OBJETO · 4/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:agronomic_sourcelink"
+    },
+    "description": "El enlace agronómico obtiene fuente del crecimiento de plantas cercanas. Colocalo junto a un cultivo y un recipiente de fuente dentro del alcance que explica el cuaderno. Comprobá que el recipiente se llene antes de conectar aparatos.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          168,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_ars_glifos"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:agronomic_sourcelink",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

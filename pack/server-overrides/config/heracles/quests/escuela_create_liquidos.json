@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Transportar fluidos",
+    "subtitle": "Create desde cero · OBJETO · 11/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:mechanical_pump"
+    },
+    "description": "Conectá depósitos y tuberías en un circuito pequeño. El sentido de la bomba importa. Observá el contenido de cada depósito antes de conectar procesos con fluidos distintos; consultá JEI para cantidades y temperatura.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          224,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_filtro"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:mechanical_pump",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

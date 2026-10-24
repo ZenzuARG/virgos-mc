@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Arquitectura modular",
+    "subtitle": "Ingeniería Create · OBJETO · 11/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "copycats:copycat_block"
+    },
+    "description": "Las piezas Copycats adoptan materiales: ideales para detalles sin máquinas de adorno.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          224,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_vias"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "copycats:copycat_block",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

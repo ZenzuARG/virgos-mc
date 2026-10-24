@@ -1,0 +1,41 @@
+{
+  "replace": true,
+  "content": {
+    "virgos_0": {
+      "type": "item",
+      "content": "create:andesite_alloy",
+      "amount": {
+        "min": 2,
+        "max": 4
+      },
+      "unitWorth": 130
+    },
+    "virgos_1": {
+      "type": "item",
+      "content": "create:shaft",
+      "amount": {
+        "min": 4,
+        "max": 8
+      },
+      "unitWorth": 65
+    },
+    "virgos_2": {
+      "type": "item",
+      "content": "minecraft:glass",
+      "amount": {
+        "min": 8,
+        "max": 16
+      },
+      "unitWorth": 35
+    },
+    "virgos_3": {
+      "type": "item",
+      "content": "minecraft:brick",
+      "amount": {
+        "min": 8,
+        "max": 16
+      },
+      "unitWorth": 35
+    }
+  }
+}

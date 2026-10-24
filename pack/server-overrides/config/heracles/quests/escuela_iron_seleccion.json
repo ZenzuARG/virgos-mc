@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Elegir antes de lanzar",
+    "subtitle": "Aprender Iron Spells · GUÍA · 3/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Abrí Controles → Iron’s Spells para revisar selección, rueda de hechizos y lanzamiento. La configuración inicial usa V para lanzar. Seleccioná un hechizo común y probá alcance y enfriamiento en un lugar seguro; no pruebes ataques sobre el Bastión.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          112,
+          384
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_iron_libro"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

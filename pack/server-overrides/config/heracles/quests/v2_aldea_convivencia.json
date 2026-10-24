@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Una aldea para todos",
+    "subtitle": "Aldeas que funcionan · GUÍA · 5/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Conservá camas, puestos de trabajo, iluminación y accesos. No desarmes el mecanismo principal para ahorrarte cuatro engranajes. Copiá la idea en tu taller y llevate una foto con Exposure.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          224,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_aldea_cofres"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

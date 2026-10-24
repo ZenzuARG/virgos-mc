@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Conectar cultivo y cocina",
+    "subtitle": "Cocina paso a paso · OBJETO · 4/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:rich_soil"
+    },
+    "description": "Una huerta variada permite platos diferentes. Leé cómo se obtiene y usa el suelo fértil en las recetas del mod. Conservá semillas para replantar y colocá la huerta dentro de tu protección.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          168,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_cocina_recipiente"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:rich_soil",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

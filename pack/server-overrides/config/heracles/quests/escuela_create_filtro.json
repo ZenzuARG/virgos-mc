@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Una salida para cada objeto",
+    "subtitle": "Create desde cero · OBJETO · 10/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:andesite_funnel"
+    },
+    "description": "Los embudos transfieren objetos entre inventarios y cintas. Probá entrada y salida con dos cofres. Dejá almacenamiento suficiente al final: los objetos tirados en el suelo generan carga y pueden perderse.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          168,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_lavado"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:andesite_funnel",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

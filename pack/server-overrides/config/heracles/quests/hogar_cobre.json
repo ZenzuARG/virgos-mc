@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Más espacio",
+    "subtitle": "Hogar y comunidad · OBJETO · 2/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "sophisticatedbackpacks:copper_backpack"
+    },
+    "description": "Mejorá la mochila con cobre. La capacidad crece, pero no habrá mochilas anidadas ni acumulación ilimitada de mejoras de apilado.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "hogar_mochila"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "sophisticatedbackpacks:copper_backpack",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

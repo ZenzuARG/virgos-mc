@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Puertos abiertos",
+    "subtitle": "Navegación en grupo · GUÍA · 5/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "No bloquees muelles ni salidas ajenas. Virgos desactiva recetas de cañones y el daño de colisión: los barcos amplían transporte y exploración. Consultá /virgos guia navegacion cuando necesites recordar el plan.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          224,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "barco_tripulacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

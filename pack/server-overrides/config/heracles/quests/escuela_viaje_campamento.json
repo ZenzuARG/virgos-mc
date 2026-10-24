@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Pasar la noche sin mudar tu casa",
+    "subtitle": "Explorar con un plan · GUÍA · 5/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Comforts ofrece sacos de dormir: buscá la receta por nombre en JEI. Sirven para pasar la noche sin cambiar tu punto de reaparición como una cama normal. Prepará igualmente un marcador y una ruta de regreso.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          224,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_viaje_pesca"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,1698 @@
+{
+  "proyecto": "Virgos-MC",
+  "fecha": "2026-10-17",
+  "minecraft": "1.20.1",
+  "loader": "Forge",
+  "forge_actual": "47.4.22",
+  "puente_actual": "Ketting 0.6.1",
+  "estado": "seleccion_de_diseno_no_instalada",
+  "combinacion_probada": false,
+  "dependencias_resueltas": false,
+  "alcance": "79 mods seleccionados, 4 opcionales de cliente y 1 herramienta de construcción; no cuenta bibliotecas ni Playit Companion ya instalado",
+  "mods": [
+    {
+      "slug": "alexs-caves",
+      "nombre": "Alex's Caves",
+      "categoria": "Exploración y mundo",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.0.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/alexs-caves/version/lC8HHXOF",
+      "modrinth_version_id": "lC8HHXOF",
+      "papel": "Cuevas excepcionales; sus recursos y secretos conservan su recorrido de descubrimiento",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "jJfV67b1",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "alexs-mobs",
+      "nombre": "Alex's Mobs",
+      "categoria": "Exploración y mundo",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.22.9",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/alexs-mobs/version/XoIASRVU",
+      "modrinth_version_id": "XoIASRVU",
+      "papel": "Fauna y encuentros; limitar densidad y revisar domesticación",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "jJfV67b1",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "regions-unexplored",
+      "nombre": "Regions Unexplored",
+      "categoria": "Exploración y mundo",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "F-0.5.6+1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/regions-unexplored/version/XTrgsfIB",
+      "modrinth_version_id": "XTrgsfIB",
+      "papel": "Único gran paquete de biomas del Overworld",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "kkmrDlKT",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "explorify",
+      "nombre": "Explorify",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "v1.6.5",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/explorify/version/CuBdAr31",
+      "modrinth_version_id": "CuBdAr31",
+      "papel": "Pequeños lugares para descubrir entre destinos mayores",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "towns-and-towers",
+      "nombre": "Towns and Towers",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.12",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/towns-and-towers/version/7ZwnSrVW",
+      "modrinth_version_id": "7ZwnSrVW",
+      "papel": "Aldeas y puestos; ajustar separación para evitar saturación de estructuras",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "cl223EMc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-dungeons",
+      "nombre": "YUNG's Better Dungeons",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-4.0.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-dungeons/version/kPiQ6v4q",
+      "modrinth_version_id": "kPiQ6v4q",
+      "papel": "Mazmorras; comprobar botín individual",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-mineshafts",
+      "nombre": "YUNG's Better Mineshafts",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-4.0.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-mineshafts/version/kVO57zxB",
+      "modrinth_version_id": "kVO57zxB",
+      "papel": "Minas abandonadas más interesantes",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-strongholds",
+      "nombre": "YUNG's Better Strongholds",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-4.0.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-strongholds/version/rwiShgsc",
+      "modrinth_version_id": "rwiShgsc",
+      "papel": "Fortalezas renovadas",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-desert-temples",
+      "nombre": "YUNG's Better Desert Temples",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-3.0.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-desert-temples/version/lRK2ZA9U",
+      "modrinth_version_id": "lRK2ZA9U",
+      "papel": "Templos del desierto",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-jungle-temples",
+      "nombre": "YUNG's Better Jungle Temples",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-2.0.5",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-jungle-temples/version/CXQc6EnZ",
+      "modrinth_version_id": "CXQc6EnZ",
+      "papel": "Templos de jungla",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-ocean-monuments",
+      "nombre": "YUNG's Better Ocean Monuments",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-3.0.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-ocean-monuments/version/SN4iZ7wf",
+      "modrinth_version_id": "SN4iZ7wf",
+      "papel": "Exploración y desafíos bajo el agua",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-nether-fortresses",
+      "nombre": "YUNG's Better Nether Fortresses",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-2.0.6",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-nether-fortresses/version/2nUEz0zq",
+      "modrinth_version_id": "2nUEz0zq",
+      "papel": "Fortalezas del Nether",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-better-witch-huts",
+      "nombre": "YUNG's Better Witch Huts",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-3.0.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-better-witch-huts/version/mwlYB7rq",
+      "modrinth_version_id": "mwlYB7rq",
+      "papel": "Cabañas de brujas",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "yungs-bridges",
+      "nombre": "YUNG's Bridges",
+      "categoria": "Exploración y mundo",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-Forge-4.0.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/yungs-bridges/version/KgO1gfM2",
+      "modrinth_version_id": "KgO1gfM2",
+      "papel": "Puentes que aparecen en el paisaje",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "Ua7DFN59",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "the-twilight-forest",
+      "nombre": "The Twilight Forest",
+      "categoria": "Dimensiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "4.3.2508",
+      "tipo_publicacion": "release",
+      "fuente": "https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest/files/all?page=1&pageSize=20&version=1.20.1",
+      "modrinth_version_id": null,
+      "papel": "Bosque de aventura; adaptar equipo y requisitos a sus jefes",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "aether",
+      "nombre": "The Aether",
+      "categoria": "Dimensiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-1.5.2-neoforge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/aether/version/2411kUqF",
+      "modrinth_version_id": "2411kUqF",
+      "papel": "Islas celestes; revisar movilidad y recompensas con magia externa",
+      "dependencias_publicadas": [
+        {
+          "version_id": "9hjtlBBI",
+          "project_id": "vvuO3ImH",
+          "file_name": null,
+          "dependency_type": "embedded"
+        },
+        {
+          "version_id": "pFS5mTSJ",
+          "project_id": "sq1f0DCq",
+          "file_name": null,
+          "dependency_type": "embedded"
+        }
+      ]
+    },
+    {
+      "slug": "irons-spells-n-spellbooks",
+      "nombre": "Iron's Spells 'n Spellbooks",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-3.16.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/irons-spells-n-spellbooks/version/hZaEegS9",
+      "modrinth_version_id": "hZaEegS9",
+      "papel": "Magia de combate y apoyo; costes y potencia por nivel",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "ars-nouveau",
+      "nombre": "Ars Nouveau",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "4.12.7",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/ars-nouveau/version/Hw2aD01e",
+      "modrinth_version_id": "Hw2aD01e",
+      "papel": "Magia creativa y de utilidad; limitar vuelo y automatización avanzada",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "better-combat",
+      "nombre": "Better Combat",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.9.0+1.20.1-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/better-combat/version/rnhiaw3t",
+      "modrinth_version_id": "rnhiaw3t",
+      "papel": "Único sistema principal de animaciones y ataques cuerpo a cuerpo",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "gedNE4y2",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "9s6osm5g",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "simply-swords",
+      "nombre": "Simply Swords",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.70.2-1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/simply-swords/version/Na6e94J1",
+      "modrinth_version_id": "Na6e94J1",
+      "papel": "Estilos de armas; ajustar efectos únicos y abundancia",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "hYykXjDp",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "5sy6g3kz",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "lhGA9TYQ",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "6avVoBVB",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "lendercataclysm",
+      "nombre": "L_Ender's Cataclysm",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.31",
+      "tipo_publicacion": "release",
+      "fuente": "https://www.curseforge.com/minecraft/mc-mods/lendercataclysm/files/all?page=1&pageSize=20&version=1.20.1",
+      "modrinth_version_id": null,
+      "papel": "Grandes jefes; revisar terreno destruido y poder de sus recompensas",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "mowzies-mobs",
+      "nombre": "Mowzie's Mobs",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.8.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/mowzies-mobs/version/acYEfsJa",
+      "modrinth_version_id": "acYEfsJa",
+      "papel": "Encuentros con patrones propios; limitar apariciones cerca del inicio",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "8BmcQJ2H",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "artifacts",
+      "nombre": "Artifacts",
+      "categoria": "Magia y combate",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "9.5.19",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/artifacts/version/lrLPBSzq",
+      "modrinth_version_id": "lrLPBSzq",
+      "papel": "Accesorios seleccionados; evitar combinaciones de daño o movilidad desmedidas",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "create",
+      "nombre": "Create",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "mc1.20.1-6.0.8",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create/version/8amzvn9x",
+      "modrinth_version_id": "8amzvn9x",
+      "papel": "Columna de tecnología, logística y transporte",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "create-steam-n-rails",
+      "nombre": "Create: Steam 'n' Rails",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.7.3+forge-mc1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-steam-n-rails/version/7Uk6lWkU",
+      "modrinth_version_id": "7Uk6lWkU",
+      "papel": "Ferrocarriles para conectar bases; archivo de la rama C6",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-connected",
+      "nombre": "Create: Connected",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.2.3-mc1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-connected/version/6gnvaVkN",
+      "modrinth_version_id": "6gnvaVkN",
+      "papel": "Componentes de ingeniería y comodidad; sin otro addon que duplique engranajes",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-deco",
+      "nombre": "Create Deco",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.0.3-1.20.1-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-deco/version/e9gaSRMd",
+      "modrinth_version_id": "e9gaSRMd",
+      "papel": "Acabados de talleres, fábricas y estaciones",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "copycats",
+      "nombre": "Create: Copycats+",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.0.10+mc.1.20.1-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/copycats/version/LlMxIysb",
+      "modrinth_version_id": "LlMxIysb",
+      "papel": "Formas con materiales personalizados; limitar uso masivo en zonas densas",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-central-kitchen",
+      "nombre": "Create: Central Kitchen",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.5.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-central-kitchen/version/jMB94kRJ",
+      "modrinth_version_id": "jMB94kRJ",
+      "papel": "Conectar procesamiento de comida con Create",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "ars-creo",
+      "nombre": "Ars Creo",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "4.3.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/ars-creo/version/bLLhDnY2",
+      "modrinth_version_id": "bLLhDnY2",
+      "papel": "Conectar Ars con Create; revisar torretas y permisos de terreno",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "farmers-delight",
+      "nombre": "Farmer's Delight",
+      "categoria": "Cocina y pesca",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-1.3.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/farmers-delight/version/SiIpcZzM",
+      "modrinth_version_id": "SiIpcZzM",
+      "papel": "Sistema principal de cocina y agricultura",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "delightful",
+      "nombre": "Delightful",
+      "categoria": "Cocina y pesca",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.8.1-1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/delightful/version/HbEQIqIu",
+      "modrinth_version_id": "HbEQIqIu",
+      "papel": "Más recetas e integración; activar sólo aportes útiles para este paquete",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "brewin-and-chewin",
+      "nombre": "Brewin' And Chewin'",
+      "categoria": "Cocina y pesca",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-3.2.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/brewin-and-chewin/version/9myDFPCD",
+      "modrinth_version_id": "9myDFPCD",
+      "papel": "Fermentación, quesos y bebidas; revisar acumulación de efectos",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "R2OftAxM",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "fRiHVvU7",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "aquaculture",
+      "nombre": "Aquaculture 2",
+      "categoria": "Cocina y pesca",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.5.7",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/aquaculture/version/wNiFoROs",
+      "modrinth_version_id": "wNiFoROs",
+      "papel": "Pesca por bioma; equipo de neptunio ajustado al progreso",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "aquaculture-delight",
+      "nombre": "Aquaculture Delight",
+      "categoria": "Cocina y pesca",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.1.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/aquaculture-delight/version/Qn9bVRpQ",
+      "modrinth_version_id": "Qn9bVRpQ",
+      "papel": "Usar la pesca en la cocina de Farmer's Delight",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "supplementaries",
+      "nombre": "Supplementaries",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-3.1.44-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/supplementaries/version/foXRPXFH",
+      "modrinth_version_id": "foXRPXFH",
+      "papel": "Objetos decorativos y utilitarios del pueblo y las bases",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "twkfQtEc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "amendments",
+      "nombre": "Amendments",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20-2.2.6",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/amendments/version/nJORWvdh",
+      "modrinth_version_id": "nJORWvdh",
+      "papel": "Mejoras funcionales y visuales de bloques existentes",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "twkfQtEc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "chipped",
+      "nombre": "Chipped",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.0.7",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/chipped/version/pi3f4er3",
+      "modrinth_version_id": "pi3f4er3",
+      "papel": "Variantes decorativas sin añadir otra progresión de poder",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "G1hIVOrD",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "b1ZV3DIJ",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "handcrafted",
+      "nombre": "Handcrafted",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.0.6",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/handcrafted/version/N7wZwOFy",
+      "modrinth_version_id": "N7wZwOFy",
+      "papel": "Muebles para casas, posada y biblioteca",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "G1hIVOrD",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "macaws-roofs",
+      "nombre": "Macaw's Roofs",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.3.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-roofs/version/31e80GhE",
+      "modrinth_version_id": "31e80GhE",
+      "papel": "Tejados y remates",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "macaws-bridges",
+      "nombre": "Macaw's Bridges",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "3.1.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-bridges/version/KImk0Oo1",
+      "modrinth_version_id": "KImk0Oo1",
+      "papel": "Puentes construibles por los jugadores",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "macaws-doors",
+      "nombre": "Macaw's Doors",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.1.5",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-doors/version/n8BlIUm3",
+      "modrinth_version_id": "n8BlIUm3",
+      "papel": "Puertas para edificios; los grandes arcos del spawn serán estructuras",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "macaws-windows",
+      "nombre": "Macaw's Windows",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.4.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-windows/version/SSIlzrPf",
+      "modrinth_version_id": "SSIlzrPf",
+      "papel": "Ventanas y detalles de fachada",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "macaws-fences-and-walls",
+      "nombre": "Macaw's Fences and Walls",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.2.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-fences-and-walls/version/HnyfcyJ9",
+      "modrinth_version_id": "HnyfcyJ9",
+      "papel": "Cercas y límites de jardines",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "macaws-lights-and-lamps",
+      "nombre": "Macaw's Lights and Lamps",
+      "categoria": "Construcción y decoración",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.1.5",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/macaws-lights-and-lamps/version/H1a9Tx4h",
+      "modrinth_version_id": "H1a9Tx4h",
+      "papel": "Iluminación funcional y ambiental",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "sophisticated-backpacks",
+      "nombre": "Sophisticated Backpacks",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-3.26.12.2206",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/sophisticated-backpacks/version/X7q2xTaV",
+      "modrinth_version_id": "X7q2xTaV",
+      "papel": "Mochila básica temprana; anidamiento deshabilitado y mejoras limitadas",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "nmoqTijg",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "BAscRYKm",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "DMu0oBKf",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "vRYk0bv7",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "b1fMg6sH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "vvuO3ImH",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "sophisticated-storage",
+      "nombre": "Sophisticated Storage",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-1.5.6.2183",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/sophisticated-storage/version/vFpp1Lw7",
+      "modrinth_version_id": "vFpp1Lw7",
+      "papel": "Almacenamiento principal de bases; límites a mejoras de apilado",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "BAscRYKm",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "DMu0oBKf",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "vRYk0bv7",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "b1fMg6sH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "qnQsVE2z",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "nmoqTijg",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "lootr",
+      "nombre": "Lootr",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "0.7.35.94",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/lootr/version/mWTXC1ZX",
+      "modrinth_version_id": "mWTXC1ZX",
+      "papel": "Botín por jugador en los contenedores compatibles",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "waystones",
+      "nombre": "Waystones",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "14.1.21+forge-1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/waystones/version/Y0IgdaoP",
+      "modrinth_version_id": "Y0IgdaoP",
+      "papel": "Viajes entre lugares descubiertos; sin salida instantánea de expediciones",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "MBAkmtvl",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "corpse",
+      "nombre": "Corpse",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "forge-1.20.1-1.0.23",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/corpse/version/7fc0hJN6",
+      "modrinth_version_id": "7fc0hJN6",
+      "papel": "Recuperación de inventario al morir; verificar mochilas y accesorios",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "nvQzSEkH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "comforts",
+      "nombre": "Comforts",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "6.4.0+1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/comforts/version/gBDsc134",
+      "modrinth_version_id": "gBDsc134",
+      "papel": "Descanso durante viajes; conservar el punto de reaparición de la base",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "construction-wand",
+      "nombre": "Construction Wand",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-2.11",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/construction-wand/version/XCgKj8gL",
+      "modrinth_version_id": "XCgKj8gL",
+      "papel": "Construcción rápida consumiendo materiales; respetar claims",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "natures-compass",
+      "nombre": "Nature's Compass",
+      "categoria": "Vida diaria y botín",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-1.12.0-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/natures-compass/version/eRSDvCjN",
+      "modrinth_version_id": "eRSDvCjN",
+      "papel": "Buscar biomas comunes; excluir cuevas especiales y limitar alcance",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "odyssey-quests",
+      "nombre": "Heracles (Odyssey Quests)",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.1.13",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/odyssey-quests/version/9ZUSHiZa",
+      "modrinth_version_id": "9ZUSHiZa",
+      "papel": "Heracles: Códice Virgos y misiones con progreso individual explícito",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "G1hIVOrD",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "open-parties-and-claims",
+      "nombre": "Open Parties and Claims",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "forge-1.20.1-0.33.0",
+      "tipo_publicacion": "beta",
+      "fuente": "https://modrinth.com/mod/open-parties-and-claims/version/Ec8wDd9H",
+      "modrinth_version_id": "Ec8wDd9H",
+      "papel": "Único sistema de claims y grupos; sin carga forzada inicialmente",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "xaeros-world-map",
+      "nombre": "Xaero's World Map",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "forge-1.20.1-1.47.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/xaeros-world-map/version/KtEupJvB",
+      "modrinth_version_id": "KtEupJvB",
+      "papel": "Mapa principal con gestión visual de claims",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "gF3BGWvG",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "xaeros-minimap",
+      "nombre": "Xaero's Minimap",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "forge-1.20.1-26.6.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/xaeros-minimap/version/dB6E0CY9",
+      "modrinth_version_id": "dB6E0CY9",
+      "papel": "Minimapa discreto; radar de entidades y cuevas desactivado donde sea configurable",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "gF3BGWvG",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "jei",
+      "nombre": "Just Enough Items (JEI)",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "15.56.0.205",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/jei/version/9jqubC9n",
+      "modrinth_version_id": "9jqubC9n",
+      "papel": "Único visor principal de recetas y usos",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "jade",
+      "nombre": "Jade 🔍",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "11.13.3+forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/jade/version/xJQHCmWJ",
+      "modrinth_version_id": "xJQHCmWJ",
+      "papel": "Información contextual breve",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "u6dRKJwZ",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "jade-addons-forge",
+      "nombre": "Jade Addons (Neo/Forge)",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "5.5.1+forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/jade-addons-forge/version/l9IrZYLt",
+      "modrinth_version_id": "l9IrZYLt",
+      "papel": "Información de máquinas y otros mods",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "nvQzSEkH",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "appleskin",
+      "nombre": "AppleSkin",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "2.5.1+mc1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/appleskin/version/XdXDExVF",
+      "modrinth_version_id": "XdXDExVF",
+      "papel": "Lectura de hambre y saturación",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "mouse-tweaks",
+      "nombre": "Mouse Tweaks",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-2.25.1-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/mouse-tweaks/version/7JVXOe3K",
+      "modrinth_version_id": "7JVXOe3K",
+      "papel": "Movimientos cómodos en inventarios",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "controlling",
+      "nombre": "Controlling",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "12.0.2",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/controlling/version/LH6Bi6Am",
+      "modrinth_version_id": "LH6Bi6Am",
+      "papel": "Buscar teclas y resolver conflictos",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "fuuu3xnx",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "default-options",
+      "nombre": "Default Options",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "18.0.5+forge-1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/default-options/version/AVz3mvZZ",
+      "modrinth_version_id": "AVz3mvZZ",
+      "papel": "Controles iniciales coherentes, sin pisar preferencias guardadas",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "MBAkmtvl",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "enchantment-descriptions",
+      "nombre": "Enchantment Descriptions",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "17.1.21",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/enchantment-descriptions/version/OPgBRfTQ",
+      "modrinth_version_id": "OPgBRfTQ",
+      "papel": "Descripciones de encantamientos",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "uy4Cnpcm",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "equipment-compare",
+      "nombre": "Equipment Compare",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "1.3.7",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/equipment-compare/version/x1lxEKIp",
+      "modrinth_version_id": "x1lxEKIp",
+      "papel": "Comparación de equipo; mantener tooltips breves",
+      "dependencias_publicadas": [
+        {
+          "version_id": "hri3ka9m",
+          "project_id": "5faXoLqX",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": "JhxD2e6J",
+          "project_id": "atHH8NyV",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "fancymenu",
+      "nombre": "FancyMenu",
+      "categoria": "Misiones e interfaz",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "3.9.14-1.20.1-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/fancymenu/version/2mNmkn9s",
+      "modrinth_version_id": "2mNmkn9s",
+      "papel": "Portada sencilla con entrar, guía y ajustes",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "J81TRJWm",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "CVT4pFB2",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "kubejs",
+      "nombre": "KubeJS",
+      "categoria": "Integración y balance",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2001.6.5-build.26+forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/kubejs/version/hVR2xUSr",
+      "modrinth_version_id": "hVR2xUSr",
+      "papel": "Recetas, textos y eventos de integración propios",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "lhGA9TYQ",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "sk9knFPE",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "kubejs-create",
+      "nombre": "KubeJS Create",
+      "categoria": "Integración y balance",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2001.3.0-build.8+forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/kubejs-create/version/5vppyenb",
+      "modrinth_version_id": "5vppyenb",
+      "papel": "Recetas de Create; build 8 declara Create 6 o superior",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "umyGl7zF",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "modernfix",
+      "nombre": "ModernFix",
+      "categoria": "Rendimiento",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "5.27.88+mc1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/modernfix/version/bDP3S7Vh",
+      "modrinth_version_id": "bDP3S7Vh",
+      "papel": "Optimización de carga y memoria; medir con Ketting",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "ferrite-core",
+      "nombre": "FerriteCore",
+      "categoria": "Rendimiento",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "6.0.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/ferrite-core/version/DG5Fn9Sz",
+      "modrinth_version_id": "DG5Fn9Sz",
+      "papel": "Reducir memoria de datos internos",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "embeddium",
+      "nombre": "Embeddium",
+      "categoria": "Rendimiento",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "0.3.31+mc1.20.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/embeddium/version/UTbfe5d1",
+      "modrinth_version_id": "UTbfe5d1",
+      "papel": "Renderizado del perfil estándar",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "S1tndFDa",
+          "file_name": null,
+          "dependency_type": "incompatible"
+        },
+        {
+          "version_id": null,
+          "project_id": "4ZqxOvjD",
+          "file_name": null,
+          "dependency_type": "incompatible"
+        }
+      ]
+    },
+    {
+      "slug": "entityculling",
+      "nombre": "Entity Culling",
+      "categoria": "Rendimiento",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "1.11.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/entityculling/version/HUUJcFnt",
+      "modrinth_version_id": "HUUJcFnt",
+      "papel": "Evitar dibujar entidades ocultas; revisar máquinas móviles",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "immediatelyfast",
+      "nombre": "ImmediatelyFast",
+      "categoria": "Rendimiento",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "1.5.5+1.20.4-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/immediatelyfast/version/rvsLEEZU",
+      "modrinth_version_id": "rvsLEEZU",
+      "papel": "Optimizar renderizado inmediato",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "clumps",
+      "nombre": "Clumps",
+      "categoria": "Rendimiento",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "12.0.0.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/clumps/version/nAHGB5ls",
+      "modrinth_version_id": "nAHGB5ls",
+      "papel": "Agrupar experiencia; verificar recogida y recompensas",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "dynamic-fps",
+      "nombre": "Dynamic FPS",
+      "categoria": "Rendimiento",
+      "destino": "Cliente",
+      "estado": "seleccionado",
+      "version_candidata": "3.11.4",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/dynamic-fps/version/EjdIWWqG",
+      "modrinth_version_id": "EjdIWWqG",
+      "papel": "Reducir carga cuando la ventana queda en segundo plano",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "9s6osm5g",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "spark",
+      "nombre": "spark",
+      "categoria": "Operación",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.10.53-forge",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/spark/version/4FXHDE9F",
+      "modrinth_version_id": "4FXHDE9F",
+      "papel": "Perfilador Forge; no instalar también el plugin",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "chunky",
+      "nombre": "Chunky",
+      "categoria": "Operación",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.3.146",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/chunky/version/4FTDk9wv",
+      "modrinth_version_id": "4FTDk9wv",
+      "papel": "Pregenerar terreno por zonas tras cerrar mods de mundo",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "simple-backups",
+      "nombre": "Simple Backups",
+      "categoria": "Operación",
+      "destino": "Servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-3.1.19",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/simple-backups/version/b0VVmLcA",
+      "modrinth_version_id": "b0VVmLcA",
+      "papel": "Copias automáticas del mundo; complementar con respaldo del proyecto y AuthMe",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "3azQ6p0W",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "worldedit",
+      "nombre": "WorldEdit",
+      "categoria": "Operación",
+      "destino": "Servidor de construcción",
+      "estado": "herramienta",
+      "version_candidata": "7.2.15",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/worldedit/version/Wrlqaul6",
+      "modrinth_version_id": "Wrlqaul6",
+      "papel": "Forge 7.2.15: construir e importar el spawn; retirar del servidor público después",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "oculus",
+      "nombre": "Oculus",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "estandar",
+      "version_candidata": "1.20.1-1.8.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/oculus/version/iQ1SwGc3",
+      "modrinth_version_id": "iQ1SwGc3",
+      "papel": "Menú y soporte de shaders; Oculus se instala, pero el shaderpack queda apagado por defecto.",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "sk9rgfiA",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "sound-physics-remastered",
+      "nombre": "Sound Physics Remastered",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "forge-1.20.1-1.5.1",
+      "tipo_publicacion": "alpha",
+      "fuente": "https://modrinth.com/mod/sound-physics-remastered/version/x0sJ9PeR",
+      "modrinth_version_id": "x0sJ9PeR",
+      "papel": "Acústica espacial configurable",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "9s6osm5g",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "9eGKb6K1",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "slug": "ambient-environment",
+      "nombre": "Ambient Environment",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "11.0.0.1",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/ambient-environment/version/BYzQMmi7",
+      "modrinth_version_id": "BYzQMmi7",
+      "papel": "Variación visual del ambiente",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "better-third-person",
+      "nombre": "Better Third Person",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "1.9.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/better-third-person/version/XkYduFuv",
+      "modrinth_version_id": "XkYduFuv",
+      "papel": "Cámara opcional; probar combate y hechizos",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "first-person-model",
+      "nombre": "First-person Model",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "2.7.3",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/first-person-model/version/kxFDUOmS",
+      "modrinth_version_id": "kxFDUOmS",
+      "papel": "Cuerpo y manos visibles desde primera persona; sólo presentación.",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "not-enough-animations",
+      "nombre": "Not Enough Animations",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "1.12.6",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/not-enough-animations/version/kGjMleOz",
+      "modrinth_version_id": "kGjMleOz",
+      "papel": "Animaciones de interacción y combate; sólo presentación.",
+      "dependencias_publicadas": []
+    },
+    {
+      "slug": "ambient-sounds",
+      "nombre": "AmbientSounds",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "6.3.11",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/ambientsounds/version/YOYpWGZg",
+      "modrinth_version_id": "YOYpWGZg",
+      "papel": "Paisaje sonoro por bioma; requiere CreativeCore.",
+      "dependencias_publicadas": [
+        {
+          "version_id": "ChKayKur",
+          "project_id": "OsZiaDHq",
+          "file_name": "CreativeCore_FORGE_v2.12.40_mc1.20.1.jar",
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "eating-animations",
+      "nombre": "Eating Animations",
+      "categoria": "Presentación opcional",
+      "destino": "Cliente",
+      "estado": "opcional",
+      "version_candidata": "5.1.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/eating-animations/version/WqBpsYBv",
+      "modrinth_version_id": "WqBpsYBv",
+      "papel": "Animaciones de comida y pociones; requiere GML.",
+      "dependencias_publicadas": [
+        {
+          "version_id": "s7gFqeVL",
+          "project_id": "zg2tT2Vu",
+          "file_name": "gml-4.0.10-all.jar",
+          "dependency_type": "required"
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "nombre": "AuthMe Reloaded",
+      "version": "6.0.1 Spigot Legacy",
+      "estado": "instalado",
+      "funcion": "Registro y login",
+      "fuente": "https://github.com/AuthMe/AuthMeReloaded"
+    },
+    {
+      "nombre": "LuckPerms",
+      "version": "5.5.71 Bukkit",
+      "estado": "seleccionado_no_instalado",
+      "funcion": "Permisos administrativos de plugins",
+      "fuente": "https://modrinth.com/plugin/luckperms/version/b0mk8uS6"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "ironSpellRarity": {
+    "COMMON": [],
+    "UNCOMMON": [],
+    "RARE": [
+      "virgos:explorador"
+    ],
+    "EPIC": [
+      "virgos:especialista"
+    ],
+    "LEGENDARY": [
+      "virgos:maestro"
+    ]
+  },
+  "arsGlyphTier": {
+    "1": [],
+    "2": [
+      "virgos:explorador"
+    ],
+    "3": [
+      "virgos:especialista"
+    ],
+    "99": [
+      "virgos:maestro"
+    ]
+  },
+  "titles": {
+    "virgos:explorador": "Explorador (recompensa del códice)",
+    "virgos:especialista": "Especialista (elegí una rama del códice)",
+    "virgos:maestro": "Maestro (recompensa del Umbral)",
+    "virgos:resonancia": "Resonancia de las profundidades",
+    "virgos:forja": "La forja arcana",
+    "virgos:umbral": "Guardián del umbral"
+  }
+}

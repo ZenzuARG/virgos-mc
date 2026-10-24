@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "El plato necesita un recipiente",
+    "subtitle": "Cocina paso a paso · OBJETO · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:bowl"
+    },
+    "description": "Algunas recetas requieren cuencos o botellas para retirar raciones de la olla. Revisá el icono de recipiente en JEI y dejá suficientes. Prepará unas pocas raciones antes de automatizar la producción.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          112,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_cocina_calor"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:bowl",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

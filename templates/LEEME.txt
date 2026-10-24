@@ -1,0 +1,41 @@
+VIRGOS-MC - EMPEZA ACA
+
+1. Clic derecho en el ZIP > Extraer todo.
+2. Abri EMPEZAR.bat (no hace falta ejecutarlo como administrador).
+3. Elegi TLauncher o Minecraft Launcher oficial y toca Instalar.
+4. Espera y segui los pasos que aparecen al terminar.
+
+La primera vez descarga Java, Forge y los mods. Puede tardar varios minutos.
+Necesitas Windows de 64 bits, Internet, unos 10 GB libres y tu launcher instalado.
+Cierra Minecraft y el launcher antes de instalar.
+
+OFICIAL: se crea el perfil Virgos-MC. Elegilo y toca Jugar.
+TLAUNCHER: abri y cerra TLauncher una vez antes de instalar. El asistente configura
+la carpeta, Forge y memoria. Al terminar: Abrir mi launcher > Entrar al juego.
+Para volver a sus ajustes anteriores: cierra TLauncher y toca Restaurar TL.
+
+En el juego: Multijugador > Virgos-MC.
+Si necesitas agregarlo: virgos-mc.playit.plus
+Primera entrada: /register tuClave tuClave
+Las siguientes: /login tuClave
+Usa siempre el mismo nombre, incluidas las mayusculas.
+
+Para volver a jugar, abri tu launcher. No hace falta instalar otra vez.
+Si una descarga falla, volve a abrir EMPEZAR: reutiliza lo que ya descargo bien.
+Para ayuda, usa Abrir registros y manda instalacion.log al administrador.
+
+Las instrucciones del juego estan en COMO-JUGAR.txt.
+
+ACTUALIZAR A 2.0: cierra el juego, extrae este ZIP y ejecuta EMPEZAR.
+Usa la misma carpeta y Revisar / reparar. Conserva tus mundos y controles.
+El servidor estrena mundo: inventario, misiones y bases empiezan de cero.
+Tu nombre y clave de acceso siguen siendo los mismos.
+VOZ: dentro del servidor, inicia sesion y pulsa O. Bloq Mayus para hablar.
+No hace falta instalar Playit ni abrir puertos en la PC de tus amigos.
+MISIONES: pulsa J. AYUDA: escribe /virgos menu (bases, mods, mercado y grupos).
+PERFIL: /perfil muestra tus horas, nivel y misiones. /perfil Nombre consulta amigos.
+DISCORD: LaLechebanda > #virgos-mc comparte el chat con el juego.
+En ese canal: !jugadores, !ip, !ayuda y !voz. Discord es opcional.
+
+Si la primera conexion vence, volve a Multijugador e intenta entrar otra vez.
+Si se repite, avisa al administrador con el registro latest.log.

@@ -1,0 +1,27 @@
+Bastion Virgos - revision 4
+Minecraft 1.20.1 / Forge; usar los mods fijados en pack/mods.lock.json.
+
+La construccion real esta en el mundo del laboratorio, semilla -4556043908712459124.
+Centro de la plaza: 672,114,736. Spawn y origen del clipboard: 672,115,752.
+
+Archivos:
+- bastion-virgos-v4.schem: ciudadela, interiores y terreno inmediato.
+- bastion-acceso-norte-v4.schem
+- bastion-acceso-sur-v4.schem
+- bastion-acceso-oeste-v4.schem
+- bastion-acceso-este-v4.schem
+- anfiteatro-virgos-v3.schem: arena y camino sur desde Z=917.
+
+manifest.json contiene los limites exactos, tamanos y SHA-256.
+Los esquemas se exportaron con WorldEdit Forge 7.2.15 en formato Sponge v2.
+No contienen jugadores, cuentas, permisos ni claims. Para restaurar el servidor
+completo se necesita el respaldo del mundo y su configuracion.
+
+Para recuperar SOLO la construccion en una copia de trabajo:
+1. Copiar los seis archivos a config/worldedit/schematics.
+2. Cargar cada archivo con //schem load NOMBRE_SIN_EXTENSION.
+3. Usar //paste -o para conservar sus coordenadas originales.
+4. Comprobar el terreno y los claims antes de sustituir el mundo publicado.
+
+No se pega ni se regenera automaticamente al arrancar el servidor.
+Documentacion: https://worldedit.enginehub.org/en/latest/usage/clipboard/

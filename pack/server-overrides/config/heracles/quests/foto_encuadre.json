@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Tu primera composición",
+    "subtitle": "Fotografía y recuerdos · GUÍA · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Probá cerca del pueblo con buena luz. Elegí un motivo, encuadrá y tomá una fotografía. Pedí a un compañero que pose o usá un edificio; no hace falta viajar a una dimensión peligrosa.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          112,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "foto_pelicula"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

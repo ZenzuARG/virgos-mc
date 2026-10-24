@@ -1,0 +1,19 @@
+{
+  "name": "Bastión Virgos",
+  "seed": -4556043908712459124,
+  "origin": [
+    672,
+    114,
+    736
+  ],
+  "spawn": [
+    672,
+    115,
+    752
+  ],
+  "palette": 76,
+  "fills": 167980,
+  "blocks": 147542,
+  "blockEntities": 6,
+  "fillVolume": 11613229
+}

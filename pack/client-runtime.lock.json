@@ -1,0 +1,21 @@
+{
+  "java": {
+    "version": "17.0.20.1+1",
+    "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jre_x64_windows_hotspot_17.0.20.1_1.zip",
+    "file": "OpenJDK17U-jre_x64_windows_hotspot_17.0.20.1_1.zip",
+    "algorithm": "SHA256",
+    "hash": "bc21a93923103cdaac93ee337b0ae4365e739fde36df823dd456bc67c8a9d352",
+    "folder": "jdk-17.0.20.1+1-jre"
+  },
+  "forge": {
+    "version": "47.4.22",
+    "file": "forge-1.20.1-47.4.22-installer.jar",
+    "url": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.22/forge-1.20.1-47.4.22-installer.jar",
+    "hash": "a66b95e67eba6b3f72047aa73318e4b80edb616d5834cd05a5baae10d25699d6",
+    "algorithm": "SHA256"
+  },
+  "minecraftJson": {
+    "url": "https://piston-meta.mojang.com/v1/packages/a5cf661d31d9dfcd3d1645be80f43954f63f63b0/1.20.1.json",
+    "hash": "e50169ba5c14ce07c82fb638118449c24f5eb5082e95005c480917aae3635be3"
+  }
+}

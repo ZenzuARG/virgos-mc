@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Una prueba con amigos",
+    "subtitle": "Navegación en grupo · GUÍA · 4/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Suban cerca de la costa y prueben navegación y desembarco. Acuerden quién dirige y cómo avisan una parada. Usen la voz de proximidad o un grupo privado si necesitan coordinarse a distancia.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          168,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "barco_carga"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

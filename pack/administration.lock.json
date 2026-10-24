@@ -1,0 +1,71 @@
+[
+  {
+    "project": "coreprotect",
+    "version": "24.1-virgos.1",
+    "version_id": "3sehX6Sg",
+    "filename": "CoreProtect-CE-24.1-virgos.1.jar",
+    "hash_algorithm": "sha256",
+    "hash": "1e0d93e1cc719cffb243b3b37a3e1c3ed2d9a37e65e31ab9b2d6b00ed740e8b7",
+    "sides": [
+      "server"
+    ],
+    "mode": "required",
+    "source": "https://modrinth.com/plugin/coreprotect/version/3sehX6Sg",
+    "upstream": {
+      "filename": "CoreProtect-CE-24.1.jar",
+      "url": "https://cdn.modrinth.com/data/Lu3KuzdV/versions/3sehX6Sg/CoreProtect-CE-24.1.jar",
+      "hash": "76aad727528ddb990bbee5069f8ef3fcd018ae0bcdea89b965be2485e828633eb068672e841be64e550c8474f901a24d8c15c7bd44c2bd6c96244e1e58de0c95",
+      "hash_algorithm": "sha512"
+    },
+    "local_source": ".lab/v2/CoreProtect-CE-24.1-virgos.1.jar"
+  },
+  {
+    "project": "decentholograms",
+    "project_id": "w02MKsTg",
+    "version_id": "fbE7wARc",
+    "version": "2.10.2",
+    "filename": "DecentHolograms-2.10.2.jar",
+    "url": "https://cdn.modrinth.com/data/w02MKsTg/versions/fbE7wARc/DecentHolograms-2.10.2.jar",
+    "hash_algorithm": "sha512",
+    "hash": "f2247802a175cf0c71f0e069ab4c3b2ff2aba683051e474ff54f2ad3ea08da5156de7e11f768087fadbf7bdeac491b5935b2ebb2f4d8fc9f48b3df41558936ce",
+    "size": 4014227,
+    "sides": [
+      "server"
+    ],
+    "mode": "required",
+    "root": true,
+    "source": "https://modrinth.com/plugin/decentholograms/version/fbE7wARc"
+  },
+  {
+    "project": "discordsrv",
+    "version": "1.30.5",
+    "filename": "DiscordSRV-Build-1.30.5.jar",
+    "url": "https://github.com/DiscordSRV/DiscordSRV/releases/download/v1.30.5/DiscordSRV-Build-1.30.5.jar",
+    "hash_algorithm": "sha256",
+    "hash": "ef2fa1f2eb146c7c77412b7190a7dd33f1fc91282683fe45407739554c8aefef",
+    "size": 10653915,
+    "sides": [
+      "server"
+    ],
+    "mode": "required",
+    "source": "https://github.com/DiscordSRV/DiscordSRV/releases/tag/v1.30.5"
+  }
+,
+{
+    "project":  "distant-horizons-support",
+    "project_id":  "IjY7seTG",
+    "version_id":  "R1UjEyjz",
+    "version":  "0.14.0",
+    "filename":  "DistantHorizonsSupport-0.14.0.jar",
+    "url":  "https://cdn.modrinth.com/data/IjY7seTG/versions/R1UjEyjz/DistantHorizonsSupport-0.14.0.jar",
+    "hash_algorithm":  "sha512",
+    "hash":  "b210b81df67ee36fa048406096fbc90805af81d978d6aa53f0bda91f4120d76b1b4fe6367b980b3c2036eac233c30cf86f881cf5c574b809c8635607c9ff991a",
+    "size":  454213,
+    "sides":  [
+                  "server"
+              ],
+    "mode":  "required",
+    "root":  true,
+    "source":  "https://modrinth.com/plugin/distant-horizons-support/version/0.14.0"
+}
+]

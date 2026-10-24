@@ -1,0 +1,50 @@
+{
+  "replace": true,
+  "content": {
+    "virgos_0": {
+      "type": "item",
+      "content": "minecraft:wheat",
+      "amount": {
+        "min": 12,
+        "max": 24
+      },
+      "unitWorth": 20
+    },
+    "virgos_1": {
+      "type": "item",
+      "content": "minecraft:carrot",
+      "amount": {
+        "min": 12,
+        "max": 24
+      },
+      "unitWorth": 20
+    },
+    "virgos_2": {
+      "type": "item",
+      "content": "minecraft:potato",
+      "amount": {
+        "min": 12,
+        "max": 24
+      },
+      "unitWorth": 20
+    },
+    "virgos_3": {
+      "type": "item",
+      "content": "minecraft:cod",
+      "amount": {
+        "min": 4,
+        "max": 8
+      },
+      "unitWorth": 70
+    },
+    "virgos_4": {
+      "type": "item",
+      "content": "minecraft:pumpkin",
+      "amount": {
+        "min": 3,
+        "max": 6
+      },
+      "unitWorth": 90
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Leer antes de lanzar",
+    "subtitle": "Hechizos y rituales · OBJETO · 3/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:scroll"
+    },
+    "description": "Conseguí un pergamino. Leé daño, enfriamiento y alcance. Probá los hechizos lejos de construcciones ajenas.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          112,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:scroll",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

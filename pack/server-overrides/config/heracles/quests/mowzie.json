@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Rivales con personalidad",
+    "subtitle": "Grandes aventuras · GUÍA · 6/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_sword"
+    },
+    "description": "Los enemigos de Mowzie tienen ventanas de ataque y mecánicas propias. Observá antes de atacar; el equipo por sí solo no reemplaza aprender el encuentro.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          280,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,52 @@
+{
+  "display": {
+    "title": "Guardián del umbral",
+    "subtitle": "Expediciones Virgos · LOGRO · 4/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:ender_eye"
+    },
+    "description": "Tres o más Especialistas con Forja. El Guardián del Bastión es un devastador con tres fases: cada tercio de vida cierra su barrera y exige activar los tres sellos otra vez. No se pueden saltar fases con un golpe enorme. Los jefes de Cataclysm conservan sus propias estructuras y mecánicas. La victoria concede Maestro al reclamar el códice.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "forja"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:umbral"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:golden_apple",
+        "count": 2
+      }
+    },
+    "rango": {
+      "type": "heracles:command",
+      "title": "Reconocimiento personal",
+      "command": "advancement grant @s only virgos:maestro"
+    }
+  }
+}

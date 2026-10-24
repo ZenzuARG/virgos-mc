@@ -1,0 +1,29 @@
+{
+  "source": "https://www.planetminecraft.com/project/medieval-spawn-town-1-17-1-18/",
+  "author": "itzvmbie; SaraGrey, CoolMMN, FireVoges, Vmbie, Z3phrin, Cynera Staff",
+  "sourceSha256": "321631f3512dd688e2214a813db42864977f7fe957394aff471cea7a08d2dcac",
+  "sourceSize": [
+    135,
+    60,
+    103
+  ],
+  "removed": {
+    "minecraft:light": 394119,
+    "minecraft:barrier": 42,
+    "minecraft:end_portal_frame": 8,
+    "minecraft:end_portal": 4,
+    "minecraft:ladder": 6,
+    "minecraft:lava": 9,
+    "minecraft:nether_portal": 20
+  },
+  "blocks": 78220,
+  "spawn": [
+    672,
+    115,
+    752
+  ],
+  "routes": 11,
+  "blueprint": "pueblo-v11-final",
+  "status": "PUBLISHED_VERIFIED",
+  "verification": ".lab/reports/v11-final.json"
+}

@@ -1,0 +1,45 @@
+{
+  "minecraft": "1.20.1",
+  "engine": "Ketting",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "launcher": {
+    "version": "1.6.0",
+    "url": "https://github.com/kettingpowered/kettinglauncher/releases/download/v1.6.0/kettinglauncher-1.6.0.jar",
+    "file": "kettinglauncher-1.6.0.jar",
+    "algorithm": "SHA256",
+    "hash": "2933c319f029b5362359d241dfc121bd8d30b4740563c458dc4f30a23e5890a0"
+  },
+  "java": {
+    "version":  "21.0.12.1+1-LTS",
+    "url":  "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.zip",
+    "file":  "OpenJDK21U-jre_x64_windows_hotspot_21.0.12.1_1.zip",
+    "algorithm":  "SHA256",
+    "hash":  "d35f31e712f0fcf6ac5a093edc90204fbff22f720ba3950bd09d331d5e621636",
+    "folder":  "jdk-21.0.12.1+1-jre"
+},
+  "authMe": {
+    "version": "6.0.1",
+    "url": "https://github.com/AuthMe/AuthMeReloaded/releases/download/6.0.1/AuthMe-6.0.1-Spigot-Legacy.jar",
+    "file": "AuthMe-6.0.1-Spigot-Legacy.jar",
+    "algorithm": "SHA256",
+    "hash": "e0f4560420371db95eacdc960d78dd6cc8c5ff62e2f5ad37c61d92187180ae9b"
+  },
+  "playitCompanion": {
+    "version": "0.1.2-forge+virgos.1",
+    "file": "playit_companion-forge-0.1.2-virgos.1.jar",
+    "algorithm": "SHA256",
+    "hash": "3d7872dbd9ccb2bdf83530298dc860a6021d892d5b60b2d7707f4e0f23794ac1",
+    "upstream": {
+      "version": "0.1.2-forge",
+      "url": "https://cdn.modrinth.com/data/og7kbNBC/versions/mBIJjrz6/playit_companion-forge-0.1.2.jar",
+      "file": "playit_companion-forge-0.1.2.jar",
+      "algorithm": "SHA512",
+      "hash": "5b6f0bf5dae4a164e4e02c543cb8f9b4e020d86960b03057b30056424a9436d0d0a9e914ed577c6150b430389948a0d80d42dad6e4ece7a4696471d04fff4b1e"
+    },
+    "local_path": "pack/local/playit_companion-forge-0.1.2-virgos.1.jar",
+    "replaces": [
+      "playit_companion-forge-0.1.2.jar"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Maderas que combinan",
+    "subtitle": "Música y construcción · GUÍA · 4/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Every Compat añade variantes compatibles con las maderas del paquete. Buscá el bloque decorativo en JEI y compará materiales. Algunas combinaciones masivas se excluyen para cuidar memoria; Chipped conserva sus variantes originales.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          168,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "arte_laud"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

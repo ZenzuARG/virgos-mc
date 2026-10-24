@@ -1,0 +1,103 @@
+{
+  "name": "BastiÃ³n Virgos",
+  "seed": -4556043908712459124,
+  "origin": [
+    672,
+    115,
+    752
+  ],
+  "minecraft": "1.20.1",
+  "worldedit": "7.2.15",
+  "files": [
+    {
+      "file": "bastion-virgos-v4.schem",
+      "minimum": [
+        560,
+        80,
+        624
+      ],
+      "maximum": [
+        784,
+        165,
+        848
+      ],
+      "bytes": 142718,
+      "sha256": "673ffdd94d67b33c218b706902e4c139b70b0a16745be2f96806ceb378741e5c"
+    },
+    {
+      "file": "bastion-acceso-norte-v4.schem",
+      "minimum": [
+        664,
+        55,
+        556
+      ],
+      "maximum": [
+        680,
+        165,
+        623
+      ],
+      "bytes": 7479,
+      "sha256": "aca4e3a10f9a18171e85374d0f4b94febf1653d8abff61ffbcdfb5832acc9de1"
+    },
+    {
+      "file": "bastion-acceso-sur-v4.schem",
+      "minimum": [
+        664,
+        55,
+        849
+      ],
+      "maximum": [
+        680,
+        165,
+        916
+      ],
+      "bytes": 5792,
+      "sha256": "c88ec9a3d5f08ea08d9f756e56d5482ea7c8679c0b36a058585f0393f301d84c"
+    },
+    {
+      "file": "bastion-acceso-oeste-v4.schem",
+      "minimum": [
+        492,
+        55,
+        728
+      ],
+      "maximum": [
+        559,
+        165,
+        744
+      ],
+      "bytes": 7841,
+      "sha256": "eb9fdf6ddb86f7b76430f06177eb80aa5347c76c5c836a4992681b42e2264c68"
+    },
+    {
+      "file": "bastion-acceso-este-v4.schem",
+      "minimum": [
+        785,
+        55,
+        728
+      ],
+      "maximum": [
+        852,
+        165,
+        744
+      ],
+      "bytes": 7496,
+      "sha256": "883281d2273f0cbb040d775c10cec7cbe6e67e48a1fc4e7f156a5eac52ec4d16"
+    },
+    {
+      "file": "anfiteatro-virgos-v3.schem",
+      "minimum": [
+        640,
+        40,
+        917
+      ],
+      "maximum": [
+        704,
+        128,
+        1084
+      ],
+      "bytes": 81735,
+      "sha256": "8a803c6034b5119993060c887c906511fb3daf18c693ae54d90a52d48a73f07e"
+    }
+  ]
+}

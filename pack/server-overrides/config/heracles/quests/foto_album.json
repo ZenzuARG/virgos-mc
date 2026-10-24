@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Armar una historia",
+    "subtitle": "Fotografía y recuerdos · OBJETO · 5/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "exposure:album"
+    },
+    "description": "Guardá fotos en un álbum. Propuesta: la plaza, tu primer taller y una salida con amigos. Decidí el orden para contar una historia y reservá los originales que quieras conservar.\n\nObjetivo: llevá el objeto en el inventario; se detecta sin consumirlo. Practicá el paso descrito.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          224,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "foto_revelar"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "exposure:album",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

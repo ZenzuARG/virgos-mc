@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Tu próxima aventura",
+    "subtitle": "Otros horizontes · GUÍA · 6/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Elegí una meta de construcción, exploración o combate. El códice conserva progreso individual, los cofres Lootr permiten acompañar más tarde y las expediciones Virgos exigen cooperación. No necesitás jugar todos los días para tener un lugar en el grupo.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          280,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_dimensiones_cuevas"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

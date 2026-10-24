@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Diseñar para ayudar",
+    "subtitle": "Aprender Ars Nouveau · GUÍA · 7/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Prepará combinaciones separadas para explorar, iluminar y combatir. Revisá coste de maná y nivel de cada componente. /virgos progreso indica qué te falta: nivel 2 necesita Explorador; nivel 3, Especialista y Forja. Recibir un libro prestado no salta esos requisitos.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          0,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_ars_aparato"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

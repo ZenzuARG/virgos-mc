@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Devolverle vida a una ruina",
+    "subtitle": "Arqueología de Create · GUÍA · 6/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Después de explorar, proponé restaurar una construcción pequeña que no bloquee contenido público. Planificá acceso, protección y un taller propio. No tapes cofres Lootr ni arenas de jefes con un claim.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          280,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_ruinas_magia"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

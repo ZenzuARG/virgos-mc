@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EBE",
+    "FBF",
+    "FBF"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:spider_eye"
+    },
+    "B": {
+      "item": "create:andesite_alloy"
+    },
+    "F": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "item": "meetyourfight:fossil_bait"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Aether con nuevos horizontes",
+    "subtitle": "Mares y cielos · GUÍA · 4/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Deep Aether amplía el Aether con biomas, recursos y mazmorras. Primero prepará el portal y comprendé cómo caés o regresás. Las islas no perdonan saltos sin una ruta segura.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          168,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_travesia_capitana"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,45 @@
+{
+  "display": {
+    "title": "Al otro lado del fuego",
+    "subtitle": "Grandes aventuras · VIAJE · 1/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:flint_and_steel"
+    },
+    "description": "Prepará resistencia al fuego, comida y una ruta de regreso. Las fortalezas renovadas de YUNG tienen recorridos más extensos.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:changed_dimension",
+      "to": "minecraft:the_nether"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:golden_carrot",
+        "count": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Materiales para conectar bases",
+    "subtitle": "Bastión compartido · LOGRO · 4/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:track"
+    },
+    "description": "El grupo aporta 384 de create:track desde el Bastión con /virgos pueblo aportar caminos. Los objetos se consumen y cada persona puede aportar como máximo un tercio: hacen falta al menos tres. Al completarlo, cada Explorador recibe esta recompensa una vez, incluso si se incorporó después. Son suministros para construir juntos; las rutas y edificios los diseña el grupo.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:pueblo_caminos"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "create:track",
+        "count": 64
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Probar con un vecino",
+    "subtitle": "Mercado entre vecinos · GUÍA · 6/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Pedile a un compañero que revise la oferta, compre una vez y confirme lo recibido. Compará existencias antes y después. Sólo el dueño administra el almacén. No hay tienda administrativa infinita ni dinero por estar conectado.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          280,
+          128
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "mercado_datos"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

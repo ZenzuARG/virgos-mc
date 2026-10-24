@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Conectar las bases",
+    "subtitle": "Ingeniería Create · OBJETO · 10/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:track"
+    },
+    "description": "Coordiná con tus amigos el trazado de una línea. Pedí acceso a los claims por donde pase.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          168,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_tren"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:track",
+      "amount": 32,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

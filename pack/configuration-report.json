@@ -1,0 +1,584 @@
+[
+  {
+    "file": "config/naturescompass-common.toml",
+    "key": "General.allowTeleport",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/naturescompass-common.toml",
+    "key": "General.maxNextSearches",
+    "before": 3,
+    "value": 3
+  },
+  {
+    "file": "config/naturescompass-common.toml",
+    "key": "General.radiusModifier",
+    "before": 750,
+    "value": 750
+  },
+  {
+    "file": "config/naturescompass-common.toml",
+    "key": "General.maxSamples",
+    "before": 12000,
+    "value": 12000
+  },
+  {
+    "file": "config/naturescompass-common.toml",
+    "key": "General.biomeBlacklist",
+    "before": [
+      "alexscaves:*"
+    ],
+    "value": [
+      "alexscaves:*"
+    ]
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "restrictions.restrictRenameToOwner",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "restrictions.generatedWaystonesUnbreakable",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "restrictions.transportLeashedDimensional",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "cooldowns.warpStoneCooldown",
+    "before": 120,
+    "value": 120
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "cooldowns.warpStoneUseTime",
+    "before": 100,
+    "value": 100
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "cooldowns.scrollUseTime",
+    "before": 100,
+    "value": 100
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "xpCost.minimumBaseXpCost",
+    "before": 1.0,
+    "value": 1.0
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "xpCost.waystoneXpCostMultiplier",
+    "before": 1.0,
+    "value": 1.0
+  },
+  {
+    "file": "config/waystones-common.toml",
+    "key": "xpCost.warpStoneXpCostMultiplier",
+    "before": 1.0,
+    "value": 1.0
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "disable_break",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "enable_break",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "enable_fake_player_break",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "blast_immune",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "refresh_all",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/lootr-common.toml",
+    "key": "decay_all",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "enabled",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "saveAll",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "timer",
+    "before": 120,
+    "value": 120
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "backupsToKeep",
+    "before": 12,
+    "value": 12
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "maxDiskSize",
+    "before": "30 GB",
+    "value": "30 GB"
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "noPlayerBackups",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "config/simplebackups-common.toml",
+    "key": "mod_compat.mc2discord",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.defaultLanguage",
+    "before": "en_us",
+    "value": "en_us"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.permissionSystem",
+    "before": "permission_api",
+    "value": "permission_api"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.parties.maxPartyMembers",
+    "before": 8,
+    "value": 8
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.parties.maxPartyAllies",
+    "before": 8,
+    "value": 8
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.parties.partyExpirationTime",
+    "before": 8760,
+    "value": 8760
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.partyOwnedClaims",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaims",
+    "before": 25,
+    "value": 25
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaimForceloads",
+    "before": 0,
+    "value": 0
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaimingAnchors",
+    "before": 0,
+    "value": 0
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.forceloadBonusPerPartyMember",
+    "before": 0,
+    "value": 0
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaimsPermission",
+    "before": "",
+    "value": ""
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaimForceloadsPermission",
+    "before": "",
+    "value": ""
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.maxPlayerClaimingAnchorsPermission",
+    "before": "",
+    "value": ""
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.protection.forcedEntityProtectionExceptionList",
+    "before": [
+      "minecraft:minecart",
+      "interact$corpse:corpse"
+    ],
+    "value": [
+      "minecraft:minecart",
+      "corpse:corpse"
+    ]
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server.toml",
+    "key": "serverConfig.claims.protection.blockProtectionOptionalExceptionGroups",
+    "before": [
+      "Controls{minecraft:lever, #minecraft:buttons}",
+      "Doors{#minecraft:doors, #minecraft:fence_gates, #forge:fence_gates, #minecraft:trapdoors}",
+      "Chests{minecraft:chest, minecraft:trapped_chest, #forge:chests/wooden}",
+      "Barrels{minecraft:barrel, #forge:barrels}",
+      "Ender_Chests{minecraft:ender_chest, #forge:chests/ender}",
+      "Shulker_Boxes{#minecraft:shulker_boxes}",
+      "Furnaces{minecraft:furnace, minecraft:blast_furnace, minecraft:smoker, farmersdelight:cooking_pot, farmersdelight:stove, farmersdelight:cutting_board}",
+      "Hoppers{minecraft:hopper}",
+      "Dispenser-like{minecraft:dispenser, minecraft:dropper}",
+      "Anvils{#minecraft:anvil}",
+      "Stonecutters{minecraft:stonecutter}",
+      "Grindstones{minecraft:grindstone}",
+      "Cartography_Tables{minecraft:cartography_table}",
+      "Lecterns{minecraft:lectern}",
+      "Smithing_Tables{minecraft:smithing_table}",
+      "Looms{minecraft:loom}",
+      "Jukeboxes{minecraft:jukebox}",
+      "Beds{#minecraft:beds}",
+      "Beacons{minecraft:beacon}",
+      "Enchanting_Tables{minecraft:enchanting_table}",
+      "break$Crops{#minecraft:crops}",
+      "Seating{handcrafted:*_bench, handcrafted:*_chair}",
+      "Virgos_Seals{minecraft:lodestone}"
+    ],
+    "value": [
+      "Controls{minecraft:lever, #minecraft:buttons}",
+      "Doors{#minecraft:doors, #minecraft:fence_gates, #forge:fence_gates, #minecraft:trapdoors}",
+      "Chests{minecraft:chest, minecraft:trapped_chest, #forge:chests/wooden}",
+      "Barrels{minecraft:barrel, #forge:barrels}",
+      "Ender_Chests{minecraft:ender_chest, #forge:chests/ender}",
+      "Shulker_Boxes{#minecraft:shulker_boxes}",
+      "Furnaces{minecraft:furnace, minecraft:blast_furnace, minecraft:smoker, farmersdelight:cooking_pot, farmersdelight:stove, farmersdelight:cutting_board}",
+      "Hoppers{minecraft:hopper}",
+      "Dispenser-like{minecraft:dispenser, minecraft:dropper}",
+      "Anvils{#minecraft:anvil}",
+      "Stonecutters{minecraft:stonecutter}",
+      "Grindstones{minecraft:grindstone}",
+      "Cartography_Tables{minecraft:cartography_table}",
+      "Lecterns{minecraft:lectern}",
+      "Smithing_Tables{minecraft:smithing_table}",
+      "Looms{minecraft:loom}",
+      "Jukeboxes{minecraft:jukebox}",
+      "Beds{#minecraft:beds}",
+      "Beacons{minecraft:beacon}",
+      "Enchanting_Tables{minecraft:enchanting_table}",
+      "break$Crops{#minecraft:crops}",
+      "Seating{handcrafted:*_bench, handcrafted:*_chair}",
+      "Virgos_Seals{minecraft:lodestone}"
+    ]
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.maxUpgradesPerStorage",
+    "before": [
+      "jukebox_upgrades|1",
+      "stack_upgrades|1",
+      "furnace_upgrades|1"
+    ],
+    "value": [
+      "jukebox_upgrades|1",
+      "stack_upgrades|1",
+      "furnace_upgrades|1"
+    ]
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.inceptionUpgrade.upgradesUseInventoriesOfBackpacksInBackpack",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.inceptionUpgrade.upgradesInContainedBackpacksAreFunctional",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.nerfs.tooManyBackpacksSlowness",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.nerfs.maxNumberOfBackpacks",
+    "before": 2,
+    "value": 2
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.nerfs.onlyWornBackpackTriggersUpgrades",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.tankUpgrade.stackMultiplierRatio",
+    "before": 0.0,
+    "value": 0.0
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.batteryUpgrade.stackMultiplierRatio",
+    "before": 0.0,
+    "value": 0.0
+  },
+  {
+    "file": "serverconfig/sophisticatedbackpacks-server.toml",
+    "key": "server.entityBackpackAdditions.addLoot",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/create-server.toml",
+    "key": "kinetics.contraptions.maxBlocksMoved",
+    "before": 1024,
+    "value": 1024
+  },
+  {
+    "file": "serverconfig/create-server.toml",
+    "key": "kinetics.contraptions.maxChassisRange",
+    "before": 8,
+    "value": 8
+  },
+  {
+    "file": "serverconfig/create-server.toml",
+    "key": "trains.maxAssemblyLength",
+    "before": 64,
+    "value": 64
+  },
+  {
+    "file": "serverconfig/create-server.toml",
+    "key": "trains.maxBogeyCount",
+    "before": 12,
+    "value": 12
+  },
+  {
+    "file": "serverconfig/corpse-server.toml",
+    "key": "corpse.access.only_owner",
+    "before": true,
+    "value": true
+  },
+  {
+    "file": "serverconfig/corpse-server.toml",
+    "key": "corpse.access.skeleton",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/corpse-server.toml",
+    "key": "corpse.despawn.force_time",
+    "before": -1,
+    "value": -1
+  },
+  {
+    "file": "serverconfig/corpse-server.toml",
+    "key": "corpse.fall_into_void",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/corpse-server.toml",
+    "key": "corpse.lava_damage",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/simplebackups-server.toml",
+    "key": "commandsCheatsDisabled",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/simplebackups-server.toml",
+    "key": "messagesForEveryone",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.name",
+    "before": "Bastion Virgos",
+    "value": "Bastion Virgos"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.color",
+    "before": 5417351,
+    "value": 5417351
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.fullAccess",
+    "before": "N",
+    "value": "N"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.playersByPlayers",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.playersByMobs",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.playersByOther",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.naturalSpawnHostile",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.naturalSpawnFriendly",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.spawnersHostile",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.spawnersFriendly",
+    "before": false,
+    "value": false
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Doors",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Barrels",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Furnaces",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Anvils",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Stonecutters",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Grindstones",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Cartography_Tables",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Lecterns",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Smithing_Tables",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Looms",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Beds",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Enchanting_Tables",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.item.interact.Books",
+    "before": "E",
+    "value": "E"
+  },
+  {
+    "file": "serverconfig/openpartiesandclaims-server-claim-config.toml",
+    "key": "playerConfig.claims.protection.exceptions.groups.block.interact.Seating",
+    "before": "E",
+    "value": "E"
+  }
+]

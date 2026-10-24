@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Mecanismos de precisión",
+    "subtitle": "Ingeniería Create · OBJETO · 7/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:precision_mechanism"
+    },
+    "description": "Armá una secuencia automatizada. Probá primero con pocas piezas antes de escalarla.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          0,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_laton"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:precision_mechanism",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Raciones completas",
+    "subtitle": "Cocina y vida cotidiana · OBJETO · 4/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:vegetable_soup"
+    },
+    "description": "Prepará cuatro raciones de sopa. Los objetos de las misiones de cocina no se consumen.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cocina_olla"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:vegetable_soup",
+      "amount": 4,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

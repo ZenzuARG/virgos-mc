@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Combinaciones útiles",
+    "subtitle": "Hechizos y rituales · OBJETO · 11/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:apprentice_spell_book"
+    },
+    "description": "El segundo libro amplía posibilidades: utilidad, protección y ayuda al grupo.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          224,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:apprentice_spell_book",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

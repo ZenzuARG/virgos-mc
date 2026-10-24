@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Investigación avanzada",
+    "subtitle": "Hechizos y rituales · OBJETO · 5/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:epic_ink"
+    },
+    "description": "Guardá los materiales avanzados para tu especialidad. Las habilidades extremas se regulan con progreso personal.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:epic_ink",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

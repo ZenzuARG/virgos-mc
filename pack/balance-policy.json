@@ -1,0 +1,155 @@
+{
+  "config/naturescompass-common.toml": {
+    "General.allowTeleport": false,
+    "General.maxNextSearches": 3,
+    "General.radiusModifier": 750,
+    "General.maxSamples": 12000,
+    "General.biomeBlacklist": [
+      "alexscaves:*"
+    ]
+  },
+  "config/waystones-common.toml": {
+    "restrictions.restrictRenameToOwner": true,
+    "restrictions.generatedWaystonesUnbreakable": true,
+    "restrictions.transportLeashedDimensional": false,
+    "cooldowns.warpStoneCooldown": 120,
+    "cooldowns.warpStoneUseTime": 100,
+    "cooldowns.scrollUseTime": 100,
+    "xpCost.minimumBaseXpCost": 1.0,
+    "xpCost.waystoneXpCostMultiplier": 1.0,
+    "xpCost.warpStoneXpCostMultiplier": 1.0
+  },
+  "config/lootr-common.toml": {
+    "disable_break": true,
+    "enable_break": false,
+    "enable_fake_player_break": false,
+    "blast_immune": true,
+    "refresh_all": false,
+    "decay_all": false
+  },
+  "config/simplebackups-common.toml": {
+    "enabled": true,
+    "saveAll": true,
+    "timer": 120,
+    "backupsToKeep": 12,
+    "maxDiskSize": "30 GB",
+    "noPlayerBackups": false,
+    "mod_compat.mc2discord": false
+  },
+  "serverconfig/openpartiesandclaims-server.toml": {
+    "serverConfig.defaultLanguage": "en_us",
+    "serverConfig.permissionSystem": "permission_api",
+    "serverConfig.parties.maxPartyMembers": 8,
+    "serverConfig.parties.maxPartyAllies": 8,
+    "serverConfig.parties.partyExpirationTime": 8760,
+    "serverConfig.claims.partyOwnedClaims": false,
+    "serverConfig.claims.maxPlayerClaims": 25,
+    "serverConfig.claims.maxPlayerClaimForceloads": 0,
+    "serverConfig.claims.maxPlayerClaimingAnchors": 0,
+    "serverConfig.claims.forceloadBonusPerPartyMember": 0,
+    "serverConfig.claims.maxPlayerClaimsPermission": "",
+    "serverConfig.claims.maxPlayerClaimForceloadsPermission": "",
+    "serverConfig.claims.maxPlayerClaimingAnchorsPermission": "",
+    "serverConfig.claims.protection.forcedEntityProtectionExceptionList": [
+      "minecraft:minecart",
+      "corpse:corpse",
+      "hand$easy_npc:villager"
+    ],
+    "serverConfig.claims.protection.blockProtectionOptionalExceptionGroups": [
+      "Controls{minecraft:lever, #minecraft:buttons}",
+      "Doors{#minecraft:doors, #minecraft:fence_gates, #forge:fence_gates, #minecraft:trapdoors}",
+      "Chests{minecraft:chest, minecraft:trapped_chest, #forge:chests/wooden}",
+      "Barrels{minecraft:barrel, #forge:barrels}",
+      "Ender_Chests{minecraft:ender_chest, #forge:chests/ender}",
+      "Shulker_Boxes{#minecraft:shulker_boxes}",
+      "Furnaces{minecraft:furnace, minecraft:blast_furnace, minecraft:smoker, farmersdelight:cooking_pot, farmersdelight:stove, farmersdelight:cutting_board}",
+      "Hoppers{minecraft:hopper}",
+      "Dispenser-like{minecraft:dispenser, minecraft:dropper}",
+      "Anvils{#minecraft:anvil}",
+      "Stonecutters{minecraft:stonecutter}",
+      "Grindstones{minecraft:grindstone}",
+      "Cartography_Tables{minecraft:cartography_table}",
+      "Lecterns{minecraft:lectern}",
+      "Smithing_Tables{minecraft:smithing_table}",
+      "Looms{minecraft:loom}",
+      "Jukeboxes{minecraft:jukebox}",
+      "Beds{#minecraft:beds}",
+      "Beacons{minecraft:beacon}",
+      "Enchanting_Tables{minecraft:enchanting_table}",
+      "break$Crops{#minecraft:crops}",
+      "Seating{handcrafted:*_bench, handcrafted:*_chair}",
+      "Virgos_Seals{minecraft:lodestone}"
+    ],
+    "serverConfig.primaryPartySystem": "default"
+  },
+  "serverconfig/sophisticatedbackpacks-server.toml": {
+    "server.maxUpgradesPerStorage": [
+      "jukebox_upgrades|1",
+      "stack_upgrades|1",
+      "furnace_upgrades|1"
+    ],
+    "server.inceptionUpgrade.upgradesUseInventoriesOfBackpacksInBackpack": false,
+    "server.inceptionUpgrade.upgradesInContainedBackpacksAreFunctional": false,
+    "server.nerfs.tooManyBackpacksSlowness": true,
+    "server.nerfs.maxNumberOfBackpacks": 2,
+    "server.nerfs.onlyWornBackpackTriggersUpgrades": true,
+    "server.tankUpgrade.stackMultiplierRatio": 0.0,
+    "server.batteryUpgrade.stackMultiplierRatio": 0.0,
+    "server.entityBackpackAdditions.addLoot": false
+  },
+  "serverconfig/create-server.toml": {
+    "kinetics.contraptions.maxBlocksMoved": 1024,
+    "kinetics.contraptions.maxChassisRange": 8,
+    "trains.maxAssemblyLength": 64,
+    "trains.maxBogeyCount": 12
+  },
+  "serverconfig/corpse-server.toml": {
+    "corpse.access.only_owner": true,
+    "corpse.access.skeleton": false,
+    "corpse.despawn.force_time": -1,
+    "corpse.fall_into_void": false,
+    "corpse.lava_damage": false
+  },
+  "serverconfig/smallships-server.toml": {
+    "Ship.General.shipGeneralCollisionDamage": 0.0,
+    "Ship.General.Modifier.shipGeneralCannonDamage": 0.0,
+    "Ship.General.Modifier.shipGeneralCannonDestruction": 0.0
+  },
+  "config/everycomp-hazardous.toml": {
+    "module.blacklist": [
+      "chipped",
+      "lightmanscurrency",
+      "farmersdelight"
+    ],
+    "woodtype.blacklist": [
+      "ars_nouveau:archwood",
+      "cataclysm:chorus"
+    ]
+  },
+  "config/immersive_melodies.json": {
+    "maxAudibleDistance": 24,
+    "instrumentVolumeFactor": 0.65,
+    "forceMobsToPickUp": false,
+    "mobInstrumentFactors": {
+      "minecraft:skeleton": 0.0,
+      "minecraft:wither_skeleton": 0.0,
+      "minecraft:zombified_piglin": 0.0,
+      "minecraft:piglin": 0.0,
+      "minecraft:husk": 0.0,
+      "minecraft:zombie": 0.0,
+      "minecraft:piglin_brute": 0.0,
+      "minecraft:pillager": 0.0
+    }
+  },
+  "serverconfig/simplebackups-server.toml": {
+    "commandsCheatsDisabled": false,
+    "messagesForEveryone": false
+  },
+  "serverconfig/openpartiesandclaims-server-claim-config.toml": {
+    "playerConfig.claims.protectClaimedChunks": true,
+    "playerConfig.claims.protection.exceptions.fullAccess": "N",
+    "playerConfig.claims.protection.exceptions.blocksByPlayers": "N",
+    "playerConfig.claims.protection.exceptions.groups.block.interact.Chests": "N",
+    "playerConfig.claims.protection.exceptions.groups.block.interact.Ender_Chests": "E"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Bajo la superficie",
+    "subtitle": "Primeros pasos · OBJETO · 7/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_ingot"
+    },
+    "description": "Conseguí ocho lingotes. No necesitás entregar estos objetos: alcanza con llevarlos en el inventario.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          0,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "inicio_piedra"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_ingot",
+      "amount": 8,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

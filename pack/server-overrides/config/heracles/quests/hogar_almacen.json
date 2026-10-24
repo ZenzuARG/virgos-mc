@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Orden en el taller",
+    "subtitle": "Hogar y comunidad · OBJETO · 3/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "sophisticatedstorage:chest"
+    },
+    "description": "Organizá tus materiales en almacenamiento Sophisticated. Mantené los cofres y sus accesos dentro del claim.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          112,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "hogar_cobre"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "sophisticatedstorage:chest",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

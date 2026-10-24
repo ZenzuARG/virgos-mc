@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Construir con comodidad",
+    "subtitle": "Hogar y comunidad · OBJETO · 7/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "constructionwand:iron_wand"
+    },
+    "description": "La varita ayuda a construir con tus propios materiales. Respetá los límites del claim y revisá la orientación antes de colocar.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          0,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "hogar_cuerda"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "constructionwand:iron_wand",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

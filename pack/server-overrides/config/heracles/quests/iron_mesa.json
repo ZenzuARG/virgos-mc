@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Mesa de inscripción",
+    "subtitle": "Hechizos y rituales · OBJETO · 2/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:inscription_table"
+    },
+    "description": "Usá la mesa para preparar tu libro. Cada escuela tiene fortalezas distintas; no necesitás llevarlas todas.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:inscription_table",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

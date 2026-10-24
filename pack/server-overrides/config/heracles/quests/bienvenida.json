@@ -1,0 +1,43 @@
+{
+  "display": {
+    "title": "Empezá por acá",
+    "subtitle": "INICIO · Tu primera misión",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:compass"
+    },
+    "description": "Este códice es tuyo: el progreso de tus amigos no completa tus misiones. Salí por cualquiera de los cuatro arcos para encontrar el mismo mundo que ves desde la plaza. No hay semanas bloqueadas ni carreras obligatorias. Reclamá las recompensas con el botón del códice.\n\n¿Primera vez con mods? Empezá también el sección «01 · Empezar» · Aprender el servidor. /virgos guia reúne comandos y explicaciones cortas. Los capítulos 13 a 20 enseñan los mods con actividades opcionales; no reinician tus misiones anteriores.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 8
+      }
+    }
+  }
+}

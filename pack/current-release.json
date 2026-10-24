@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "published": "2026-10-19T00:29:31.194452-03:00",
+  "minecraft": "1.20.1",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "quests": 244,
+  "chapters": 10,
+  "installer": 11,
+  "coreSha256": "0181e32f38247c4d12ace070006cb37b0b5d5d7e62be78f1f7996fe48bde199c",
+  "spawnBlueprintSha256": "a28671fb86062a932d9b7544a54c3b5507527a630a00cc4045fc23dfece35da5",
+  "verification": ".lab/v2/final.json",
+  "marketBlueprintSha256": "8aa53c4b5e05898b71066a2f835be83d1a9552cfeb00819736388b0548c7770e",
+  "reviewed": "2026-10-20T16:20:00-03:00",
+  "townAuditBlueprintSha256": "96ed153b5ce48ab969aa4e341ee82605e6bb4ee34d625514edf1c6ba145c3845",
+  "discordMessage": "https://discord.com/channels/736709362206113802/1561436921006137527/1562097329547378700",
+  "clientRequired": 116,
+  "clientOptional": 4,
+  "installerSha256": "90c459c7b25eeedf73be1c981623663c705a33d8e625b75ee5c6ae29331776bf",
+  "mrpackSha256": "2156aec7f54c150d4a50c8bc8dae99f438cb760eb4265aa7d0afedeb544a8c1c",
+  "clientRelease": "2.0.0-r11",
+  "clientFingerprint": "virgos-client-2.0.0-r11"
+}

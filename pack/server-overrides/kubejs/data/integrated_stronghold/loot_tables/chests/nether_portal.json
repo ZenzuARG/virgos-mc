@@ -1,0 +1,462 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 1
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:written_book",
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\r\n          pages:[\r\n              \"[\r\n                \\\"\\\",\r\n                {\\\"text\\\":\\\"§kREDACTED\\\"},\r\n                {\\\"text\\\":\\\"§l’s guide to the fiery creatures of the Nether\n\n\\\"},\r\n                {\\\"text\\\":\\\"The Nether is dimension beneath our own full of fire, lava, and all things hot and dangerous. \\\"},\r\n                {\\\"text\\\":\\\"Its inhabitants must be adapted to this precarious environment. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"We only recently got access to this dimension after the invention of the Nether Portal.\n\n\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lNether Portal\n\n\\\"},\r\n                {\\\"text\\\":\\\"The Nether Portal is a hollow rectangle of obsidian with a purple glowing aura. \\\"},\r\n                {\\\"text\\\":\\\"Once lit with items such as a flint and steel or fire charge, it will activate. \\\"},\r\n                {\\\"text\\\":\\\"Upon activation, when an entity goes through they are transported into the nether dimension. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lPiglins\n\n\\\"},\r\n                {\\\"text\\\":\\\"Piglins are a race of walking pigs living in the Nether. They like biomes such as the Nether Wastes and Crimson Forests. \\\"},\r\n                {\\\"text\\\":\\\"They value gold very highly and are hostile if you are not wearing any. \\\"},\r\n                {\\\"text\\\":\\\"Additionally, they will defend their items and attack if chests are \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"opened nearby. They are a rather intelligent species and have built massive blackstone Bastions scattered throughout the Nether. \\\"},\r\n                {\\\"text\\\":\\\"We must continue to treat their kind with dignity for the benefit of everyone.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lHoglins\n\n\\\"},\r\n                {\\\"text\\\":\\\"Hoglins are a race of large pig-like animals that are hostile to just about everything they come across. \\\"},\r\n                {\\\"text\\\":\\\"However, they do not attack piglins. \\\"},\r\n                {\\\"text\\\":\\\"They are a great source of meat and leather in the Nether dimension.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lMagma Cube\n\n\\\"},\r\n                {\\\"text\\\":\\\"Magma Cubes are a blob-like creature found in the basalt delta biome. \\\"},\r\n                {\\\"text\\\":\\\"Once slain, they split into smaller Magma Cubes. \\\"},\r\n                {\\\"text\\\":\\\"They are hostile, but the smallest ones will not do any harm. Their essence is a valuable potion ingredient.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lStrider\n\n\\\"},\r\n                {\\\"text\\\":\\\"Striders are passive creatures near lava lakes in the Nether. \\\"},\r\n                {\\\"text\\\":\\\"They have the incredible ability to walk on lava. Maybe this power can be utilized to navigate the fiery dimension. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lGhast\n\n\\\"},\r\n                {\\\"text\\\":\\\"Ghasts are screaming, flying, cubes of fiery death and destruction. They are found in Nether Wastes and Soul Sand Valleys. \\\"},\r\n                {\\\"text\\\":\\\"If you see one and you don’t have a ranged weapon, run away as fast as you can. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"If you can perform the daunting task of collecting its tears, they are said to possess many magical abilities.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lWraith\n\n\\\"},\r\n                {\\\"text\\\":\\\"The Wraith is a floating, translucent entity found in the Soul Sand Valleys. \\\"},\r\n                {\\\"text\\\":\\\"They are said to be a \\\"},\r\n                {\\\"text\\\":\\\"§kreincarnation\\\"},\r\n                {\\\"text\\\":\\\" of a previous being due to their familiar sounding screams.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§lFoxhound\n\n\\\"},\r\n                {\\\"text\\\":\\\"Foxhounds are a wolf-like creature found throughout the Nether dimension. \\\"},\r\n                {\\\"text\\\":\\\"They are hostile initially, but with fire resistance and coal they can be domesticated.\\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§kSoul Vulture\n\n\\\"},\r\n                {\\\"text\\\":\\\"§kSoul Vultures are the withered remains of long dead birds that haunt the Nether's Soul Sand Valleys. \\\"},\r\n                {\\\"text\\\":\\\"§kThese undead birds can be seen circling the countless giant skeletons that litter the landscape. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§kBone Serpent\n\n\\\"},\r\n                {\\\"text\\\":\\\"§kThis long serpent creature appears to be made of bone and has red eyes. \\\"},\r\n                {\\\"text\\\":\\\"§kIt can occasionally be seen jumping out of the lava only to disappear into it again shortly after. \\\"}\r\n              ]\",\r\n              \"[\r\n                {\\\"text\\\":\\\"§kWither Skeleton\n\n\\\"},\r\n                {\\\"text\\\":\\\"§kWither skeletons are tall black variants of skeletons equipped with stone swords \\\"},\r\n                {\\\"text\\\":\\\"§kThey are found exclusively in nether fortresses \\\"}\r\n              ]\"\r\n            ],\r\n            title:Nether,\r\n            author:Unknown,\r\n            display:{Lore:[\"Found in the ancient Stronghold\"]}\r\n            }"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Creatures of the Nether",
+              "add": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "create:honeyed_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:golden_apple",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:name_tag"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:book",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_pickaxe",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Pickaxe",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_sword",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Sword",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_leggings",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Leggings",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_boots",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Boots",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_helmet",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Helmet",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:chainmail_chestplate",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Chestplate",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:crossbow",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_axe",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_damage",
+              "damage": {
+                "min": 0.3,
+                "max": 0.7
+              }
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": "Ancient Axe",
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:book",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 3
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "create:experience_nugget",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 5,
+                "max": 15
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:netherrack",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 6
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:magma_block",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 6
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:soul_sand",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 6
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:bone",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:rotten_flesh",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:string",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:lava_bucket"
+        }
+      ]
+    },
+    {
+      "rolls": 2,
+      "bonus_rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:gold_ingot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 7
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:gold_block",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:coal",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 10
+              },
+              "add": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

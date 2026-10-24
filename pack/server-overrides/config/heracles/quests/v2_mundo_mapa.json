@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Leer el paisaje",
+    "subtitle": "Un mundo nuevo · GUÍA · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Un camino, una silueta sobre una colina o un barco pueden indicar una estructura. Observá desde afuera antes de entrar. Las fortalezas gigantes son expediciones; las cabañas y campamentos permiten exploraciones más cortas.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          112,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_mundo_equipo"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

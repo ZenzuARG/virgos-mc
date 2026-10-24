@@ -1,0 +1,50 @@
+{
+  "replace": true,
+  "content": {
+    "virgos_0": {
+      "type": "item",
+      "content": "minecraft:bread",
+      "amount": {
+        "min": 2,
+        "max": 4
+      },
+      "unitWorth": 140
+    },
+    "virgos_1": {
+      "type": "item",
+      "content": "minecraft:cooked_cod",
+      "amount": {
+        "min": 2,
+        "max": 4
+      },
+      "unitWorth": 150
+    },
+    "virgos_2": {
+      "type": "item",
+      "content": "minecraft:torch",
+      "amount": {
+        "min": 8,
+        "max": 16
+      },
+      "unitWorth": 35
+    },
+    "virgos_3": {
+      "type": "item",
+      "content": "minecraft:paper",
+      "amount": {
+        "min": 4,
+        "max": 8
+      },
+      "unitWorth": 80
+    },
+    "virgos_4": {
+      "type": "item",
+      "content": "minecraft:flower_pot",
+      "amount": {
+        "min": 1,
+        "max": 2
+      },
+      "unitWorth": 280
+    }
+  }
+}

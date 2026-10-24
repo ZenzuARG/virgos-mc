@@ -1,0 +1,22 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:village_plains",
+    "minecraft:village_desert",
+    "minecraft:village_savanna",
+    "minecraft:village_snowy",
+    "minecraft:village_taiga",
+    "integrated_villages:tavern_village",
+    "integrated_villages:airship_village",
+    "integrated_villages:pirate_village",
+    "integrated_villages:mediterranean_village",
+    "integrated_villages:kutcha_village",
+    "integrated_villages:oasis_village",
+    "integrated_villages:mossy_mounds",
+    "integrated_villages:cabin_village",
+    "integrated_villages:quark/minka_village",
+    "integrated_villages:marketstead_village",
+    "integrated_villages:clockwork_village",
+    "integrated_villages:sunken_village"
+  ]
+}

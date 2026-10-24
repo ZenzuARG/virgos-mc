@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Nadie activa dos sellos",
+    "subtitle": "Expediciones Virgos · GUÍA · 1/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:amethyst_shard"
+    },
+    "description": "Seguí el camino sur hasta el anfiteatro, en 672, 78, 1048. Cada integrante elige /virgos expedicion unirse resonancia, forja o umbral. Cuando estén listos, uno usa /virgos expedicion iniciar. En cada ronda todos tocan un sello; después mantienen clic derecho, con la mano vacía, en sellos distintos durante ocho segundos. Hay tres rondas de sellos y combate. Las recompensas del códice son personales y se reclaman una sola vez.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,41 @@
+{
+  "replace": true,
+  "content": {
+    "virgos_0": {
+      "type": "item",
+      "content": "minecraft:gravel",
+      "amount": {
+        "min": 16,
+        "max": 32
+      },
+      "unitWorth": 18
+    },
+    "virgos_1": {
+      "type": "item",
+      "content": "minecraft:stone_bricks",
+      "amount": {
+        "min": 12,
+        "max": 24
+      },
+      "unitWorth": 25
+    },
+    "virgos_2": {
+      "type": "item",
+      "content": "minecraft:oak_sapling",
+      "amount": {
+        "min": 4,
+        "max": 8
+      },
+      "unitWorth": 70
+    },
+    "virgos_3": {
+      "type": "item",
+      "content": "minecraft:lantern",
+      "amount": {
+        "min": 2,
+        "max": 4
+      },
+      "unitWorth": 130
+    }
+  }
+}

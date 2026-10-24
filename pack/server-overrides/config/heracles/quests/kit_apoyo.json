@@ -1,0 +1,59 @@
+{
+  "display": {
+    "title": "Apoyo: cocinar y mantener al grupo",
+    "subtitle": "Preparación rápida · GUÍA · 4/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:cooking_pot"
+    },
+    "description": "Prepará comida antes de salir y ocupate de los mecanismos cuando otro luche. En los jefes, recibir ataques o lanzar hechizos durante el encuentro también cuenta como participación.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          168,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "preparacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {
+    "0": {
+      "type": "heracles:item",
+      "item": {
+        "id": "farmersdelight:cooking_pot",
+        "count": 1
+      }
+    },
+    "1": {
+      "type": "heracles:item",
+      "item": {
+        "id": "farmersdelight:vegetable_soup",
+        "count": 8
+      }
+    },
+    "2": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:torch",
+        "count": 32
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "La primera estación",
+    "subtitle": "Ingeniería Create · OBJETO · 9/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:track_station"
+    },
+    "description": "Diseñá estaciones y trenes compactos. Los trenes tienen un límite de 64 bloques y 12 bogies.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_ensamble"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:track_station",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

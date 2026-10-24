@@ -1,0 +1,6 @@
+{
+  "amendments": {
+    "reason": "Conflicto reproducido de tres overwrites del atril con Iron's Spells 3.16.3. Se conserva Iron's Spells y la decoración de Supplementaries, Chipped, Handcrafted y Macaw. Reconsiderar sólo tras una corrección probada.",
+    "evidence": "https://github.com/MehVahdJukaar/amendments/issues/442"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Procesar con aire",
+    "subtitle": "Create desde cero · OBJETO · 9/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:encased_fan"
+    },
+    "description": "El ventilador puede procesar objetos cuando el flujo atraviesa el medio que indica la receta. Para lavar, revisá en Ponder la disposición del agua, el sentido del aire y el lugar del objeto. No toda receta de ventilador usa el mismo medio.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_prensa"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:encased_fan",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

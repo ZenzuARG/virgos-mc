@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Entender una secuencia",
+    "subtitle": "Create desde cero · OBJETO · 12/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:deployer"
+    },
+    "description": "Los mecanismos de precisión usan una secuencia con pasos y repeticiones. Abrí su receta, seguí el objeto intermedio y controlá la salida de cada etapa. No confundas el objeto incompleto con el resultado final.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          280,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_liquidos"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:deployer",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Hacer una casa propia",
+    "subtitle": "Cocina y vida cotidiana · GUÍA · 8/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:flower_pot"
+    },
+    "description": "Macaw, Chipped y Handcrafted amplían ventanas, tejados, puentes y muebles. Construí con tu estilo. No convertimos cada bloque decorativo en una tarea obligatoria: el catálogo de JEI es tu paleta.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          56,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

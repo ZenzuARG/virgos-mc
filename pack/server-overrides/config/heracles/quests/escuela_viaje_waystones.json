@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Conocer un destino primero",
+    "subtitle": "Explorar con un plan · GUÍA · 6/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Activá las Waystones que encuentres y probá viajar entre destinos conocidos. El servidor aplica coste de experiencia y espera. Revisá el coste antes de confirmar. El Bastión y su arena también están conectados por caminos reales.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          280,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_viaje_campamento"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

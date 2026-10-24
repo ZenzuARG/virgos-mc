@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " FS",
+    "AS ",
+    "DA "
+  ],
+  "key": {
+    "S": {
+      "item": "create:precision_mechanism"
+    },
+    "A": {
+      "tag": "forge:gems/amethyst"
+    },
+    "D": {
+      "item": "meetyourfight:fortunes_favor"
+    },
+    "F": {
+      "item": "minecraft:allium"
+    }
+  },
+  "result": {
+    "item": "meetyourfight:dusk_key"
+  }
+}

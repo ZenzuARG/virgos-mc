@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "7. Reclamar tu primera zona",
+    "subtitle": "Aprender el servidor · GUÍA · 7/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Fuera del Bastión, parate en un chunk libre y escribí /oclaims claim. Leé la respuesta: si falla por límite o propietario, no quedó protegido. Pulsá P y revisá tus claims. Repetí desde los chunks vecinos que ocupe tu base. /virgos guia bases deja los comandos preparados en el chat.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          0,
+          384
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "guia_chunk"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

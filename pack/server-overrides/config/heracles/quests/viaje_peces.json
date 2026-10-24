@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Lo que vive en el agua",
+    "subtitle": "Caminos y descubrimientos · OBJETO · 4/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "aquaculture:iron_fishing_rod"
+    },
+    "description": "Aquaculture amplía la pesca. Explorá distintos cuerpos de agua para variar tus capturas.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "viaje_rutas"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "aquaculture:iron_fishing_rod",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "enabled": true,
+  "intervalMinutes": 120,
+  "idleMinutes": 10,
+  "backupOnCleanStop": true,
+  "retentionCount": 12,
+  "maxBackupGiB": 30,
+  "autoRestartOnUnexpectedExit": true,
+  "maxUnexpectedRestarts": 3,
+  "restartDelaySeconds": 15
+}

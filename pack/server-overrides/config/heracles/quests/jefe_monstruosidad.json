@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Monstruosidad de netherita",
+    "subtitle": "Trofeos personales · LOGRO · 2/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:diamond"
+    },
+    "description": "Premio único de primera victoria. Permanecé vivo y a menos de 40 bloques al morir el jefe, habiendo participado durante al menos tres segundos: daño equivalente al 1% de su vida, o tres aportes de apoyo (recibir ataques/lanzar hechizos espaciados). La actividad debe ser reciente. El botín original sigue en el mundo para repartir. Repetir la victoria ayuda a tus amigos, pero no vuelve a dar este premio.",
+    "groups": {
+      "08 · Jefes": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:jefe_monstruosidad"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:diamond",
+        "count": 2
+      }
+    }
+  }
+}

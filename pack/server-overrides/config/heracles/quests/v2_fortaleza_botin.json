@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Recompensas sin carrera",
+    "subtitle": "Grandes fortalezas · GUÍA · 5/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Lootr reparte cofres convertidos por jugador, sin reinicios para farmear. Las nuevas tablas reducen materiales finales en grandes cantidades. Los trofeos únicos siguen valiendo; los drops del suelo se reparten por acuerdo.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          224,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_fortaleza_avance"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

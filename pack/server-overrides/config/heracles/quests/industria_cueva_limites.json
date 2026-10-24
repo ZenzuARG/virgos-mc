@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Una industria segura",
+    "subtitle": "Create y las cuevas · GUÍA · 4/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Usá apagado por redstone, mantené todo dentro del claim y evitá objetos tirados. Las recetas nativas de Create y Alex's Caves están disponibles; usá JEI para ver si requieren mesa, máquina o componentes especiales. /virgos progreso explica los rangos; los procesos nuevos no conceden reconocimientos cooperativos.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          168,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "industria_cueva_piloto"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

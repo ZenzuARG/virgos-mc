@@ -1,0 +1,59 @@
+{
+  "display": {
+    "title": "Vanguardia: sostener el frente",
+    "subtitle": "Preparación rápida · GUÍA · 2/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:shield"
+    },
+    "description": "Usá escudo, cobertura y una salida segura. El equipo defensivo sigue importando; avisá por voz cuándo necesitás ayuda.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          56,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "preparacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {
+    "0": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:shield",
+        "count": 1
+      }
+    },
+    "1": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:iron_chestplate",
+        "count": 1
+      }
+    },
+    "2": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:cooked_beef",
+        "count": 8
+      }
+    }
+  }
+}

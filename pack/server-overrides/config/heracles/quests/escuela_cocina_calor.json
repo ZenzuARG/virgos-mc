@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Dar calor a la olla",
+    "subtitle": "Cocina paso a paso · OBJETO · 2/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:stove"
+    },
+    "description": "Colocá una olla sobre una fuente de calor válida; la cocina es una opción compacta. Mirá el indicador de cocción. Si no avanza, revisá calor, ingredientes y salida antes de cambiar los bloques al azar.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          56,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_cocina_corte"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:stove",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

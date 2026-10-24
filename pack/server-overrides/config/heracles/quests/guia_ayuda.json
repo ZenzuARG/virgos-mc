@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "13. Ayuda sin salir del juego",
+    "subtitle": "Aprender el servidor · GUÍA · 13/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "/virgos guia abre un índice por tema. Los enlaces azules navegan la guía; los comandos que cambian algo se preparan en el chat para que los revises antes de Enter. /virgos progreso muestra tus reconocimientos. Usá /virgos guia voz si no escuchás y /virgos guia expediciones para preparar una salida.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          0,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "guia_loot"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

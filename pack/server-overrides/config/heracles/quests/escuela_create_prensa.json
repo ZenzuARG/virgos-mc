@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Placas sin desperdiciar",
+    "subtitle": "Create desde cero · OBJETO · 8/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:depot"
+    },
+    "description": "Poné un depósito bajo una prensa y buscá la receta de una placa. Revisá distancia y alimentación con Ponder. Probá una unidad y verificá el resultado antes de mandar una pila entera por la línea.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          56,
+          256
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_molino"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:depot",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

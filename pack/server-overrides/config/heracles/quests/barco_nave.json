@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "La primera nave",
+    "subtitle": "Navegación en grupo · OBJETO · 2/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "smallships:oak_cog"
+    },
+    "description": "Fabricá un cog de roble. Prepará agua profunda y espacio para colocarlo y girar. Revisá sus controles, vela y cómo desembarcar antes de llevar pasajeros.\n\nObjetivo: llevá el objeto en el inventario; se detecta sin consumirlo. Practicá el paso descrito.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          56,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "barco_plan"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "smallships:oak_cog",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

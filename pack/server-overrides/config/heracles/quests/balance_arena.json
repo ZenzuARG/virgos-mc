@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "El equipo ayuda; el grupo decide",
+    "subtitle": "Preparación rápida · GUÍA · 5/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_sword"
+    },
+    "description": "Sólo en expediciones, daño final por segundo/ráfaga: Resonancia 20/10, Forja 30/18, Umbral 40/24. Se comparte entre todos los blancos de un atacante, incluidos ataques de área. Curación por jugador: 4/6/8 puntos por segundo. Un corazón son dos puntos. El mundo normal conserva el daño de sus mods. No hay topes de horas ni reinicios del progreso.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          224,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "preparacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

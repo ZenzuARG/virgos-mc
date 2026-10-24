@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Tu cartografía",
+    "subtitle": "Caminos y descubrimientos · OBJETO · 1/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:compass"
+    },
+    "description": "Xaero guarda tu exploración. Marcá campamentos, rutas y ruinas; compartir coordenadas es una forma útil de colaborar.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:compass",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

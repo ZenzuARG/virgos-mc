@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Tu nombre es tu identidad",
+    "subtitle": "Primeros pasos · GUÍA · 2/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:tripwire_hook"
+    },
+    "description": "Usá siempre exactamente el mismo nombre, incluyendo mayúsculas. Registrate con /register contraseña contraseña y luego /login contraseña. Nunca compartas la contraseña ni la reutilices. El servidor guarda misiones, inventario y claims con tu identidad local.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

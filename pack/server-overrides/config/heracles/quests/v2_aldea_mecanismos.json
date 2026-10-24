@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Mirar antes de tocar",
+    "subtitle": "Aldeas que funcionan · OBJETO · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:andesite_alloy"
+    },
+    "description": "Observá ejes, engranajes y fuentes de rotación. Mantené W sobre componentes en JEI para Ponder cuando esté disponible. Si una máquina no gira, revisá energía, orientación y estrés antes de cambiar bloques.\n\nObjetivo detectado: llevá el objeto en el inventario, sin consumirlo. Tener un trofeo no certifica una muerte propia; también podés conseguirlo comerciando.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          112,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_aldea_guardias"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:andesite_alloy",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

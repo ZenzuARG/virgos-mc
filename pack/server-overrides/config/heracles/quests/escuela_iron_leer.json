@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Leer un pergamino",
+    "subtitle": "Aprender Iron Spells · OBJETO · 1/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:scroll"
+    },
+    "description": "Posá el cursor y revisá escuela, nivel, rareza, coste de maná y enfriamiento. Un hechizo de área puede afectar varios objetivos y exige más cuidado cerca de construcciones. Conservá una opción sencilla de nivel bajo para practicar.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          0,
+          384
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "iron_tinta"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:scroll",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "GSG",
+    "GSG"
+  ],
+  "key": {
+    "G": {
+      "item": "create:brass_ingot"
+    },
+    "S": {
+      "item": "meetyourfight:mossy_tooth"
+    }
+  },
+  "result": {
+    "item": "meetyourfight:haunted_bell"
+  }
+}

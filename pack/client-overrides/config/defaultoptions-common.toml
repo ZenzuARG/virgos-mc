@@ -1,0 +1,3 @@
+defaultDifficulty = "NORMAL"
+lockDifficulty = false
+defaultResourcePacks = ["file/Virgos-MC-UI.zip"]

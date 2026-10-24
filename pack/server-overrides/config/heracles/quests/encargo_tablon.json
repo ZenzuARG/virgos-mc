@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Leer antes de aceptar",
+    "subtitle": "Encargos sin apuro · GUÍA · 1/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "El tablón Bountiful está en 632, 80, 787. Abrilo y compará objetos pedidos, cantidades y recompensa. Elegí una tarea acorde a tu sesión; no necesitás completar todas las ofertas.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          0,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

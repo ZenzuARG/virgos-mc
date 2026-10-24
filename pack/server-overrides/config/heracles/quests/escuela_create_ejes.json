@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Llevar el movimiento",
+    "subtitle": "Create desde cero · OBJETO · 3/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:shaft"
+    },
+    "description": "Conectá una rueda hidráulica a un eje y observá la rotación. Usá la demostración Ponder indicada al posar el cursor sobre el objeto. Primero hacé funcionar un tramo corto; después llevá potencia a cada estación.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_gafas"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:shaft",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

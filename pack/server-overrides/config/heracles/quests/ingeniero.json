@@ -1,0 +1,52 @@
+{
+  "display": {
+    "title": "Especialista en ingeniería",
+    "subtitle": "Ingeniería Create · OBJETO · 12/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:precision_mechanism"
+    },
+    "description": "Tu taller ya puede abastecer proyectos comunes. Este reconocimiento concede Especialista; también se obtiene por las rutas de magia, sin obligación de completar ambas.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          280,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_copias"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:precision_mechanism",
+      "amount": 4,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:golden_carrot",
+        "count": 8
+      }
+    },
+    "rango": {
+      "type": "heracles:command",
+      "title": "Reconocimiento personal",
+      "command": "advancement grant @s only virgos:especialista"
+    }
+  }
+}

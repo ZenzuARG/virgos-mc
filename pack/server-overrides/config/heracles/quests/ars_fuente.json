@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Fuente renovable",
+    "subtitle": "Hechizos y rituales · OBJETO · 9/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:source_jar"
+    },
+    "description": "Planificá una fuente de energía moderada y cercana a tu base. Nada queda cargado permanentemente al desconectarte.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          112,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:source_jar",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

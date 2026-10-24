@@ -1,0 +1,10 @@
+language: es
+use-mysql: false
+use-duckdb: false
+verbose: false
+check-updates: false
+error-reporting: false
+player-commands: false
+player-messages: false
+rollback-items: false
+rollback-entities: false

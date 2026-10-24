@@ -1,0 +1,35 @@
+{
+  "display": {
+    "title": "Elegí tu escuela",
+    "subtitle": "GUÍA DE LA SECCIÓN · Abrí para orientarte",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:enchanted_book"
+    },
+    "description": "Ars Nouveau e Iron’s Spellbooks tienen rutas propias. Los rangos personales y las expediciones regulan la magia avanzada; no hace falta dominar ambas escuelas a la vez.\n\nCómo leer este códice\nElegí un capítulo en la izquierda. Buscá una misión por nombre o filtrá Pendientes y Para reclamar. Clic en una fila abre sus pasos; las bloqueadas explican qué falta. Usá las flechas para cambiar de página. Una casilla es lectura o práctica manual; un objeto se detecta en el inventario. Las recompensas se reclaman dentro de cada misión. Mi perfil muestra tus horas y el avance por capítulo. Ver mapa original conserva el diagrama de dependencias.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          -64,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Entendí cómo usar esta sección"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Aprender temperatura y tiempo",
+    "subtitle": "Cocina paso a paso · OBJETO · 5/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "brewinandchewin:keg"
+    },
+    "description": "El barril de fermentación usa recetas con tiempo y temperatura. Leé ambos requisitos en JEI y comparalos con el estado del barril. Si no avanza, revisá eso antes de añadir ingredientes de otra receta.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          224,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_cocina_huerta"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "brewinandchewin:keg",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

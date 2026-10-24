@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "IDI",
+    "NIN"
+  ],
+  "key": {
+    "D": {
+      "item": "meetyourfight:phantoplasm"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    },
+    "N": {
+      "tag": "forge:netherrack"
+    }
+  },
+  "result": {
+    "item": "meetyourfight:devils_ante"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "title": "Retos y trofeos",
+    "subtitle": "GUÍA DE LA SECCIÓN · Abrí para orientarte",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:diamond_sword"
+    },
+    "description": "Meet Your Fight tiene una cadena de cuatro invocadores; otros jefes viven en el mundo. Los trofeos normales se reparten entre jugadores. Los reconocimientos cooperativos están en la sección 09.\n\nCómo leer este códice\nElegí un capítulo en la izquierda. Buscá una misión por nombre o filtrá Pendientes y Para reclamar. Clic en una fila abre sus pasos; las bloqueadas explican qué falta. Usá las flechas para cambiar de página. Una casilla es lectura o práctica manual; un objeto se detecta en el inventario. Las recompensas se reclaman dentro de cada misión. Mi perfil muestra tus horas y el avance por capítulo. Ver mapa original conserva el diagrama de dependencias.",
+    "groups": {
+      "08 · Jefes": {
+        "position": [
+          -64,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Entendí cómo usar esta sección"
+    }
+  },
+  "rewards": {}
+}

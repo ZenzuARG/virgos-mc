@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Aprender glifos",
+    "subtitle": "Hechizos y rituales · OBJETO · 8/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:scribes_table"
+    },
+    "description": "La mesa de escriba transforma materiales en conocimiento. No es necesario fabricar todos los glifos.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          56,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:scribes_table",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

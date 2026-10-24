@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "El primer taller",
+    "subtitle": "Primeros pasos · OBJETO · 5/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:crafting_table"
+    },
+    "description": "Juntá madera y fabricá una mesa. JEI muestra recetas: R para receta y U para usos.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:crafting_table",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

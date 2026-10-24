@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Diagnosticar sobrecarga",
+    "subtitle": "Create desde cero · OBJETO · 6/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:stressometer"
+    },
+    "description": "Conectá el medidor a tu red. Probá encender y apagar una máquina y compará la carga. Si aparece sobrecarga, reducí velocidad o consumo, o aumentá generación. Más ejes no producen energía.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          280,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_embrague"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:stressometer",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

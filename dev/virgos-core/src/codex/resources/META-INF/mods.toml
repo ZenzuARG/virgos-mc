@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+clientSideOnly=true
+[[mods]]
+modId="virgos_codex"
+version="2.0.0"
+displayName="Virgos Códice"
+description="Una biblioteca de misiones legible para Virgos-MC. El servidor conserva objetivos, permisos y recompensas."
+[[dependencies.virgos_codex]]
+modId="heracles"
+mandatory=true
+versionRange="[1.1.13,1.2)"
+ordering="AFTER"
+side="CLIENT"

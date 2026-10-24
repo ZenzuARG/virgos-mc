@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Dar forma",
+    "subtitle": "Ingeniería Create · OBJETO · 3/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:mechanical_press"
+    },
+    "description": "La prensa abre recetas de placas. Revisá dirección de giro y estrés de la red.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_rueda"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:mechanical_press",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Preparar espacios de hechizos",
+    "subtitle": "Aprender Iron Spells · OBJETO · 2/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:inscription_table"
+    },
+    "description": "La mesa de inscripción sirve para trabajar con el libro y los pergaminos. Consultá JEI para fabricar un libro disponible y revisá sus espacios. Leé el resultado antes de confirmar cambios: el pergamino y el libro cumplen funciones distintas.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          56,
+          384
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_iron_leer"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:inscription_table",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

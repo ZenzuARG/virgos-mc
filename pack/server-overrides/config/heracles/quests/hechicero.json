@@ -1,0 +1,52 @@
+{
+  "display": {
+    "title": "Especialista en hechicería",
+    "subtitle": "Hechizos y rituales · OBJETO · 6/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:epic_ink"
+    },
+    "description": "La experiencia con tintas y pergaminos te reconoce como Especialista. Reclamá la recompensa para registrar el rango.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          280,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "iron_epica"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:epic_ink",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:golden_carrot",
+        "count": 8
+      }
+    },
+    "rango": {
+      "type": "heracles:command",
+      "title": "Reconocimiento personal",
+      "command": "advancement grant @s only virgos:especialista"
+    }
+  }
+}

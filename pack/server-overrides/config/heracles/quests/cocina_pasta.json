@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Del campo al plato",
+    "subtitle": "Cocina y vida cotidiana · OBJETO · 5/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:pasta_with_meatballs"
+    },
+    "description": "Combiná agricultura, ganadería y cocina para comidas que valen el viaje.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cocina_sopa"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:pasta_with_meatballs",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

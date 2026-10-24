@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "filename": "virgos_core-2.0.0.jar",
+      "local_source": "dev/virgos-core/build/libs/virgos_core-2.0.0.jar",
+      "hash_algorithm": "sha256",
+      "hash": "0181e32f38247c4d12ace070006cb37b0b5d5d7e62be78f1f7996fe48bde199c",
+      "sides": [
+        "server"
+      ],
+      "mode": "required",
+      "name": "Integración Virgos-MC"
+    },
+    {
+      "filename": "virgos_codex-2.0.0.jar",
+      "local_source": "dev/virgos-core/build/libs/virgos_codex-2.0.0.jar",
+      "hash_algorithm": "sha256",
+      "hash": "92c89ca464234ccdcb915b4612a535b9f6d5041660f785c16629f0687ab414f3",
+      "sides": [
+        "client"
+      ],
+      "mode": "required",
+      "name": "Códice y perfiles Virgos-MC"
+    }
+  ]
+}

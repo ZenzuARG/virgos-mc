@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "La primera tinta",
+    "subtitle": "Hechizos y rituales · OBJETO · 1/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:common_ink"
+    },
+    "description": "Iron’s Spells utiliza tinta, pergaminos y libros. Empezá con hechizos comunes y aprendé su coste de maná.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:common_ink",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

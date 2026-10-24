@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Taller comunitario",
+    "subtitle": "Bastión compartido · LOGRO · 3/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:andesite_alloy"
+    },
+    "description": "El grupo aporta 192 de create:andesite_alloy desde el Bastión con /virgos pueblo aportar taller. Los objetos se consumen y cada persona puede aportar como máximo un tercio: hacen falta al menos tres. Al completarlo, cada Explorador recibe esta recompensa una vez, incluso si se incorporó después. Son suministros para construir juntos; las rutas y edificios los diseña el grupo.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          112,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:pueblo_taller"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "create:andesite_casing",
+        "count": 8
+      }
+    }
+  }
+}

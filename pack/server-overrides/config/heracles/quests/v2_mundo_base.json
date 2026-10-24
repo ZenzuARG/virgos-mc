@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Dejar espacio al camino",
+    "subtitle": "Un mundo nuevo · GUÍA · 5/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Buscá una zona fuera del spawn y de los accesos de aldeas. Protegé primero tu casa con Open Parties and Claims. No reclames entradas de mazmorras ni cofres comunitarios: su contenido personal debe seguir accesible para otros.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          224,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_mundo_andesita"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

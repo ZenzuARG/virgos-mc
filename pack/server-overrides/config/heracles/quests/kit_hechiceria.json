@@ -1,0 +1,59 @@
+{
+  "display": {
+    "title": "Magia: empezar sin una fábrica",
+    "subtitle": "Preparación rápida · GUÍA · 3/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "irons_spellbooks:common_ink"
+    },
+    "description": "Prepará un libro con ataque común, movilidad y apoyo. Las tintas ayudan a empezar; las mesas, el libro y los hechizos siguen siendo parte de tu aventura. La rareza alta exige tu progreso personal.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          112,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "preparacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {
+    "0": {
+      "type": "heracles:item",
+      "item": {
+        "id": "irons_spellbooks:common_ink",
+        "count": 4
+      }
+    },
+    "1": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:paper",
+        "count": 16
+      }
+    },
+    "2": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:lapis_lazuli",
+        "count": 8
+      }
+    }
+  }
+}

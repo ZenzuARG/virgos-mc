@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Una receta sobre la tabla",
+    "subtitle": "Cocina paso a paso · OBJETO · 1/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "farmersdelight:cutting_board"
+    },
+    "description": "Buscá una receta de corte en JEI: indica ingrediente y herramienta. Colocá el ingrediente en la tabla y utilizá la herramienta correspondiente. Un cuchillo no sustituye a todas las herramientas de todas las recetas.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          0,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cocina_cuchillo"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "farmersdelight:cutting_board",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

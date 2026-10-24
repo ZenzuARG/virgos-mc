@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "La herramienta del arqueólogo",
+    "subtitle": "Arqueología de Create · OBJETO · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:wrench"
+    },
+    "description": "La llave de Create permite entender y orientar componentes. Usala con cuidado: arrancar un eje puede detener puertas o plataformas. Probá primero los controles visibles y conservá el mecanismo cuando puedas.\n\nObjetivo detectado: llevá el objeto en el inventario, sin consumirlo. Tener un trofeo no certifica una muerte propia; también podés conseguirlo comerciando.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          112,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_ruinas_sondeo"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:wrench",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

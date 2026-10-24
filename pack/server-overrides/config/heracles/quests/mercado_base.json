@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Comerciar desde casa",
+    "subtitle": "Mercado entre vecinos · OBJETO · 7/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "lightmanscurrency:shelf_oak"
+    },
+    "description": "También podés fabricar una estantería de Lightman y ponerla en tu base. El bloque conserva propiedad y almacén. Revisá cómo permitir a clientes interactuar sin abrir tus cofres ni tus máquinas; no des acceso general a la base.\n\nObjetivo: llevá el objeto en el inventario; se detecta sin consumirlo. Practicá el paso descrito.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          0,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "mercado_compra"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "lightmanscurrency:shelf_oak",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

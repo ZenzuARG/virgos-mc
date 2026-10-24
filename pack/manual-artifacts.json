@@ -1,0 +1,32 @@
+[
+  {
+    "project": "lendercataclysm",
+    "version": "3.31",
+    "filename": "L_Enders_Cataclysm-3.31.jar",
+    "url": "https://edge.forgecdn.net/files/8246/47/L_Enders_Cataclysm-3.31.jar",
+    "hash_algorithm": "sha512",
+    "hash": "0dccedd79e3e555f5a38075612d91aec23e1f6ca674e7637ea88c669095b44554385abb75826dfa5a0170585c6b3c3b6d9465bed049c0186d80f75d88f45c5e8",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "mode": "standard",
+    "root": true,
+    "source": "https://www.curseforge.com/minecraft/mc-mods/lendercataclysm/files/8246047"
+  },
+  {
+    "project": "the-twilight-forest",
+    "version": "4.3.2508",
+    "filename": "twilightforest-1.20.1-4.3.2508-universal.jar",
+    "url": "https://edge.forgecdn.net/files/5468/648/twilightforest-1.20.1-4.3.2508-universal.jar",
+    "hash_algorithm": "sha512",
+    "hash": "340b42ca27cac8c011a97eff5999b675e5f7e13f9d5b035ca94767ce3868d2168dd3ad81448a2d5e7bdf06cf08ed6b4bcf90edf8df68e452d222448868aa6a7c",
+    "sides": [
+      "client",
+      "server"
+    ],
+    "mode": "standard",
+    "root": true,
+    "source": "https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest/files/5468648"
+  }
+]

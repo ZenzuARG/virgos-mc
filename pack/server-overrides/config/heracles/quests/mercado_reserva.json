@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Un puesto propio",
+    "subtitle": "Mercado entre vecinos · GUÍA · 2/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Elegí uno de los ocho puestos numerados. Acercate y escribí /virgos mercado reservar seguido del número. Leé la respuesta: un puesto ocupado no cambia de dueño. Cada persona conserva una reserva aunque mueva el bloque; no lo retires del mercado.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          56,
+          128
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "mercado_visita"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

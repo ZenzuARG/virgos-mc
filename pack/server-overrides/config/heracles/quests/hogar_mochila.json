@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Todo a mano",
+    "subtitle": "Hogar y comunidad · OBJETO · 1/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "sophisticatedbackpacks:backpack"
+    },
+    "description": "La mochila básica acompaña desde temprano. Dos mochilas transportadas son suficientes; las mejoras activas funcionan sólo en la equipada.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "sophisticatedbackpacks:backpack",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "El cuaderno del investigador",
+    "subtitle": "Caminos y descubrimientos · OBJETO · 6/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "alexscaves:cave_book"
+    },
+    "description": "Seguí las pistas de Alex’s Caves y sus tablillas. Cada cueva ofrece una experiencia distinta; llevá suministros y una ruta de salida.",
+    "groups": {
+      "05 · Explorar": {
+        "position": [
+          280,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "viaje_animales"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "alexscaves:cave_book",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

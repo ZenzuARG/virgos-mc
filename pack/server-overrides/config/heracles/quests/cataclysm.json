@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Ruinas de Cataclysm",
+    "subtitle": "Grandes aventuras · GUÍA · 5/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:netherite_scrap"
+    },
+    "description": "Cataclysm contiene jefes de gran dificultad. No aumentamos su vida sin criterio: aprendé sus ataques, prepará resistencias y pedí ayuda. Sus drops normales deben repartirse entre el grupo.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "nether"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

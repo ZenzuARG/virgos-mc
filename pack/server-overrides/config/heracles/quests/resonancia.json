@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Resonancia de las profundidades",
+    "subtitle": "Expediciones Virgos · LOGRO · 2/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:echo_shard"
+    },
+    "description": "Dos o más Exploradores. Ronda 1: sellos oeste y este; ronda 2: este y norte; ronda 3: oeste y norte. Todos deben tocar un sello activo y sostener los dos ocho segundos. Después, combate. Los enemigos no dan drops ni XP. Ausentarse diez segundos cancela la prueba.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cooperar"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:resonancia"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:golden_carrot",
+        "count": 8
+      }
+    }
+  }
+}

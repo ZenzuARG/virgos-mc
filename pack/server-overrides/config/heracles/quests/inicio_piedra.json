@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Herramientas confiables",
+    "subtitle": "Primeros pasos · OBJETO · 6/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:stone_pickaxe"
+    },
+    "description": "Fabricá un pico de piedra. Explorá cerca, marcá tu base en el mapa y llevá antorchas.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          280,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "inicio_mesa"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:stone_pickaxe",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

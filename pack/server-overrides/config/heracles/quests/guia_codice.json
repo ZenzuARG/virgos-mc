@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "1. Leer, completar y reclamar",
+    "subtitle": "Aprender el servidor · GUÍA · 1/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Pulsá J y elegí un capítulo. Abrí una misión: la descripción explica el paso y abajo aparecen objetivo y recompensa. Completar el objetivo y reclamar son acciones distintas. Los rangos se activan al reclamar su recompensa; un tilde sin reclamar todavía no concede el rango.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          0,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

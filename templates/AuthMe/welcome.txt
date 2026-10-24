@@ -1,0 +1,2 @@
+Bienvenido a Virgos-MC, {PLAYER}.
+Tu aventura empieza aca. Para volver a entrar usa /login.

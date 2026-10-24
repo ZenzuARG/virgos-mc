@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "enabled": true,
+  "requiredBuild": "arena-virgos-v3",
+  "center": [
+    672,
+    78,
+    1048
+  ],
+  "radius": 28,
+  "seals": [
+    [
+      655,
+      79,
+      1048
+    ],
+    [
+      689,
+      79,
+      1048
+    ],
+    [
+      672,
+      79,
+      1031
+    ]
+  ],
+  "balance": {
+    "resonancia": {
+      "damagePerSecond": 20,
+      "damageBurst": 10,
+      "healingPerSecond": 4
+    },
+    "forja": {
+      "damagePerSecond": 30,
+      "damageBurst": 18,
+      "healingPerSecond": 6
+    },
+    "umbral": {
+      "damagePerSecond": 40,
+      "damageBurst": 24,
+      "healingPerSecond": 8
+    }
+  },
+  "guardianHealth": 480
+}

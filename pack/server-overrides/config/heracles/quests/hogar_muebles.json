@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Un lugar habitable",
+    "subtitle": "Hogar y comunidad · OBJETO · 5/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "handcrafted:hammer"
+    },
+    "description": "El martillo y los muebles de Handcrafted sirven para personalizar interiores. Consultá sus usos en JEI.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "hogar_cincel"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "handcrafted:hammer",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

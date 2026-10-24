@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "La herramienta del taller",
+    "subtitle": "Create desde cero · OBJETO · 1/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:wrench"
+    },
+    "description": "La llave de Create permite ajustar orientación y desmontar sus componentes según el bloque. Mirá el uso del objeto y probá en una instalación pequeña de tu propiedad. No intentes corregir una red completa golpeando máquinas al azar.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          0,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "create_aleacion"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:wrench",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

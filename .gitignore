@@ -1,0 +1,66 @@
+# Runtime, caches and generated reports
+.cache/
+.runtime/
+.lab/
+.mixin.out/
+/dev/**/build/
+/dev/**/.gradle/
+/dev/**/run/
+*.class
+/dist/
+/logs/
+/crash-reports/
+/debug/
+/virgos-reports/
+/simplebackups/
+/modernfix/
+/local/
+/easy_npc/
+/moonlight-global-datapacks/
+/_cuarentena/
+hs_err_pid*
+replay_pid*
+
+# Built and downloaded binaries; source and lock manifests stay tracked
+*.jar
+*.zip
+*.mrpack
+/libraries/
+/mods/
+/plugins/
+
+# Live configuration and credentials; reproducible overrides live under pack/
+/config/
+!config/.gitkeep
+/playit/
+playit*.toml
+playit*.json
+playit*.yml
+.env*
+plugins/DiscordSRV/.token
+
+# Worlds and player/user state
+/world*/
+/virgos_world*/
+/backups/
+banned-*.json
+ops.json
+whitelist.json
+usercache.json
+usernamecache.json
+eula.txt
+server.properties
+
+# Local launcher and machine-specific files
+client/
+versions/
+fabric-server-launcher.properties
+rhino.local.properties
+
+# Verification captures can contain player names, addresses or session data
+docs/auth-verification.json
+docs/verification-server.log
+
+# Keep the project structure placeholder when present
+!backups/.gitkeep
+

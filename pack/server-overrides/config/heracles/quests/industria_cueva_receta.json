@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Leer entrada, salida y probabilidad",
+    "subtitle": "Create y las cuevas · GUÍA · 2/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "En JEI revisá la máquina, el ingrediente exacto, el tiempo y las probabilidades. Una receta de mineral triturado exige mineral; no es generación gratuita. Los resultados secundarios pueden ser probabilísticos.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          56,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "industria_cueva_descubrir"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Tiempo de fermentación",
+    "subtitle": "Cocina y vida cotidiana · OBJETO · 6/8",
+    "icon": {
+      "type": "heracles:item",
+      "item": "brewinandchewin:keg"
+    },
+    "description": "Brewin’ and Chewin’ agrega fermentación. Consultá la temperatura de cada receta.",
+    "groups": {
+      "06 · Cocina": {
+        "position": [
+          280,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "cocina_pasta"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "brewinandchewin:keg",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

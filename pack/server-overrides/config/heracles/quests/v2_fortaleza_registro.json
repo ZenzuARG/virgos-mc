@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Dejar un informe útil",
+    "subtitle": "Grandes fortalezas · GUÍA · 6/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Compartí nombre de la estructura, coordenadas, entrada y peligros. Una foto y un waypoint ayudan a los que se conectan después. No anuncies una zona como segura si quedan pisos sin revisar.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          280,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_fortaleza_botin"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

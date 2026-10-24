@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "objectives": [
+    "virgos_taller"
+  ],
+  "rewards": [
+    "virgos_provisiones"
+  ]
+}

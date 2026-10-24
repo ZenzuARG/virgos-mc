@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "No es una obligación diaria",
+    "subtitle": "Encargos sin apuro · GUÍA · 5/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Los encargos son repetibles y opcionales: no desbloquean rangos ni sustituyen expediciones. Si hoy preferís construir o explorar, podés hacerlo. No hay rachas diarias que perder.\n\nActividad guiada: realizá o revisá los pasos y marcá la casilla. No se detecta automáticamente esta acción.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          224,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "encargo_cobrar"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

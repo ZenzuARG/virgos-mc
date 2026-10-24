@@ -1,0 +1,45 @@
+{
+  "display": {
+    "title": "Un horizonte distinto",
+    "subtitle": "Grandes aventuras · VIAJE · 4/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:ender_eye"
+    },
+    "description": "Buscá Integrated Stronghold con ojos de ender y explorá sus mecanismos de Create. Coordiná el primer viaje al End; Nullscape renueva las islas exteriores. El dragón no sustituye las pruebas cooperativas de Virgos.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          168,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "nether"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:changed_dimension",
+      "to": "minecraft:the_end"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:ender_pearl",
+        "count": 4
+      }
+    }
+  }
+}

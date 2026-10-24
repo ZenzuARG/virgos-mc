@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Preparar tres respuestas",
+    "subtitle": "Aprender Iron Spells · GUÍA · 7/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Llevá una opción para daño, otra para movilidad y otra de apoyo si tu escuela lo permite. Acordá quién mantiene los mecanismos mientras los demás pelean. Dentro de expediciones hay límites de daño y curación por persona; fuera de ellas rigen los sistemas normales de los mods.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          0,
+          448
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_iron_rango"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

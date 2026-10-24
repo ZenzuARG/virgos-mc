@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "6. Qué vas a proteger",
+    "subtitle": "Aprender el servidor · GUÍA · 6/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Un chunk es una columna de 16 × 16 bloques. F3+G muestra sus bordes. Tu casa puede ocupar varios: protegé también máquinas, huerta y acceso al sótano. No intentes reclamar el Bastión ni una base ajena. Hay 25 chunks personales y no permanecen cargados al desconectarte.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          280,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "guia_rangos"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

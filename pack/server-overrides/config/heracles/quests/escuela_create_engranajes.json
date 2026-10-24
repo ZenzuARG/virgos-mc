@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Cambiar dirección y velocidad",
+    "subtitle": "Create desde cero · OBJETO · 4/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "create:cogwheel"
+    },
+    "description": "Compará ejes y engranajes en Ponder. El tamaño y la disposición cambian la velocidad o el sentido de giro. Girar más rápido también aumenta el consumo de estrés: no todas las máquinas necesitan máxima velocidad.\n\nObjetivo: tené este objeto en tu inventario. Se reconoce automáticamente y no se consume. Si ya lo conseguiste, usalo para practicar el paso explicado.",
+    "groups": {
+      "03 · Create": {
+        "position": [
+          168,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_create_ejes"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "create:cogwheel",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

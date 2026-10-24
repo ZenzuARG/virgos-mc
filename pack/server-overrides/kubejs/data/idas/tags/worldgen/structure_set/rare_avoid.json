@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:villages",
+    "idas:idas_small",
+    "idas:idas_underground",
+    "idas:idas_underground_rare",
+    "integrated_villages:regular_villages",
+    "dungeons_arise:major_structures"
+  ]
+}

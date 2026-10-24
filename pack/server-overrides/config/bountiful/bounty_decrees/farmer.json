@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "objectives": [
+    "virgos_cocina"
+  ],
+  "rewards": [
+    "virgos_provisiones"
+  ]
+}

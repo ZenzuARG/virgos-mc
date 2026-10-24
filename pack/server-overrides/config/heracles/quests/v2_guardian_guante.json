@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Nether Gauntlet: control del espacio",
+    "subtitle": "Guardianes del mundo · GUÍA · 4/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Llevá protección contra fuego y una ruta de retorno. Respetá el espacio del jefe y sus fases. Virgos desactiva el depósito adicional de ancient debris al morir para evitar que repetirlo sustituya la búsqueda del material.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "08 · Jefes": {
+        "position": [
+          168,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_guardian_flor"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

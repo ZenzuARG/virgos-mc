@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Entender las mejoras",
+    "subtitle": "Casa, mochila y seguridad · GUÍA · 3/7",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Buscá las mejoras de Sophisticated Backpacks en JEI y leé sus condiciones. Instalá una, probá su efecto y configurá su filtro antes de salir. Las mochilas anidadas y varias mejoras excesivas están deshabilitadas: una receta ausente puede ser una decisión del paquete.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "02 · Tu hogar": {
+        "position": [
+          112,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "escuela_hogar_orden"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

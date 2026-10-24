@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "8. Invitar sin abrir toda la base",
+    "subtitle": "Aprender el servidor · GUÍA · 8/13",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "P abre Open Parties and Claims. Revisá la configuración de protección y quién puede usar contenedores o construir. Una party es una relación de confianza: probá los permisos con un amigo antes de guardar objetos valiosos. No habilites acceso general para resolver un permiso puntual. Las misiones siguen siendo personales.\n\nActividad guiada: realizá o revisá estos pasos y marcá la casilla. Esta misión no detecta automáticamente la acción.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          56,
+          384
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "guia_claim"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya lo revisé / practiqué"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Encantamiento artesanal",
+    "subtitle": "Hechizos y rituales · OBJETO · 10/12",
+    "icon": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:enchanting_apparatus"
+    },
+    "description": "El aparato y sus pedestales forman un conjunto. Revisá ingredientes y fuente necesaria en el libro y JEI.",
+    "groups": {
+      "04 · Magia": {
+        "position": [
+          168,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "ars_nouveau:enchanting_apparatus",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:bread",
+        "count": 2
+      }
+    }
+  }
+}

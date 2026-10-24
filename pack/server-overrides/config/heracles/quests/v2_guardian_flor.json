@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Void Blossom: mirar bajo tierra",
+    "subtitle": "Guardianes del mundo · GUÍA · 3/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Explorá las profundidades con salida, iluminación y espacio para esquivar. Observá el terreno de la arena antes de iniciar el combate. La flor tiene ataques de área: juntarse todos en un mismo punto puede ser peligroso.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "08 · Jefes": {
+        "position": [
+          112,
+          320
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_guardian_lich"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

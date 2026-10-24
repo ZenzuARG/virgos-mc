@@ -1,0 +1,39 @@
+{
+  "display": {
+    "title": "Swampjaw: el primer desafío",
+    "subtitle": "Los cuatro desafíos · OBJETO · 2/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "meetyourfight:fossil_bait"
+    },
+    "description": "Fabricá el cebo fósil con materiales comunes y aleación de andesita. El jefe vuela y usa ataques de área: dejá espacio para moverte, observá sus señales y llevá un arma a distancia.\n\nObjetivo detectado: llevá el objeto en el inventario, sin consumirlo. Tener un trofeo no certifica una muerte propia; también podés conseguirlo comerciando.",
+    "groups": {
+      "08 · Jefes": {
+        "position": [
+          56,
+          192
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_duelo_reglas"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "meetyourfight:fossil_bait",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {}
+}

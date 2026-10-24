@@ -1,0 +1,52 @@
+{
+  "display": {
+    "title": "Preparado para explorar",
+    "subtitle": "Primeros pasos · OBJETO · 9/9",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_pickaxe"
+    },
+    "description": "Reclamá la bienvenida y llevá un pico de hierro. Esta misión activa Explorador y abre magia, tecnología y cocina; cama y protección son guías opcionales.",
+    "groups": {
+      "01 · Empezar": {
+        "position": [
+          112,
+          64
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:item",
+      "item": "minecraft:iron_pickaxe",
+      "amount": 1,
+      "collection": "AUTOMATIC"
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "minecraft:torch",
+        "count": 24
+      }
+    },
+    "rango": {
+      "type": "heracles:command",
+      "title": "Reconocimiento personal",
+      "command": "advancement grant @s only virgos:explorador"
+    }
+  }
+}

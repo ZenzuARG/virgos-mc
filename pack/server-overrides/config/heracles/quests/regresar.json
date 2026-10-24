@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Volver para acompañar",
+    "subtitle": "Expediciones Virgos · GUÍA · 5/5",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:campfire"
+    },
+    "description": "Podés acompañar a quienes todavía no terminaron una expedición. Sus reconocimientos se conservan individualmente. Ayudar, construir rutas y preparar comida sigue siendo útil después de completar el códice.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          224,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "umbral"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Leído y entendido"
+    }
+  },
+  "rewards": {}
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Nullscape: un End distinto",
+    "subtitle": "Otros horizontes · GUÍA · 4/6",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:book"
+    },
+    "description": "Nullscape cambia las islas exteriores y su relieve. Guardá coordenadas, bloques y suministros de vuelta. Alcanzar una isla no garantiza que puedas regresar; quien aún no tiene élitros necesita caminos.\n\nActividad guiada: revisá o practicá estos pasos y marcá la casilla. Esta acción no se detecta automáticamente.",
+    "groups": {
+      "07 · Aventuras": {
+        "position": [
+          168,
+          576
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "v2_dimensiones_stronghold"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Revisé / practiqué este paso"
+    }
+  },
+  "rewards": {}
+}

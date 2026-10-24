@@ -1,0 +1,47 @@
+{
+  "display": {
+    "title": "Despensa del Bastión",
+    "subtitle": "Bastión compartido · LOGRO · 2/4",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:wheat"
+    },
+    "description": "El grupo aporta 192 de minecraft:wheat desde el Bastión con /virgos pueblo aportar cocina. Los objetos se consumen y cada persona puede aportar como máximo un tercio: hacen falta al menos tres. Al completarlo, cada Explorador recibe esta recompensa una vez, incluso si se incorporó después. Son suministros para construir juntos; las rutas y edificios los diseña el grupo.",
+    "groups": {
+      "10 · El pueblo": {
+        "position": [
+          56,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "LOCKED",
+    "unlockNotification": true,
+    "showDependencyArrow": false,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "explorador"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:advancement",
+      "advancements": [
+        "virgos:pueblo_cocina"
+      ]
+    }
+  },
+  "rewards": {
+    "provisiones": {
+      "type": "heracles:item",
+      "item": {
+        "id": "farmersdelight:vegetable_soup",
+        "count": 16
+      }
+    }
+  }
+}
