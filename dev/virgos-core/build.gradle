@@ -131,7 +131,12 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     // Keep the API beside the server's actual mod set so a cleaned workspace can still rebuild.
-    compileOnly files('../../mods/voicechat-forge-1.20.1-2.6.24.jar')
+    // Production mods are private runtime state; clean CI uses the verified download cache.
+    def voicechatApi = file('../../mods/voicechat-forge-1.20.1-2.6.24.jar')
+    if (!voicechatApi.exists()) {
+        voicechatApi = file('../../.cache/pack/downloads/voicechat-forge-1.20.1-2.6.24.jar')
+    }
+    compileOnly files(voicechatApi)
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

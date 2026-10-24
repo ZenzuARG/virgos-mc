@@ -25,6 +25,8 @@ replay_pid*
 *.jar
 *.zip
 *.mrpack
+!dev/virgos-core/gradle/wrapper/gradle-wrapper.jar
+!pack/client-overrides/resourcepacks/Virgos-MC-UI.zip
 /libraries/
 /mods/
 /plugins/

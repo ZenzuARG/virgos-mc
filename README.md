@@ -45,6 +45,8 @@ El repositorio público contiene el sistema reproducible: código de Virgos Core
 
 Los tags `vMAJOR.MINOR.PATCH` activan `.github/workflows/release.yml`: descarga las dependencias fijadas, compila Core/Códice, regenera el instalador y publica ZIP, MRPack y `release.json` como GitHub Release.
 
+Para probar el build sin publicar, usar **Actions → Build and publish Virgos-MC release → Run workflow** sin `release_tag`. Para publicar desde `main` después de pasar los controles, completar un tag nuevo en ese campo. No se reemplazan tags ni releases existentes. El wrapper de Gradle y `Virgos-MC-UI.zip` son entradas de build versionadas; no son mundos, credenciales ni descargas de mods.
+
 ## Mundo y mantenimiento
 
 El mundo activo es `virgos_world`; el pueblo del spawn está en **672, 80, 752**. Las carpetas antiguas `world*` se retiraron porque no participan del servidor; para recuperar el estado actual se conservan los respaldos recientes de `backups/full`. No volver a ejecutar `deploy-release.py` sobre un mundo en uso.

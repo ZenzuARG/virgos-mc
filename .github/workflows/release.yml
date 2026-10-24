@@ -5,16 +5,22 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'New release tag to publish after successful checks (leave empty for build only)'
+        required: false
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Java 17
         uses: actions/setup-java@v5
@@ -24,19 +30,21 @@ jobs:
           cache: gradle
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
       - name: Cache locked client downloads
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             .cache
           key: virgos-client-${{ hashFiles('pack/mods.lock.json', 'pack/client-runtime.lock.json') }}
 
       - name: Fetch locked client dependencies
-        run: python scripts/fetch-locked-client-deps.py
+        run: |
+          python -B scripts/test-fetch-locked-client-deps.py
+          python scripts/fetch-locked-client-deps.py
 
       - name: Build Virgos Core and Códice
         working-directory: dev/virgos-core
@@ -77,13 +85,14 @@ jobs:
               client = json.loads(archive.read('asistente/cliente.lock.json'))
               assert client['clientRelease'] == current['clientRelease']
               assert 'asistente/bundled/virgos_codex-2.0.0.jar' in archive.namelist()
+              assert 'asistente/overrides/resourcepacks/Virgos-MC-UI.zip' in archive.namelist()
           PY
 
       - name: Publish GitHub release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: |
-            dist/Virgos-MC-2.0.0-instalar.zip
-            dist/Virgos-MC-2.0.0.mrpack
-            dist/release.json
+        if: startsWith(github.ref, 'refs/tags/') || inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" dist/* \
+            --target "$GITHUB_SHA" --title "Virgos-MC $RELEASE_TAG" --generate-notes
