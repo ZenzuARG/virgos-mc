@@ -1,9 +1,9 @@
-# Pinned Distant Horizons ordering fixes
+# Pinned Distant Horizons lifecycle and transfer fixes
 
 This Forge addon fixes client initialization races for **Minecraft 1.20.1,
 Forge 47.4.22 and Distant Horizons 3.3.3**, plus dedicated-server Chunky provider
 readiness on **Ketting Forge 47.4.22-0.6.1 with Chunky 1.3.146**. It changes
-ordering, not authentication, packet permissions or terrain data. Client fixes
+ordering and transient buffer ownership, not authentication, packet permissions or terrain data. Client fixes
 remain client-only; the Chunky guard is dedicated-server-only.
 
 ## Build and check offline
@@ -27,6 +27,7 @@ requires the existing ForgeGradle 6.0.54, Forge and Mixin caches.
 | `DhClientWorld.<init>` | Capture the initial `ClientNetworkState.sendConfigMessage()` instead of sending before the world is published. |
 | `SharedApi.setDhWorld` return | Send the captured configuration once, only when this world is the published world, after native thread-pool setup has completed. |
 | Full four-argument `DhClientLevel` constructor return | Publish the wrapper reference, then register native partial-update handlers once, only after provider/module/repository/renderer initialization succeeds. The delegating constructor and null-network branch retain their native behavior. |
+| Requested-source async handoff | Claim a completed buffer before executor scheduling and consume it once within its original receiver lifetime. Unclaimed fragments keep their native expiry. |
 | Dedicated-server `AbstractChunkyAccessor.tryRunFirstTimeSetup` head | Defer the exact Forge accessor while the installed Chunky provider reports its expected unloaded state, before native code sets `listenerBound`. Native subsequent calls bind the listener normally once ready. |
 
 There is no polling, forced read enable, fake session readiness, pool prewarming,
@@ -36,12 +37,19 @@ DH configuration messages are unchanged.
 The client-level fix defers only the two native publication calls; it neither
 constructs the client module early nor changes `close()`. A partial update could
 previously invoke `updateDataSourcesAsync` while `clientside` was still null.
-Normal full-source responses and split buffers remain owned by the native
-session/request queues, not this partial-update subscription. Messages received
+Normal full-source responses retain the native session/request queues and decoder;
+completed requested buffers use transient payload-local ownership during the
+executor handoff, not this partial-update subscription. Messages received
 before the level subscribes are not buffered or replayed by this addon. The
 initial snapshot must retrieve current server state through normal requests;
 this is an end-to-end laboratory requirement, not a claim that every prebinding
-partial push is harmless. Payload-buffer expiry remains unchanged.
+partial push is harmless. Unclaimed fragment-buffer expiry remains unchanged.
+
+See [completed payload ownership](docs/payload-ownership.md) for the native
+regressions, cancellation/close controls and precise version boundary. These
+mechanisms reproduce with the original receiver and DTO code; reproducing them
+does not establish which caused an earlier intermittent full-pack failure.
+Full untraced laboratory acceptance remains mandatory.
 
 The Chunky probe calls only the public provider getter through reflection, so
 Chunky remains an optional dependency. It runs only for the installed Forge

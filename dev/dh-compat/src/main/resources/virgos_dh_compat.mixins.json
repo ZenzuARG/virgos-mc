@@ -7,10 +7,15 @@
     "ConnectionMixin",
     "DhClientWorldMixin",
     "SharedApiMixin",
-    "DhClientLevelMixin"
+    "DhClientLevelMixin",
+    "FullDataPayloadMixin",
+    "FullDataPayloadReceiverMixin",
+    "FullDataRequestQueueMixin"
   ],
   "server": [
     "ChunkyReadinessMixin"
   ],
-  "injectors": { "defaultRequire": 1 }
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

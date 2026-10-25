@@ -1,3 +1,5 @@
+import java.nio.file.Files
+
 plugins {
     id 'net.minecraftforge.gradle' version '6.0.54'
 }
@@ -15,6 +17,7 @@ if (!dhJar.isPresent() || !file(dhJar.get()).isFile()) {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.22'
     compileOnly files(dhJar.get())
+    testImplementation files(dhJar.get())
     compileOnly 'org.spongepowered:mixin:0.8.5'
     testImplementation 'org.ow2.asm:asm-tree:9.7.1'
 }
@@ -48,3 +51,21 @@ tasks.register('checkLevelPublication', JavaExec) {
     systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
 }
 tasks.named('check').configure { dependsOn 'checkLevelPublication' }
+
+tasks.register('checkPayloadOwnership', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.payload.PayloadOwnershipTest'
+    systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
+}
+tasks.named('check').configure { dependsOn 'checkPayloadOwnership' }
+
+['checkPayloadOwnership'].each { taskName ->
+    tasks.named(taskName, JavaExec).configure {
+        doFirst {
+            def scratch = Files.createTempDirectory('virgos-dh-native-').toFile()
+            workingDir scratch
+            logger.lifecycle("Retained native test directory: ${scratch}")
+        }
+    }
+}
