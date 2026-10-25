@@ -1,0 +1,38 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="virgos_dh_compat"
+version="0.1.0"
+displayName="Virgos DH Compatibility"
+description="Version-pinned client connection, DH initialization and dedicated-server Chunky readiness fixes."
+[[dependencies.virgos_dh_compat]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.22]"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.virgos_dh_compat]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.22-0.6.1]"
+ordering="NONE"
+side="SERVER"
+[[dependencies.virgos_dh_compat]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.virgos_dh_compat]]
+modId="distanthorizons"
+mandatory=true
+versionRange="[3.3.3]"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.virgos_dh_compat]]
+modId="chunky"
+mandatory=false
+versionRange="[1.3.146]"
+ordering="AFTER"
+side="SERVER"

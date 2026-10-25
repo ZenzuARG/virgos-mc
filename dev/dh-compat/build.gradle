@@ -1,0 +1,50 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.54'
+}
+
+version = '0.1.0'
+group = 'mc.virgos'
+base { archivesName = 'virgos_dh_compat' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+minecraft { mappings channel: 'official', version: '1.20.1' }
+
+def dhJar = providers.gradleProperty('dhJar')
+if (!dhJar.isPresent() || !file(dhJar.get()).isFile()) {
+    throw new GradleException('Supply the original DH 3.3.3 jar with -PdhJar=<path>')
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.22'
+    compileOnly files(dhJar.get())
+    compileOnly 'org.spongepowered:mixin:0.8.5'
+    testImplementation 'org.ow2.asm:asm-tree:9.7.1'
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    // Targets are pinned runtime SRG and DH names; no refmap is required.
+    options.compilerArgs += ['-proc:none']
+}
+tasks.named('jar', Jar).configure {
+    manifest { attributes('MixinConfigs': 'virgos_dh_compat.mixins.json') }
+    finalizedBy 'reobfJar'
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+tasks.register('checkOrdering', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.OrderedInitializationTest'
+}
+tasks.named('check').configure { dependsOn 'checkOrdering' }
+tasks.register('checkChunkyReadiness', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.ChunkyReadinessTest'
+}
+tasks.named('check').configure { dependsOn 'checkChunkyReadiness' }
+tasks.register('checkLevelPublication', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.LevelPublicationTest'
+    systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
+}
+tasks.named('check').configure { dependsOn 'checkLevelPublication' }

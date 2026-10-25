@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "mc.virgos.dhcompat.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ConnectionMixin",
+    "DhClientWorldMixin",
+    "SharedApiMixin",
+    "DhClientLevelMixin"
+  ],
+  "server": [
+    "ChunkyReadinessMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}
