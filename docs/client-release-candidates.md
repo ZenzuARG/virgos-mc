@@ -22,6 +22,9 @@ python -B scripts/prepare-dh-release.py `
 ```
 
 `--java-home` defaults to `JAVA_HOME`. The preparer never downloads upstream inputs;
+CI resolves `JAVA_HOME` to its canonical directory before invoking the preparer,
+because hosted tool-cache JDK aliases can be symbolic links. Linked release
+inputs, cache paths and output paths remain rejected.
 `--offline` also prevents addon Gradle dependency resolution. It verifies both built
 jars' embedded release/fingerprint, source identity, original DH, ASM and two pinned
 source archives before any child build or output creation. The addon is checked and

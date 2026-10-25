@@ -75,7 +75,7 @@ jobs:
         run: |
           python -B scripts/prepare-dh-release.py \
             --metadata "$CANDIDATE_METADATA" --cache-root "$GITHUB_WORKSPACE/.cache" \
-            --inputs-dir "$RUNNER_TEMP/virgos-release-inputs" --java-home "$JAVA_HOME"
+            --inputs-dir "$RUNNER_TEMP/virgos-release-inputs" --java-home "$(realpath "$JAVA_HOME")"
 
       - name: Build explicit candidate installer and Modrinth pack
         run: |
