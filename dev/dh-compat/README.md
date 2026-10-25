@@ -28,6 +28,7 @@ requires the existing ForgeGradle 6.0.54, Forge and Mixin caches.
 | `SharedApi.setDhWorld` return | Send the captured configuration once, only when this world is the published world, after native thread-pool setup has completed. |
 | Full four-argument `DhClientLevel` constructor return | Publish the wrapper reference, then register native partial-update handlers once, only after provider/module/repository/renderer initialization succeeds. The delegating constructor and null-network branch retain their native behavior. |
 | Requested-source async handoff | Claim a completed buffer before executor scheduling and consume it once within its original receiver lifetime. Unclaimed fragments keep their native expiry. |
+| Grouped server response iteration | Allocate each response wrapper from the native ID sequence before both fragment sending and final-message capture, sharing the immutable encoded bytes without recompression. |
 | Dedicated-server `AbstractChunkyAccessor.tryRunFirstTimeSetup` head | Defer the exact Forge accessor while the installed Chunky provider reports its expected unloaded state, before native code sets `listenerBound`. Native subsequent calls bind the listener normally once ready. |
 
 There is no polling, forced read enable, fake session readiness, pool prewarming,
@@ -45,7 +46,8 @@ initial snapshot must retrieve current server state through normal requests;
 this is an end-to-end laboratory requirement, not a claim that every prebinding
 partial push is harmless. Unclaimed fragment-buffer expiry remains unchanged.
 
-See [completed payload ownership](docs/payload-ownership.md) for the native
+See [completed payload ownership](docs/payload-ownership.md) and
+[grouped response identities](docs/grouped-payload-identity.md) for the native
 regressions, cancellation/close controls and precise version boundary. These
 mechanisms reproduce with the original receiver and DTO code; reproducing them
 does not establish which caused an earlier intermittent full-pack failure.

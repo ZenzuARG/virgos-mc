@@ -5,7 +5,7 @@ license="All Rights Reserved"
 modId="virgos_dh_compat"
 version="0.1.0"
 displayName="Virgos DH Compatibility"
-description="Version-pinned client initialization, completed-payload ownership and dedicated-server Chunky readiness fixes."
+description="Version-pinned client initialization, completed-payload ownership, grouped transfer identity and dedicated-server Chunky readiness fixes."
 [[dependencies.virgos_dh_compat]]
 modId="forge"
 mandatory=true

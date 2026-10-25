@@ -3,6 +3,9 @@
   "minVersion": "0.8.5",
   "package": "mc.virgos.dhcompat.mixin",
   "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "FullDataPayloadIdAccessor"
+  ],
   "client": [
     "ConnectionMixin",
     "DhClientWorldMixin",
@@ -13,9 +16,8 @@
     "FullDataRequestQueueMixin"
   ],
   "server": [
-    "ChunkyReadinessMixin"
+    "ChunkyReadinessMixin",
+    "GroupedFullDataPayloadMixin"
   ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  "injectors": { "defaultRequire": 1 }
 }

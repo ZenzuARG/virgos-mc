@@ -58,9 +58,15 @@ tasks.register('checkPayloadOwnership', JavaExec) {
     mainClass = 'mc.virgos.dhcompat.payload.PayloadOwnershipTest'
     systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
 }
-tasks.named('check').configure { dependsOn 'checkPayloadOwnership' }
+tasks.register('checkGroupedPayloadIdentity', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.GroupedPayloadIdentityTest'
+    systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
+}
+tasks.named('check').configure { dependsOn 'checkPayloadOwnership', 'checkGroupedPayloadIdentity' }
 
-['checkPayloadOwnership'].each { taskName ->
+['checkPayloadOwnership', 'checkGroupedPayloadIdentity'].each { taskName ->
     tasks.named(taskName, JavaExec).configure {
         doFirst {
             def scratch = Files.createTempDirectory('virgos-dh-native-').toFile()
