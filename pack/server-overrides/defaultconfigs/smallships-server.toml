@@ -311,7 +311,7 @@ schematicVersion = 6
 	# This category holds configs for vanilla boats.
 	[Ship.VanillaBoats]
 		#Slow down vanilla boats (makes smallships ships more attractive).
-		vanillaBoatSlowdownEnable = true
+		vanillaBoatSlowdownEnable = false
 		#Speed factor for vanilla boats, also applies to turning with A and D: 0.25 = 75% slower.
 		#Range: 0.05 ~ 1.0
 		vanillaBoatSpeedFactor = 0.25
