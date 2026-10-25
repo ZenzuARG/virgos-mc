@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "filename": "smallships-2.0.2-forge-1.20.1.jar",
+      "base_hash_algorithm": "sha512",
+      "base_hash": "e20175173745df575449dba683803df997922f823699cd4ef57c7bf0a3d5610ddfd6e7817336d0f17e272b90105b70268f3705f1afb7e368bd37ae1dd61157d4",
+      "base_size": 2964478,
+      "hash_algorithm": "sha512",
+      "hash": "eef3b8ad611d8f7bbe9dc6e5b7b873aa3263ca43044f54b622c5dcc17fe79ba07aced45b4c76b52f4777fa406893e4d6fc2b168b683a1f4e1e0742b34483a1ed",
+      "size": 2904500,
+      "reason": "Move the client-only EntityRenderDispatcher mixin out of the common mixin list for dedicated servers."
+    }
+  ]
+}

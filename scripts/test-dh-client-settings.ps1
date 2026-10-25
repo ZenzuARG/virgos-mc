@@ -11,7 +11,7 @@ $plan=Get-VirgosDhSettingsPlan $path $seed
 Assert (-not [IO.File]::Exists($path)) 'Fresh settings preflight does not write files'
 Write-VirgosDhSettingsPlan $plan
 $fresh=[IO.File]::ReadAllText($path)
-Assert ($fresh -match 'lodChunkRenderDistanceRadius = 32' -and $fresh -match 'enableAutoUpdater = false') 'Fresh pinned DH settings use bounded radius and no self-update'
+Assert ($fresh -match 'lodChunkRenderDistanceRadius = 256' -and $fresh -match 'generationMaxChunkRadius = 0' -and $fresh -match 'enableAutoUpdater = false') 'Fresh DH settings request shared terrain with a bounded render radius and no self-update'
 $custom="_version = 5`r`n[client.advanced.graphics.quality]`r`nlodChunkRenderDistanceRadius = 96`r`n[client.advanced.autoUpdater]`r`nenableAutoUpdater = true # personal comment`r`nenableSilentUpdates = false`r`n"
 [IO.File]::WriteAllText($path,$custom)
 $plan=Get-VirgosDhSettingsPlan $path $seed
@@ -24,6 +24,25 @@ Assert ($backups.Count -eq 1 -and [IO.File]::ReadAllText($backups[0].FullName) -
 $plan=Get-VirgosDhSettingsPlan $path $seed
 Write-VirgosDhSettingsPlan $plan
 Assert (@(Get-ChildItem -LiteralPath $scratch -Filter '*.bak').Count -eq 1) 'Repeat settings application is idempotent'
+$legacy="_version = 5`n[common.worldGenerator]`ngenerationMaxChunkRadius = 32 # old pack default`n[client.advanced.graphics.quality]`nlodChunkRenderDistanceRadius = 32`n[client.advanced.autoUpdater]`nenableAutoUpdater = false`n"
+[IO.File]::WriteAllText($path,$legacy)
+Write-VirgosDhSettingsPlan (Get-VirgosDhSettingsPlan $path $seed)
+$migrated=[IO.File]::ReadAllText($path)
+Assert ($migrated -ceq $legacy.Replace('generationMaxChunkRadius = 32','generationMaxChunkRadius = 0').Replace('lodChunkRenderDistanceRadius = 32','lodChunkRenderDistanceRadius = 256')) 'Existing pack defaults migrate without changing comments or unrelated settings'
+Assert (@(Get-ChildItem -LiteralPath $scratch -Filter '*.bak' | Where-Object { [IO.File]::ReadAllText($_.FullName) -ceq $legacy }).Count -eq 1) 'Legacy settings have a recoverable backup'
+$backupCount=@(Get-ChildItem -LiteralPath $scratch -Filter '*.bak').Count
+Write-VirgosDhSettingsPlan (Get-VirgosDhSettingsPlan $path $seed)
+Assert (@(Get-ChildItem -LiteralPath $scratch -Filter '*.bak').Count -eq $backupCount) 'Legacy migration is idempotent'
+$personal=$legacy.Replace('generationMaxChunkRadius = 32','generationMaxChunkRadius = 128').Replace('lodChunkRenderDistanceRadius = 32','lodChunkRenderDistanceRadius = 96')
+[IO.File]::WriteAllText($path,$personal)
+Write-VirgosDhSettingsPlan (Get-VirgosDhSettingsPlan $path $seed)
+Assert ([IO.File]::ReadAllText($path) -ceq $personal) 'Personal generation and rendering preferences are preserved'
+foreach($duplicate in @($legacy.Replace('generationMaxChunkRadius = 32','generationMaxChunkRadius = 32'+"`ngenerationMaxChunkRadius = 0"), ($legacy+"`n[common.worldGenerator]`ngenerationMaxChunkRadius = 0`n"), $legacy.Replace('lodChunkRenderDistanceRadius = 32','lodChunkRenderDistanceRadius = 32'+"`nlodChunkRenderDistanceRadius = 256"))) {
+    [IO.File]::WriteAllText($path,$duplicate)
+    $rejected=$false
+    try { [void](Get-VirgosDhSettingsPlan $path $seed) } catch { $rejected=$true }
+    Assert ($rejected -and [IO.File]::ReadAllText($path) -ceq $duplicate) 'Ambiguous migrated settings reject without changing the file'
+}
 $old="_version = 4`n[client]`nlegacy = true`n"
 [IO.File]::WriteAllText($path,$old)
 Write-VirgosDhSettingsPlan (Get-VirgosDhSettingsPlan $path $seed)

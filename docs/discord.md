@@ -11,7 +11,7 @@ La integración está **activa desde el 18/10/2026** y usa DiscordSRV 1.30.5 ún
 - `!jugadores`: lista de conectados; `!ip`: dirección del servidor; `!ayuda`: guía de misiones y protección; `!voz`: cómo usar la voz.
 - Mensajes en español, sin notificaciones por cada logro o muerte, y sin menciones masivas.
 
-Escribí normalmente en #virgos-mc o en el chat del juego: el mensaje aparece en ambos. La consola administrativa también se publica en #virgos-mc; DiscordSRV muestra un aviso de canal compartido porque esta configuración es deliberada. Para no inundar el canal, la consola publica únicamente errores; el detalle completo queda en `logs/latest.log`. Discord sigue siendo opcional para jugar. Se conserva AuthMe; se comprobó con una cuenta Forge de prueba que el chat previo al registro no llega a Discord y que después del login sí funciona.
+Escribe normalmente en #virgos-mc o en el chat del juego: el mensaje aparece en ambos. La consola administrativa y sus errores no se publican en Discord (`DiscordConsoleChannelId` vacío); el diagnóstico completo permanece en `logs/latest.log`. Discord sigue siendo opcional para jugar. Se conserva AuthMe; se comprobó con una cuenta Forge de prueba que el chat previo al registro no llega a Discord y que después del login sí funciona.
 
 La voz de proximidad sigue a cargo de Simple Voice Chat y su túnel UDP existente. DiscordSRV no abre otro puerto ni requiere instalar un programa en Windows.
 

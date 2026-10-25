@@ -1,8 +1,12 @@
 package mc.virgos.dhcompat.mixin;
 
 import com.seibel.distanthorizons.core.wrapperInterfaces.modAccessor.AbstractChunkyAccessor;
+import com.seibel.distanthorizons.core.config.Config;
 import mc.virgos.dhcompat.ChunkyReadiness;
+import mc.virgos.dhcompat.ChunkyLodServingPolicy;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +17,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = AbstractChunkyAccessor.class, remap = false)
 public abstract class ChunkyReadinessMixin {
     @Shadow private boolean listenerBound;
+
+    @Inject(method = "onGenEvent()V", at = @At("HEAD"), cancellable = true,
+        require = 1, remap = false)
+    private void virgos$keepExistingLodsAvailable(CallbackInfo callback) {
+        if (ChunkyLodServingPolicy.preserveCachedServing(
+            FMLEnvironment.dist == Dist.DEDICATED_SERVER,
+            Config.Common.WorldGenerator.chunkGeneratorMode.get(),
+            Config.Common.WorldGenerator.generatorPlan.getTrueValue())) {
+            // Do not refresh the native timeout either: a previous override must expire.
+            callback.cancel();
+        }
+    }
 
     @Inject(method = "tryRunFirstTimeSetup()V", at = @At("HEAD"), cancellable = true,
         require = 1, remap = false)

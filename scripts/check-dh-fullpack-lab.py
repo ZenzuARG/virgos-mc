@@ -1,7 +1,15 @@
 """Exercise only the authorized local laboratory through normal QA actions."""
-import argparse, hashlib, json, sqlite3, time
+import argparse, hashlib, json, shutil, sqlite3, time
 from pathlib import Path
 from dh_fullpack_lab import policy
+
+# 1024 blocks from spawn: outside both vanilla distance and the old 32-chunk gate.
+FIXTURE_SECTION_X = 16
+FIXTURE_X = FIXTURE_SECTION_X * 64
+VIEW_X = FIXTURE_X - 256
+# Chunk import competes with initial generation; this is a bounded convergence
+# check, not a claim of instantaneous updates under that load.
+SERVER_UPDATE_DEADLINE = 150
 
 class Proof:
  def __init__(self, lab, role):
@@ -51,12 +59,16 @@ class Proof:
    policy.regular(path)
    with sqlite3.connect(path.as_uri()+'?mode=ro',uri=True,timeout=3) as db:
     db.execute('PRAGMA query_only=ON');db.row_factory=sqlite3.Row
-    try:row=db.execute('SELECT * FROM FullData WHERE DetailLevel=0 AND PosX=4 AND PosZ=0').fetchone()
+    try:row=db.execute('SELECT * FROM FullData WHERE DetailLevel=0 AND PosX=? AND PosZ=0',(FIXTURE_SECTION_X,)).fetchone()
     except sqlite3.OperationalError:continue
     if row:
      return {k:({'sha256':hashlib.sha256(row[k]).hexdigest(),'bytes':len(row[k])} if isinstance(row[k],bytes) else row[k]) for k in row.keys()}
   return None
  def same(self,a,b):return a is not None and b is not None and all(a[k]==b[k] for k in ['Data','Mapping'])
+ def changed(self,previous):
+  current=self.row('server')
+  # Palettes retain previously seen blocks; reusing one can change Data alone.
+  return current if current is not None and not self.same(current,previous) else None
  def converged(self,label):
   def check():
    a,b=self.row('server'),self.row(self.role)
@@ -72,38 +84,86 @@ class Proof:
    if audit.get('serverReady'):return audit
    time.sleep(2)
   raise RuntimeError('Native DH did not become ready after normal AuthMe login; no repair was sent')
+ def position(self):
+  # Legitimate proximity avoids a cold cache's nearest-first backlog, never visiting the fixture.
+  self.command(f'tp {self.name} {VIEW_X} 201 0')
+  self.wait(lambda:abs(self.status().get('x',0)-VIEW_X)<2,30,'remote viewing position')
+  audit=self.audit('remote-viewing-position')
+  if audit.get('remoteVanillaChunkPresent') is not False:raise RuntimeError('Remote fixture entered vanilla cache')
+ def chunky_active(self,label):
+  log=policy.regular(self.lab/'server/console.log');offset=log.stat().st_size
+  self.command('forge:chunky progress')
+  def check():
+   with log.open('rb') as stream:
+    stream.seek(offset);lines=stream.read().decode('utf-8',errors='replace').splitlines()
+   if any('[Chunky] No tasks running.' in line for line in lines):raise RuntimeError('Chunky ended before '+label)
+   progress=[line for line in lines if '[Chunky] Task running for minecraft:overworld.' in line]
+   return {'observedAt':time.time(),'progress':progress[-1]} if progress else None
+  self.save(label,self.wait(check,20,label));self.checks[label]=True
+ def visual(self):
+  self.action('look',yaw=-90,pitch=8)
+  self.wait(lambda:abs(self.status().get('yaw',0)+90)<2,10,'remote viewing direction')
+  folder=self.lab/self.role/'screenshots';previous=set(folder.glob('virgos-qa-*.png'))
+  self.action('screenshot')
+  def captured():
+   for path in folder.glob('virgos-qa-*.png'):
+    if path not in previous and path.read_bytes().endswith(b'\x00\x00\x00\x00IEND\xaeB`\x82'):return policy.regular(path)
+  source=self.wait(captured,30,'remote visual screenshot')
+  shutil.copy2(source,self.output/'remote-fixture.png')
+  audit=self.audit('remote-visual-audit')
+  if audit.get('remoteVanillaChunkPresent') is not False or audit.get('rendererDisabledByException') is not False:raise RuntimeError('Visual evidence lacks an active remote renderer')
+  self.checks['remote-visual-captured']=True
  def probe(self,label,**extra):
   p=self.lab/self.role/'virgos-qa/merge-probe.json';stamp=time.time();self.action('probe_dh_merge',**extra)
   d=self.wait(lambda:self.read(p) if p.exists() and p.stat().st_mtime>=stamp else None,45,label);self.save(label,d);return d
  def run(self):
   self.wait(lambda:self.status().get('screen')=='net.minecraft.client.gui.screens.TitleScreen',240,'title')
   if self.row(self.role) is not None:raise RuntimeError('Expected an independent fresh LOD cache')
+  self.command(f'forceload add {FIXTURE_X} 0 {FIXTURE_X+63} 63')
+  self.command(f'fill {FIXTURE_X} 200 0 {FIXTURE_X+63} 201 63 minecraft:stone')
+  self.command(f'forceload add {VIEW_X-8} -8 {VIEW_X+7} 7')
+  self.command(f'fill {VIEW_X-8} 200 -8 {VIEW_X+7} 200 7 minecraft:glass')
+  self.command('save-all')
+  self.wait(lambda:self.row('server'),90,'remote server fixture')
+  self.checks['fixture-beyond-legacy-boundary']=True
   self.checks['fresh-cache-before-join']=True;self.action('connect')
   self.wait(lambda:self.status().get('screen')=='game' and self.status().get('name')==self.name,100,'first playable world')
   # Deliberately wait like a human before authenticating; do not race the gate.
   time.sleep(10);pre=self.audit('before-auth')
   if self.row(self.role) is not None:raise RuntimeError('Remote fixture arrived before authentication')
   self.checks['no-remote-lod-before-auth']=True
+  # Start after client boot, so a slow menu cannot consume the test workload.
+  for command in ['world minecraft:overworld','shape circle','center 16384 0','radius 1024','start']:
+   self.command('forge:chunky '+command)
+  self.chunky_active('chunky-active-before-auth')
   ready=self.auth(True)
   if ready.get('remoteVanillaChunkPresent') is not False:raise RuntimeError('Fixture is not proven outside vanilla chunk cache')
   self.checks['native-ready-without-repair']=True;self.checks['outside-vanilla-cache']=True
+  if ready.get('negotiated',{}).get('getGeneratorPlan')!='CHUNKS_ONLY':raise RuntimeError('Chunky disabled cached serving')
+  self.position()
   self.converged('fresh-shared-download');self.save('authenticated-status',self.status())
+  self.chunky_active('chunky-active-after-fresh-download')
   d=self.probe('palette-regression',fixture=True)
   if not d.get('reportedChanged') or d.get('fullAfter')!=d.get('fullIncoming') or d.get('fullBefore')==d.get('fullIncoming'):raise RuntimeError('Palette regression')
   d=self.probe('identical-noop',fixture=True,same=True)
   if d.get('reportedChanged') or not d.get('fullBefore')==d.get('fullIncoming')==d.get('fullAfter'):raise RuntimeError('No-op regression')
   self.checks['palette-regression-and-noop']=True
-  old=self.row('server');self.command('fill 256 200 0 319 200 63 create:andesite_casing');self.command('save-all')
-  self.wait(lambda:self.row('server') if self.row('server')['Mapping']!=old['Mapping'] else None,30,'server material update')
+  old=self.row('server');self.command(f'fill {FIXTURE_X} 200 0 {FIXTURE_X+63} 200 63 create:andesite_casing');self.command('save-all')
+  self.wait(lambda:self.changed(old),SERVER_UPDATE_DEADLINE,'server material update')
   self.converged('live-modded-material')
-  old=self.row('server');self.command('fill 256 201 0 319 201 63 minecraft:diamond_block');self.command('save-all')
-  self.wait(lambda:self.row('server') if self.row('server')['Data']!=old['Data'] else None,30,'server geometry update')
+  self.chunky_active('chunky-active-after-material-update')
+  old=self.row('server');self.command(f'fill {FIXTURE_X} 201 0 {FIXTURE_X+63} 207 63 minecraft:diamond_block');self.command('save-all')
+  self.wait(lambda:self.changed(old),SERVER_UPDATE_DEADLINE,'server geometry update')
   self.converged('live-geometry')
+  self.chunky_active('chunky-active-after-geometry-update')
   old=self.row(self.role);self.action('disconnect');self.wait(lambda:self.status().get('screen')=='net.minecraft.client.gui.screens.TitleScreen',40,'disconnect')
-  time.sleep(2);self.command('fill 256 201 0 319 201 63 minecraft:emerald_block');self.command('save-all')
-  self.wait(lambda:self.row('server') if self.row('server')['Mapping']!=old['Mapping'] else None,30,'offline material update')
-  self.action('connect');self.wait(lambda:self.status().get('screen')=='game',100,'reconnect world');self.auth(False)
+  time.sleep(2);self.command(f'fill {FIXTURE_X} 201 0 {FIXTURE_X+63} 207 63 minecraft:emerald_block');self.command('save-all')
+  self.wait(lambda:self.changed(old),SERVER_UPDATE_DEADLINE,'offline material update')
+  self.chunky_active('chunky-active-before-reconnect')
+  self.action('connect');self.wait(lambda:self.status().get('screen')=='game',100,'reconnect world');self.auth(False);self.position()
   self.converged('cached-reconnect-refresh')
+  self.chunky_active('chunky-active-after-reconnect')
+  self.visual()
   final=self.row(self.role);self.save('before-client-close',final);self.action('quit')
   end=time.monotonic()+45
   while time.monotonic()<end:
@@ -119,3 +179,5 @@ if __name__=='__main__':
   checks=proof.run();proof.save('result',{'status':'PASS','checks':checks});print(json.dumps({'status':'PASS','checks':checks}))
  except Exception as error:
   proof.save('result',{'status':'PARTIAL','checks':proof.checks,'error':str(error),'statusSnapshot':proof.status()});print(json.dumps({'status':'PARTIAL','error':str(error)}));raise SystemExit(1)
+ finally:
+  proof.command('forge:chunky pause minecraft:overworld')

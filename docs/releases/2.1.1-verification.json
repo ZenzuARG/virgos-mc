@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "version": "2.1.1",
+  "clientRelease": "2.1.1-r13",
+  "clientFingerprint": "virgos-client-2.1.1-r13",
+  "status": "local-candidate-verified",
+  "publication": "pending",
+  "native": {
+    "serverHeapMiB": 8192,
+    "clientHeapMiB": 8192,
+    "traceMixins": false,
+    "manualHandshakeRepair": false,
+    "clientCacheSeeding": false,
+    "checks": {
+      "fixture-beyond-legacy-boundary": true,
+      "fresh-cache-before-join": true,
+      "no-remote-lod-before-auth": true,
+      "chunky-active-before-auth": true,
+      "native-ready-without-repair": true,
+      "outside-vanilla-cache": true,
+      "fresh-shared-download": true,
+      "chunky-active-after-fresh-download": true,
+      "palette-regression-and-noop": true,
+      "live-modded-material": true,
+      "chunky-active-after-material-update": true,
+      "live-geometry": true,
+      "chunky-active-after-geometry-update": true,
+      "chunky-active-before-reconnect": true,
+      "cached-reconnect-refresh": true,
+      "chunky-active-after-reconnect": true,
+      "remote-visual-captured": true,
+      "client-cache-persisted": true
+    },
+    "remoteFixtureBlockX": 1024,
+    "viewerBlockX": 768,
+    "remoteVanillaChunkPresent": false,
+    "rendererDisabledByException": false,
+    "visual": "2.1.1-dh-remote.png",
+    "visualSha256": "ac181793e72e4ff54cb3f9ca1fa699ac7c7d74a0a3f6ba684b7bfe48e6d76ba4",
+    "visualReviewed": true,
+    "serverExitCode": 0,
+    "clientExitCode": 0
+  },
+  "testedArtifactsSha256": {
+    "virgos_core-2.0.0.jar": "efb1a61939886a8da278c18304595da654722d357012e9fb93f4bc49850271dc",
+    "virgos_codex-2.0.0.jar": "950ab7855f2d98f432f1b39d505dcaecde060b1792513e6c1273efa6d2418140",
+    "DistantHorizons-3.3.3-1.20.1-fabric-forge.jar": "3aca79ff06e9522c84c3af96e7aa75bdec65432e79fa384353ccded89f37e21b",
+    "virgos_dh_compat-0.1.0.jar": "375bbd6cd26534e7d875ff3abc38ba7e02b99e05e345851042b14f3fea8897ea"
+  },
+  "localPackages": [
+    {
+      "name": "Virgos-MC-2.1.1-instalar.zip",
+      "bytes": 50963847,
+      "sha256": "1352586329953c5f170c389160c5b469e726e2b6aaf19fc0e76482a2e570e19e"
+    },
+    {
+      "name": "Virgos-MC-2.1.1.mrpack",
+      "bytes": 50934029,
+      "sha256": "c11378d3acd5fe1a8f1bfd5b15e6940e24fefec79f6ef3bce669f0b7cb0b77a3"
+    }
+  ],
+  "packaging": {
+    "repeatBuildIdentical": true,
+    "installerChecks": 37,
+    "memoryChecks": 8,
+    "dhMigrationChecks": 20,
+    "pythonTests": 39,
+    "pythonSkipped": 1,
+    "correspondingSourceFiles": 7
+  },
+  "knownAdvisories": [
+    "Existing lab expedition configuration/storage ERROR remains.",
+    "Client resource-model/compatibility ERROR messages remain, including an Every Compat model message; this is not a zero-error certification.",
+    "The earlier below-policy 6-GiB run exhausted memory; the shipped 8-GiB policy passed."
+  ],
+  "initialGeneration": {
+    "world": "minecraft:overworld",
+    "radiusBlocks": 10000,
+    "shape": "circle",
+    "complete": false
+  }
+}

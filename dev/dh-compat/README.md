@@ -60,6 +60,16 @@ accessor before its listener is bound. Only the getter's exact
 unexpected provider failures propagate. No listener flag is forged and the
 generation-progress hook is retained. There are no new version upgrades.
 
+On dedicated servers configured with `PRE_EXISTING_ONLY` and `CHUNKS_ONLY`, the
+Chunky progress hook must not disable DH's shared cached-data requests. The
+compatibility hook cancels only that native entry, before its timestamp/API
+override, because DH cannot generate competing missing terrain in this mode.
+All other sides, generator modes and configured plans retain native exclusion.
+The underlying configured plan is checked rather than masking another API
+override. `checkChunkyLodServing` pins the native selector, fail-closed injection
+and every mode/plan/side policy combination; the full-pack test must also prove
+native fresh/reconnect cached delivery while Chunky is active.
+
 ## Version boundary and verification
 
 Targets were inspected with `javap -c -p` in the installed 1.20.1 SRG client and

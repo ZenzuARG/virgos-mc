@@ -196,23 +196,23 @@ BackupSystem:
     write(lab / 'server/config/voicechat/voicechat-server.properties',
           'bind_address=127.0.0.1\nport=24455\nvoice_host=127.0.0.1:24455\n')
     for side in ['server', 'client', 'client2']:
-        write(lab / side / 'config/DistantHorizons.toml', '''[common.worldGenerator]
+        write(lab / side / 'config/DistantHorizons.toml', f'''[common.worldGenerator]
 generatorPlan = "CHUNKS_ONLY"
 chunkGeneratorMode = "PRE_EXISTING_ONLY"
-generationMaxChunkRadius = 32
+generationMaxChunkRadius = {625 if side == 'server' else 0}
 [common.multiThreading]
 numberOfThreads = 2
 threadRunTimeRatio = "0.5"
 [server]
 enableRealTimeUpdates = true
-realTimeUpdateDistanceRadiusInChunks = 32
+realTimeUpdateDistanceRadiusInChunks = 256
 synchronizeOnLoad = true
-syncOnLoadRateLimit = 4
-maxSyncOnLoadRequestDistance = 512
-generationRequestRateLimit = 4
-maxGenerationRequestDistance = 512
+syncOnLoadRateLimit = 16
+maxSyncOnLoadRequestDistance = 625
+generationRequestRateLimit = 16
+maxGenerationRequestDistance = 625
 [client.advanced.graphics.quality]
-lodChunkRenderDistanceRadius = 32
+lodChunkRenderDistanceRadius = 256
 ''')
         if side != 'server':
             write(lab / side / 'virgos-qa/endpoint.txt', '127.0.0.1:25575')

@@ -1,4 +1,4 @@
-# Keep the pinned compatibility patch installed; retain current personal rendering settings.
+# Keep the pinned patch and migrate known pack defaults without replacing personal settings.
 function Get-VirgosDhSettingsPlan([string]$ConfigPath,[string]$DefaultPath) {
     foreach($candidate in @($ConfigPath,$DefaultPath)) {
         $cursor=[IO.Path]::GetFullPath($candidate)
@@ -69,6 +69,31 @@ function Get-VirgosDhSettingsPlan([string]$ConfigPath,[string]$DefaultPath) {
                 if(-not $match.Success) { throw 'La opción de actualización de DH no es válida.' }
                 $lines[$keys[0]]=$match.Groups[1].Value+'false'+$match.Groups[3].Value
             } else { $lines.Insert($end,'enableAutoUpdater = false') }
+        }
+        # Old pack seeds restricted even remote cached requests to 512 blocks
+        # around world origin. Let the server enforce its own generation boundary.
+        # Only migrate the known defaults; customized values remain untouched.
+        foreach($setting in @(
+            @{Table='common.worldGenerator';Key='generationMaxChunkRadius';Replacement='0'},
+            @{Table='client.advanced.graphics.quality';Key='lodChunkRenderDistanceRadius';Replacement='256'}
+        )) {
+            $tablePattern='^\s*\['+[regex]::Escape($setting.Table)+'\]\s*(?:#.*)?$'
+            $headers=@(for($i=0;$i -lt $lines.Count;$i++) { if($lines[$i] -match $tablePattern) { $i } })
+            if($headers.Count -gt 1) { throw 'La configuración de distancia de DH está duplicada.' }
+            if(-not $headers.Count) { continue }
+            $start=$headers[0]+1; $end=$lines.Count
+            for($i=$start;$i -lt $lines.Count;$i++) {
+                if($lines[$i] -match '^\s*\[') { $end=$i; break }
+            }
+            $keyPattern='^\s*'+[regex]::Escape($setting.Key)+'\s*='
+            $keys=@(for($i=$start;$i -lt $end;$i++) { if($lines[$i] -match $keyPattern) { $i } })
+            if($keys.Count -gt 1) { throw 'La opción de distancia de DH está duplicada.' }
+            if(-not $keys.Count) { continue }
+            $match=[regex]::Match($lines[$keys[0]],'^(\s*'+[regex]::Escape($setting.Key)+'\s*=\s*)([0-9]+)(\s*(?:#.*)?)$')
+            if(-not $match.Success) { throw 'La opción de distancia de DH no es válida.' }
+            if($match.Groups[2].Value -eq '32') {
+                $lines[$keys[0]]=$match.Groups[1].Value+$setting.Replacement+$match.Groups[3].Value
+            }
         }
         $text=$lines -join $newline
     }

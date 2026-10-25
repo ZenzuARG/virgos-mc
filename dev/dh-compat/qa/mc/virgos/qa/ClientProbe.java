@@ -254,7 +254,7 @@ public final class ClientProbe {
                     result.addProperty("fps",Minecraft.getInstance().getFps());
                     result.addProperty("heapUsedMiB",(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1048576);
                     result.addProperty("dhLoaded",net.minecraftforge.fml.ModList.get().isLoaded("distanthorizons"));
-                    var remoteChunk=client.level==null?null:client.level.getChunkSource().getChunk(16,0,net.minecraft.world.level.chunk.ChunkStatus.FULL,false);
+                    var remoteChunk=client.level==null?null:client.level.getChunkSource().getChunk(64,0,net.minecraft.world.level.chunk.ChunkStatus.FULL,false);
                     result.addProperty("remoteVanillaChunkPresent",remoteChunk!=null&&!(remoteChunk instanceof net.minecraft.world.level.chunk.EmptyLevelChunk));
                     result.addProperty("remoteChunkClass",remoteChunk==null?"null":remoteChunk.getClass().getName());
                     result.addProperty("modCount",net.minecraftforge.fml.ModList.get().getMods().size());

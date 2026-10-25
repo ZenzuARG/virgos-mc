@@ -1,0 +1,11 @@
+{
+  "version": "2.1.1",
+  "installer": 13,
+  "clientRelease": "2.1.1-r13",
+  "clientFingerprint": "virgos-client-2.1.1-r13",
+  "status": "lab-verified-untraced",
+  "minecraft": "1.20.1",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "verification": "docs/releases/2.1.1-verification.json"
+}

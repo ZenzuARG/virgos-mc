@@ -44,6 +44,15 @@ tasks.register('checkChunkyReadiness', JavaExec) {
     mainClass = 'mc.virgos.dhcompat.ChunkyReadinessTest'
 }
 tasks.named('check').configure { dependsOn 'checkChunkyReadiness' }
+
+tasks.register('checkChunkyLodServing', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.dhcompat.ChunkyLodServingTest'
+    systemProperty 'dh.compat.originalJar', file(dhJar.get()).absolutePath
+}
+
+tasks.named('check').configure { dependsOn 'checkChunkyLodServing' }
 tasks.register('checkLevelPublication', JavaExec) {
     dependsOn testClasses
     classpath = sourceSets.test.runtimeClasspath
