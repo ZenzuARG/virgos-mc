@@ -6,7 +6,10 @@
 /dev/**/build/
 /dev/**/.gradle/
 /dev/**/run/
+/dev/**/logs/
 *.class
+__pycache__/
+*.py[cod]
 /dist/
 /logs/
 /crash-reports/

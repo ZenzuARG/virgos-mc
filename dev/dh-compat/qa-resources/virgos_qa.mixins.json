@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "mc.virgos.qa.trace",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ClientNetworkStateTraceMixin",
+    "NetworkSessionTraceMixin",
+    "FullDataPayloadReceiverTraceMixin",
+    "FullDataRequestQueueTraceMixin"
+  ],
+  "injectors": { "defaultRequire": 1 }
+}

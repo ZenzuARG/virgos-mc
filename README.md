@@ -64,3 +64,13 @@ Para pasar la noche alcanza con que duerma una sola persona, independientemente 
 Los respaldos contienen cuentas y credenciales de Playit y Discord: guardalos localmente. Para tus amigos compartí solamente los archivos de `dist` y la guía.
 
 SimpleBackups sigue ofreciendo copias parciales durante sesiones largas; sólo las copias de `backups/full` cubren las seis carpetas de mundos. Los documentos de [diseño](docs/experiencia-virgos-mc.md) e [implementación inicial](docs/implementacion.md) conservan contexto histórico; el estado de v1 está en el roadmap.
+
+## Compilación local reproducible
+
+Con Java 17 y las dependencias ya almacenadas, se pueden verificar los módulos sin publicar ni modificar una instalación:
+
+```powershell
+& dev/virgos-core/gradlew.bat -p dev/virgos-core --offline check jar codexJar -PbuildEpoch=0
+```
+
+`buildEpoch` es una opción explícita: acepta segundos Unix enteros no negativos, fija la fecha del manifiesto en UTC y normaliza las fechas y el orden de las entradas de los archivos. Por ejemplo, `0` produce `1970-01-01T00:00:00Z`. Sin esta opción se conserva el comportamiento habitual del build. En un worktree sin el JAR de la API de voz, `-PvoicechatJar=RUTA_AL_JAR_VERIFICADO` permite indicar una copia local; una ruta explícita inexistente se rechaza. Estos comandos sólo generan artefactos locales: no actualizan los locks ni los registros de publicación.
