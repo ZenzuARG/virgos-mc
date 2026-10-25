@@ -34,58 +34,84 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Select candidate and validate any publication tag
+        env:
+          REQUESTED_TAG: ${{ inputs.release_tag }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          python -B - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          version = json.loads(Path('pack/candidates/current.json').read_text())['version']
+          assert re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?', version)
+          path = Path('pack/candidates') / version / 'release.json'
+          metadata = json.loads(path.read_text())
+          assert metadata['version'] == version
+          tag = os.environ.get('REQUESTED_TAG') or (os.environ['REF_NAME'] if os.environ['REF_TYPE'] == 'tag' else '')
+          if tag and tag != 'v' + version:
+              raise SystemExit('Publication tag must match the selected candidate version')
+          with open(os.environ['GITHUB_ENV'], 'a') as stream:
+              stream.write('CANDIDATE_METADATA=' + path.as_posix() + '\n')
+          PY
+
       - name: Cache locked client downloads
         uses: actions/cache@v5
         with:
           path: |
             .cache
-          key: virgos-client-${{ hashFiles('pack/mods.lock.json', 'pack/client-runtime.lock.json') }}
+          key: virgos-client-${{ hashFiles('pack/mods.lock.json', 'pack/client-runtime.lock.json', 'pack/dh-upstream.lock.json') }}
 
-      - name: Fetch locked client dependencies
+      - name: Fetch locked client and DH build dependencies
         run: |
           python -B scripts/test-fetch-locked-client-deps.py
-          python scripts/fetch-locked-client-deps.py
+          python -B scripts/fetch-locked-client-deps.py
 
-      - name: Build Virgos Core and Códice
+      - name: Build Virgos Core and Codex reproducibly
         working-directory: dev/virgos-core
-        run: bash gradlew check jar codexJar --no-daemon
+        run: bash gradlew check jar codexJar -PbuildEpoch=0 --no-daemon
 
-      - name: Refresh custom artifact hashes
-        shell: bash
+      - name: Build DH addon, patch and corresponding sources
         run: |
-          python - <<'PY'
-          import hashlib, json
-          from pathlib import Path
-          root = Path('.')
-          core = root / 'dev/virgos-core/build/libs/virgos_core-2.0.0.jar'
-          codex = root / 'dev/virgos-core/build/libs/virgos_codex-2.0.0.jar'
-          lock_path = root / 'pack/custom-artifacts.lock.json'
-          lock = json.loads(lock_path.read_text(encoding='utf-8'))
-          lock['artifacts'][0]['hash'] = hashlib.sha256(core.read_bytes()).hexdigest()
-          lock['artifacts'][1]['hash'] = hashlib.sha256(codex.read_bytes()).hexdigest()
-          lock_path.write_text(json.dumps(lock, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-          PY
+          python -B scripts/prepare-dh-release.py \
+            --metadata "$CANDIDATE_METADATA" --cache-root "$GITHUB_WORKSPACE/.cache" \
+            --inputs-dir "$RUNNER_TEMP/virgos-release-inputs" --java-home "$JAVA_HOME"
 
-      - name: Build installer and Modrinth pack
-        run: python scripts/build-client-release.py
-
-      - name: Validate release artifacts
+      - name: Build explicit candidate installer and Modrinth pack
         run: |
-          python - <<'PY'
-          import json, zipfile
+          python -B scripts/build-client-release.py \
+            --release-metadata "$RUNNER_TEMP/virgos-release-inputs/release.json" \
+            --custom-lock "$RUNNER_TEMP/virgos-release-inputs/custom-artifacts.lock.json" \
+            --downloads "$GITHUB_WORKSPACE/.cache/pack/downloads" \
+            --runtime-cache "$GITHUB_WORKSPACE/.cache" \
+            --output "$RUNNER_TEMP/virgos-release-output"
+
+      - name: Validate release artifacts and stage verified outputs
+        run: |
+          python -B - <<'PY'
+          import hashlib, json, os, shutil, zipfile
           from pathlib import Path
-          root = Path('.')
-          current = json.loads((root / 'pack/current-release.json').read_text(encoding='utf-8'))
-          manifest = json.loads((root / 'dist/release.json').read_text(encoding='utf-8'))
-          assert manifest['installerVersion'] == current['installer']
-          for name in ('Virgos-MC-2.0.0-instalar.zip', 'Virgos-MC-2.0.0.mrpack'):
-              with zipfile.ZipFile(root / 'dist' / name) as archive:
+          temporary = Path(os.environ['RUNNER_TEMP'])
+          current = json.loads((temporary / 'virgos-release-inputs/release.json').read_text())
+          output = temporary / 'virgos-release-output'
+          report = json.loads((output / 'release.json').read_text())
+          assert report['version'] == current['version'] and report['installerVersion'] == current['installer']
+          for item in report['files']:
+              path = output / item['name']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256']
+              with zipfile.ZipFile(path) as archive:
                   assert archive.testzip() is None
-          with zipfile.ZipFile(root / 'dist/Virgos-MC-2.0.0-instalar.zip') as archive:
-              client = json.loads(archive.read('asistente/cliente.lock.json'))
-              assert client['clientRelease'] == current['clientRelease']
-              assert 'asistente/bundled/virgos_codex-2.0.0.jar' in archive.namelist()
-              assert 'asistente/overrides/resourcepacks/Virgos-MC-UI.zip' in archive.namelist()
+                  assert not any('virgos_local_qa' in name or '/saves/' in name for name in archive.namelist())
+                  for source in current['sourceFiles']:
+                      assert hashlib.sha256(archive.read('sources/' + source['filename'])).hexdigest() == source['sha256']
+                  if path.name.endswith('-instalar.zip'):
+                      client = json.loads(archive.read('asistente/cliente.lock.json'))
+                      assert client['clientRelease'] == current['clientRelease']
+                      assert client['clientFingerprint'] == current['clientFingerprint']
+                      assert len([item for item in client['files'] if item.get('bundled')]) == 3
+          destination = Path('dist'); destination.mkdir(exist_ok=True)
+          for name in [*[item['name'] for item in report['files']], 'release.json']:
+              shutil.copyfile(output / name, destination / name)
           PY
 
       - name: Publish GitHub release

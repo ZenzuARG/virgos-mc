@@ -1,0 +1,47 @@
+{
+  "version": "2.1.0",
+  "installer": 12,
+  "clientRelease": "2.1.0-r12",
+  "clientFingerprint": "virgos-client-2.1.0-r12",
+  "status": "lab-verified-untraced",
+  "minecraft": "1.20.1",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "sourceFiles": [
+    {
+      "filename": "DistantHorizons-3.3.3-main-sources.zip",
+      "local_source": "artifacts/DistantHorizons-3.3.3-main-sources.zip",
+      "sha256": "9cb686ae9b231ff404a8074b4540fcacbc4938e55a4f60c7c0d4837bade87909"
+    },
+    {
+      "filename": "DistantHorizons-3.3.3-core-sources.zip",
+      "local_source": "artifacts/DistantHorizons-3.3.3-core-sources.zip",
+      "sha256": "514c20c41529b044806c74486d1880e54e6d379cca64fe81b23bd5f81604b599"
+    },
+    {
+      "filename": "DistantHorizons-LICENSE.txt",
+      "local_source": "artifacts/DistantHorizons-LICENSE.txt",
+      "sha256": "3237699d9e6781c85877365abd9493ca132a0fd31f43e1a3278b8e75f3654af4"
+    },
+    {
+      "filename": "DistantHorizons-LICENSE.LESSER.txt",
+      "local_source": "artifacts/DistantHorizons-LICENSE.LESSER.txt",
+      "sha256": "f831e7eed577481687a9bc0b48024e5e40b6f655fcde073ede964b50be5d55d9"
+    },
+    {
+      "filename": "DistantHorizons-LICENSE-LOGOS.txt",
+      "local_source": "artifacts/DistantHorizons-LICENSE-LOGOS.txt",
+      "sha256": "9a995cb445f5236c309b25c0566508df23cb5346ec00911f3575b1eade1ec54c"
+    },
+    {
+      "filename": "Virgos-DH-modifications-source.zip",
+      "local_source": "artifacts/Virgos-DH-modifications-source.zip",
+      "sha256": "8c27d7734f675f37cb986644401e449cc2a4f98556a30db374993297ed6cc196"
+    },
+    {
+      "filename": "DH-SOURCES.txt",
+      "local_source": "artifacts/DH-SOURCES.txt",
+      "sha256": "6d343ae8d4b6748fadbdb8a0ded3d061c127b3f0e2e007841924e540d0d86d37"
+    }
+  ]
+}

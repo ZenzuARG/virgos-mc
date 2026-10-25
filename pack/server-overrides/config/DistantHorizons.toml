@@ -1,0 +1,23 @@
+_version = 5
+
+[server]
+realTimeUpdateDistanceRadiusInChunks = 32
+maxSyncOnLoadRequestDistance = 512
+synchronizeOnLoad = true
+maxGenerationRequestDistance = 512
+generationRequestRateLimit = 4
+syncOnLoadRateLimit = 4
+
+[common.multiThreading]
+numberOfThreads = 2
+threadRunTimeRatio = "0.5"
+
+[common.worldGenerator]
+generatorPlan = "CHUNKS_ONLY"
+chunkGeneratorMode = "PRE_EXISTING_ONLY"
+generationMaxChunkRadius = 32
+showGenerationProgress = "DISABLED"
+
+[client.advanced.autoUpdater]
+enableAutoUpdater = false
+enableSilentUpdates = false

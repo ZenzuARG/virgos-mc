@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "project": "distanthorizons",
+  "project_id": "uCdwusMi",
+  "version_id": "6UnEfsRQ",
+  "version": "3.3.3-1.20.1",
+  "filename": "DistantHorizons-3.3.3-1.20.1-fabric-forge.jar",
+  "url": "https://cdn.modrinth.com/data/uCdwusMi/versions/6UnEfsRQ/DistantHorizons-3.3.3-1.20.1-fabric-forge.jar",
+  "hash_algorithm": "sha256",
+  "hash": "a537a71171d935540b56b7598d0de2c106f6f5026336c713d89a1d9ea0ea14e3",
+  "sha512": "2ac0a2fd34fe17bb3a3764bb53838f00595998a7e0b4bd70c5068aa9244626c6b0e622af548f97a1614dbb0b7c3df29b6d313edfc890d572dc361591c2a176c0",
+  "size": 27700542,
+  "license": "LGPL-3.0-only",
+  "source": "https://modrinth.com/mod/distanthorizons/version/3.3.3-1.20.1",
+  "source_repository": "https://gitlab.com/distant-horizons-team/distant-horizons/",
+  "patch_recipe": "dev/dh-compat/build-artifacts.py",
+  "source_commit": "a54dd3eb1df0078e63a71266d042c10d9cda4493",
+  "source_archives": [
+    {
+      "filename": "DistantHorizons-3.3.3-main-sources.zip",
+      "url": "https://gitlab.com/api/v4/projects/distant-horizons-team%2Fdistant-horizons/repository/archive.zip?sha=a54dd3eb1df0078e63a71266d042c10d9cda4493",
+      "commit": "a54dd3eb1df0078e63a71266d042c10d9cda4493",
+      "sha256": "9cb686ae9b231ff404a8074b4540fcacbc4938e55a4f60c7c0d4837bade87909",
+      "bytes": 20088436
+    },
+    {
+      "filename": "DistantHorizons-3.3.3-core-sources.zip",
+      "url": "https://gitlab.com/api/v4/projects/jeseibel%2Fdistant-horizons-core/repository/archive.zip?sha=b02c66d778beea11a931291815d652cd8abaa7ad",
+      "commit": "b02c66d778beea11a931291815d652cd8abaa7ad",
+      "sha256": "514c20c41529b044806c74486d1880e54e6d379cca64fe81b23bd5f81604b599",
+      "bytes": 4052109
+    }
+  ],
+  "asm": {
+    "file": "asm-9.9.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.9.1/asm-9.9.1.jar",
+    "hash_algorithm": "sha256",
+    "hash": "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd"
+  }
+}

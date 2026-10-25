@@ -13,6 +13,20 @@ spec.loader.exec_module(fetcher)
 
 
 class FetchTests(unittest.TestCase):
+    def test_optional_dh_inputs_and_legacy_absence(self):
+        import json
+        with tempfile.TemporaryDirectory(prefix='virgos-fetch-plan-') as directory:
+            root = Path(directory); (root / 'pack').mkdir()
+            self.assertEqual(fetcher.dh_targets(root), [])
+            record = {'schema': 1, 'filename': 'DH.jar', 'url': 'https://example.test/dh', 'hash_algorithm': 'sha256', 'hash': 'a' * 64,
+                      'asm': {'file': 'asm.jar', 'url': 'https://example.test/asm', 'hash': 'b' * 64},
+                      'source_archives': [{'filename': n, 'url': 'https://example.test/source', 'sha256': 'c' * 64} for n in ['main.zip', 'core.zip']]}
+            (root / 'pack/dh-upstream.lock.json').write_text(json.dumps(record))
+            pairs = fetcher.dh_targets(root)
+            self.assertEqual([str(p.relative_to(root)).replace('\\', '/') for _, p in pairs],
+                             ['.cache/pack/downloads/DH.jar', '.cache/pack/tools/asm.jar', '.cache/pack/sources/main.zip', '.cache/pack/sources/core.zip'])
+            self.assertEqual(pairs[-1][0]['hash'], 'c' * 64)
+
     def setUp(self):
         self.scratch = tempfile.TemporaryDirectory(prefix="virgos-fetch-test-")
         self.addCleanup(self.scratch.cleanup)
