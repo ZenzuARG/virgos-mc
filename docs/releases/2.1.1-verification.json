@@ -4,7 +4,19 @@
   "clientRelease": "2.1.1-r13",
   "clientFingerprint": "virgos-client-2.1.1-r13",
   "status": "local-candidate-verified",
-  "publication": "pending",
+  "publication": {
+    "tag": "v2.1.1",
+    "sourceCommit": "c00599f21063fb1190b795f4a6c44ee81c8f2d76",
+    "ciRun": 40232474173,
+    "ciConclusion": "success",
+    "installerSha256": "4a012dbb060fa71e48dcdaefb5e53f7dcc474ad0eb67fcb4021f83933d417ac1",
+    "mrpackSha256": "323ddc1e2bdea50fec992bd33bfe35ccdea0fbe264c156ae9c8b6ce532c58c9d",
+    "anonymousInstallerLinkHttpStatus": 200,
+    "publishedAddonSha256": "9a770e7157bfa9f40437987b26a547124d9086e1c1138111aec52e7ac733c01c",
+    "publishedCodexSha256": "8a55b370be9ff9a7be0888218e4b6e8f4b8efb1bb0ee238b3e21dad036fa4391",
+    "publishedExecutableClassesMatchNativeTested": true,
+    "archiveDifferences": "CRLF/LF-only text resources; published artifact checksums retained separately from native-tested local builds"
+  },
   "native": {
     "serverHeapMiB": 8192,
     "clientHeapMiB": 8192,
@@ -78,5 +90,23 @@
     "radiusBlocks": 10000,
     "shape": "circle",
     "complete": false
+  },
+  "publicDeployment": {
+    "verifiedAtUtc": "2026-10-25T21:21:39.885411+00:00",
+    "backupSha256": "ea0e17a7b680bb4ccba4698260eb783e34c42a6b3dd53df9609ef0639d2e863e",
+    "verifiedBackupFiles": 6283,
+    "unchangedNonAllowlistedFiles": 6276,
+    "worldFolders": 6,
+    "independentOfflinePreservation": "PASS",
+    "dhIdentityPreserved": true,
+    "allSixDhDatabasesUnchangedBeforeBoot": true,
+    "localAndPublicSlpProtocol": 763,
+    "startupErrors": 0,
+    "targetedDhCoreTickErrors": 0,
+    "remainingAdvisories": "Pre-existing Sculk/LevelChunk/Supplementaries world-data warnings and proxy connection-closure messages remain; no universal zero-error claim.",
+    "savedChunkyCheckpoint": 282099,
+    "observedChunkyProcessed": 289305,
+    "radiusBlocks": 10000,
+    "initialGenerationComplete": false
   }
 }
