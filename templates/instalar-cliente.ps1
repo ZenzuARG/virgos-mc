@@ -13,13 +13,39 @@ if ([IO.File]::Exists($shaderManifestPath)) {
 }
 $target = [IO.Path]::GetFullPath($Destino)
 if ($manifest.minecraft -ne '1.20.1' -or $manifest.forge -ne '47.4.22') { throw 'Version de paquete desconocida.' }
+$controlsPlan=$null
+if(-not $Verificar) {
+    # Reject invalid controls before staging downloads, replacing mods or writing the lock.
+    $keyHelper=Join-Path $PSScriptRoot 'client-keybindings.ps1'
+    $keyPolicy=Join-Path $PSScriptRoot 'keybindings.json'
+    if([IO.File]::Exists($keyHelper) -ne [IO.File]::Exists($keyPolicy)) { throw 'El paquete de controles esta incompleto. Extrae nuevamente el ZIP.' }
+    if([IO.File]::Exists($keyHelper)) {
+        . $keyHelper
+        $controlsPlan=Get-VirgosKeyBindingsPlan (Join-Path $target 'options.txt') $keyPolicy (Join-Path $PSScriptRoot 'overrides\options.txt')
+    }
+}
+$dhPlan=$null
+if(-not $Verificar) {
+    # Pin the patched DH settings before downloads or any installed file changes.
+    $dhHelper=Join-Path $PSScriptRoot 'dh-client-settings.ps1'
+    $dhDefaults=Join-Path $PSScriptRoot 'overrides\config\DistantHorizons.toml'
+    if([IO.File]::Exists($dhHelper) -ne [IO.File]::Exists($dhDefaults)) { throw 'El paquete de ajustes de DH esta incompleto. Extrae nuevamente el ZIP.' }
+    if([IO.File]::Exists($dhHelper)) {
+        . $dhHelper
+        $dhPlan=Get-VirgosDhSettingsPlan (Join-Path $target 'config\DistantHorizons.toml') $dhDefaults
+    }
+}
 $seenNames=@{}
 foreach ($item in $manifest.files) {
     if ([IO.Path]::GetFileName($item.filename) -ne $item.filename -or $item.filename -notmatch '^[A-Za-z0-9_.+ ()-]+\.jar$') { throw 'Nombre de mod invalido.' }
     if ($seenNames.ContainsKey($item.filename) -or $item.sha512 -notmatch '^[a-fA-F0-9]{128}$') { throw 'Hash invalido o componente duplicado.' }
     $seenNames[$item.filename]=$true
     if ($item.bundled -eq $true) {
-        if ($item.project -ne 'virgos-codex' -or $item.filename -notmatch '^virgos_codex-[0-9]+\.[0-9]+\.[0-9]+\.jar$') { throw 'Componente incluido inesperado.' }
+        $versionPattern='[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?'
+        $knownRole=(($item.project -ceq 'virgos-codex') -and ($item.filename -cmatch ('^virgos_codex-'+$versionPattern+'\.jar$'))) -or
+                   (($item.project -ceq 'distant-horizons') -and ($item.filename -ceq 'DistantHorizons-3.3.3-1.20.1-fabric-forge.jar')) -or
+                   (($item.project -ceq 'virgos-dh-compat') -and ($item.filename -cmatch ('^virgos_dh_compat-'+$versionPattern+'\.jar$')))
+        if (-not $knownRole -or $item.optional) { throw 'Componente incluido inesperado.' }
         $included=Join-Path (Join-Path $PSScriptRoot 'bundled') $item.filename
         if (-not [IO.File]::Exists($included) -or (Get-FileDigest $included) -ne $item.sha512) { throw 'El componente incluido esta incompleto o modificado. Extrae nuevamente el ZIP.' }
     } else {
@@ -84,6 +110,7 @@ if (-not $Verificar) {
     $overrides = Join-Path $PSScriptRoot 'overrides'
     foreach ($file in Get-ChildItem -LiteralPath $overrides -File -Recurse) {
         $relative = $file.FullName.Substring($overrides.Length).TrimStart('\','/')
+        if($dhPlan -and $relative -eq 'config\DistantHorizons.toml') { continue }
         $out = [IO.Path]::GetFullPath((Join-Path $target $relative))
         if (-not $out.StartsWith($target.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Ruta invalida.' }
         if ($relative -in @('servers.dat','options.txt') -and [IO.File]::Exists($out)) { continue }
@@ -91,7 +118,9 @@ if (-not $Verificar) {
         [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($out))
         Copy-Item -LiteralPath $file.FullName -Destination $out -Force
     }
+    if($null -ne $dhPlan) { Write-VirgosDhSettingsPlan $dhPlan }
     Write-TextAtomic (Join-Path $target 'virgos-cliente.lock.json') ([IO.File]::ReadAllText($manifestPath))
+    if($null -ne $controlsPlan) { Write-VirgosKeyBindingsPlan $controlsPlan }
     # Add only the new voice controls on upgrade. Preserve existing custom bindings.
     # ConvertFrom-Json returns either one object or an array for files, so do
     # not rely on member enumeration when deciding whether this is an older

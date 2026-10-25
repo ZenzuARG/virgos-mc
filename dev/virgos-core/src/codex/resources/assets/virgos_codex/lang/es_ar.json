@@ -1,0 +1,6 @@
+{
+  "key.virgos_codex.open": "Abrir Códice",
+  "key.categories.virgos_codex": "Códice de Virgos",
+  "virgos_codex.shortcut": "Códice [%s]",
+  "virgos_codex.controls.conflicts": "Se conservaron controles personales con conflictos (%s). Revisa Opciones > Controles."
+}

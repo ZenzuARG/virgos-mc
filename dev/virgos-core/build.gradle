@@ -331,3 +331,17 @@ tasks.named('check').configure { dependsOn 'checkKettingParticleData' }
     }
 }
 tasks.named('check').configure { dependsOn 'checkCommunity', 'checkMaintenance' }
+
+// The runtime and installer consume the same checked-in controls policy.
+tasks.named('processCodexResources', ProcessResources).configure {
+    from('../../pack/keybindings.json') { rename { 'virgos-keybindings.json' } }
+}
+tasks.named('compileTestJava', JavaCompile).configure {
+    source 'src/codex/java/mc/virgos/codex/ManagedKeyPolicy.java'
+}
+tasks.register('checkCodexKeys', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.CodexKeyPolicyTest'
+}
+tasks.named('check').configure { dependsOn 'checkCodexKeys' }

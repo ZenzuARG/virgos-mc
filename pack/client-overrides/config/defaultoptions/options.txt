@@ -126,7 +126,7 @@ key_key.sophisticatedcore.sort:key.mouse.middle
 key_key.sophisticatedcore.transfer_to_storage:key.keyboard.left.bracket
 key_key.sophisticatedcore.transfer_to_inventory:key.keyboard.right.bracket
 key_gui.xaero_open_map:key.keyboard.m
-key_gui.xaero_open_settings:key.keyboard.right.bracket
+key_gui.xaero_open_settings:key.keyboard.f9
 key_gui.xaero_world_map_server_settings:key.keyboard.unknown
 key_gui.xaero_map_zoom_in:key.keyboard.unknown
 key_gui.xaero_map_zoom_out:key.keyboard.unknown
@@ -155,7 +155,7 @@ key_artifacts.key.night_vision_goggles.toggle:key.keyboard.unknown
 key_artifacts.key.universal_attractor.toggle:key.keyboard.unknown
 key_key.simplyswords.mainhand_ability:key.keyboard.unknown
 key_key.simplyswords.offhand_ability:key.keyboard.unknown
-key_key.simplytooltips.cycle_tab:key.keyboard.g
+key_key.simplytooltips.cycle_tab:key.keyboard.grave.accent
 key_key.simplytooltips.capture_gif:key.keyboard.unknown
 key_key.dynamic_fps.toggle_forced:key.keyboard.unknown
 key_key.dynamic_fps.toggle_disabled:key.keyboard.unknown
@@ -196,7 +196,7 @@ key_key.jei.showRecipe:key.keyboard.r
 key_key.jei.previousRecipePage:key.keyboard.page.up
 key_key.jei.previousCategory:key.keyboard.page.up:SHIFT
 key_key.jei.shareToChat:key.keyboard.unknown
-key_key.heracles.open_quests:key.keyboard.j
+key_key.heracles.open_quests:key.keyboard.unknown
 key_key.ars_nouveau.open_book:key.keyboard.c
 key_key.ars_nouveau.selection_hud:key.keyboard.y
 key_key.ars_nouveau.next_slot:key.keyboard.x
@@ -233,7 +233,7 @@ key_gui.xaero_minimap_server_profiles:key.keyboard.unknown
 key_gui.xaero_zoom_in:key.keyboard.unknown
 key_gui.xaero_zoom_out:key.keyboard.unknown
 key_gui.xaero_new_waypoint:key.keyboard.n
-key_gui.xaero_waypoints_key:key.keyboard.u
+key_gui.xaero_waypoints_key:key.keyboard.home
 key_gui.xaero_enlarge_map:key.keyboard.minus
 key_gui.xaero_toggle_map:key.keyboard.unknown
 key_gui.xaero_toggle_waypoints:key.keyboard.unknown
@@ -290,3 +290,7 @@ modelPart_right_pants_leg:true
 modelPart_hat:true
 key_key.push_to_talk:key.keyboard.caps.lock
 key_key.voice_chat:key.keyboard.o
+key_key.virgos_codex.open:key.keyboard.j
+key_iris.keybind.reload:key.keyboard.f8
+key_iris.keybind.toggleShaders:key.keyboard.f6
+key_iris.keybind.shaderPackSelection:key.keyboard.f7

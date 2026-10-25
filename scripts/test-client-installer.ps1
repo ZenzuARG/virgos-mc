@@ -1,35 +1,38 @@
-param([string]$Package = (Join-Path $PSScriptRoot '..\.lab\installer-v2\package'))
+param([Parameter(Mandatory=$true)][string]$Package)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $package=[IO.Path]::GetFullPath($Package)
+if($package -eq $root -or $package.StartsWith($root+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Use an external fixture package, never the worktree.' }
 . (Join-Path $package 'asistente\installer-common.ps1')
 . (Join-Path $package 'asistente\tlauncher-settings.ps1')
+function Assert-TLauncherClosed {} # Fixture-only: never inspect actual launcher processes.
 $script:StatusPath=$null
 $testRoot=Join-Path ([IO.Path]::GetTempPath()) ('virgos-installer-unit-'+[Guid]::NewGuid().ToString('N'))
 [void][IO.Directory]::CreateDirectory($testRoot)
+Write-Host ('SCRATCH='+$testRoot)
 $checks=New-Object Collections.Generic.List[string]
 function Assert($Condition,$Message) { if(-not $Condition) { throw $Message }; $checks.Add($Message) }
 $tlFixture=Join-Path $testRoot 'tlauncher-2.0.properties'
 [IO.File]::WriteAllText($tlFixture,"# TLauncher configuration file`r`nsettings.version=3`r`nminecraft.gamedir=C:\Existing Games\Minecraft`r`n")
 Assert ((Read-TLauncherSettings $tlFixture) -match 'settings.version=3') 'TLauncher without RAM keys is accepted'
 $tlBackup=Join-Path $testRoot 'tl-backup'
-[void](Set-VirgosTLauncher $tlFixture 'D:\Games with spaces\Virgos-MC\juego' 5120 $tlBackup)
+[void](Set-VirgosTLauncher $tlFixture 'D:\Games with spaces\Virgos-MC\juego' 8192 $tlBackup)
 $tlText=[IO.File]::ReadAllText($tlFixture)
-Assert ($tlText -match '(?m)^minecraft\.memory\.ram2=5120\r?$' -and $tlText -match '(?m)^minecraft\.memory\.ram3=5120\r?$') 'Missing TLauncher RAM keys are created and verified'
+Assert ($tlText -match '(?m)^minecraft\.memory\.ram2=8192\r?$' -and $tlText -match '(?m)^minecraft\.memory\.ram3=8192\r?$') 'Missing TLauncher RAM keys are created at eight GiB and verified'
 $profile=Join-Path $testRoot 'launcher_profiles.json'
 $original=@{profiles=@{forge=@{name='Other pack';lastVersionId='1.20.1-forge-47.4.26';gameDir='C:\Existing Games\Other';javaArgs='-Xmx8G'};vanilla=@{name='Vanilla';lastVersionId='1.21.1'}};settings=@{enableHistorical=$true};selectedProfile='vanilla';arbitrary=@{keep='yes'}}
 Write-JsonAtomic $profile $original
 $before=Get-Content -LiteralPath $profile -Raw | ConvertFrom-Json
-Set-VirgosProfile $profile 'D:\Games with spaces\Virgos-MC\juego' 'D:\Games with spaces\javaw.exe' 5120
+Set-VirgosProfile $profile 'D:\Games with spaces\Virgos-MC\juego' 'D:\Games with spaces\javaw.exe' 8192
 $after=Get-Content -LiteralPath $profile -Raw | ConvertFrom-Json
 Assert (($before.profiles.forge | ConvertTo-Json -Compress) -eq ($after.profiles.forge | ConvertTo-Json -Compress)) 'Existing Forge profile unchanged'
 Assert (($before.profiles.vanilla | ConvertTo-Json -Compress) -eq ($after.profiles.vanilla | ConvertTo-Json -Compress)) 'Existing vanilla profile unchanged'
 Assert ($after.selectedProfile -eq 'vanilla' -and $after.settings.enableHistorical -and $after.arbitrary.keep -eq 'yes') 'Other launcher metadata preserved'
-Assert ($after.profiles.'virgos-mc-1.20.1'.javaArgs -match '-Xmx5120M' -and $after.profiles.'virgos-mc-1.20.1'.lastVersionId -eq '1.20.1-forge-47.4.22') 'New profile uses exact Forge and RAM'
+Assert ($after.profiles.'virgos-mc-1.20.1'.javaArgs -match '-Xmx8192M' -and $after.profiles.'virgos-mc-1.20.1'.lastVersionId -eq '1.20.1-forge-47.4.22') 'New profile uses exact Forge and eight GiB'
 Assert (@(Get-ChildItem -LiteralPath $testRoot -Filter '*.bak').Count -eq 1) 'Profile backup created'
-Set-VirgosProfile $profile 'D:\Games with spaces\Virgos-MC\juego' 'D:\Games with spaces\javaw.exe' 6144
+Set-VirgosProfile $profile 'D:\Games with spaces\Virgos-MC\juego' 'D:\Games with spaces\javaw.exe' 8192
 $after=Get-Content -LiteralPath $profile -Raw | ConvertFrom-Json
-Assert (@($after.profiles.PSObject.Properties).Count -eq 3 -and $after.profiles.'virgos-mc-1.20.1'.javaArgs -match '6144M') 'Repeat installation updates one profile without duplicates'
+Assert (@($after.profiles.PSObject.Properties).Count -eq 3 -and $after.profiles.'virgos-mc-1.20.1'.javaArgs -match '8192M') 'Repeat installation retains eight GiB without duplicate profiles'
 $bad=Join-Path $testRoot 'bad.json'; [IO.File]::WriteAllText($bad,'{invalid')
 $caught=$false; try { Set-VirgosProfile $bad 'D:\Game' 'D:\java.exe' 5120 } catch { $caught=$true }
 Assert ($caught -and [IO.File]::ReadAllText($bad) -eq '{invalid') 'Malformed profiles rejected without replacement'
@@ -40,7 +43,11 @@ $mods=Join-Path $testRoot 'unknown\mods'; [void][IO.Directory]::CreateDirectory(
 $caught=$false; try { & (Join-Path $package 'asistente\instalar-cliente.ps1') -Destino (Join-Path $testRoot 'unknown') } catch { $caught=$true }
 Assert ($caught -and [IO.File]::ReadAllText((Join-Path $mods 'alien.jar')) -eq 'do not remove') 'Foreign mods block installation and remain intact'
 $tiny=Join-Path $testRoot 'tiny'; [void][IO.Directory]::CreateDirectory((Join-Path $tiny 'overrides'))
-foreach($name in @('installer-common.ps1','instalar-cliente.ps1')) { Copy-Item -LiteralPath (Join-Path $package ('asistente\'+$name)) -Destination (Join-Path $tiny $name) }
+# This intentionally models an older package with neither controls helper nor policy.
+foreach($name in @('installer-common.ps1','instalar-cliente.ps1')) {
+    $source=Join-Path $package ('asistente\'+$name)
+    if(Test-Path -LiteralPath $source) { Copy-Item -LiteralPath $source -Destination (Join-Path $tiny $name) }
+}
 $payload=Join-Path $tiny 'payload'; [IO.File]::WriteAllText($payload,'test payload')
 $manifest=@{minecraft='1.20.1';forge='47.4.22';files=@(@{filename='fixture.jar';url='https://cdn.modrinth.com/fixture.jar';sha512=(Get-FileDigest $payload);optional=$false;project='Fixture'})}
 Write-JsonAtomic (Join-Path $tiny 'cliente.lock.json') $manifest
@@ -101,7 +108,19 @@ $caught=$false; try { & (Join-Path $tiny 'instalar-cliente.ps1') -Destino $insta
 Assert $caught 'Path traversal in manifest rejected'
 # Embedded UI ships without a remote URL, but is checked before any migration.
 $embedded=Join-Path $testRoot 'embedded';[void][IO.Directory]::CreateDirectory((Join-Path $embedded 'bundled'));[void][IO.Directory]::CreateDirectory((Join-Path $embedded 'overrides'))
-foreach($name in @('installer-common.ps1','instalar-cliente.ps1')) { Copy-Item -LiteralPath (Join-Path $package ('asistente\'+$name)) -Destination (Join-Path $embedded $name) }
+foreach($name in @('installer-common.ps1','instalar-cliente.ps1','client-keybindings.ps1')) {
+    $source=Join-Path $package ('asistente\'+$name)
+    if(Test-Path -LiteralPath $source) { Copy-Item -LiteralPath $source -Destination (Join-Path $embedded $name) }
+}
+$embeddedPolicy=Join-Path $package 'asistente\keybindings.json'
+if(Test-Path -LiteralPath $embeddedPolicy) { Copy-Item -LiteralPath $embeddedPolicy -Destination (Join-Path $embedded 'keybindings.json') }
+$dhHelper=Join-Path $package 'asistente\dh-client-settings.ps1'
+$dhSeed=Join-Path $package 'asistente\overrides\config\DistantHorizons.toml'
+if((Test-Path -LiteralPath $dhHelper) -and (Test-Path -LiteralPath $dhSeed)) {
+    Copy-Item -LiteralPath $dhHelper -Destination (Join-Path $embedded 'dh-client-settings.ps1')
+    [void][IO.Directory]::CreateDirectory((Join-Path $embedded 'overrides\config'))
+    Copy-Item -LiteralPath $dhSeed -Destination (Join-Path $embedded 'overrides\config\DistantHorizons.toml')
+}
 $jar=Join-Path $embedded 'bundled\virgos_codex-2.0.0.jar';[IO.File]::WriteAllText($jar,'verified embedded UI fixture')
 $embeddedManifest=@{version='2.0.0';minecraft='1.20.1';forge='47.4.22';files=@(@{filename='virgos_codex-2.0.0.jar';project='virgos-codex';bundled=$true;optional=$false;sha512=(Get-FileDigest $jar)})}
 Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
@@ -109,6 +128,52 @@ $game=Join-Path $embedded 'game'
 & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
 Assert ((Get-FileDigest (Join-Path $game 'mods\virgos_codex-2.0.0.jar')) -eq $embeddedManifest.files[0].sha512) 'Bundled codex installed and hashed without network URL'
 & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game -Verificar
+# All candidate roles remain local bundled inputs; neither DH component needs a URL.
+$codexEntry=$embeddedManifest.files[0]
+foreach($role in @(
+    @{filename='DistantHorizons-3.3.3-1.20.1-fabric-forge.jar';project='distant-horizons'},
+    @{filename='virgos_dh_compat-0.1.0.jar';project='virgos-dh-compat'}
+)) {
+    $included=Join-Path $embedded ('bundled\'+$role.filename)
+    [IO.File]::WriteAllText($included,'verified local '+$role.project)
+    $embeddedManifest.files+=@{filename=$role.filename;project=$role.project;bundled=$true;optional=$false;sha512=(Get-FileDigest $included)}
+}
+Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
+& (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
+foreach($entry in $embeddedManifest.files) {
+    Assert ((Get-FileDigest (Join-Path $game ('mods\'+$entry.filename))) -eq $entry.sha512) ('Known bundled role installed without network: '+$entry.project)
+}
+if(Test-Path -LiteralPath (Join-Path $embedded 'dh-client-settings.ps1')) {
+    $config=Join-Path $game 'config\DistantHorizons.toml'
+    [IO.File]::WriteAllText($config,"_version = 5`n[client.advanced.graphics.quality]`nlodChunkRenderDistanceRadius = 77`n[client.advanced.autoUpdater]`nenableAutoUpdater = true`n")
+    & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
+    $text=[IO.File]::ReadAllText($config)
+    Assert ($text.Contains('lodChunkRenderDistanceRadius = 77') -and $text.Contains('enableAutoUpdater = false')) 'DH settings plan preserves personal radius and pins auto-updater'
+    $lock=Join-Path $game 'virgos-cliente.lock.json';$lockBefore=[IO.File]::ReadAllBytes($lock)
+    $mod=Join-Path $game 'mods\virgos_codex-2.0.0.jar';$modBefore=Get-FileDigest $mod
+    [IO.File]::WriteAllText($config,"_version = 6`n")
+    $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
+    Assert ($caught -and (Get-FileDigest $mod) -eq $modBefore -and [Convert]::ToBase64String([IO.File]::ReadAllBytes($lock)) -eq [Convert]::ToBase64String($lockBefore) -and [IO.File]::ReadAllText($config) -eq "_version = 6`n") 'Invalid future DH config rejected before mod or lock mutation'
+    [IO.File]::WriteAllText($config,$text)
+    $helper=Join-Path $embedded 'dh-client-settings.ps1';$held=$helper+'.held'
+    [IO.File]::Move($helper,$held)
+    try {
+        $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
+        Assert ($caught -and (Get-FileDigest $mod) -eq $modBefore -and [IO.File]::ReadAllText($config) -eq $text) 'Incomplete DH helper/seed pair rejected before mutation'
+    } finally { [IO.File]::Move($held,$helper) }
+}
+foreach($invalidRole in @(
+    @{filename='virgos_local_qa-0.1.0.jar';project='virgos-codex'},
+    @{filename='DistantHorizons-3.3.4-1.20.1-fabric-forge.jar';project='distant-horizons'},
+    @{filename='virgos_dh_compat-0.1.0.jar';project='unexpected'}
+)) {
+    $invalidJar=Join-Path $embedded ('bundled\'+$invalidRole.filename);[IO.File]::WriteAllText($invalidJar,'invalid role fixture')
+    $embeddedManifest.files=@(@{filename=$invalidRole.filename;project=$invalidRole.project;bundled=$true;optional=$false;sha512=(Get-FileDigest $invalidJar)})
+    Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
+    $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
+    Assert $caught ('Unexpected bundled role rejected: '+$invalidRole.filename)
+}
+$embeddedManifest.files=@($codexEntry);Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
 [IO.File]::WriteAllText($jar,'corrupted UI fixture')
 $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
 Assert ($caught -and (Get-FileDigest (Join-Path $game 'mods\virgos_codex-2.0.0.jar')) -eq $embeddedManifest.files[0].sha512) 'Corrupt bundled payload rejected before replacing installed UI'

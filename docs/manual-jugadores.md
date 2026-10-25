@@ -33,18 +33,27 @@ El tablón está en **632, 80, 787**. Tomá un encargo adecuado a tus materiales
 
 | Tecla | Función |
 | --- | --- |
-| J | Códice de misiones personales |
+| J | Abrir el Códice; **Mi perfil** está en su pantalla principal |
 | B | Mochila |
 | M | Mapa mundial |
 | N | Nuevo marcador |
+| Inicio | Lista de marcadores |
+| F9 | Ajustes del mapa, sin interferir con transferencias de inventario |
 | P | Bases y grupos |
 | H | Historial de muertes |
+| Acento grave (`) | Cambiar pestaña de información de objetos; G queda para Curios |
 | R / U sobre un objeto | Receta / usos en JEI |
 | V | Lanzar hechizo de Iron |
+| R en el mundo | Rueda de hechizos de Iron |
+| F6 / F7 / F8 | Activar shaders / elegir shaderpack / recargar shaders |
 | O | Menú de voz y configuración inicial |
 | Bloq Mayús | Mantener para hablar |
 
-Las teclas se pueden cambiar en Controles. Para proteger el chunk en el que estás: `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisá los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
+El Códice tiene una categoría propia en **Opciones → Controles → Códice de Virgos**. Sus botones muestran la tecla realmente asignada. Al actualizar, se reparan las teclas faltantes del paquete y un Códice sin asignación recibe **J**. Si antes abrías el Códice con otra tecla de Heracles, esa tecla pasa al nuevo control independiente; una asignación personal del nuevo control tiene prioridad. Se desactiva el control redundante de Heracles para evitar abrir dos pantallas.
+
+La prioridad de los valores predeterminados es Códice, acciones de mods y accesos de plugins. Los shaders quedan en **F6–F8** para no interferir con hechizos, curios y voz. Las combinaciones de JEI dentro del inventario y los modificadores contextuales de Create se conservan: no son acciones globales simultáneas. Los controles personales se conservan; si todavía se solapan, el juego avisa y el instalador deja `virgos-keybinding-conflicts.json` para revisarlos en Controles. Una tecla que desactivaste se mantiene desactivada, salvo el acceso principal al Códice.
+
+Para proteger el chunk en el que estás: `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisá los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
 
 ## Proteger la primera base
 

@@ -1,26 +1,292 @@
 {
-  "key.heracles.open_quests": "j",
-  "key.sophisticatedbackpacks.open_backpack": "b",
-  "gui.xaero_new_waypoint": "n",
-  "gui.xaero_waypoints_key": "u",
-  "key.corpse.death_history": "h",
-  "key.simplytooltips.capture_gif": "unknown",
-  "gui.xaero_pac_key_open_menu": "p",
-  "key.socialInteractions": "unknown",
-  "key.ars_nouveau.selection_hud": "y",
-  "key.ars_nouveau.head_curio_hotkey": "k",
-  "gui.xaero_minimap_settings": "unknown",
-  "gui.xaero_enlarge_map": "minus",
-  "key.sophisticatedbackpacks.inventory_interaction": "insert",
-  "key.sophisticatedbackpacks.toggle_upgrade_1": "unknown",
-  "key.sophisticatedbackpacks.toggle_upgrade_2": "unknown",
-  "key.cataclysm.ability": "keypad.6",
-  "key.cataclysm.helmet_ability": "keypad.7",
-  "key.cataclysm.chestplate_ability": "keypad.8",
-  "key.cataclysm.boots_ability": "keypad.9",
-  "key.aether.invisibility_toggle.desc": "period",
-  "supplementaries.keybind.quiver": "comma",
-  "key.special_ability": "right.control",
-  "key.push_to_talk": "caps.lock",
-  "key.voice_chat": "o"
+  "schema": 1,
+  "preserve": [
+    "key.forward",
+    "key.back",
+    "key.left",
+    "key.right",
+    "key.jump",
+    "key.sneak",
+    "key.sprint",
+    "key.inventory",
+    "key.chat",
+    "key.drop",
+    "key.swapOffhand",
+    "key.playerlist",
+    "key.screenshot",
+    "key.togglePerspective",
+    "key.fullscreen",
+    "key.attack",
+    "key.use",
+    "key.pickItem",
+    "key.hotbar.1",
+    "key.hotbar.2",
+    "key.hotbar.3",
+    "key.hotbar.4",
+    "key.hotbar.5",
+    "key.hotbar.6",
+    "key.hotbar.7",
+    "key.hotbar.8",
+    "key.hotbar.9"
+  ],
+  "bindings": {
+    "key.heracles.open_quests": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "legacy"
+    },
+    "key.sophisticatedbackpacks.open_backpack": {
+      "key": "key.keyboard.b",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_new_waypoint": {
+      "key": "key.keyboard.n",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_waypoints_key": {
+      "key": "key.keyboard.home",
+      "previous": [
+        "key.keyboard.u"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.corpse.death_history": {
+      "key": "key.keyboard.h",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.simplytooltips.capture_gif": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "contextual"
+    },
+    "gui.xaero_pac_key_open_menu": {
+      "key": "key.keyboard.p",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.socialInteractions": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.ars_nouveau.selection_hud": {
+      "key": "key.keyboard.y",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.ars_nouveau.head_curio_hotkey": {
+      "key": "key.keyboard.k",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_minimap_settings": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_enlarge_map": {
+      "key": "key.keyboard.minus",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.sophisticatedbackpacks.inventory_interaction": {
+      "key": "key.keyboard.insert",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.sophisticatedbackpacks.toggle_upgrade_1": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.sophisticatedbackpacks.toggle_upgrade_2": {
+      "key": "key.keyboard.unknown",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.cataclysm.ability": {
+      "key": "key.keyboard.keypad.6",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.cataclysm.helmet_ability": {
+      "key": "key.keyboard.keypad.7",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.cataclysm.chestplate_ability": {
+      "key": "key.keyboard.keypad.8",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.cataclysm.boots_ability": {
+      "key": "key.keyboard.keypad.9",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.aether.invisibility_toggle.desc": {
+      "key": "key.keyboard.period",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "supplementaries.keybind.quiver": {
+      "key": "key.keyboard.comma",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.special_ability": {
+      "key": "key.keyboard.right.control",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.push_to_talk": {
+      "key": "key.keyboard.caps.lock",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.voice_chat": {
+      "key": "key.keyboard.o",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.virgos_codex.open": {
+      "key": "key.keyboard.j",
+      "previous": [],
+      "repairUnbound": true,
+      "context": "global"
+    },
+    "iris.keybind.reload": {
+      "key": "key.keyboard.f8",
+      "previous": [
+        "key.keyboard.r"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "iris.keybind.toggleShaders": {
+      "key": "key.keyboard.f6",
+      "previous": [
+        "key.keyboard.k"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "iris.keybind.shaderPackSelection": {
+      "key": "key.keyboard.f7",
+      "previous": [
+        "key.keyboard.o"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.curios.open.desc": {
+      "key": "key.keyboard.g",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.irons_spellbooks.spell_wheel": {
+      "key": "key.keyboard.r",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.irons_spellbooks.spellbook_cast": {
+      "key": "key.keyboard.v",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.simplytooltips.cycle_tab": {
+      "key": "key.keyboard.grave.accent",
+      "previous": [
+        "key.keyboard.g"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_open_settings": {
+      "key": "key.keyboard.f9",
+      "previous": [
+        "key.keyboard.right.bracket"
+      ],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "gui.xaero_open_map": {
+      "key": "key.keyboard.m",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.aether.open_accessories.desc": {
+      "key": "key.keyboard.i",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.ars_nouveau.open_book": {
+      "key": "key.keyboard.c",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.ars_nouveau.next_slot": {
+      "key": "key.keyboard.x",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.ars_nouveau.previous_slot": {
+      "key": "key.keyboard.z",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.jade.config": {
+      "key": "key.keyboard.keypad.0",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.jade.show_overlay": {
+      "key": "key.keyboard.keypad.1",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    },
+    "key.jade.toggle_liquid": {
+      "key": "key.keyboard.keypad.2",
+      "previous": [],
+      "repairUnbound": false,
+      "context": "global"
+    }
+  }
 }

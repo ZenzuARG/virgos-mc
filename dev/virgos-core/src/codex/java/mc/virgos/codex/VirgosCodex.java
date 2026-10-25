@@ -25,7 +25,7 @@ public final class VirgosCodex {
         mc.virgos.profile.ProfileProtocol.register(ProfileScreen::accept);
         UpdateProtocol.register(ignored -> {});
     }
-    public static void openCodex(){pendingTree=true;group(savedGroup.isEmpty()?"01 · Empezar":savedGroup);}
+    public static void openCodex(){pendingTree=false;group(savedGroup.isEmpty()?"01 · Empezar":savedGroup);}
     private static final String PREFIX="earth.terrarium.heracles.";
     private static boolean originalOnce;
     private static boolean pendingTree;
@@ -118,6 +118,9 @@ public final class VirgosCodex {
             }
             refreshRoutes();
             addRenderableWidget(Button.builder(Component.literal("Ver mapa original"),b->{originalOnce=true;Minecraft.getInstance().setScreen(original);}).bounds(left+16,top+panelH-29,125,20).build());
+            addRenderableWidget(Button.builder(Component.literal("Mi perfil"),b->{
+                if(minecraft.player!=null)minecraft.player.connection.sendCommand("perfil");
+            }).bounds(left+147,top+panelH-29,86,20).build());
         }
         private int routeMaxScroll(){int rows=(groups.size()+columns-1)/columns;return Math.max(0,rows*68-(panelH-112));}
         private void refreshRoutes(){int cardW=(panelW-44-(columns-1)*12)/columns,cardH=58,at=0;for(int i=0;i<groups.size();i++){int col=i%columns,row=i/columns;Button b=routeButtons.get(at++);int y=top+72+row*68-routeScroll;b.setX(left+16+col*(cardW+12));b.setY(y);b.setWidth(cardW);b.setHeight(cardH);b.visible=y>=top+72&&y+cardH<=top+panelH-40;b.active=b.visible;}}
@@ -126,7 +129,7 @@ public final class VirgosCodex {
         @Override public void tick(){if(introTicks<16)introTicks++;}
         @Override public void render(GuiGraphics g,int mouseX,int mouseY,float partialTick){
             g.fill(0,0,width,height,0xB3091017);g.fill(left,top,left+panelW,top+panelH,0xFF17242C);g.fill(left,top,left+panelW,top+3,0xFFCCAB70);
-            g.drawString(font,"VIRGOS-MC",left+16,top+14,0xEAD8B4,false);g.drawString(font,"Códice de aventuras",left+16,top+31,0xF4F0E7,false);
+            g.drawString(font,"VIRGOS-MC",left+16,top+14,0xEAD8B4,false);g.drawString(font,Component.translatable("virgos_codex.shortcut",CodexKeyBindings.OPEN.getTranslatedKeyMessage()),left+16,top+31,0xF4F0E7,false);
             g.drawString(font,"Elegí una ruta. Después vas a ver sus pasos, requisitos y recompensas.",left+16,top+48,0xB9C7C5,false);
             int cardW=(panelW-44-(columns-1)*12)/columns,cardH=58;
             for(int i=0;i<groups.size();i++){
@@ -138,7 +141,7 @@ public final class VirgosCodex {
             }
             if(introTicks<16)g.fill(0,0,width,height,Math.max(0,16-introTicks)*0x03000000);
             super.render(g,mouseX,mouseY,partialTick);
-            if(routeMaxScroll()>0)g.drawString(font,"Rueda: más rutas",left+panelW-105,top+panelH-24,0xFF9DB7AF);
+            if(routeMaxScroll()>0)g.drawString(font,"Rueda: más rutas",left+16,top+61,0xFF9DB7AF);
         }
         @Override public boolean isPauseScreen(){return false;}
     }

@@ -8,6 +8,8 @@ VIRGOS-MC - EMPEZA ACA
 La primera vez descarga Java, Forge y los mods. Puede tardar varios minutos.
 Necesitas Windows de 64 bits, Internet, unos 10 GB libres y tu launcher instalado.
 Cierra Minecraft y el launcher antes de instalar.
+Minecraft se configura con 8 GB de memoria (8192 MB), también al reparar una instalación.
+Se recomienda disponer de memoria adicional para Windows y otras aplicaciones.
 
 OFICIAL: se crea el perfil Virgos-MC. Elegilo y toca Jugar.
 TLAUNCHER: abri y cerra TLauncher una vez antes de instalar. El asistente configura
@@ -32,8 +34,12 @@ El servidor estrena mundo: inventario, misiones y bases empiezan de cero.
 Tu nombre y clave de acceso siguen siendo los mismos.
 VOZ: dentro del servidor, inicia sesion y pulsa O. Bloq Mayus para hablar.
 No hace falta instalar Playit ni abrir puertos en la PC de tus amigos.
-MISIONES: pulsa J. AYUDA: escribe /virgos menu (bases, mods, mercado y grupos).
-PERFIL: /perfil muestra tus horas, nivel y misiones. /perfil Nombre consulta amigos.
+CÓDICE: J de forma predeterminada; conserva una tecla personal anterior si estaba asignada.
+Puede cambiarse en Opciones > Controles > Virgos-MC. El inicio incluye Mi perfil.
+SHADERS: F6 activa/desactiva, F7 abre la selección y F8 recarga. Mapa: F9; puntos: Inicio.
+Las personalizaciones se conservan; los conflictos restantes se informan para revisarlos.
+AYUDA: /virgos menu (bases, mods, mercado y grupos).
+PERFIL: Mi perfil en el Códice o /perfil; /perfil Nombre consulta amigos.
 DISCORD: LaLechebanda > #virgos-mc comparte el chat con el juego.
 En ese canal: !jugadores, !ip, !ayuda y !voz. Discord es opcional.
 

@@ -1,0 +1,17 @@
+_version = 5
+
+[common.multiThreading]
+numberOfThreads = 2
+threadRunTimeRatio = "0.5"
+
+[common.worldGenerator]
+generatorPlan = "CHUNKS_ONLY"
+chunkGeneratorMode = "PRE_EXISTING_ONLY"
+generationMaxChunkRadius = 32
+
+[client.advanced.autoUpdater]
+enableAutoUpdater = false
+enableSilentUpdates = false
+
+[client.advanced.graphics.quality]
+lodChunkRenderDistanceRadius = 32

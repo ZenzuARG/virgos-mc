@@ -37,7 +37,8 @@ public final class ProfileScreen extends Screen {
         addRenderableWidget(Button.builder(Component.literal("Misiones"),b->{tab=1;page=0;}).bounds(left+109,top+77,89,20).build());
         addRenderableWidget(Button.builder(Component.literal("Jugadores"),b->{tab=2;page=0;}).bounds(left+202,top+77,89,20).build());
         addRenderableWidget(Button.builder(Component.literal("Mi perfil"),b->{if(minecraft.player!=null)query(minecraft.player.getGameProfile().getName());}).bounds(left+16,top+panelH-30,84,20).build());
-        addRenderableWidget(Button.builder(Component.literal("Códice [J]"),b->VirgosCodex.openCodex()).bounds(left+panelW-105,top+panelH-30,89,20).build());
+        int codexWidth=Math.min(150,Math.max(50,(panelW-100)/2-20));
+        addRenderableWidget(Button.builder(Component.translatable("virgos_codex.shortcut",CodexKeyBindings.OPEN.getTranslatedKeyMessage()),b->VirgosCodex.openCodex()).bounds(left+panelW-16-codexWidth,top+panelH-30,codexWidth,20).build());
         addRenderableWidget(Button.builder(Component.literal("←"),b->page=Math.max(0,page-1)).bounds(left+panelW/2-24,top+panelH-30,22,20).build());
         addRenderableWidget(Button.builder(Component.literal("→"),b->page++).bounds(left+panelW/2+2,top+panelH-30,22,20).build());
     }

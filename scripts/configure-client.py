@@ -1,53 +1,38 @@
-"""Apply the pack's initial controls to staging and first-launch defaults.
-
-DefaultOptions preserves a player's subsequent changes. Run staging changes
-only while the QA client is stopped, or its Options.save() will overwrite them.
-"""
-from pathlib import Path
+"""Generate managed first-launch controls without accessing a staging installation."""
+import argparse
 import json
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-bindings = {
-    'key.heracles.open_quests': 'j',
-    'key.sophisticatedbackpacks.open_backpack': 'b',
-    'gui.xaero_new_waypoint': 'n',
-    'gui.xaero_waypoints_key': 'u',
-    'key.corpse.death_history': 'h',
-    'key.simplytooltips.capture_gif': 'unknown',
-    'gui.xaero_pac_key_open_menu': 'p',
-    'key.socialInteractions': 'unknown',
-    'key.ars_nouveau.selection_hud': 'y',
-    'key.ars_nouveau.head_curio_hotkey': 'k',
-    'gui.xaero_minimap_settings': 'unknown',
-    'gui.xaero_enlarge_map': 'minus',
-    'key.sophisticatedbackpacks.inventory_interaction': 'insert',
-    'key.sophisticatedbackpacks.toggle_upgrade_1': 'unknown',
-    'key.sophisticatedbackpacks.toggle_upgrade_2': 'unknown',
-    'key.cataclysm.ability': 'keypad.6',
-    'key.cataclysm.helmet_ability': 'keypad.7',
-    'key.cataclysm.chestplate_ability': 'keypad.8',
-    'key.cataclysm.boots_ability': 'keypad.9',
-    'key.aether.invisibility_toggle.desc': 'period',
-    'supplementaries.keybind.quiver': 'comma',
-    'key.special_ability': 'right.control',
-}
-path = ROOT / 'client/standard/options.txt'
-lines = path.read_text('utf-8').splitlines()
-updates = {'key_' + name: 'key.keyboard.' + key for name, key in bindings.items()}
-updates.update({'lang': 'es_ar', 'renderDistance': '8', 'simulationDistance': '6',
-                'maxFps': '60', 'autoJump': 'false', 'guiScale': '2'})
-seen = set()
-for i, line in enumerate(lines):
-    key = line.split(':', 1)[0]
-    if key in updates:
-        lines[i] = key + ':' + updates[key]
-        seen.add(key)
-lines += [key + ':' + value for key, value in updates.items() if key not in seen]
-text = '\n'.join(lines) + '\n'
-path.write_text(text, 'utf-8')
-for base in ['client/standard', 'pack/client-overrides']:
-    target = ROOT / base / 'config/defaultoptions'
-    target.mkdir(parents=True, exist_ok=True)
-    (target / 'options.txt').write_text(text, 'utf-8')
-(ROOT / 'pack/keybindings.json').write_text(json.dumps(bindings, indent=2), 'utf-8')
-print('Controls and first-launch defaults updated:', len(bindings))
+
+
+def apply_defaults(text, policy):
+    updates = {"key_" + name: row["key"] for name, row in policy["bindings"].items()}
+    lines = text.splitlines()
+    seen = set()
+    for index, line in enumerate(lines):
+        name = line.split(":", 1)[0]
+        if name in updates:
+            if name in seen:
+                raise ValueError("Duplicate managed control: " + name)
+            lines[index] = name + ":" + updates[name]
+            seen.add(name)
+    lines.extend(name + ":" + value for name, value in updates.items() if name not in seen)
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    defaults = ROOT / "pack/client-overrides/config/defaultoptions/options.txt"
+    parser.add_argument("--input", type=Path, default=defaults, help="Source options fixture/defaults (default: tracked first-launch options)")
+    parser.add_argument("--output", type=Path, default=defaults, help="Generated options destination (default: tracked first-launch options; never a live instance)")
+    parser.add_argument("--policy", type=Path, default=ROOT / "pack/keybindings.json")
+    args = parser.parse_args()
+    policy = json.loads(args.policy.read_text(encoding="utf-8"))
+    result = apply_defaults(args.input.read_text(encoding="utf-8"), policy)
+    args.output.write_text(result, encoding="utf-8")
+    print("Managed first-launch controls generated:", len(policy["bindings"]))
+
+
+if __name__ == "__main__":
+    main()
