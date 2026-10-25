@@ -11,7 +11,7 @@ Servidor y paquete **2.0.0**, instalador revisión **11**, para Minecraft Java *
 3. Entrá al dominio. La primera vez usá `/register contraseña contraseña`; después, `/login contraseña`. Conservá siempre el mismo nombre exacto.
 4. Abrí el códice con **J**. El pueblo amurallado tiene cuatro arcos para salir caminando, taller y cocina públicos. El camino sur lleva al anfiteatro cooperativo.
 
-No hay whitelist y se usa `online-mode=false`, como pidió el propietario. AuthMe controla las cuentas locales. La advertencia de cifrado offline de Simple Voice Chat es esperable bajo esta política. DiscordSRV usa `#virgos-mc` también para la consola; su aviso de canal compartido es intencional. Nadie recibe OP automáticamente; registrá primero la cuenta real antes de asignarle permisos de administración desde la consola.
+No hay whitelist y se usa `online-mode=false`, como pidió el propietario. AuthMe controla las cuentas locales. La advertencia de cifrado offline de Simple Voice Chat es esperable bajo esta política. DiscordSRV mantiene el chat en `#virgos-mc`, pero no envía la consola ni los errores a Discord (`DiscordConsoleChannelId: ""`). Los diagnósticos permanecen en los logs locales. Nadie recibe OP automáticamente; registrá primero la cuenta real antes de asignarle permisos de administración desde la consola.
 
 ## Encender y apagar
 

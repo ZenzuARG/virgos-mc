@@ -4,7 +4,8 @@
   "package": "mc.virgos.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "KettingSupplementariesMixin"
+    "KettingSupplementariesMixin",
+    "KettingParticleDataMixin"
   ],
   "injectors": {
     "defaultRequire": 0

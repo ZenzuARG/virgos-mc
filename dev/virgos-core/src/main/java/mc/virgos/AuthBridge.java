@@ -76,7 +76,7 @@ public final class AuthBridge {
         channel.eventLoop().execute(() -> {
             if (channel.pipeline().get("virgos_auth") != null) return;
             channel.pipeline().addBefore("packet_handler", "virgos_auth", new ChannelInboundHandlerAdapter() {
-                private boolean voiceHandshakeSeen;
+                private final PreAuthPayloads preAuth = new PreAuthPayloads();
                 private final AtomicInteger pending = new AtomicInteger();
 
                 @Override
@@ -105,15 +105,15 @@ public final class AuthBridge {
                     }
                     player.server.execute(() -> {
                         try {
-                            // One four-byte compatibility handshake is read-only. Audio remains
-                            // blocked by VoiceGuard until AuthMe succeeds; no gameplay is replayed.
-                            boolean voiceHello=!voiceHandshakeSeen&&payload.getIdentifier().toString().equals("voicechat:request_secret")&&payload.getData().readableBytes()==4;
-                            if (!player.connection.connection.isConnected() || (!authenticated(player)&&!voiceHello)) {
+                            // Only bounded, single-use compatibility/release handshakes may
+                            // precede AuthMe. Release acceptance still goes through UPDATE_GATE;
+                            // movement, mod actions and voice audio remain authentication-gated.
+                            boolean allowedHello = preAuth.allow(payload.getIdentifier().toString(), payload.getData());
+                            if (!player.connection.connection.isConnected() || (!authenticated(player)&&!allowedHello)) {
                                 blockedPayloads.incrementAndGet();
                                 ReferenceCountUtil.safeRelease(payload.getData());
                                 return;
                             }
-                            if(voiceHello)voiceHandshakeSeen=true;
                             // handle() dispatches to Ketting/Forge and releases its buffer.
                             // Executing here makes the auth check and mod dispatch ordered
                             // with login/logout commands on the same server thread.

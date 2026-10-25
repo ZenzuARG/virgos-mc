@@ -15,6 +15,25 @@ base {
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+// Opt-in release builds use a fixed Unix epoch; ordinary local builds keep their timestamp behavior.
+def buildEpochValue = providers.gradleProperty('buildEpoch').orNull
+def fixedBuildTimestamp = null
+if (buildEpochValue != null) {
+    if (!(buildEpochValue ==~ /[0-9]+/)) {
+        throw new GradleException('-PbuildEpoch must be non-negative integer Unix seconds')
+    }
+    try {
+        fixedBuildTimestamp = java.time.Instant.ofEpochSecond(Long.parseLong(buildEpochValue)).toString()
+    } catch (RuntimeException invalidEpoch) {
+        throw new GradleException('-PbuildEpoch is outside the supported Unix timestamp range', invalidEpoch)
+    }
+    tasks.withType(org.gradle.api.tasks.bundling.AbstractArchiveTask).configureEach {
+        inputs.property('buildEpoch', buildEpochValue)
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+    }
+}
+
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
@@ -132,7 +151,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     // Keep the API beside the server's actual mod set so a cleaned workspace can still rebuild.
     // Production mods are private runtime state; clean CI uses the verified download cache.
-    def voicechatApi = file('../../mods/voicechat-forge-1.20.1-2.6.24.jar')
+    def voicechatApi = providers.gradleProperty('voicechatJar').isPresent()
+        ? file(providers.gradleProperty('voicechatJar').get())
+        : file('../../mods/voicechat-forge-1.20.1-2.6.24.jar')
+    if (providers.gradleProperty('voicechatJar').isPresent() && !voicechatApi.exists()) {
+        throw new GradleException('The explicit -PvoicechatJar path does not exist')
+    }
     if (!voicechatApi.exists()) {
         voicechatApi = file('../../.cache/pack/downloads/voicechat-forge-1.20.1-2.6.24.jar')
     }
@@ -183,7 +207,7 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'Implementation-Timestamp': fixedBuildTimestamp ?: new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'MixinConfigs'            : 'virgos_core.mixins.json'
         ])
     }
@@ -276,4 +300,34 @@ tasks.register('checkClientRelease', JavaExec) {
     mainClass = 'mc.virgos.ClientReleaseGateTest'
 }
 tasks.named('check').configure { dependsOn 'checkClientRelease' }
+
+tasks.register('checkClientUpdateTimeout', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.update.ClientUpdateTimeoutTest'
+}
+tasks.named('check').configure { dependsOn 'checkClientUpdateTimeout' }
+
+tasks.register('checkPreAuthPayloads', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.PreAuthPayloadsTest'
+}
+tasks.named('check').configure { dependsOn 'checkPreAuthPayloads' }
+
+tasks.register('checkKettingParticleData', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.KettingParticleDataTest'
+}
+tasks.named('check').configure { dependsOn 'checkKettingParticleData' }
+['checkClientUpdateTimeout', 'checkPreAuthPayloads', 'checkKettingParticleData'].each { taskName ->
+    tasks.named(taskName, JavaExec).configure {
+        doFirst {
+            def scratch = java.nio.file.Files.createTempDirectory("virgos-hotfix-${taskName}-")
+            workingDir = scratch.toFile()
+            println "Hotfix regression scratch: ${scratch}"
+        }
+    }
+}
 tasks.named('check').configure { dependsOn 'checkCommunity', 'checkMaintenance' }

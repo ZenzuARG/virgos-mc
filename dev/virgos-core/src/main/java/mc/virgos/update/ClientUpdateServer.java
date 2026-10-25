@@ -9,8 +9,10 @@ import net.minecraft.server.level.ServerPlayer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 /** Enforces the client release before AuthMe can unlock gameplay. */
 public final class ClientUpdateServer {
@@ -52,14 +54,23 @@ public final class ClientUpdateServer {
     }
 
     public void tick(MinecraftServer server) {
-        long now = System.currentTimeMillis();
+        pending.keySet().removeIf(id -> server.getPlayerList().getPlayer(id) == null);
+        expirePending(pending, System.currentTimeMillis(), id -> {
+            ServerPlayer player = server.getPlayerList().getPlayer(id);
+            if (player != null) reject(player, null, "missing-client");
+        });
+    }
+
+    static void expirePending(Map<UUID, Long> pending, long now, Consumer<UUID> reject) {
+        var expired = new ArrayList<UUID>();
         pending.entrySet().removeIf(entry -> {
-            ServerPlayer player = server.getPlayerList().getPlayer(entry.getKey());
-            if (player == null) return true;
             if (now - entry.getValue() < TIMEOUT_MS) return false;
-            reject(player, null, "missing-client");
+            expired.add(entry.getKey());
             return true;
         });
+        // Disconnect can synchronously trigger logout and modify pending again.
+        // Finish every iterator operation before invoking external callbacks.
+        expired.forEach(reject);
     }
 
     public boolean accepted(ServerPlayer player) { return accepted.containsKey(player.getUUID()); }
