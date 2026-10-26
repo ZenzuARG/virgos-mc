@@ -1,0 +1,10 @@
+{
+  "path": "src/com/thizthizzydizzy/treefeller/Sapling.java",
+  "source_sha256": "95d43a3911495eb0d3ecdb5fda2cafa6dd26193687ce8938b2e57926229ad72a",
+  "replacements": [
+    {
+      "before": "    public boolean place(Material material){\n        if(!canPlace())return false;\n        placed = true;\n        if(material==null)material = new ArrayList<>(materials).get(0);\n        BlockState was = block.getState();\n        block.setType(material);\n        TreeFellerCompat.addBlock(treefeller, player, block, was);\n        return true;\n    }",
+      "after": "    public boolean place(Material material){\n        // The persistent guarded reservation ledger is the only planting authority in this fork.\n        // This also closes legacy timeout, inventory and direct-API placement paths.\n        return false;\n    }"
+    }
+  ]
+}

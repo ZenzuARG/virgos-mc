@@ -1,0 +1,50 @@
+{
+  "path": "src/com/thizthizzydizzy/treefeller/TreeFeller.java",
+  "source_sha256": "7293cb341f297f29118d8758302e1782154b17047430c0a97f7fc32fe5e7549d",
+  "replacements": [
+    {
+      "before": "    public void fellTree(BlockBreakEvent event){\n        if(fellTree(event.getBlock(), event.getPlayer()))event.setCancelled(true);\n    }",
+      "after": "    public void fellTree(BlockBreakEvent event){\n        mc.virgos.forestry.Forestry.resetDenied();\n        try{\n            if(fellTree(event.getBlock(), event.getPlayer()))event.setCancelled(true);\n        }finally{\n            if(mc.virgos.forestry.Forestry.denied())event.setCancelled(true);\n        }\n    }"
+    },
+    {
+      "before": "        if(detectedTree==null)return null;\n        Tool tool = detectedTree.tool;",
+      "after": "        if(detectedTree==null)return null;\n        HashSet<Block> protectedBlocks = new HashSet<>(toList(detectedTree.trunk));\n        protectedBlocks.addAll(toList(detectedTree.leaves));\n        for(Block log : toList(detectedTree.trunk)){\n            protectedBlocks.addAll(toList(getBlocksWithLeafCheck(detectedTree.tree.trunk, detectedTree.tree.leaves, log,\n                Option.LEAF_BREAK_RANGE.get(detectedTree.tool, detectedTree.tree), Option.DIAGONAL_LEAVES.get(detectedTree.tool, detectedTree.tree),\n                Option.PLAYER_LEAVES.get(detectedTree.tool, detectedTree.tree), Option.IGNORE_LEAF_DATA.get(detectedTree.tool, detectedTree.tree),\n                Option.FORCE_DISTANCE_CHECK.get(detectedTree.tool, detectedTree.tree))));\n        }\n        for(ArrayList<Block> decoration : detectedTree.decorations.values())protectedBlocks.addAll(decoration);\n        if(!mc.virgos.forestry.Forestry.prepare(detectedTree, player, axe, protectedBlocks))return null;\n        try{\n        Tool tool = detectedTree.tool;"
+    },
+    {
+      "before": "        createSaplingHandler();\n        return droppedItems;",
+      "after": "        createSaplingHandler();\n        return droppedItems;\n        }finally{\n            mc.virgos.forestry.Forestry.finish(detectedTree);\n        }"
+    },
+    {
+      "before": "        reload();\n        new BukkitRunnable()",
+      "after": "        reload();\n        mc.virgos.forestry.Forestry.enable(this);\n        new BukkitRunnable()"
+    },
+    {
+      "before": "        TreeFellerCompat.reload();\n    }",
+      "after": "        TreeFellerCompat.reload();\n        mc.virgos.forestry.Forestry.configure(this);\n    }"
+    },
+    {
+      "before": "    private void breakBlock(DetectedTree detectedTree, boolean dropItems, Tree tree, Tool tool, ItemStack axe, Block block, Block origin, int lowest, Player player, long seed, boolean isLeaves){\n",
+      "after": "    private void breakBlock(DetectedTree detectedTree, boolean dropItems, Tree tree, Tool tool, ItemStack axe, Block block, Block origin, int lowest, Player player, long seed, boolean isLeaves){\n        if(!mc.virgos.forestry.Forestry.beforeBreak(detectedTree, player, axe, block))return;\n"
+    },
+    {
+      "before": "        Item item = world.dropItemNaturally(location, stack.stack);",
+      "after": "        if(!mc.virgos.forestry.Forestry.reserve(detectedTree, stack.stack))return;\n        Item item = world.dropItemNaturally(location, stack.stack);"
+    },
+    {
+      "before": "                durabilityCost/=(axe.getEnchantmentLevel(Enchantment.DURABILITY)+1);\n                if(durabilityCost<1)durabilityCost++;",
+      "after": "                durabilityCost = mc.virgos.forestry.Forestry.durability(testTree, durabilityCost, axe);"
+    },
+    {
+      "before": "            durabilityCost/=(axe.getEnchantmentLevel(Enchantment.DURABILITY)+1);\n            if(durabilityCost<1)durabilityCost++;",
+      "after": "            durabilityCost = mc.virgos.forestry.Forestry.durability(detectedTree, durabilityCost, axe);"
+    },
+    {
+      "before": "        ItemMeta meta = axe.hasItemMeta()?axe.getItemMeta():null;",
+      "after": "        mc.virgos.forestry.Forestry.begin();\n        ItemMeta meta = axe.hasItemMeta()?axe.getItemMeta():null;"
+    },
+    {
+      "before": "        DetectedTree detectedTree = detectTree(block, player, axe, (testTree) -> {\n            Tool tool = testTree.tool;",
+      "after": "        DetectedTree detectedTree = detectTree(block, player, axe, (testTree) -> {\n            if(!mc.virgos.forestry.Forestry.definitionMatches(testTree))return false;\n            Tool tool = testTree.tool;"
+    }
+  ]
+}

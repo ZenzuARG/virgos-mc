@@ -1,0 +1,3556 @@
+{
+  "schema": 2,
+  "sources": [
+    {
+      "jar": "Zeta-1.0-31.jar",
+      "sha256": "cd1786902a79434f8fd762d741019d9c8a79725fef7e30a89c153c934e1e6a9e"
+    },
+    {
+      "jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "sha256": "5ba96a83d12c0e2eb3b22c0fa11262ff6d49ba8d2ebd03e1c59ab47ea7dcc2c6"
+    },
+    {
+      "jar": "aether-1.20.1-1.5.2-neoforge.jar",
+      "sha256": "b6b586eb6fdc9ce4b3645cab43642ba87817c5deadef4d87ab884e4fe20ef282"
+    },
+    {
+      "jar": "deep_aether-1.20.1-1.1.7.jar",
+      "sha256": "ab6bce474afa41edb53299d6ccbba6af22b881b7a7eab4988124ba6b6eff7feb"
+    },
+    {
+      "jar": "alexscaves-2.0.2.jar",
+      "sha256": "131e205ce3eed384d701b336d8a0d4a671108ed56b6eff6014f0e407db2997f0"
+    },
+    {
+      "jar": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "sha256": "1f1debc282a0c379c1141f2840ea294eede6f6b544c589663f40bbe17b59a1af"
+    },
+    {
+      "jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "sha256": "0bdc89263616d1b35c32ef82c5e9c14cbd20368e2fe8b468c72a28320be7a778"
+    },
+    {
+      "jar": "Quark-4.0-462.jar",
+      "sha256": "c90b96f049d92825c4a103721988c80d72e5ad380d17be46a0f53e114874c478"
+    }
+  ],
+  "inventory_count": 64,
+  "scope_note": "Non-potted *_sapling variants only; not exhaustive vegetation, not native acceptance",
+  "families": [
+    {
+      "id": "regions_unexplored:alpha_sapling",
+      "trunks": [
+        "regions_unexplored:alpha_log"
+      ],
+      "foliage": [
+        "regions_unexplored:alpha_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:alpha_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:alpha_sapling"
+      ],
+      "fallback": "regions_unexplored:alpha_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/alpha_sapling.json",
+          "sha256": "96fcd0fde711c8b60eb2a5bc8bb94be8b9d06792b96404dc11bdd1fdd44c77a7"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/alpha_leaves.json",
+          "sha256": "1a93919396a836cf0607df6309a91b0902f497b3f27c8e064dbbc4bd67dd3b6b"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/alpha_oak_tree.json",
+          "sha256": "e0f202a585605b177fefca47704e2395deb14b56f6cada3361a9681cb51f8e7a"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/AlphaOakGrower.class",
+          "sha256": "21e447f583d55df4f8b5257f26a5cda9801c6eb967277182ae7c75f28d900124"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:apple_oak_sapling",
+      "trunks": [
+        "minecraft:oak_log"
+      ],
+      "foliage": [
+        "minecraft:oak_leaves",
+        "regions_unexplored:apple_oak_leaves",
+        "regions_unexplored:flowering_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:apple_oak_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:apple_oak_sapling"
+      ],
+      "fallback": "regions_unexplored:apple_oak_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/apple_oak_sapling.json",
+          "sha256": "d10239f203a559c9e5b9c8ae18da42617ebea99f1a3d79d7564e0af1d032e90b"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/apple_oak_leaves.json",
+          "sha256": "1df728e91a40f0bd94ed462a3dd4de3bfb351ebd3561b6bbdbbc66864c483a19"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/apple_oak_tree.json",
+          "sha256": "1db53e271557202bfc8db7e70e55f95c6e81dcc068e1cac9b348644aa572216a"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_apple_oak_tree.json",
+          "sha256": "c343477b81b84f2c380b24b61498fa4dcebf4bff004ffb5a8cba4d6c383fcd51"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_flowering_oak_tree.json",
+          "sha256": "04bcd38296e022667c1f52cb8b96356bbd8cfead2874cdeff4cb5068b69bd94c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_oak_tree.json",
+          "sha256": "64023c51d153c7da00b797e4408a8e8dcb8afb7a9f941656e11db881d114604d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/flowering_oak_tree.json",
+          "sha256": "f36d3343cce13af46e06e3e41ee7e4322b0b1f54ec8c4a7ac8c6c4553f14e0df"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_bush.json",
+          "sha256": "d25d94a7390160d44622ee04c48c65ede2bbee19ca5c08bfa0a66edb6169ae73"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_bush_with_flowers.json",
+          "sha256": "f16b5bd0cc45404793dc527b782c5f4b6fde382679721362abd7d16be584f91b"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree.json",
+          "sha256": "2886e85585e23bd4057924db3d30420f4e114fbe31fc99a1a9bf505e03bd74b0"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_shrub.json",
+          "sha256": "bf5f7b769029f1cc839934e5de72420a351181033575bdba6b31ec96dc22acc0"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_tall.json",
+          "sha256": "1e87921563cfe7bbab016521d2432e09ef1beaaf792758faab198821c3db65a8"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_with_branch.json",
+          "sha256": "86833120d44a8e11c4bfe248ae44772eb8a852a9c063020e2613bc1b484e1a3d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_with_flowers.json",
+          "sha256": "6968fbe744f82cc81c699562d8870fafbeb25ba2aaeac3dd881f63e1d1432b2a"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/AppleOakTreeGrower.class",
+          "sha256": "7f66d8dcf4676e56abf282a10c726a7342022961790cb017c49a26d8d5edeab7"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:ashen_sapling",
+      "trunks": [
+        "regions_unexplored:ashen_log"
+      ],
+      "foliage": [
+        "regions_unexplored:ashen_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:ashen_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:ashen_sapling"
+      ],
+      "fallback": "regions_unexplored:ashen_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/ashen_sapling.json",
+          "sha256": "d697cc84e1910cc3c18a4d98d34c2bb465105b9850929feb48227a930a329a23"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/ashen_leaves.json",
+          "sha256": "c68690618ef676d740b9df50cb5ca2a4c4580ab9d71a6352e12483f3c1d7b3f7"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/ashen_tree.json",
+          "sha256": "2d1d81e6af2222c52ecc9306b63e6d45440b91e2a7cbbac26b2a3a3f10c3b776"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/AshenPineGrower.class",
+          "sha256": "abded7746680f27f6d80891b01bfff557b4998adf6339f3faa0cfa90f8ce3be1"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:bamboo_sapling",
+      "trunks": [
+        "regions_unexplored:bamboo_log"
+      ],
+      "foliage": [
+        "regions_unexplored:bamboo_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:bamboo_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:bamboo_sapling"
+      ],
+      "fallback": "regions_unexplored:bamboo_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/bamboo_sapling.json",
+          "sha256": "8d258d660f94d274afd0e3d0e1270e369133c6c459da67a902b77f853e724475"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/bamboo_leaves.json",
+          "sha256": "e08faeca662d8e996df5bead3987cef1ce373db1e4a347a77b41dfe4db0a5e28"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/bamboo_tree.json",
+          "sha256": "76e527ff24fd6815f7eff672b811033927fe0579a06b58776d5b5425e7e19bad"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/GiantBambooGrower.class",
+          "sha256": "9298d15e7db29c2498e69b04e51cd7a0cbfff2da7c93ccfcde374a8906e96b37"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:baobab_sapling",
+      "trunks": [
+        "regions_unexplored:baobab_log"
+      ],
+      "foliage": [
+        "regions_unexplored:baobab_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:baobab_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:baobab_sapling"
+      ],
+      "fallback": "regions_unexplored:baobab_sapling",
+      "widths": [],
+      "mature_widths": [],
+      "planting_widths": [],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: growth footprint",
+      "growth_evidence": "custom/ultra/overridden grow path requires inspection: net/regions_unexplored/world/level/block/saplinggrowers/AbstractUltraFromMegaTreeGrower",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/baobab_sapling.json",
+          "sha256": "2eb3a3b0c3adbaf52e15628c41fddf31c322917fbfa2db848173f09ae5809ddf"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/baobab_leaves.json",
+          "sha256": "902f439cdc54caba3087dfa39749f0874947b35497dfaa1414478becafdff89e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/mega_baobab_tree.json",
+          "sha256": "5bff1427471fb2c7c2cea91faea71782f4a975c7bebeb8a7a90ca3b6385e3493"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/ultra_baobab_tree.json",
+          "sha256": "b86c2f73310cd4af5b7c6c68fb14ed128921eb75d33c834c88bb9c4c2b547d06"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/BaobabTreeGrower.class",
+          "sha256": "09b29b2f3e6aff5431b5889c8db515051344b11c22a012aa73fa17ab6eefad48"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:blackwood_sapling",
+      "trunks": [
+        "regions_unexplored:blackwood_log"
+      ],
+      "foliage": [
+        "regions_unexplored:blackwood_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:blackwood_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:blackwood_sapling"
+      ],
+      "fallback": "regions_unexplored:blackwood_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        2
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla mega path; single enabled only for verified GETSTATIC/ARETURN key; native/root acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/blackwood_sapling.json",
+          "sha256": "abd524df7b3fd6312f7617f8f595f0163e27d8f4d196fa625d27787ac051ccb1"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/blackwood_leaves.json",
+          "sha256": "e10692a50ac432dae4d437f0aebbb83ee667f03d8bbe6ec863a295bf8ce3a4e8"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_blackwood_tree.json",
+          "sha256": "e74ee99d937036e7d5cd75b46963357daf32ce4bbe1f6a16177840d16544e094"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/blackwood_tree.json",
+          "sha256": "19aa010cb31d30e766cb4bfc5ccfc7c5dc4e3d5c80e33d6341c410ac3d622ce7"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/BlackwoodTreeGrower.class",
+          "sha256": "9d22cb73542d2f17080f8267d4d908667773733108e6024f3b218dc56c70668d"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:blue_magnolia_sapling",
+      "trunks": [
+        "regions_unexplored:magnolia_log"
+      ],
+      "foliage": [
+        "regions_unexplored:blue_magnolia_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:blue_magnolia_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:blue_magnolia_sapling"
+      ],
+      "fallback": "regions_unexplored:blue_magnolia_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/blue_magnolia_sapling.json",
+          "sha256": "de2d4fe0484057f44b08427cbb9e5d3404c4fdd7b071b440a5661fe0a7d65cfb"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/blue_magnolia_leaves.json",
+          "sha256": "8b2fa88b8ee0f3e778329b636ba539f1ce0d69666f24acb0f11eb9cb7cc16665"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_blue_magnolia_tree.json",
+          "sha256": "573c6e233cf8282d531d4897f8caae5f2624412d51846f6ccd6bcb41b2ca143e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/blue_magnolia_tree.json",
+          "sha256": "580bd19bcea0a19d5559b18a8aec065c8ae397349560f73a1d46ab28108d1600"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/BlueMagnoliaTreeGrower.class",
+          "sha256": "d5589da1b590c7f1e201b95714e7d6cbcc3645c3b1ff4788d23ec27fbbc55bda"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:brimwood_sapling",
+      "trunks": [
+        "regions_unexplored:brimwood_log",
+        "regions_unexplored:brimwood_log_magma",
+        "regions_unexplored:brimwood_wood"
+      ],
+      "foliage": [
+        "regions_unexplored:brimwood_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:brimwood_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:brimwood_sapling"
+      ],
+      "fallback": "regions_unexplored:brimwood_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/brimwood_sapling.json",
+          "sha256": "5166da544285233bbfbb4f5e60e326dd2b20bff8e2466281da17056b044d7c3c"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/brimwood_leaves.json",
+          "sha256": "043a6e76de0b5f1f45a6c70f69e1711c0aee424d141045e63804cd9e227cf443"
+        },
+        {
+          "path": "data/regions_unexplored/tags/blocks/brimwood_logs.json",
+          "sha256": "b348da4145e648d9bb5d146c344f485203a747fd589d70f44746776d5c3e0078"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/BrimwoodGrower.class",
+          "sha256": "c2b2eaa07ea125c41ea46869119743bc53e4e48af25873d6794d0cc74053a196"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:cobalt_sapling",
+      "trunks": [
+        "regions_unexplored:cobalt_log",
+        "regions_unexplored:cobalt_wood"
+      ],
+      "foliage": [
+        "regions_unexplored:cobalt_webbing"
+      ],
+      "required_foliage": [
+        "regions_unexplored:cobalt_webbing"
+      ],
+      "seeds": [
+        "regions_unexplored:cobalt_sapling"
+      ],
+      "fallback": "regions_unexplored:cobalt_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/cobalt_sapling.json",
+          "sha256": "463ced42044283e684b58a304ee6dbb7eda1767106489b593fc766146e499832"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/cobalt_webbing.json",
+          "sha256": "cd40647b1393e3210c25608c575fa675c235790a9c8c3cc65cb1cf604095534f"
+        },
+        {
+          "path": "data/regions_unexplored/tags/blocks/cobalt_logs.json",
+          "sha256": "c22b2c62f891e1b460db84f4da6b899c257dffc4e59a2de1fded824252707ea5"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/CobaltTreeGrower.class",
+          "sha256": "4302854ba0ba1ad349bcb224df183153da3d6f893b40b4cd628fe63532afbf8a"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:cypress_sapling",
+      "trunks": [
+        "regions_unexplored:cypress_log"
+      ],
+      "foliage": [
+        "regions_unexplored:cypress_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:cypress_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:cypress_sapling"
+      ],
+      "fallback": "regions_unexplored:cypress_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/cypress_sapling.json",
+          "sha256": "450bea19aee36b657c2ef96050b81d63a55887adab9734192fe074f420469cc7"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/cypress_leaves.json",
+          "sha256": "dbf1d828331c1944ecc833e7479281f7189bc007cf542c9764757b1a402559e9"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/cypress_tree.json",
+          "sha256": "8542ad22856eb01d69b592d3296f07445412e440f3f0c9724186e6599517878a"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/giant_cypress_tree.json",
+          "sha256": "b19df6a5366d169bfe87dbfd0f5a062c91b5b7a7955c96b4c4c80bc73511db19"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/CypressTreeGrower.class",
+          "sha256": "d27f58b407debe5b468aeed5f1b77373371616d6642e740b15f006a053f95b7b"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:dead_pine_sapling",
+      "trunks": [
+        "regions_unexplored:pine_log"
+      ],
+      "foliage": [
+        "regions_unexplored:dead_pine_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:dead_pine_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:dead_pine_sapling"
+      ],
+      "fallback": "regions_unexplored:dead_pine_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/dead_pine_sapling.json",
+          "sha256": "f19a65348531d890c7257a213ea64b855eedbd8cc03b7a446a9274e52f1eaaf1"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/dead_pine_leaves.json",
+          "sha256": "46185c3020e0d94b07cac0a6e0a26068093c8008fc6f2b111b83ff03fe80595b"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_pine_tree.json",
+          "sha256": "73f03f2a870f1a602812e2248331c56ddc01625656133ea5a40ad9c019b5d79f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_pine_tree_tall.json",
+          "sha256": "1ebb99f06707c0846023d117e61985d7a58f110b9f65ebb04497de058161e7fe"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_stripped_pine_tree.json",
+          "sha256": "44b62abd3d13033dc90ede3d42cb113faf8c8152a3ac234ccc6067493e0cf87f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_stripped_pine_tree_mountain.json",
+          "sha256": "1091dbf4bd0e81c2e33c9d5f8f77ade096beffc8d4bca4a034ba45c428f2511e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_stripped_pine_tree_tall.json",
+          "sha256": "5990a741ffd35775b263c8d506348e568fbc15e9df1bb98f865bbf4e04a12fc8"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/DeadPineTreeGrower.class",
+          "sha256": "844edd689cf28726b3928b988dd98916dac8db2567e450999c19f5b65db8b0d4"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:dead_sapling",
+      "trunks": [
+        "minecraft:oak_log",
+        "regions_unexplored:dead_log"
+      ],
+      "foliage": [
+        "regions_unexplored:dead_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:dead_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:dead_sapling"
+      ],
+      "fallback": "regions_unexplored:dead_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/dead_sapling.json",
+          "sha256": "9166e7f7534756f6fcd7cd8ddd3f8823adb2e4ceb290a43d1a82a5c6f432ae25"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/dead_leaves.json",
+          "sha256": "9a7feea54d779456358066240f1d06fe1f969009b3ff4d67d07e9f1124830d72"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_dead_tree.json",
+          "sha256": "9a176b4b05078a63c7162f7d74b38d869a804809f5abe7707c1c64602ea64e88"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_bog_tree.json",
+          "sha256": "0f0661c644216a6cabf60e26ffae4bdfadcce82576d9df4c46fffbb8b6362ca9"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/dead_tree.json",
+          "sha256": "d5e0fb7fc7b212a3229aabe79b3723978cd1cfd2c0656cb3986d62a2d0eaf012"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_oak_tree.json",
+          "sha256": "0602a0f5c5a32c2ecb5b0189d503a1cc8f67ea4b8347e5701673c4f6c010e0d8"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_oak_tree_with_blob.json",
+          "sha256": "ea2e2579d9728d8ab87cdc3d33e38d8ca55dfcf2ae9dbcae79565dc16b5964f8"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/DeadTreeGrower.class",
+          "sha256": "99d340b973e4b04369f7b7ae346a5d31e7228e0d426ab711c726a4a680a29f2c"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:enchanted_birch_sapling",
+      "trunks": [
+        "regions_unexplored:silver_birch_log"
+      ],
+      "foliage": [
+        "regions_unexplored:enchanted_birch_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:enchanted_birch_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:enchanted_birch_sapling"
+      ],
+      "fallback": "regions_unexplored:enchanted_birch_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/enchanted_birch_sapling.json",
+          "sha256": "2896b8c870f5aa1191ef623503d931a6695c253b44e57226febf7c8594c001a4"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/enchanted_birch_leaves.json",
+          "sha256": "8015694d41c05b48d4c276f14239e19772115754d8906e310ab182eda971f1ae"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/enchanted_birch_tree.json",
+          "sha256": "a9a5145fdbe5e4a39e0b8ceb4665ca6c51e066a7176da69d7f0db739d8f9d4ea"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/enchanted_birch_tree_tall.json",
+          "sha256": "6cfb9dd47254e447222c620d304b9c257cebef5f68d0a20443de6354c7933209"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/EnchantedBirchTreeGrower.class",
+          "sha256": "3154c5878d2b4fdcbb098e4b4237ed56b5d133a2ab701ba5ad3c1073f46fb7b8"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:eucalyptus_sapling",
+      "trunks": [
+        "regions_unexplored:eucalyptus_log"
+      ],
+      "foliage": [
+        "regions_unexplored:eucalyptus_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:eucalyptus_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:eucalyptus_sapling"
+      ],
+      "fallback": "regions_unexplored:eucalyptus_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/eucalyptus_sapling.json",
+          "sha256": "69a6f1f7a1f7d00212acbca6ac766e8c1e58a1ebee2a08a461d2defcb6fb8a44"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/eucalyptus_leaves.json",
+          "sha256": "3db64fdd3120f4dd608cc621345637724b35c91eaf27e2ef505c363a41ff7acc"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/eucalyptus_tree.json",
+          "sha256": "db48a83833c76e40453a8f95b28095f2c1f56b2c23841dbe64024494e6aa8a51"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/small_eucalyptus_tree.json",
+          "sha256": "e4340ef69d64d1f5c99ad38098ff57cadbc0fbbf6f29874127535bcde73fe40b"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/EucalyptusTreeGrower.class",
+          "sha256": "4758ec1b723526be729191d86727653edf26a370f37953a93c03ea7b697e841e"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:flowering_sapling",
+      "trunks": [
+        "minecraft:oak_log"
+      ],
+      "foliage": [
+        "minecraft:oak_leaves",
+        "regions_unexplored:flowering_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:flowering_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:flowering_sapling"
+      ],
+      "fallback": "regions_unexplored:flowering_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/flowering_sapling.json",
+          "sha256": "8e1a646d7ddd679451d416af30f3af78ad223f77d992ccea13fa86ff58cdf6ee"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/flowering_leaves.json",
+          "sha256": "7245b8085d39ac687df5399848bb436e68a591d011d27eac7470f96b6b615cb1"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_flowering_oak_tree.json",
+          "sha256": "04bcd38296e022667c1f52cb8b96356bbd8cfead2874cdeff4cb5068b69bd94c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_oak_tree.json",
+          "sha256": "64023c51d153c7da00b797e4408a8e8dcb8afb7a9f941656e11db881d114604d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/flowering_oak_tree.json",
+          "sha256": "f36d3343cce13af46e06e3e41ee7e4322b0b1f54ec8c4a7ac8c6c4553f14e0df"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_bush.json",
+          "sha256": "d25d94a7390160d44622ee04c48c65ede2bbee19ca5c08bfa0a66edb6169ae73"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_bush_with_flowers.json",
+          "sha256": "f16b5bd0cc45404793dc527b782c5f4b6fde382679721362abd7d16be584f91b"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree.json",
+          "sha256": "2886e85585e23bd4057924db3d30420f4e114fbe31fc99a1a9bf505e03bd74b0"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_shrub.json",
+          "sha256": "bf5f7b769029f1cc839934e5de72420a351181033575bdba6b31ec96dc22acc0"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_tall.json",
+          "sha256": "1e87921563cfe7bbab016521d2432e09ef1beaaf792758faab198821c3db65a8"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_with_branch.json",
+          "sha256": "86833120d44a8e11c4bfe248ae44772eb8a852a9c063020e2613bc1b484e1a3d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/oak_tree_with_flowers.json",
+          "sha256": "6968fbe744f82cc81c699562d8870fafbeb25ba2aaeac3dd881f63e1d1432b2a"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/FloweringTreeGrower.class",
+          "sha256": "1d3ed73a3f7eba7c4f98d9933ca75162e029e0437da45052b5d1f126ac5b7859"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:golden_larch_sapling",
+      "trunks": [
+        "regions_unexplored:larch_log"
+      ],
+      "foliage": [
+        "regions_unexplored:golden_larch_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:golden_larch_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:golden_larch_sapling"
+      ],
+      "fallback": "regions_unexplored:golden_larch_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/golden_larch_sapling.json",
+          "sha256": "9e370bd15bfa4cec2e12e51cb2b3c963bf2dfdfc5c16a9bd28c5f705d0f5f1dd"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/golden_larch_leaves.json",
+          "sha256": "a988d2f12cb8a1e1e2106600f753cfff08dd9e45a2903cfe3beef418c6a3bd75"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_golden_larch_tree.json",
+          "sha256": "572369b9566afadb8bda6c13133941795f72a3da928af3b3a2224ca28ebce949"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_larch_tree.json",
+          "sha256": "07283dacc214410c03a5bd1e3bce59860db08908bbe0846935b5a0af728e3cb9"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/larch_golden_tree.json",
+          "sha256": "d89ff2c86ac2d07fefd507ab0b9880c22813b81d2639f87ce74ba704893ff9cf"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/GoldenLarchTreeGrower.class",
+          "sha256": "cc16d0603bc3ba0325c7d3d14bf040c62a7dc9961cddf263a840ee8d89087285"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:joshua_sapling",
+      "trunks": [
+        "regions_unexplored:joshua_log"
+      ],
+      "foliage": [
+        "regions_unexplored:joshua_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:joshua_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:joshua_sapling"
+      ],
+      "fallback": "regions_unexplored:joshua_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/joshua_sapling.json",
+          "sha256": "fb29dc5d75fcae3cfbd058e276efeead94646edb3d380e7db0e72e0c0d697201"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/joshua_leaves.json",
+          "sha256": "c8e930d16db3060af6108eef1ea7da328fe80cb1fca1e4c57284a706826b5011"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/joshua_tree_shrub.json",
+          "sha256": "ed824a90b8fab6161635809180d54abb2fae7662493177335b6daa310281ee9b"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/JoshuaTreeGrower.class",
+          "sha256": "33d2eb50d3d1f7595a982c148ef2dc3c252ad3c56ceae09b4d9c37a00b4fde7c"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:kapok_sapling",
+      "trunks": [
+        "regions_unexplored:kapok_log"
+      ],
+      "foliage": [
+        "regions_unexplored:kapok_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:kapok_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:kapok_sapling"
+      ],
+      "fallback": "regions_unexplored:kapok_sapling",
+      "widths": [],
+      "mature_widths": [],
+      "planting_widths": [],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: growth footprint",
+      "growth_evidence": "custom/ultra/overridden grow path requires inspection: net/regions_unexplored/world/level/block/saplinggrowers/AbstractSuperTreeGrower",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/kapok_sapling.json",
+          "sha256": "06e690caad424b30492374ec4ee71325fba2922742158c8ac4b2a5795fc96d7e"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/kapok_leaves.json",
+          "sha256": "f3d929eb302bc5d89d5499163bb9e8db433aef048c8e4c9214c01120db032be5"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/kapok_tree.json",
+          "sha256": "540336074b947cc740c0643e4c6ad829774c90d4142157130c2b90add3922409"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/KapokTreeGrower.class",
+          "sha256": "04a664ba08b1eef4b4d2fd890132445a590093ff336df17d38892f9da0629b89"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:larch_sapling",
+      "trunks": [
+        "regions_unexplored:larch_log"
+      ],
+      "foliage": [
+        "regions_unexplored:larch_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:larch_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:larch_sapling"
+      ],
+      "fallback": "regions_unexplored:larch_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/larch_sapling.json",
+          "sha256": "3c201b8ffe3ed7b14c2e11b0d99d323355b2919dc2554136d99ff13238429821"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/larch_leaves.json",
+          "sha256": "7bb4883221e0a0d912fcf2c018fdd3771e440cda481e2476b0fe5b971e8e3f97"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_larch_tree.json",
+          "sha256": "09e360c9d91fe9ce0618cde26c0d80892402539f94aff4e4c9440a9594010f11"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/larch_tree.json",
+          "sha256": "9f3271251a9f5f54e35d066a0631b89cee8646e0066a209833a93e683a6486d6"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/LarchTreeGrower.class",
+          "sha256": "6ba60706434c0b05711fc6e83ebb1cb63f1cff1c9f7128dacee33711e5e2090b"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:magnolia_sapling",
+      "trunks": [
+        "regions_unexplored:magnolia_log"
+      ],
+      "foliage": [
+        "regions_unexplored:magnolia_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:magnolia_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:magnolia_sapling"
+      ],
+      "fallback": "regions_unexplored:magnolia_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/magnolia_sapling.json",
+          "sha256": "624ed6450666f3cd75bbf42f8dca76bd81ed968d4b8aa82f6ad5231de42b65ae"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/magnolia_leaves.json",
+          "sha256": "53a2a78e9cc35ca085063dd7f51cea48a1803131d8a7615b1720c5cc839bd66f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_magnolia_tree.json",
+          "sha256": "be89522481c61ab7f4e5b952ac06e28c8933b8253ee24a65543ab1eda8b428b6"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/magnolia_tree.json",
+          "sha256": "bb072e5db4733cefc0b18cc9f56049f759436ffa8b7fd7e706875fe05af92581"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/MagnoliaTreeGrower.class",
+          "sha256": "0e14cc3dc6665819e0395b787ab54267433dd9a41837e13265f3b99784b3bf70"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:maple_sapling",
+      "trunks": [
+        "regions_unexplored:maple_log"
+      ],
+      "foliage": [
+        "regions_unexplored:maple_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:maple_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:maple_sapling"
+      ],
+      "fallback": "regions_unexplored:maple_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/maple_sapling.json",
+          "sha256": "2ace4f339ffdfec9e9321eed1f767e882ab99f234425c695b4f58f5a77702bcf"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/maple_leaves.json",
+          "sha256": "c91b1c08bea5fc31fe8b7fa687043e89ee501283a630f12aeb6621cc501aae9e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_maple_tree.json",
+          "sha256": "3b5b32994dbecbaafa8922ea182a981177ff017585c76c7d06579f0a942e480f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_maple_tree.json",
+          "sha256": "0a1a0e164452651b554d1b99fc21bd929aeca9542128accfdda26894251a60b6"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/maple_tree.json",
+          "sha256": "6db53c16f20712bb6cb6cd3114e0b9a45240a8059a811ea9eb6115b909d99863"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/MapleTreeGrower.class",
+          "sha256": "937053f0e74ebd34074d5910af966c518b35dccd0b11f39919d9e4de0b2aa129"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:mauve_sapling",
+      "trunks": [
+        "regions_unexplored:mauve_log"
+      ],
+      "foliage": [
+        "regions_unexplored:mauve_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:mauve_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:mauve_sapling"
+      ],
+      "fallback": "regions_unexplored:mauve_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/mauve_sapling.json",
+          "sha256": "354f047c69e4b245120b49fe78545f5f25d569b36c07c7328d4261303c699382"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/mauve_leaves.json",
+          "sha256": "e5e7bdfab74e50afd77d0190b16dbed36257212d5a0fa5ecbe2939597ba9e2e7"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_mauve_oak.json",
+          "sha256": "426c4b582c21fb5089f33441ad0045bbb488e9b733a75c31ae1b441693933e4c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/mauve_oak.json",
+          "sha256": "db98c4d6d38dc3cd3b8a46a27bd8ff1ddc313019a0a3612754d6a7fa2724d993"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/mauve_oak_bee.json",
+          "sha256": "17ec7fe6a83e2f9a5ff54041ad301142370d1b4db5c51b4ecaa89397e7061bd7"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/MauveOakGrower.class",
+          "sha256": "2887655d4c8e850a6a3a6954b24569b97a5e11c9b762db5e82c86750db324e67"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:orange_maple_sapling",
+      "trunks": [
+        "regions_unexplored:maple_log"
+      ],
+      "foliage": [
+        "regions_unexplored:orange_maple_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:orange_maple_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:orange_maple_sapling"
+      ],
+      "fallback": "regions_unexplored:orange_maple_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/orange_maple_sapling.json",
+          "sha256": "f53b420c7fe9f8220b05b3f1dc83e52e50fb69c135b1e0083e2168f4d8ddb364"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/orange_maple_leaves.json",
+          "sha256": "75281bc4450e40084309a85979d04c7b57b6f1e97a3f6c68c744674d02801545"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_orange_maple_tree.json",
+          "sha256": "5d262aca9f79183df08a925a24db24f210681bec1a75b9123d844b5e62102c5d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/orange_maple_tree.json",
+          "sha256": "c9a5f981a3a15c7daf70a1b30c25ce98919c608381a58ea82c583f7a80a38fee"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/OrangeMapleTreeGrower.class",
+          "sha256": "cd9b2a0b4d7b3e62525da67a88c183207a3b8edf323a4473faf13f0cd2bf13f2"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:palm_sapling",
+      "trunks": [
+        "regions_unexplored:palm_log"
+      ],
+      "foliage": [
+        "regions_unexplored:palm_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:palm_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:palm_sapling"
+      ],
+      "fallback": "regions_unexplored:palm_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/palm_sapling.json",
+          "sha256": "0c98c128bc9992206d7e9368c8c7b24a72ae72acbbbd1ab2c3d0d19e61ef23f6"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/palm_leaves.json",
+          "sha256": "5d1a0a3a42660cb3834873efe84cea999637e2562334951ed681d29cd3c68e7e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/palm_tree.json",
+          "sha256": "f40ef48d4fb5fb6e5ec03b350760d8d6179075efadc1714b6c8c7ff533b455cd"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/palm_tree_aquatic.json",
+          "sha256": "b101fe8eb233807ca35052509176bb85e7ffc658a8634df83ab28d64d5ee9818"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/palm_tree_shrub.json",
+          "sha256": "e06be94c0b2cc854b936300c18b9cb3d3b54d9a35723f6a5b96ae89cab2c8f6e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/tall_palm_tree.json",
+          "sha256": "0e9af705cf506064ad8eb68af2e9b16c72373ec2469d2a93fe9befaf433c6e61"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/PalmTreeGrower.class",
+          "sha256": "b85377922e15b28f611e6c10cc67719864f07c49e4b7d20f32d4a2fda202761a"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:pine_sapling",
+      "trunks": [
+        "regions_unexplored:ashen_log",
+        "regions_unexplored:pine_log"
+      ],
+      "foliage": [
+        "regions_unexplored:pine_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:pine_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:pine_sapling"
+      ],
+      "fallback": "regions_unexplored:pine_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/pine_sapling.json",
+          "sha256": "5ff01065411557d589ced804aee702dda386eb133c430a5fe87e71faa5e58e8e"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/pine_leaves.json",
+          "sha256": "f81c7054333adc82fe841917feb039d55986c8adcd13edeb46e618b2f9992895"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/ashen_pine_tree.json",
+          "sha256": "166415c983a980569d70c63ec4a071c64439a2beef973f276890f534f676279e"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_pine_tree.json",
+          "sha256": "f353dc393ac1cd21acad8fffced7f2e52b7214c3a5910dba623edaa04b45d9d3"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/lush_pine_tree.json",
+          "sha256": "b2b93a6bb6616cd2dab4c3e2e864a134b96057aea586da29b18d8521d5514e6c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/pine_tree.json",
+          "sha256": "39779ca93d79d045a30ec76cf2bbe1c21ed81b6f1659c976a0080d8af2649e83"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/pine_tree_shrub.json",
+          "sha256": "652d061fd166248586bc94d6cc54b4c825cef4ab76b12a69ed6181e025fd8a51"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/pine_tree_tall.json",
+          "sha256": "b34fd64080aa957e647e4f8c0418e71ed74378b1638cba9986f264acda4a1eae"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/stripped_pine_tree.json",
+          "sha256": "17314a8490ee296c13129875596486e4114466b026b02b100cf1c2581f178a7c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/stripped_pine_tree_mountain.json",
+          "sha256": "8a834ca014a2005fb281de22f807f1d2cabd71ecbb65cb99e8ce9cf2e49c1264"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/stripped_pine_tree_tall.json",
+          "sha256": "dfb00b201c0ff135a3c04437242921d78f9ed5df8cfcd0d925bea1319719fa0f"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/PineTreeGrower.class",
+          "sha256": "3b5fd9712c2a57a906ca18a8a3c210d415b9a0f8a36cfb19e6c257960fb02823"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:pink_magnolia_sapling",
+      "trunks": [
+        "regions_unexplored:magnolia_log"
+      ],
+      "foliage": [
+        "regions_unexplored:pink_magnolia_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:pink_magnolia_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:pink_magnolia_sapling"
+      ],
+      "fallback": "regions_unexplored:pink_magnolia_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/pink_magnolia_sapling.json",
+          "sha256": "b047cc65659c9839223bfd8bd5c3906dfeb083d30a46515db32799c7f9691ca7"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/pink_magnolia_leaves.json",
+          "sha256": "c5e2a89bd6f224e547cd80548b4e1eb6a463276468c902d9bbdc0cdab482d806"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_pink_magnolia_tree.json",
+          "sha256": "79a5fb6cb63cacd1aa84c0d7af98fa4991870e2ee64290ae38c685ce362d213f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/pink_magnolia_tree.json",
+          "sha256": "452dd867846097b1793d245650fd310f3f76180df3e9665cc198c420568cbc44"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/PinkMagnoliaTreeGrower.class",
+          "sha256": "40588fba092dafeacf3dd989a55343a6040b19347b39bc9cf213f76d11bbcbc3"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:red_maple_sapling",
+      "trunks": [
+        "regions_unexplored:maple_log"
+      ],
+      "foliage": [
+        "regions_unexplored:red_maple_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:red_maple_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:red_maple_sapling"
+      ],
+      "fallback": "regions_unexplored:red_maple_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/red_maple_sapling.json",
+          "sha256": "bdc389c6bd4edcb5196ff6b6c0439b377a7d6eb3967880c558e3fd27b52b836d"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/red_maple_leaves.json",
+          "sha256": "c358ec87db8e14b1738998957f8776c04cc9fe50af3225870abbc98f16f8a912"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_red_maple_tree.json",
+          "sha256": "6063d86e00b9715f6204c7ebbcbd32849c12940d672061e96ca9f8a707824261"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/red_maple_tree.json",
+          "sha256": "3aa154c41c9a5007d4aea25f4fe99838c3d7d2c2161b3e77b1efa8996d15cc97"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/RedMapleTreeGrower.class",
+          "sha256": "230c37092a70fff65ffe888ce72e19be604117a0f235d003a249844ec8853144"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:redwood_sapling",
+      "trunks": [
+        "regions_unexplored:redwood_log"
+      ],
+      "foliage": [
+        "regions_unexplored:redwood_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:redwood_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:redwood_sapling"
+      ],
+      "fallback": "regions_unexplored:redwood_sapling",
+      "widths": [],
+      "mature_widths": [],
+      "planting_widths": [],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: growth footprint",
+      "growth_evidence": "custom/ultra/overridden grow path requires inspection: net/regions_unexplored/world/level/block/saplinggrowers/AbstractUltraFromSuperTreeGrower",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/redwood_sapling.json",
+          "sha256": "7eab0b42c576b296aca92fa5fbf77c8ab8594c6993de621c58402ee3fadfc877"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/redwood_leaves.json",
+          "sha256": "9188ecbf27d66b51ff78cdd837ac015c0615128370509c8955f28e3d73bf4a7c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/giant_redwood_tree.json",
+          "sha256": "c3e22238ed66aea2876075a8dd4800612f1d03c903069252bdbc68aedf92f81c"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/redwood_tree.json",
+          "sha256": "b8c1223c37c2ede3ac634c1b175271fb40fa8a32b02b535ff888c4a18c24eec4"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/ultra_redwood_tree.json",
+          "sha256": "95b6715dd81c090b8bd367faeeb6e4bcb7b437e4aa73cdb69ee25ba22442d5b9"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/RedwoodTreeGrower.class",
+          "sha256": "1304b3b2b7eb3222a87da3f35889380da4f8fb0b2be32134879d7986a6d747b0"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:silver_birch_sapling",
+      "trunks": [
+        "regions_unexplored:silver_birch_log"
+      ],
+      "foliage": [
+        "regions_unexplored:silver_birch_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:silver_birch_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:silver_birch_sapling"
+      ],
+      "fallback": "regions_unexplored:silver_birch_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/silver_birch_sapling.json",
+          "sha256": "3b82bc51b7588794228388c0d8ef0b3674826ff59adc6584a04b40367469f437"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/silver_birch_leaves.json",
+          "sha256": "cc24067fe862a6c0edd789f5b224185a4c06cfc4417ac59c3a50ef85a053055a"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/fallen_silver_birch_tree.json",
+          "sha256": "9899a7a8dfbcdc71ff282a57bb23d3f64087b7f6791b355b1e80558900770b12"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/silver_birch_tree.json",
+          "sha256": "06e9750a83146de6e1d00c902f1cdf5840b00e64ccc5c97f76a2ea4118256134"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/silver_birch_tree_tall.json",
+          "sha256": "0ebbb30c7f20e872625e459e942397defec2577153483409640d8cd75c7383b5"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/SilverBirchTreeGrower.class",
+          "sha256": "f73f4a9645120c54e42144ee1e7d3051c5c3d4edda4b435921ce51606d145655"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:small_oak_sapling",
+      "trunks": [
+        "regions_unexplored:small_oak_log"
+      ],
+      "foliage": [
+        "regions_unexplored:small_oak_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:small_oak_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:small_oak_sapling"
+      ],
+      "fallback": "regions_unexplored:small_oak_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/small_oak_sapling.json",
+          "sha256": "15f0a38b5b1ab9b3c4d6313ebc246e069ce6cf78f279c4d4aea255fb256b7a6c"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/small_oak_leaves.json",
+          "sha256": "d0367a66e018a2d2230a3ec81fb287711e75cae9300c5f8b6423b0d3a5979659"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/small_oak_tree.json",
+          "sha256": "55c544378edd39d7e73840efcf4fcca81c9b2ca26aa7032391127e59efde4a9d"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/SmallOakTreeGrower.class",
+          "sha256": "b87ee406351d58772f86ed049675f7b94541c94da81c151bff951cd86f63a3e7"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:socotra_sapling",
+      "trunks": [
+        "regions_unexplored:socotra_log"
+      ],
+      "foliage": [
+        "regions_unexplored:socotra_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:socotra_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:socotra_sapling"
+      ],
+      "fallback": "regions_unexplored:socotra_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/socotra_sapling.json",
+          "sha256": "76ed6a785ee5a0c76313ec8fd257adfbc3ee6256574353a67439290b83f7ee10"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/socotra_leaves.json",
+          "sha256": "1cb3a0f6c4ef2190054ebe3ab5a3315a9d6d99bf291df71fc85b378bba696d0d"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/large_socotra_tree.json",
+          "sha256": "a41a51d5d30c4a650a25fa9cd9fec80024a22a644cac18d18cabfce83b1030ce"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/SocotraTreeGrower.class",
+          "sha256": "6cd5a3430dcf9079cb3fcf736f14ad044f8f69cd6617c74222b734384effca4d"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:white_magnolia_sapling",
+      "trunks": [
+        "regions_unexplored:magnolia_log"
+      ],
+      "foliage": [
+        "regions_unexplored:white_magnolia_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:white_magnolia_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:white_magnolia_sapling"
+      ],
+      "fallback": "regions_unexplored:white_magnolia_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/white_magnolia_sapling.json",
+          "sha256": "6f5218169d50c447b65f675688eb060af8a7e71980062ebf562b14155ba5305f"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/white_magnolia_leaves.json",
+          "sha256": "7c1fd28698f7c1803fb4b30f8cb25ceb0734399af1f7aa2245f492f4848fb814"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_white_magnolia_tree.json",
+          "sha256": "37e005a249f9aef63c65cbdc73c960b0f94a9d1f9f8980a645f2f2eb0798afaa"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/white_magnolia_tree.json",
+          "sha256": "d44b98437b22afff0c9c008286251828182c1fc837b68e029c71843d75871f8c"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/WhiteMagnoliaTreeGrower.class",
+          "sha256": "380b57a8dc33173ef6bd316759a714afaa660f461cf96b06ea7b4ca46569eb9d"
+        }
+      ]
+    },
+    {
+      "id": "regions_unexplored:willow_sapling",
+      "trunks": [
+        "regions_unexplored:willow_log"
+      ],
+      "foliage": [
+        "regions_unexplored:willow_leaves"
+      ],
+      "required_foliage": [
+        "regions_unexplored:willow_leaves"
+      ],
+      "seeds": [
+        "regions_unexplored:willow_sapling"
+      ],
+      "fallback": "regions_unexplored:willow_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+      "evidence": [
+        {
+          "path": "assets/regions_unexplored/blockstates/willow_sapling.json",
+          "sha256": "20f2a0dde60798d8c032c23f833c9e51c6d0ea98d8138253cd67cf891d0367ab"
+        },
+        {
+          "path": "data/regions_unexplored/loot_tables/blocks/willow_leaves.json",
+          "sha256": "a60f21b5c4540e9509f0514e1fb8be4497f5ab08d461ba9d784bc9ca07aebdd7"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/big_willow_tree.json",
+          "sha256": "107bbaeb32153298abec4d5b24a9aed67f0ceeff9db065ae3b3099cc3a00ec45"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/willow_tree.json",
+          "sha256": "fa1332f063d10b0ff837ec0e8013320285c352622c24af5ba2fc8781b169119f"
+        },
+        {
+          "path": "data/regions_unexplored/worldgen/configured_feature/willow_tree_vines.json",
+          "sha256": "da2d744818f27aee5f023ffe9ea77c175415c065e4ceb02748d0a884daf72e94"
+        },
+        {
+          "path": "net/regions_unexplored/world/level/block/saplinggrowers/WillowTreeGrower.class",
+          "sha256": "817e42078e913a0733751dbbe2b095d9e4ca26e3fee3e50735e4dda1e0932646"
+        }
+      ]
+    },
+    {
+      "id": "aether:golden_oak_sapling",
+      "trunks": [
+        "aether:golden_oak_log"
+      ],
+      "foliage": [
+        "aether:golden_oak_leaves"
+      ],
+      "required_foliage": [
+        "aether:golden_oak_leaves"
+      ],
+      "seeds": [
+        "aether:golden_oak_sapling"
+      ],
+      "fallback": "aether:golden_oak_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "aether-1.20.1-1.5.2-neoforge.jar",
+      "evidence": [
+        {
+          "path": "assets/aether/blockstates/golden_oak_sapling.json",
+          "sha256": "fba00a22a9c0e49d9a52b657bd3bd12b59d751fb3851989edf6e7e7008f2f2be"
+        },
+        {
+          "path": "com/aetherteam/aether/world/treegrower/GoldenOakTree.class",
+          "sha256": "6d309d5440417b99a375844f50b57b5a53b5ae1462fb04e9ad056b24b56d4a1d"
+        },
+        {
+          "path": "data/aether/loot_tables/blocks/golden_oak_leaves.json",
+          "sha256": "3f7c2ae763a9b68d7614c99cd2d7da9bb63352e720912dc01bcc49c687215a6c"
+        },
+        {
+          "path": "data/aether/worldgen/configured_feature/golden_oak_tree.json",
+          "sha256": "514ef8cadc417015381c0f201016ed81d4b97fa5306f71f94c229f1f850ec720"
+        }
+      ]
+    },
+    {
+      "id": "aether:skyroot_sapling",
+      "trunks": [
+        "aether:skyroot_log"
+      ],
+      "foliage": [
+        "aether:skyroot_leaves"
+      ],
+      "required_foliage": [
+        "aether:skyroot_leaves"
+      ],
+      "seeds": [
+        "aether:skyroot_sapling"
+      ],
+      "fallback": "aether:skyroot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "aether-1.20.1-1.5.2-neoforge.jar",
+      "evidence": [
+        {
+          "path": "assets/aether/blockstates/skyroot_sapling.json",
+          "sha256": "457ca9bf59c45253bc50f5f817da03ae95679c651620c04c62d1f3fea6a14484"
+        },
+        {
+          "path": "com/aetherteam/aether/world/treegrower/SkyrootTree.class",
+          "sha256": "c59d4cb4c698860212f057b75bd87b8283462768f4c163f49c5f76fd5c56feac"
+        },
+        {
+          "path": "data/aether/loot_tables/blocks/skyroot_leaves.json",
+          "sha256": "e0938aa4ebdc1d9714de484b242504ffe4c906be0958577b99f2726665e611ae"
+        },
+        {
+          "path": "data/aether/worldgen/configured_feature/skyroot_tree.json",
+          "sha256": "46a4178237a1453796dba856564dc63c85c5d6c838e37e37e279b8d98b7362f3"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:blue_roseroot_sapling",
+      "trunks": [
+        "deep_aether:roseroot_log"
+      ],
+      "foliage": [
+        "deep_aether:blue_roseroot_leaves",
+        "deep_aether:flowering_blue_roseroot_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:blue_roseroot_leaves",
+        "deep_aether:flowering_blue_roseroot_leaves"
+      ],
+      "seeds": [
+        "deep_aether:blue_roseroot_sapling"
+      ],
+      "fallback": "deep_aether:blue_roseroot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/blue_roseroot_sapling.json",
+          "sha256": "2e19aaebbb2790a26810db42077bbac703ae94f6d722f103805f2b9ba752954d"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/blue_roseroot_leaves.json",
+          "sha256": "e3e43187d22357fc92e6c5dd259901fa92bde1509ac6f330a186dab929539cfc"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/flowering_blue_roseroot_leaves.json",
+          "sha256": "aad24d9a1f9c83fe990061b882b14cbdd6f8dd8241eee40f331d8c71d49ed1d1"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/blue_roseroot_tree_large.json",
+          "sha256": "9dfa8207507d5bc89f0f383aa6883ec851b1d7b698bd2a483bb5d5b6bdb8a94d"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/blue_roseroot_tree_small.json",
+          "sha256": "18fd335fe7071745e0999e3787f11acc45006584222b43c3b385b9f5e89258ff"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/BlueRoserootTreeGrower.class",
+          "sha256": "c2c46c3bedd876cffbd79092f58a52609fb948cd82e7a2c7f9d9d6c1749aa4b8"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:conberry_sapling",
+      "trunks": [
+        "deep_aether:conberry_log"
+      ],
+      "foliage": [
+        "deep_aether:conberry_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:conberry_leaves"
+      ],
+      "seeds": [
+        "deep_aether:conberry_sapling"
+      ],
+      "fallback": "deep_aether:conberry_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/conberry_sapling.json",
+          "sha256": "edef7318645769c1ec7c761b5b0911d53ae663ebe324289d981b2e5169c43f37"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/conberry_leaves.json",
+          "sha256": "e3d25c7201e6571bd0ef7efbd6b436aa76717e93ad220310461f321195da467a"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/conberry_tree.json",
+          "sha256": "2b3034b916e6c8b135aadb746dca36622f0204d051ca8ca578c0a966778e68c4"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/ConberryTreeGrower.class",
+          "sha256": "5141eaa20ad4e6422c853e891c6171ffd5b9afbb22a1b0c63c179adac104540f"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:cruderoot_sapling",
+      "trunks": [
+        "deep_aether:cruderoot_log"
+      ],
+      "foliage": [
+        "deep_aether:cruderoot_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:cruderoot_leaves"
+      ],
+      "seeds": [
+        "deep_aether:cruderoot_sapling"
+      ],
+      "fallback": "deep_aether:cruderoot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/cruderoot_sapling.json",
+          "sha256": "e59b2553b6066c7429d1beeb9e4d0f95c0b26296c2778fa295c7da3213234bd2"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/cruderoot_leaves.json",
+          "sha256": "832b41313d71fdbca01664a072307ae24f468e9f7f7526268664869e3323c257"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/cruderoot_tree.json",
+          "sha256": "76ee1d6bdbd6296e3831c4e122fb246a97751755d3a99f97a8ca3a394aa35555"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/CruderootTreeGrower.class",
+          "sha256": "ec1181fb9276189256eb8bcc9e45af981eac6a0ed5bed3d6144030f5b82f4ffa"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:roseroot_sapling",
+      "trunks": [
+        "deep_aether:roseroot_log"
+      ],
+      "foliage": [
+        "deep_aether:flowering_roseroot_leaves",
+        "deep_aether:roseroot_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:flowering_roseroot_leaves",
+        "deep_aether:roseroot_leaves"
+      ],
+      "seeds": [
+        "deep_aether:roseroot_sapling"
+      ],
+      "fallback": "deep_aether:roseroot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/roseroot_sapling.json",
+          "sha256": "90b5d85e5c31dfb50cba6c31525e5986bb891d21d0da73676f8b5b57f43d05c3"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/flowering_roseroot_leaves.json",
+          "sha256": "973451b5f64a66f95c4b4300d473949d7e612b23655b13078ef884fcf4ec2dda"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/roseroot_leaves.json",
+          "sha256": "b698dc971c08f237086b1cf5650f516124d70d74bd2e5e937073ef9829e4511c"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/roseroot_tree_large.json",
+          "sha256": "7d6ae34cf68023dfa047a1822ad7379115dd6bd65b42b7dea524d42d333f1093"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/roseroot_tree_small.json",
+          "sha256": "747f4cb457f11d594858e102c18770bd53ede22b673a8cde0713dee4d116219c"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/RoserootTreeGrower.class",
+          "sha256": "34fb4efd081d7aeddc733d507f7ce658f7c3a9caae63745f6b37989c8de45e47"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:sunroot_sapling",
+      "trunks": [
+        "deep_aether:sunroot_log"
+      ],
+      "foliage": [
+        "deep_aether:sunroot_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:sunroot_leaves"
+      ],
+      "seeds": [
+        "deep_aether:sunroot_sapling"
+      ],
+      "fallback": "deep_aether:sunroot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/sunroot_sapling.json",
+          "sha256": "7c342dcfc786f0d77f949751051e24473cc3704fc37298e2312595d014b5dd57"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/sunroot_leaves.json",
+          "sha256": "84c05eeffa8c3a50b5711801615f5ebaa5c2ae7ab487e893bd42928f4518e690"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/sunroot_tree.json",
+          "sha256": "d57ecaca2e8684c6faf7fea77e36656042fda96e3304fa998b020114023c6f06"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/SunrootTreeGrower.class",
+          "sha256": "8bd21f635b72463d57036784b5254c5c400c3ce6febc6f92a2b06a452a782e27"
+        }
+      ]
+    },
+    {
+      "id": "deep_aether:yagroot_sapling",
+      "trunks": [
+        "deep_aether:yagroot_log"
+      ],
+      "foliage": [
+        "deep_aether:yagroot_leaves"
+      ],
+      "required_foliage": [
+        "deep_aether:yagroot_leaves"
+      ],
+      "seeds": [
+        "deep_aether:yagroot_sapling"
+      ],
+      "fallback": "deep_aether:yagroot_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "deep_aether-1.20.1-1.1.7.jar",
+      "evidence": [
+        {
+          "path": "assets/deep_aether/blockstates/yagroot_sapling.json",
+          "sha256": "2a3042b2ddc668f8a7f91aebfd11df5e1d8ad341b5b80a27d3557a182d0c3b6d"
+        },
+        {
+          "path": "data/deep_aether/loot_tables/blocks/yagroot_leaves.json",
+          "sha256": "1967bd6f3bf5019fc5aafcadab98160c40afbd1db9738f09330a771030606643"
+        },
+        {
+          "path": "data/deep_aether/worldgen/configured_feature/yagroot_tree.json",
+          "sha256": "88d20143c59d5da94ffc03f445d6b4b9498eafb9931e802d3fb898d256b7d0a4"
+        },
+        {
+          "path": "teamrazor/deepaether/world/feature/tree/grower/YagrootTreeGrower.class",
+          "sha256": "219926e2f96e8b8194ea3a6205585a93051967e1a34a00fea30b0583fe01d068"
+        }
+      ]
+    },
+    {
+      "id": "alexscaves:ancient_sapling",
+      "trunks": [],
+      "foliage": [
+        "alexscaves:ancient_leaves"
+      ],
+      "required_foliage": [
+        "alexscaves:ancient_leaves"
+      ],
+      "seeds": [
+        "alexscaves:ancient_sapling"
+      ],
+      "fallback": "alexscaves:ancient_sapling",
+      "widths": [],
+      "mature_widths": [],
+      "planting_widths": [],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: trunk mapping, growth footprint",
+      "growth_evidence": "custom/ultra/overridden grow path requires inspection: net/minecraft/world/level/block/grower/AbstractTreeGrower",
+      "runtime": "UNPROVEN",
+      "origin_jar": "alexscaves-2.0.2.jar",
+      "evidence": [
+        {
+          "path": "assets/alexscaves/blockstates/ancient_sapling.json",
+          "sha256": "52c2ab28f59dda663c5b00138bbdd33384d355ace6a2e39f0ec30bb5f0ed9571"
+        },
+        {
+          "path": "com/github/alexmodguy/alexscaves/server/block/grower/AncientTreeGrower.class",
+          "sha256": "71cdad2e0adf7fcd1a03647bfa3df67bcd22a590d1a6edc7abaff24c7da85538"
+        },
+        {
+          "path": "data/alexscaves/loot_tables/blocks/ancient_leaves.json",
+          "sha256": "95335a5bbcd1743f54922adb5847e47a41130aa56e54d92bedb22e208757659a"
+        }
+      ]
+    },
+    {
+      "id": "alexscaves:pewen_sapling",
+      "trunks": [
+        "alexscaves:pewen_log",
+        "alexscaves:pewen_wood"
+      ],
+      "foliage": [
+        "alexscaves:pewen_branch",
+        "alexscaves:pewen_pines"
+      ],
+      "required_foliage": [
+        "alexscaves:pewen_branch",
+        "alexscaves:pewen_pines"
+      ],
+      "seeds": [
+        "alexscaves:pewen_sapling"
+      ],
+      "fallback": "alexscaves:pewen_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "alexscaves-2.0.2.jar",
+      "evidence": [
+        {
+          "path": "assets/alexscaves/blockstates/pewen_sapling.json",
+          "sha256": "db25315454ff9296ff14b297792ff9a046276f7c2a916b846f9f40ef82e18b8f"
+        },
+        {
+          "path": "com/github/alexmodguy/alexscaves/server/block/grower/PewenGrower.class",
+          "sha256": "9b92952e2d6809470e29ce6c361dcbab6be9b58bd1f7e9af8b9c63ece94d0b42"
+        },
+        {
+          "path": "data/alexscaves/loot_tables/blocks/pewen_branch.json",
+          "sha256": "6827d1346b2e395ff24c6bc9d90413fb59a7f501b51ac037a05e5b01c33b098b"
+        },
+        {
+          "path": "data/alexscaves/loot_tables/blocks/pewen_pines.json",
+          "sha256": "0ef8777bc97caba0b00f9ff0d661b89e94aeff82986c7d193cf0c489c7e9d20b"
+        },
+        {
+          "path": "data/minecraft/tags/blocks/logs.json",
+          "sha256": "fe46415c994001416d6db394af451a063ccf7c6983545bf5860e6e913ef9812d"
+        }
+      ]
+    },
+    {
+      "id": "alexscaves:thornwood_sapling",
+      "trunks": [],
+      "foliage": [],
+      "required_foliage": [],
+      "seeds": [
+        "alexscaves:thornwood_sapling"
+      ],
+      "fallback": "alexscaves:thornwood_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: foliage mapping, trunk mapping",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "alexscaves-2.0.2.jar",
+      "evidence": [
+        {
+          "path": "assets/alexscaves/blockstates/thornwood_sapling.json",
+          "sha256": "e4c0429349b7f7ae128b942b75a45e786ac63e26c3a32d1f8b2add29eda0fc36"
+        },
+        {
+          "path": "com/github/alexmodguy/alexscaves/server/block/grower/ThornwoodGrower.class",
+          "sha256": "599cd8e1a361313921adf3a0b3c978e3646732b07406d9388c533577231f0d08"
+        }
+      ]
+    },
+    {
+      "id": "ars_nouveau:blue_archwood_sapling",
+      "trunks": [
+        "ars_nouveau:blue_archwood_log",
+        "ars_nouveau:blue_archwood_wood"
+      ],
+      "foliage": [
+        "ars_nouveau:blue_archwood_leaves"
+      ],
+      "required_foliage": [
+        "ars_nouveau:blue_archwood_leaves"
+      ],
+      "seeds": [
+        "ars_nouveau:blue_archwood_sapling"
+      ],
+      "fallback": "ars_nouveau:blue_archwood_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "UNRESOLVED_ARS_BUTTRESS",
+      "status": "GAP: one-seed anchor within mature core/buttresses requires faithful geometry proof",
+      "growth_evidence": "MagicTree single sapling; MagicTrunkPlacer.m_213934_ offsets230-289 2x2core,290-550 buttress roots; minimum1 is not mature4",
+      "runtime": "UNPROVEN",
+      "origin_jar": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "evidence": [
+        {
+          "path": "assets/ars_nouveau/blockstates/blue_archwood_sapling.json",
+          "sha256": "fec1966ab4dc0a5a263143de63ef189fa2bc7dc8eb10fd95d39e176062c4d7d9"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTree.class",
+          "sha256": "ea2c9078be735a2ab022e4ed5e6ed99cd5758cb9599b24e7c4dbf514f76eede7"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTrunkPlacer.class",
+          "sha256": "dd4064d83b60559638b927c44a44304f2b286ce5e9cbf8a4d42334559a83e081"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/SupplierBlockStateProvider.class",
+          "sha256": "d87ddf3dc7104632c52ff7009ec9fb1aff473c687752477c2867cafdd0e38c74"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/setup/registry/BlockRegistry.class",
+          "sha256": "04beab4a93ed724485a45cfd481f450bb9cb49abd2ff3c402b99241d43acd3b8"
+        },
+        {
+          "path": "data/ars_nouveau/loot_tables/blocks/blue_archwood_leaves.json",
+          "sha256": "818e27b911f6f638ab18f3c2841ab99d4736b564aa3ff71e73d5123cb4acb04c"
+        },
+        {
+          "path": "data/ars_nouveau/tags/blocks/cascading_logs.json",
+          "sha256": "1b1e13d38e1de0575877d02fef09b0c11ffd222e3b97040bb57e0f73d0217a01"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/cascading_tree.json",
+          "sha256": "0fe8a329b034c95232cdacbaca1710b97ec6873237cb8a5cdacd39a5b0eb1e69"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/natural_cascading_tree.json",
+          "sha256": "4d9de38e3113294df130a59719b422980ec7a4354891bcb8e4384f0e0cb645af"
+        }
+      ]
+    },
+    {
+      "id": "ars_nouveau:green_archwood_sapling",
+      "trunks": [
+        "ars_nouveau:green_archwood_log",
+        "ars_nouveau:green_archwood_wood"
+      ],
+      "foliage": [
+        "ars_nouveau:green_archwood_leaves"
+      ],
+      "required_foliage": [
+        "ars_nouveau:green_archwood_leaves"
+      ],
+      "seeds": [
+        "ars_nouveau:green_archwood_sapling"
+      ],
+      "fallback": "ars_nouveau:green_archwood_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "UNRESOLVED_ARS_BUTTRESS",
+      "status": "GAP: one-seed anchor within mature core/buttresses requires faithful geometry proof",
+      "growth_evidence": "MagicTree single sapling; MagicTrunkPlacer.m_213934_ offsets230-289 2x2core,290-550 buttress roots; minimum1 is not mature4",
+      "runtime": "UNPROVEN",
+      "origin_jar": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "evidence": [
+        {
+          "path": "assets/ars_nouveau/blockstates/green_archwood_sapling.json",
+          "sha256": "d278678b9e233613d05020a964d75d6a8b58de435ee0018f2143ed8ab72cdab0"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTree.class",
+          "sha256": "ea2c9078be735a2ab022e4ed5e6ed99cd5758cb9599b24e7c4dbf514f76eede7"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTrunkPlacer.class",
+          "sha256": "dd4064d83b60559638b927c44a44304f2b286ce5e9cbf8a4d42334559a83e081"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/SupplierBlockStateProvider.class",
+          "sha256": "d87ddf3dc7104632c52ff7009ec9fb1aff473c687752477c2867cafdd0e38c74"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/setup/registry/BlockRegistry.class",
+          "sha256": "04beab4a93ed724485a45cfd481f450bb9cb49abd2ff3c402b99241d43acd3b8"
+        },
+        {
+          "path": "data/ars_nouveau/loot_tables/blocks/green_archwood_leaves.json",
+          "sha256": "c85ed7e575a85cacf52a2bfc9171b742728c22d5e446e622a9e180510030b08d"
+        },
+        {
+          "path": "data/ars_nouveau/tags/blocks/flourishing_logs.json",
+          "sha256": "e06959ae50a4e8c8d2e6be417e1b67136b65777e49af12517ba129166ed47acd"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/flourishing_tree.json",
+          "sha256": "186ae784e00cf9c19ed75808516eacce2c923edb5a6931fcc3021e6cf1a00cf9"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/natural_flourishing_tree.json",
+          "sha256": "a7f319338ef031edb11df73f255e6d23492a09ea20461889286560f0e6d17795"
+        }
+      ]
+    },
+    {
+      "id": "ars_nouveau:purple_archwood_sapling",
+      "trunks": [
+        "ars_nouveau:purple_archwood_log",
+        "ars_nouveau:purple_archwood_wood"
+      ],
+      "foliage": [
+        "ars_nouveau:purple_archwood_leaves"
+      ],
+      "required_foliage": [
+        "ars_nouveau:purple_archwood_leaves"
+      ],
+      "seeds": [
+        "ars_nouveau:purple_archwood_sapling"
+      ],
+      "fallback": "ars_nouveau:purple_archwood_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "UNRESOLVED_ARS_BUTTRESS",
+      "status": "GAP: one-seed anchor within mature core/buttresses requires faithful geometry proof",
+      "growth_evidence": "MagicTree single sapling; MagicTrunkPlacer.m_213934_ offsets230-289 2x2core,290-550 buttress roots; minimum1 is not mature4",
+      "runtime": "UNPROVEN",
+      "origin_jar": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "evidence": [
+        {
+          "path": "assets/ars_nouveau/blockstates/purple_archwood_sapling.json",
+          "sha256": "488ab017f958b58128fb83a359f94d92e7fdcc3937c5a128bc34750da57eeaff"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTree.class",
+          "sha256": "ea2c9078be735a2ab022e4ed5e6ed99cd5758cb9599b24e7c4dbf514f76eede7"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTrunkPlacer.class",
+          "sha256": "dd4064d83b60559638b927c44a44304f2b286ce5e9cbf8a4d42334559a83e081"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/SupplierBlockStateProvider.class",
+          "sha256": "d87ddf3dc7104632c52ff7009ec9fb1aff473c687752477c2867cafdd0e38c74"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/setup/registry/BlockRegistry.class",
+          "sha256": "04beab4a93ed724485a45cfd481f450bb9cb49abd2ff3c402b99241d43acd3b8"
+        },
+        {
+          "path": "data/ars_nouveau/loot_tables/blocks/purple_archwood_leaves.json",
+          "sha256": "145a31daeee44bf472e61e74c1b868535467cf0351324aaed80e9965a30fac4a"
+        },
+        {
+          "path": "data/ars_nouveau/tags/blocks/vexing_logs.json",
+          "sha256": "6a6423de96377d17d025b725ce083d57d148389db474e42d7bba8fddbc1456ca"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/natural_vexing_tree.json",
+          "sha256": "a361f717cafeb161dbb076357ba4ed0ed6f9ad785a528a17f8f9bbe99833dcdb"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/vexing_tree.json",
+          "sha256": "029e0fd30f0c8ea30720703992927c7c9b1ca60fb0de145d52f10cc591542391"
+        }
+      ]
+    },
+    {
+      "id": "ars_nouveau:red_archwood_sapling",
+      "trunks": [
+        "ars_nouveau:red_archwood_log",
+        "ars_nouveau:red_archwood_wood"
+      ],
+      "foliage": [
+        "ars_nouveau:red_archwood_leaves"
+      ],
+      "required_foliage": [
+        "ars_nouveau:red_archwood_leaves"
+      ],
+      "seeds": [
+        "ars_nouveau:red_archwood_sapling"
+      ],
+      "fallback": "ars_nouveau:red_archwood_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "UNRESOLVED_ARS_BUTTRESS",
+      "status": "GAP: one-seed anchor within mature core/buttresses requires faithful geometry proof",
+      "growth_evidence": "MagicTree single sapling; MagicTrunkPlacer.m_213934_ offsets230-289 2x2core,290-550 buttress roots; minimum1 is not mature4",
+      "runtime": "UNPROVEN",
+      "origin_jar": "ars_nouveau-1.20.1-4.12.7-all.jar",
+      "evidence": [
+        {
+          "path": "assets/ars_nouveau/blockstates/red_archwood_sapling.json",
+          "sha256": "ffa89e85a8fbc0a3ddced5a4c91c1e081b81a74c893678c6de780ed9406ec66b"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTree.class",
+          "sha256": "ea2c9078be735a2ab022e4ed5e6ed99cd5758cb9599b24e7c4dbf514f76eede7"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/MagicTrunkPlacer.class",
+          "sha256": "dd4064d83b60559638b927c44a44304f2b286ce5e9cbf8a4d42334559a83e081"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/common/world/tree/SupplierBlockStateProvider.class",
+          "sha256": "d87ddf3dc7104632c52ff7009ec9fb1aff473c687752477c2867cafdd0e38c74"
+        },
+        {
+          "path": "com/hollingsworth/arsnouveau/setup/registry/BlockRegistry.class",
+          "sha256": "04beab4a93ed724485a45cfd481f450bb9cb49abd2ff3c402b99241d43acd3b8"
+        },
+        {
+          "path": "data/ars_nouveau/loot_tables/blocks/red_archwood_leaves.json",
+          "sha256": "78da9c5f43335c8bcd7e16a4a2061427ac8d85722fa591d760012c6347cf1aed"
+        },
+        {
+          "path": "data/ars_nouveau/tags/blocks/blazing_logs.json",
+          "sha256": "c3519a7b733f52cee3373a7d7d6082475a2dd6b4f29ab1e02dbd428882b1e50d"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/blazing_tree.json",
+          "sha256": "bca68f61c4191e6b8085181cb35d202c3fffc0875f0fcb6b7c1f1c5a4284ccf1"
+        },
+        {
+          "path": "data/ars_nouveau/worldgen/configured_feature/natural_blazing_tree.json",
+          "sha256": "e57c0fd670559e2829ffdbbb530595d0ed7319e0471710e82c3ece227d6ea242"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:canopy_sapling",
+      "trunks": [
+        "twilightforest:canopy_log"
+      ],
+      "foliage": [
+        "twilightforest:canopy_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:canopy_leaves"
+      ],
+      "seeds": [
+        "twilightforest:canopy_sapling"
+      ],
+      "fallback": "twilightforest:canopy_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/canopy_sapling.json",
+          "sha256": "599e92a80fe03346e7febdc2d672b6c1337c7842def6de13678ad8e56d1d76eb"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/canopy_leaves.json",
+          "sha256": "c18d300bcc6cc463e750c427dd8150a13ead72541a144a1d98f1be7988dd0815"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/canopy_tree.json",
+          "sha256": "dc2054df781041890b36f7540134e22f6ef9c8c01367ba4adcff72da9bda0781"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/firefly_canopy_tree.json",
+          "sha256": "c85122f82fc4b5427f122f4ff95c01b81efc82732d5ac6f7cf3a98e6bcde3c60"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/CanopyTreeGrower.class",
+          "sha256": "857dce06358483fdd42395968282eaa3041b5cf28fce62c7fd33c4c99adbcba1"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:darkwood_sapling",
+      "trunks": [
+        "twilightforest:dark_log"
+      ],
+      "foliage": [
+        "twilightforest:dark_leaves",
+        "twilightforest:hardened_dark_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:dark_leaves",
+        "twilightforest:hardened_dark_leaves"
+      ],
+      "seeds": [
+        "twilightforest:darkwood_sapling"
+      ],
+      "fallback": "twilightforest:darkwood_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/darkwood_sapling.json",
+          "sha256": "bcc12983a713589ce9ced9413e905c8d7761494189b3648c2f55ef0aabd99b6b"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/dark_leaves.json",
+          "sha256": "edcd1463ea07d710aa17fba4c04891585018fd8276d2b3a30ef644988148b7f1"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/hardened_dark_leaves.json",
+          "sha256": "eb00ee7e301a9d90e68dd71d8c0be56ec6fb21388be3c35e50836888eb08bacb"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/darkwood_lantern_tree.json",
+          "sha256": "1f4141f7f9dd93ce56728dc802a620cd093e0b6cfbb04abe89083b8714c874eb"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/darkwood_tree.json",
+          "sha256": "6c802f675d1efb1396e6170d300dcec8b89678f56dd370c5becfb88a33d77993"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/homegrown_darkwood_tree.json",
+          "sha256": "7a73f6ea4a8416d8691b8def8bb70faa4c9eeee7e481bc956ea0c6bc500db92a"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/DarkCanopyTreeGrower.class",
+          "sha256": "3106f14b1a030da9e8b55b555d2e9a5ac99f44f045a5c33a2a5e8302033625be"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:hollow_oak_sapling",
+      "trunks": [
+        "twilightforest:twilight_oak_log",
+        "twilightforest:twilight_oak_wood"
+      ],
+      "foliage": [
+        "twilightforest:twilight_oak_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:twilight_oak_leaves"
+      ],
+      "seeds": [
+        "twilightforest:hollow_oak_sapling"
+      ],
+      "fallback": "twilightforest:hollow_oak_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "GAP: shared oak identity requires verified hollow-root morphology",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/hollow_oak_sapling.json",
+          "sha256": "2a9d739b2f591fa2c5d5ed889cb22e061a58da3bef904f8a4869168cb9c7245c"
+        },
+        {
+          "path": "assets/twilightforest/blockstates/twilight_oak_leaves.json",
+          "sha256": "eb027ad7e52b5fb2732c0dd3ff8da9cbc3adb9b6344eae523ea072c403316916"
+        },
+        {
+          "path": "data/twilightforest/tags/blocks/twilight_oak_logs.json",
+          "sha256": "13cfc7ff1545efe476778f9a3c3b392baeab5a4e4ce4d2d02a167256b0385f28"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/HollowTreeGrower.class",
+          "sha256": "9c3869687874aff2a902708885b364067f2d07e78f0175afa6d27cf595dd8e13"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:mangrove_sapling",
+      "trunks": [
+        "twilightforest:mangrove_log"
+      ],
+      "foliage": [
+        "twilightforest:mangrove_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:mangrove_leaves"
+      ],
+      "seeds": [
+        "twilightforest:mangrove_sapling"
+      ],
+      "fallback": "twilightforest:mangrove_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/mangrove_sapling.json",
+          "sha256": "71a0c552fb0585bae633f9d0e333acd4316ce01319c37c7e8051c6b0f85fc1bc"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/mangrove_leaves.json",
+          "sha256": "f9a4e3e7c9b8ee9e086296d3efbea1ce6fafedbbb7dee2870be7eac294415ae4"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/mangrove_tree.json",
+          "sha256": "3e848effd74574f0394048b87ade976e15feede2bea246714869e0ec4b4bdab1"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/MangroveTreeGrower.class",
+          "sha256": "e2c2092deeeec6884f003529d30c23790e6c859729803698011646dd8828bfcd"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:mining_sapling",
+      "trunks": [
+        "twilightforest:mining_log",
+        "twilightforest:mining_wood"
+      ],
+      "foliage": [
+        "twilightforest:mining_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:mining_leaves"
+      ],
+      "seeds": [
+        "twilightforest:mining_sapling"
+      ],
+      "fallback": "twilightforest:mining_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/mining_leaves.json",
+          "sha256": "8b52db4f82f3f0be68e900e27873487bf118ade455fdb53097f993c744d9f4a6"
+        },
+        {
+          "path": "assets/twilightforest/blockstates/mining_sapling.json",
+          "sha256": "4a3848693c4be3c5b097c3e475119271a02f7f2078a29f249d4c051f54b376aa"
+        },
+        {
+          "path": "data/twilightforest/tags/blocks/mining_logs.json",
+          "sha256": "bd07dd71298d4c1646995afe82dd354f54f220d0fef5b3d94d2d0864acb5ebfc"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/MiningTreeGrower.class",
+          "sha256": "9d0178dd697e4669bbd80767f68ac8746f4334fad230af37538d76eca522b66f"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:rainbow_oak_sapling",
+      "trunks": [
+        "twilightforest:twilight_oak_log"
+      ],
+      "foliage": [
+        "twilightforest:rainbow_oak_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:rainbow_oak_leaves"
+      ],
+      "seeds": [
+        "twilightforest:rainbow_oak_sapling"
+      ],
+      "fallback": "twilightforest:rainbow_oak_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/rainbow_oak_sapling.json",
+          "sha256": "59f00b1ddf9160b41a0304e6e3e0786209820d2ce8578733d5c8bcae615f15bc"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/rainbow_oak_leaves.json",
+          "sha256": "9f5b5dc51cb55ca78c66db1fdadca1b6156be6cc42ae8ec57a08451ce98f3701"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/large_rainbow_oak.json",
+          "sha256": "f96a9442cee8b4168ae2daf48198e7cfbd31c5f46a498715d0a60aec71f0c23d"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/rainbow_oak.json",
+          "sha256": "1842bf66f48d3c8a0cf3357858525b262ca18f9ba3d2128f72094ab2efa2cfb5"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/RainboakTreeGrower.class",
+          "sha256": "a4d763cf9ee022da7767bc971494422818a4c65d7ac0c72a024adf5cdc7a02b7"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:sorting_sapling",
+      "trunks": [
+        "twilightforest:sorting_log",
+        "twilightforest:sorting_wood"
+      ],
+      "foliage": [
+        "twilightforest:sorting_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:sorting_leaves"
+      ],
+      "seeds": [
+        "twilightforest:sorting_sapling"
+      ],
+      "fallback": "twilightforest:sorting_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/sorting_leaves.json",
+          "sha256": "0737effe2c039d6a0000318d66d4ace84ad1757f750e020af722be539a603cb2"
+        },
+        {
+          "path": "assets/twilightforest/blockstates/sorting_sapling.json",
+          "sha256": "31a8e91b240fd1f5f0261cf3724368dad1fb1ae76df19625047214838b408212"
+        },
+        {
+          "path": "data/twilightforest/tags/blocks/sortwood_logs.json",
+          "sha256": "4ebc2194f7e756ab62e8ce7e4a7c4db53fbcb9d8e135966ac1973c748a2af6ac"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/SortingTreeGrower.class",
+          "sha256": "c8f83152f9f33c53c7b83602892c018154094bff3e3229127b5ae1655e414510"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:time_sapling",
+      "trunks": [
+        "twilightforest:time_log",
+        "twilightforest:time_wood"
+      ],
+      "foliage": [
+        "twilightforest:time_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:time_leaves"
+      ],
+      "seeds": [
+        "twilightforest:time_sapling"
+      ],
+      "fallback": "twilightforest:time_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/time_leaves.json",
+          "sha256": "a8497fc287f894a1710240fcd1acf260f7874404b383b91e4d0ee456614dd615"
+        },
+        {
+          "path": "assets/twilightforest/blockstates/time_sapling.json",
+          "sha256": "6dea6fe035f2f3237d989ed90470f166685a2a6700bc3743df046bda6547ce7f"
+        },
+        {
+          "path": "data/twilightforest/tags/blocks/timewood_logs.json",
+          "sha256": "55bff5adecc66a3962cd1e398e1edfb7b8e94448085ade4f510f20da41799bef"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/TimeTreeGrower.class",
+          "sha256": "c39929586df0e6aea53e2e932c313cffc68c0ac057bda50955a412bf22335888"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:transformation_sapling",
+      "trunks": [
+        "twilightforest:transformation_log",
+        "twilightforest:transformation_wood"
+      ],
+      "foliage": [
+        "twilightforest:transformation_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:transformation_leaves"
+      ],
+      "seeds": [
+        "twilightforest:transformation_sapling"
+      ],
+      "fallback": "twilightforest:transformation_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla single-sapling grow path; root-shape/native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/transformation_leaves.json",
+          "sha256": "75860f9fd98a91f01e84d6696315f0f1227181788c825d14bf15b91ab2140083"
+        },
+        {
+          "path": "assets/twilightforest/blockstates/transformation_sapling.json",
+          "sha256": "d4018fbf67937a3e16ab1cb26ff3f0cb7270f391884bc1df1217853f1a7bdda9"
+        },
+        {
+          "path": "data/twilightforest/tags/blocks/transwood_logs.json",
+          "sha256": "ecf0f1ddc9021b252c4fdfc0e438aa6cc953ff45f13d65fdf4367db53b9fd9fc"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/TransformationTreeGrower.class",
+          "sha256": "a4c57cb2194ce1d2ca09ee3307a1488a75b5675b675656956396168f5fc8991c"
+        }
+      ]
+    },
+    {
+      "id": "twilightforest:twilight_oak_sapling",
+      "trunks": [
+        "twilightforest:twilight_oak_log",
+        "twilightforest:twilight_oak_wood"
+      ],
+      "foliage": [
+        "twilightforest:twilight_oak_leaves"
+      ],
+      "required_foliage": [
+        "twilightforest:twilight_oak_leaves"
+      ],
+      "seeds": [
+        "twilightforest:twilight_oak_sapling"
+      ],
+      "fallback": "twilightforest:twilight_oak_sapling",
+      "widths": [
+        2
+      ],
+      "mature_widths": [
+        2
+      ],
+      "planting_widths": [
+        2
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "inherits vanilla mega path; single enabled only for verified GETSTATIC/ARETURN key; native/root acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "twilightforest-1.20.1-4.3.2508-universal.jar",
+      "evidence": [
+        {
+          "path": "assets/twilightforest/blockstates/twilight_oak_sapling.json",
+          "sha256": "c3a7096150dba9dfd048bf4ab72d45a619ee29d3d36e6295c2234e91805d829c"
+        },
+        {
+          "path": "data/twilightforest/loot_tables/blocks/twilight_oak_leaves.json",
+          "sha256": "65ff0b7fd943de9271fefd7beda1d96c79f45c2ba4ceea6404fd3efae7a38a42"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/hollow_stump.json",
+          "sha256": "01ccc61fd12906770d1197a69143ed6d2e5a54be7dc6fdc118d19358487691c8"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/forest_canopy_oak_tree.json",
+          "sha256": "8495efa3e0aab78bd1f9298bab514181989ed08e89cafbd5891cbef68cfe2494"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/hollow_tree.json",
+          "sha256": "46effcc95059b9211612e6118d4eac71763cea6347744c8148b2988038915500"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/large_twilight_oak_tree.json",
+          "sha256": "0135ea8369b331d6890ba715b3128379ed5dd84e564b6faf753d02b58c2f30a5"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/savannah_canopy_oak_tree.json",
+          "sha256": "4e37e71c2e1e361b0aa9adb7864e3d6552b7135cc6c6cdf47df66a9b455f10f1"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/swampy_oak_tree.json",
+          "sha256": "2c4f185de91972948efc6cb4fe42e4b5eb99f71e903bffa67d80d496f6f48316"
+        },
+        {
+          "path": "data/twilightforest/worldgen/configured_feature/tree/twilight_oak_tree.json",
+          "sha256": "9902085635694b449adae48255182f129056cf16284e7d3bb86c1ef20c8aab04"
+        },
+        {
+          "path": "twilightforest/world/components/feature/trees/growers/SmallOakTreeGrower.class",
+          "sha256": "b3430fc200f046de972c33522f03630775527197e8173c5bb080de7e046886f0"
+        }
+      ]
+    },
+    {
+      "id": "quark:ancient_sapling",
+      "trunks": [
+        "quark:ancient_log"
+      ],
+      "foliage": [
+        "quark:ancient_leaves"
+      ],
+      "required_foliage": [
+        "quark:ancient_leaves"
+      ],
+      "seeds": [
+        "quark:ancient_sapling"
+      ],
+      "fallback": "quark:ancient_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/ancient_sapling.json",
+          "sha256": "14b0cfd548bad438ce36694279e16d8453fb5c0296482ba7262116cb52941269"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/ancient_leaves.json",
+          "sha256": "d5068a9f04aa05249d6c1b844aee7c57074be760e3432615edcbdad2245fe91f"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/ancient_tree.json",
+          "sha256": "4bdbd925283b6230800fdf1430917c1c459fdd586af53b1442ad818e86555333"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/feature/MultiFoliageStraightTrunkPlacer.class",
+          "sha256": "be65b3b0ae6ea0864aee524ea4c1df51b1d66509be93131aa917e8bc6a3b31cf"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/AncientWoodModule.class",
+          "sha256": "c8727de36657eb0fcfd1efb90640c419fde382bece11ff6569a66230759666bf"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    },
+    {
+      "id": "quark:blue_blossom_sapling",
+      "trunks": [
+        "quark:blossom_log"
+      ],
+      "foliage": [
+        "quark:blue_blossom_leaves"
+      ],
+      "required_foliage": [
+        "quark:blue_blossom_leaves"
+      ],
+      "seeds": [
+        "quark:blue_blossom_sapling"
+      ],
+      "fallback": "quark:blue_blossom_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/blue_blossom_sapling.json",
+          "sha256": "7063b6d6eed6ef43c0925b8031094a810391a906d928f8a8b01ab466bd3abdef"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/blue_blossom_leaves.json",
+          "sha256": "913dcf95edc79c289673b5491c75d0d4b76ac4f123109b2df64e167173f55d4f"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/blue_blossom.json",
+          "sha256": "4d83d60cd633456a91c48dbb1ff8a2e4397e6146eb6c1aa1575a283f8cf3d61b"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/BlossomTreesModule.class",
+          "sha256": "2464d7e8746bf384fb6740ce7bb362e731a51592ea9bbf10bd723655f320dec0"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    },
+    {
+      "id": "quark:lavender_blossom_sapling",
+      "trunks": [
+        "quark:blossom_log"
+      ],
+      "foliage": [
+        "quark:lavender_blossom_leaves"
+      ],
+      "required_foliage": [
+        "quark:lavender_blossom_leaves"
+      ],
+      "seeds": [
+        "quark:lavender_blossom_sapling"
+      ],
+      "fallback": "quark:lavender_blossom_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/lavender_blossom_sapling.json",
+          "sha256": "3d4d4537300c67e504e04a0e0a5a207b53c94bf100d2dd6b5b72e2b00ae278e4"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/lavender_blossom_leaves.json",
+          "sha256": "add94bd94952dfa015c0236a27b92cced8164555e3d50ac13ee0487b40383223"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/lavender_blossom.json",
+          "sha256": "30e12c6c6cd331bc720aa975d1788b750a6c1e6ea0ea570c59d6100d315e6990"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/BlossomTreesModule.class",
+          "sha256": "2464d7e8746bf384fb6740ce7bb362e731a51592ea9bbf10bd723655f320dec0"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    },
+    {
+      "id": "quark:orange_blossom_sapling",
+      "trunks": [
+        "quark:blossom_log"
+      ],
+      "foliage": [
+        "quark:orange_blossom_leaves"
+      ],
+      "required_foliage": [
+        "quark:orange_blossom_leaves"
+      ],
+      "seeds": [
+        "quark:orange_blossom_sapling"
+      ],
+      "fallback": "quark:orange_blossom_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/orange_blossom_sapling.json",
+          "sha256": "0a958309f58a81373663a773941d5f854ed4a1da2b9d54d0dd8b225dfa0b7445"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/orange_blossom_leaves.json",
+          "sha256": "31a69a307a131c4d779ba8eb03a349f54cff775a36b4c81736206a003207075b"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/orange_blossom.json",
+          "sha256": "670bae2405dc75b95971259b604e9f748aaf650f7ea8ef7356cb126f63451e27"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/BlossomTreesModule.class",
+          "sha256": "2464d7e8746bf384fb6740ce7bb362e731a51592ea9bbf10bd723655f320dec0"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    },
+    {
+      "id": "quark:red_blossom_sapling",
+      "trunks": [
+        "quark:blossom_log"
+      ],
+      "foliage": [
+        "quark:red_blossom_leaves"
+      ],
+      "required_foliage": [
+        "quark:red_blossom_leaves"
+      ],
+      "seeds": [
+        "quark:red_blossom_sapling"
+      ],
+      "fallback": "quark:red_blossom_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/red_blossom_sapling.json",
+          "sha256": "61d5638a7c0b31fab08fc3267d37e6b55f91c2c2963340fff0da63b10bcf415e"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/red_blossom_leaves.json",
+          "sha256": "e556a94cfc81494493a0669933bd41530f5c536656f58b9c61d4c2c3577100e3"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/red_blossom.json",
+          "sha256": "9d5caf5ce27e311f20676db48c9ced786026b862001c7518e02ef9002058f864"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/BlossomTreesModule.class",
+          "sha256": "2464d7e8746bf384fb6740ce7bb362e731a51592ea9bbf10bd723655f320dec0"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    },
+    {
+      "id": "quark:yellow_blossom_sapling",
+      "trunks": [
+        "quark:blossom_log"
+      ],
+      "foliage": [
+        "quark:yellow_blossom_leaves"
+      ],
+      "required_foliage": [
+        "quark:yellow_blossom_leaves"
+      ],
+      "seeds": [
+        "quark:yellow_blossom_sapling"
+      ],
+      "fallback": "quark:yellow_blossom_sapling",
+      "widths": [
+        1
+      ],
+      "mature_widths": [
+        1
+      ],
+      "planting_widths": [
+        1
+      ],
+      "anchor_mode": "ROOT_GRID",
+      "status": "READY_STATIC",
+      "growth_evidence": "Quark module constructs ZetaSaplingBlock(PassthroughTreeGrower(key)); inherited single-sapling path; mature fancy/vertical base1; native acceptance pending",
+      "runtime": "UNPROVEN",
+      "origin_jar": "Quark-4.0-462.jar",
+      "evidence": [
+        {
+          "path": "assets/quark/blockstates/yellow_blossom_sapling.json",
+          "sha256": "73e9a160d0183630fc96ccd5870971516f20409de0ad9c35585fc3153d48ed55"
+        },
+        {
+          "path": "data/quark/loot_tables/blocks/yellow_blossom_leaves.json",
+          "sha256": "26386d347a05a9888884a595da4571d175390cfb64944242da0400bcd2efc862"
+        },
+        {
+          "path": "data/quark/worldgen/configured_feature/yellow_blossom.json",
+          "sha256": "b6ab51c330c3f25ad834001b1c28c97d02c5184917e27cfd374be33a58654ae5"
+        },
+        {
+          "path": "org/violetmoon/quark/content/world/module/BlossomTreesModule.class",
+          "sha256": "2464d7e8746bf384fb6740ce7bb362e731a51592ea9bbf10bd723655f320dec0"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/block/ZetaSaplingBlock.class",
+          "sha256": "bc13fb46a80994f97765532a303ae873ebf899d8d35e98dcddee13c6ba680aad"
+        },
+        {
+          "jar": "Zeta-1.0-31.jar",
+          "path": "org/violetmoon/zeta/world/PassthroughTreeGrower.class",
+          "sha256": "fb1dc497a6db7a9c2c38c4d7e3eb309aa093d72324699e6032606c9efdbff33a"
+        }
+      ]
+    }
+  ]
+}

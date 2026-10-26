@@ -1,0 +1,60 @@
+{
+  "release": "https://github.com/ThizThizzyDizzy/tree-feller/releases/tag/v1.33.0",
+  "tag": "v1.33.0",
+  "commit": "e8eebda5c71e78ab1da98bc9324daafda51830e3",
+  "jar": {
+    "url": "https://github.com/ThizThizzyDizzy/tree-feller/releases/download/v1.33.0/TreeFeller-1.33.0.jar",
+    "sha256": "798053757e215d90f4a894900c96d752b3a8486ff654822d0c04ccb76057eee5",
+    "size": 1756192,
+    "crc": "PASS"
+  },
+  "source": {
+    "url": "https://api.github.com/repos/ThizThizzyDizzy/tree-feller/zipball/e8eebda5c71e78ab1da98bc9324daafda51830e3",
+    "sha256": "0bbd6eb65f1ae02fd30a84dc64c68768e9072140b3b0acdc0e378c7d096ca200",
+    "size": 251506,
+    "crc": "PASS"
+  },
+  "license": "GPL-3.0",
+  "modified_version": "1.33.0-virgos.3",
+  "java_release": 17,
+  "compile_inputs": {
+    "ketting_universal_sha256": "1614068a547d9c27d738d9d4b8d8f1ebb423afe150c810493242f4e1c2f9cf29",
+    "coreprotect_sha256": "a2acef7c06ef201355cef07d591a6055dfed358ad768faaaaaf4e276865ecc97",
+    "additional_jars": {
+      "bungeecord-chat-1.20-R0.1.jar": "2468cc1270a5c14752e38d094c0c601b743bec3538325ce347ef1b9d915ca01c",
+      "guava-31.1-jre.jar": "a42edc9cab792e39fe39bb94f3fca655ed157ff87a8af78e1d6ba5b07c4a00ab"
+    }
+  },
+  "journal_schema": 2,
+  "resources": {
+    "catalog.json": "9d6993307ab8bf023bc2c5211ced9c41d50ea092415a9db5fd56c7ab91671b0f",
+    "catalog.tsv": "be4d4c413e03607c09cc6918fcdcc206362403a8bde1dc0810c98ffa71805ff4"
+  },
+  "previous_candidate": {
+    "version": "1.33.0-virgos.2",
+    "jar_sha256": "641f24744db90e75d14da2046f79e7a83fc4cc9eaddcfa033c0d21213f6001cc",
+    "source_sha256": "17767dc1e6337d0d4984c7f0e21a298c10efff27ab76668401e1b639cf253289",
+    "purpose": "public journal and catalog compatibility differential; not deployment approval"
+  },
+  "coreprotect_compile_provider": {
+    "url": "https://cdn.modrinth.com/data/Lu3KuzdV/versions/3sehX6Sg/CoreProtect-CE-24.1.jar",
+    "sha256": "a2acef7c06ef201355cef07d591a6055dfed358ad768faaaaaf4e276865ecc97",
+    "license": "Artistic-2.0",
+    "source": "https://github.com/PlayPro/CoreProtect",
+    "scope": "compile-only; not bundled; does not replace the patched runtime plugin",
+    "referenced_classes_sha256": {
+      "net/coreprotect/CoreProtect.class": "c02fcc413da773ba24ee732f572945e2c062b4de0d58734e58c801048bafd787",
+      "net/coreprotect/CoreProtectAPI.class": "ea59c1f4a429d49183fc80d5fe29740565e3c60c9e5609af61d8e8178c79739a"
+    },
+    "preserved_runtime_sha256": "1e0d93e1cc719cffb243b3b37a3e1c3ed2d9a37e65e31ab9b2d6b00ed740e8b7"
+  },
+  "catalog_schema": 2,
+  "historical_diagnostic_candidates": [
+    {
+      "version": "1.33.0-virgos.1",
+      "jar_sha256": "b7e5e996426197634bffa098a9f258c20e9636c0ced1bb2feb0965aca007e5ff",
+      "source_sha256": "8f56c5d9b351c20ec7ad0e5a65cc416f258cc422bfdce5dddbd955731ebed13b",
+      "purpose": "optional v1 public-journal semantic differential only; never a deployment fallback"
+    }
+  ]
+}
