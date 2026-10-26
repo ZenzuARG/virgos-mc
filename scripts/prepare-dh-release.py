@@ -156,6 +156,10 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
         or type(current.get('installer')) is not int or current['installer'] < 1):
         raise ValueError('Invalid candidate release metadata')
     extras = source_extras(metadata, current)
+    tree_platform_variant = False
+    if tree_artifacts is not None:
+        manifest = json.loads(checked(tree_artifacts / 'tree-release.json').read_text('utf-8'))
+        tree_platform_variant = bool(manifest.get('platformVariantAllowed') and not manifest.get('byteIdenticalFrozen', True))
     tree = tree_bundle(tree_artifacts) if tree_artifacts is not None else []
     expected = {'RELEASE': release, 'FINGERPRINT': current['clientFingerprint']}
     source = checked(root / 'dev/virgos-core/src/shared/java/mc/virgos/update/ClientRelease.java').read_text('utf-8')
@@ -178,7 +182,7 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
     if tree:
         plugin = next(record for record, _ in tree if record['kind'] == 'server-plugin')
         matches = [item for item in administration if item.get('project') == 'tree-feller']
-        if (len(matches) != 1 or matches[0].get('hash') != plugin['sha256']
+        if (len(matches) != 1 or (matches[0].get('hash') != plugin['sha256'] and not tree_platform_variant)
             or matches[0].get('filename') != plugin['filename'] or matches[0].get('sides') != ['server']
             or matches[0].get('mode') != 'required'):
             raise ValueError('Tree server administration pin mismatch')
@@ -231,8 +235,10 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
         else: shutil.copyfile(path, artifacts / name)
         if record['kind'] == 'server-plugin':
             matches = [item for item in administration if item.get('project') == 'tree-feller']
-            if len(matches) != 1 or matches[0].get('hash') != record['sha256'] or matches[0].get('sides') != ['server']:
+            if len(matches) != 1 or (matches[0].get('hash') != record['sha256'] and not tree_platform_variant) or matches[0].get('sides') != ['server']:
                 raise ValueError('Tree server administration pin mismatch')
+            if tree_platform_variant:
+                matches[0]['hash'] = record['sha256']
             matches[0]['local_source'] = str(output / 'artifacts' / name)
         else:
             extra = {'filename': name, 'local_source': 'artifacts/' + name, 'sha256': record['sha256'], 'size': record['size']}
