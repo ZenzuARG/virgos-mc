@@ -251,6 +251,8 @@ sourceSets {
         runtimeClasspath += sourceSets.main.runtimeClasspath
     }
 }
+sourceSets.test.compileClasspath += sourceSets.codex.output
+sourceSets.test.runtimeClasspath += sourceSets.codex.output
 tasks.register('qaJar', Jar) {
     archiveBaseName = 'virgos_local_qa'
     from sourceSets.qa.output
@@ -261,6 +263,7 @@ reobf { qaJar {} }
 tasks.register('codexJar', Jar) {
     archiveBaseName = 'virgos_codex'
     from sourceSets.codex.output
+    manifest { attributes('MixinConfigs': 'virgos_codex.mixins.json') }
     finalizedBy 'reobfCodexJar'
 }
 reobf { codexJar {} }
@@ -345,3 +348,15 @@ tasks.register('checkCodexKeys', JavaExec) {
     mainClass = 'mc.virgos.CodexKeyPolicyTest'
 }
 tasks.named('check').configure { dependsOn 'checkCodexKeys' }
+
+tasks.register('checkIngredientCache', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.codex.ingredient.IngredientCacheTest'
+    doFirst {
+        def scratch = java.nio.file.Files.createTempDirectory('virgos-ingredient-cache-')
+        workingDir = scratch.toFile()
+        println "Ingredient regression scratch: ${scratch}"
+    }
+}
+tasks.named('check').configure { dependsOn 'checkIngredientCache' }

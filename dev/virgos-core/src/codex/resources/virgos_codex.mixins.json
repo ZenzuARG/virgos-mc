@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mc.virgos.codex.ingredient.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "IngredientCacheMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

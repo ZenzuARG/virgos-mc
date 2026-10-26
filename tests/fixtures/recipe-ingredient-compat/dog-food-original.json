@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "delightful:enabled",
+          "value": "animal_fat"
+        }
+      ],
+      "recipe": {
+        "type": "farmersdelight:cooking",
+        "cookingtime": 200,
+        "experience": 1.0,
+        "ingredients": [
+          {
+            "item": "delightful:animal_fat"
+          },
+          {
+            "item": "minecraft:bone_meal"
+          },
+          {
+            "tag": "farmersdelight:wolf_prey"
+          },
+          {
+            "tag": "forge:crops/rice"
+          }
+        ],
+        "recipe_book_tab": "misc",
+        "result": {
+          "item": "farmersdelight:dog_food"
+        }
+      }
+    }
+  ]
+}

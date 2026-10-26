@@ -1,0 +1,38 @@
+{
+  "dog-food-original.json": {
+    "jar": "Delightful-1.20.1-3.8.1.jar",
+    "jarSha256": "b4cc8808db58ab96440d79a509d72c52a71cc97450d8437d8072d32a278994f4",
+    "resource": "data/delightful/recipes/food/cooking/dog_food_from_animal_fat.json",
+    "resourceSha256": "57f6c6690e00d07a700570f607ec5b5bf377a46216c66c4726ab5257adce4688"
+  },
+  "cheesecake-original.json": {
+    "jar": "Delightful-1.20.1-3.8.1.jar",
+    "jarSha256": "b4cc8808db58ab96440d79a509d72c52a71cc97450d8437d8072d32a278994f4",
+    "resource": "data/delightful/recipes/food/sweet_berry_cheesecake_from_cheese.json",
+    "resourceSha256": "1a763f1325ecc692378307eed8ca0168137e2644ceeb7dec63860d7ce56740fe"
+  },
+  "magnolia-items-original.json": {
+    "jar": "RegionsUnexploredForge-0.5.6+1.20.1.jar",
+    "jarSha256": "5ba96a83d12c0e2eb3b22c0fa11262ff6d49ba8d2ebd03e1c59ab47ea7dcc2c6",
+    "resource": "data/regions_unexplored/tags/items/magnolia_logs_item.json",
+    "resourceSha256": "c0f6ddeab5b0b25dadd31f08fcae5210b75354c05286dbed95311d279b3292c8"
+  },
+  "dog-food-farmersdelight-original.json": {
+    "jar": "FarmersDelight-1.20.1-1.3.4.jar",
+    "jarSha256": "34f03eb671ea1ca579b00c98e4541404cb96d1a292014aed9cc5eb45ad8afbce",
+    "resource": "data/farmersdelight/recipes/cooking/dog_food.json",
+    "resourceSha256": "0253d5d80596e71ce67cc36c58efd0b04b9b0595589666741ebeec1907aaf7d6"
+  },
+  "cheese-mild-original.json": {
+    "jar": "Delightful-1.20.1-3.8.1.jar",
+    "jarSha256": "b4cc8808db58ab96440d79a509d72c52a71cc97450d8437d8072d32a278994f4",
+    "resource": "data/forge/tags/items/cheese/mild.json",
+    "resourceSha256": "965ae4f2f3cf9f88f7baef6e6320bbb992fd354778b3800cb2df814c43dc8083"
+  },
+  "cheese-sweet-original.json": {
+    "jar": "Delightful-1.20.1-3.8.1.jar",
+    "jarSha256": "b4cc8808db58ab96440d79a509d72c52a71cc97450d8437d8072d32a278994f4",
+    "resource": "data/forge/tags/items/cheese/sweet.json",
+    "resourceSha256": "9d53ea41a447f00711b4b4d3c89284beaae7c51c1bddccfac6ca086f5a500cf0"
+  }
+}

@@ -321,6 +321,69 @@ public final class ClientProbe {
                     result.addProperty("jeiSynced",(Boolean)internal.getMethod("hasClientSyncedRecipes").invoke(null));
                     result.addProperty("jeiFallback",(Boolean)internal.getMethod("hasClientFallbackRecipes").invoke(null));
                     result.add("recipes",JSON.toJsonTree(client.getConnection().getRecipeManager().getRecipes().stream().map(recipe->recipe.getId().toString()).sorted().toList()));
+                    result.add("sandpaper", auditItemTag("create:sandpaper"));
+                    result.add("planksControl", auditItemTag("minecraft:planks"));
+                    var broken = new JsonArray();
+                    var compatibility = new JsonArray();
+                    var compatibilityIds = java.util.Set.of(
+                        "everycomp:q/regions_unexplored/magnolia_hedge",
+                        "everycomp:q/regions_unexplored/pink_magnolia_hedge",
+                        "everycomp:q/regions_unexplored/blue_magnolia_hedge",
+                        "everycomp:q/regions_unexplored/white_magnolia_hedge",
+                        "delightful:food/sweet_berry_cheesecake_from_cheese",
+                        "delightful:food/cooking/dog_food_from_animal_fat");
+                    for (var recipe : client.getConnection().getRecipeManager().getRecipes()) {
+                        int index = 0;
+                        var details = new JsonArray();
+                        for (var ingredient : recipe.getIngredients()) {
+                            if (!ingredient.isEmpty()) {
+                                var audit = auditIngredient(ingredient);
+                                details.add(audit);
+                                if (audit.get("unresolved").getAsBoolean()) {
+                                    audit.addProperty("recipe", recipe.getId().toString());
+                                    audit.addProperty("index", index);
+                                    broken.add(audit);
+                                }
+                            }
+                            index++;
+                        }
+                        if (compatibilityIds.contains(recipe.getId().toString())) {
+                            var detail = new JsonObject();
+                            detail.addProperty("recipe", recipe.getId().toString());
+                            detail.add("ingredients", details);
+                            var output = recipe.getResultItem(client.level.registryAccess());
+                            detail.addProperty("result", BuiltInRegistries.ITEM.getKey(output.getItem()).toString());
+                            detail.addProperty("resultCount", output.getCount());
+                            compatibility.add(detail);
+                        }
+                    }
+                    result.add("unresolvedRecipeIngredients", broken);
+                    result.add("compatibilityRecipes", compatibility);
+                    // Read recipes already registered with JEI, not newly converted substitutes.
+                    var runtime = internal.getMethod("getJeiRuntime").invoke(null);
+                    var runtimeApi = Class.forName("mezz.jei.api.runtime.IJeiRuntime");
+                    var manager = runtimeApi.getMethod("getRecipeManager").invoke(runtime);
+                    var managerApi = Class.forName("mezz.jei.api.recipe.IRecipeManager");
+                    var type = (java.util.Optional<?>) managerApi.getMethod("getRecipeType", net.minecraft.resources.ResourceLocation.class)
+                        .invoke(manager, new net.minecraft.resources.ResourceLocation("create:deploying"));
+                    var held = new JsonArray();
+                    if (type.isPresent()) {
+                        var lookup = managerApi.getMethod("createRecipeLookup", Class.forName("mezz.jei.api.recipe.RecipeType"))
+                            .invoke(manager, type.get());
+                        var lookupApi = Class.forName("mezz.jei.api.recipe.IRecipeLookup");
+                        try (var recipes = (java.util.stream.Stream<?>) lookupApi.getMethod("get").invoke(lookup)) {
+                            for (var value : recipes.toList()) {
+                                if (!(value instanceof net.minecraft.world.item.crafting.Recipe<?> recipe)) continue;
+                                var tool = (net.minecraft.world.item.crafting.Ingredient) value.getClass().getMethod("getRequiredHeldItem").invoke(value);
+                                var audit = auditIngredient(tool);
+                                if (recipe.getId().toString().contains("sandpaper_polishing/") || audit.get("unresolved").getAsBoolean()) {
+                                    audit.addProperty("recipe", recipe.getId().toString());
+                                    held.add(audit);
+                                }
+                            }
+                        }
+                    }
+                    result.add("jeiDeployingHeldIngredients", held);
                     Files.writeString(folder.resolve("recipes-audit.json"),JSON.toJson(result));
                 }
                 case "disconnect" -> {
@@ -376,6 +439,36 @@ public final class ClientProbe {
             }
         }
         return java.util.HexFormat.of().formatHex(digest.digest());
+    }
+
+    private JsonObject auditItemTag(String id) {
+        var key = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM,
+            new net.minecraft.resources.ResourceLocation(id));
+        var result = new JsonObject();
+        result.addProperty("tag", id);
+        result.add("members", JSON.toJsonTree(BuiltInRegistries.ITEM.getTag(key)
+            .map(values -> values.stream().map(holder -> BuiltInRegistries.ITEM.getKey(holder.value()).toString()).sorted().toList())
+            .orElse(java.util.List.of())));
+        result.add("freshIngredient", auditIngredient(net.minecraft.world.item.crafting.Ingredient.of(key)));
+        return result;
+    }
+
+    private JsonObject auditIngredient(net.minecraft.world.item.crafting.Ingredient ingredient) {
+        var result = new JsonObject();
+        result.add("definition", ingredient.toJson());
+        var stacks = ingredient.getItems();
+        var items = new JsonArray();
+        boolean unresolved = !ingredient.isEmpty() && stacks.length == 0;
+        for (var stack : stacks) {
+            var entry = new JsonObject();
+            entry.addProperty("id", BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+            entry.addProperty("name", stack.getHoverName().getString());
+            if (stack.getHoverName().getString().startsWith("Empty Tag:")) unresolved = true;
+            items.add(entry);
+        }
+        result.add("items", items);
+        result.addProperty("unresolved", unresolved);
+        return result;
     }
 
 }
