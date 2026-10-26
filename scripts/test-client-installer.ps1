@@ -155,6 +155,19 @@ if(Test-Path -LiteralPath (Join-Path $embedded 'dh-client-settings.ps1')) {
     $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
     Assert ($caught -and (Get-FileDigest $mod) -eq $modBefore -and [Convert]::ToBase64String([IO.File]::ReadAllBytes($lock)) -eq [Convert]::ToBase64String($lockBefore) -and [IO.File]::ReadAllText($config) -eq "_version = 6`n") 'Invalid future DH config rejected before mod or lock mutation'
     [IO.File]::WriteAllText($config,$text)
+    # Reject a redirected configuration before any installed artifact or lock changes.
+    $configDirectory=Split-Path -Parent $config
+    $originalDirectory=$configDirectory+'-original'
+    [IO.Directory]::Move($configDirectory,$originalDirectory)
+    [void](New-Item -ItemType Junction -Path $configDirectory -Target $originalDirectory)
+    try {
+        $caught=$false;try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught=$true }
+        Assert ($caught -and (Get-FileDigest $mod) -eq $modBefore -and [Convert]::ToBase64String([IO.File]::ReadAllBytes($lock)) -eq [Convert]::ToBase64String($lockBefore) -and [IO.File]::ReadAllText($config) -eq $text) 'Redirected DH config rejected before mod, lock or settings mutation'
+    } finally {
+        # Preserve the junction fixture rather than deleting a linked directory.
+        [IO.Directory]::Move($configDirectory,$configDirectory+'-rejected-link')
+        [IO.Directory]::Move($originalDirectory,$configDirectory)
+    }
     $helper=Join-Path $embedded 'dh-client-settings.ps1';$held=$helper+'.held'
     [IO.File]::Move($helper,$held)
     try {

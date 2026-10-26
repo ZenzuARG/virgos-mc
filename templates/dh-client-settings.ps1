@@ -1,14 +1,63 @@
+function Get-VirgosDhPathMetadata([string]$Path) {
+    if(-not ('Virgos.DhPathMetadata' -as [type])) {
+        Add-Type -TypeDefinition @'
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
+namespace Virgos {
+    public sealed class DhPathMetadata {
+        public uint Attributes;
+        public uint Tag;
+        [StructLayout(LayoutKind.Sequential)]
+        private struct AttributeTagInfo { public uint Attributes; public uint Tag; }
+        [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
+        private static extern SafeFileHandle CreateFileW(string name, uint access, uint sharing,
+            IntPtr security, uint creation, uint flags, IntPtr template);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        private static extern bool GetFileInformationByHandleEx(SafeFileHandle handle, int infoClass,
+            out AttributeTagInfo info, uint size);
+        public static DhPathMetadata Read(string path) {
+            // Query this entry itself, without following a junction or a dangling symlink.
+            using(var handle=CreateFileW(path,0,7,IntPtr.Zero,3,0x02200000,IntPtr.Zero)) {
+                if(handle.IsInvalid) {
+                    int error=Marshal.GetLastWin32Error();
+                    if(error==2 || error==3) return null;
+                    throw new Win32Exception(error,"Cannot inspect DH path: "+path);
+                }
+                AttributeTagInfo info;
+                if(!GetFileInformationByHandleEx(handle,9,out info,8))
+                    throw new Win32Exception(Marshal.GetLastWin32Error(),"Cannot inspect DH path: "+path);
+                return new DhPathMetadata { Attributes=info.Attributes,Tag=info.Tag };
+            }
+        }
+        public static bool Allowed(uint attributes,uint tag) {
+            if((attributes & 0x400u)==0) return true;
+            // Only documented CloudFiles tags; unknown tags and name surrogates fail closed.
+            return (tag & 0x20000000u)==0 && (tag & 0xFFFF0FFFu)==0x9000001Au;
+        }
+    }
+}
+'@
+    }
+    return [Virgos.DhPathMetadata]::Read($Path)
+}
+
 # Keep the pinned patch and migrate known pack defaults without replacing personal settings.
 function Get-VirgosDhSettingsPlan([string]$ConfigPath,[string]$DefaultPath) {
     foreach($candidate in @($ConfigPath,$DefaultPath)) {
+        $ancestors=New-Object Collections.Generic.List[string]
         $cursor=[IO.Path]::GetFullPath($candidate)
         while($cursor) {
-            if(Test-Path -LiteralPath $cursor) {
-                if((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) {
-                    throw 'La configuración de DH no puede usar enlaces.'
-                }
-            }
+            $ancestors.Add($cursor)
             $cursor=[IO.Path]::GetDirectoryName($cursor)
+        }
+        $ancestors.Reverse()
+        foreach($entry in $ancestors) {
+            $metadata=Get-VirgosDhPathMetadata $entry
+            if($null -ne $metadata -and -not [Virgos.DhPathMetadata]::Allowed($metadata.Attributes,$metadata.Tag)) {
+                throw ('La configuracion de DH no puede usar enlaces o redirecciones desconocidas: '+$entry+'. Extrae el ZIP y elige una carpeta local sin enlaces.')
+            }
         }
     }
     $seed=[IO.File]::ReadAllText($DefaultPath)
