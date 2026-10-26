@@ -26,13 +26,14 @@ write. `--offline` never downloads. Without `--offline`, only anonymous official
 HTTPS providers are fetched; no GitHub session, token or environment proxy is
 used. A missing/corrupt provider, linked path, source/patch/license mismatch or
 output overlap fails closed. The existing fork builder caps its Java processes
-at 256 MiB and produces the complete GPL source archive. Final outputs must match
-the frozen .3 hashes, not just a successful compiler exit. The 31 frozen source
-files are fingerprinted in portable relative-path order. A NEW external copy
-restores the exact pinned text bytes (GPL license LF; other text CRLF), without
-editing the checkout. Both the output directory and its `-source` sibling must
-be new. A Linux-style checkout normalization regression is covered; actual
-cross-platform/JDK-vendor compiler byte determinism is still unproven.
+at 256 MiB and produces the complete GPL source archive. The default build refuses
+bytes that differ from the frozen .3 hashes. The hosted Linux/Temurin workflow
+passes `--allow-platform-variant`: it still validates every input, class footprint,
+CRC, source archive, license and output role, but records platform-specific artifact
+hashes in its manifest. Java compiler patch level and OS toolchain details can alter
+class bytes while leaving the validated behavior and source unchanged. A NEW external
+copy restores exact pinned text bytes (GPL license LF; other text CRLF), without
+editing the checkout; cross-platform/JDK-vendor byte identity remains unproven.
 
 The anonymous full Ketting public download was verified: 6,365,185 bytes,
 SHA256 `1614068a547d9c27d738d9d4b8d8f1ebb423afe150c810493242f4e1c2f9cf29`.

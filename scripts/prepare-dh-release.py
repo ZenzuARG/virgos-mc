@@ -136,7 +136,7 @@ def source_extras(metadata, current):
 def tree_bundle(directory):
     spec = importlib.util.spec_from_file_location('tree_release_stage', ROOT / 'scripts/build-tree-release.py')
     helper = importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
-    return helper.load_artifacts(directory)
+    return helper.load_artifacts(directory, allow_platform_variant=True)
 
 
 def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=ROOT, runner=subprocess.run, tree_artifacts=None):

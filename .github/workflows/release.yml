@@ -75,7 +75,8 @@ jobs:
         run: |
           python -B scripts/build-tree-release.py \
             --cache-root "$RUNNER_TEMP/virgos-tree-cache" \
-            --output "$RUNNER_TEMP/virgos-tree-release" --java-home "$(realpath "$JAVA_HOME")"
+            --output "$RUNNER_TEMP/virgos-tree-release" --java-home "$(realpath "$JAVA_HOME")" \
+            --allow-platform-variant
 
       - name: Build DH addon, patch and corresponding sources
         run: |

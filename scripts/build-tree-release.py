@@ -121,11 +121,13 @@ def validate_archives(paths, module, pin):
                 raise ValueError('CoreProtect compile API class mismatch')
 
 
-def load_artifacts(directory):
+def load_artifacts(directory, allow_platform_variant=False):
     directory = H.checked(directory, 'directory')
     manifest = json.loads(H.checked(directory / 'tree-release.json').read_text())
     if not isinstance(manifest, dict) or manifest.get('schema') != 1: raise ValueError('Unknown Tree release manifest')
     records = manifest.get('artifacts', [])
+    platform_variant = bool(manifest.get('platformVariantAllowed'))
+    accept_variant = bool(allow_platform_variant and platform_variant)
     if (not isinstance(records, list) or len(records) != 3 or any(not isinstance(r, dict) or not isinstance(r.get('filename'), str) for r in records)
         or {r.get('filename') for r in records} != set(EXPECTED)):
         raise ValueError('Incomplete/duplicate Tree release artifacts')
@@ -133,7 +135,8 @@ def load_artifacts(directory):
     for record in records:
         name = H.filename(record['filename'])
         if (record.get('local_source') != name or record.get('kind') != KINDS[name]
-            or record.get('sides') != ['server'] or record.get('sha256') != EXPECTED[name]
+            or record.get('sides') != ['server']
+            or (record.get('sha256') != EXPECTED[name] and not accept_variant)
             or type(record.get('size')) is not int or record['size'] < 1):
             raise ValueError('Tree artifact role/path/hash declaration rejected')
         path = H.verified(directory / name, record)
@@ -155,7 +158,7 @@ def load_artifacts(directory):
 
 
 def build(cache_root, output, java_home, offline=False, *, root=ROOT, runner=subprocess.run,
-          downloader=anonymous_download, plan=False):
+          downloader=anonymous_download, plan=False, allow_platform_variant=False):
     root = H.checked(root, 'directory');module, pin = load_pin(root)
     cache = H.checked(cache_root, 'output');output = H.checked(output, 'output')
     java_home = H.checked(java_home, 'directory')
@@ -196,9 +199,13 @@ def build(cache_root, output, java_home, offline=False, *, root=ROOT, runner=sub
     records = [{'filename': name, 'local_source': name, 'kind': KINDS[name], 'sides': ['server'],
                 'sha256': H.sha(output / name), 'size': (output / name).stat().st_size} for name in EXPECTED]
     for record in records:
-        if record['sha256'] != EXPECTED[record['filename']]: raise ValueError('Tree build differs from frozen release pin')
-    (output / 'tree-release.json').write_text(json.dumps({'schema': 1, 'artifacts': records}, indent=2) + '\n')
-    load_artifacts(output)
+        if record['sha256'] != EXPECTED[record['filename']] and not allow_platform_variant:
+            raise ValueError('Tree build differs from frozen release pin')
+    manifest = {'schema': 1, 'artifacts': records,
+                'byteIdenticalFrozen': all(record['sha256'] == EXPECTED[record['filename']] for record in records),
+                'platformVariantAllowed': bool(allow_platform_variant)}
+    (output / 'tree-release.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    load_artifacts(output, allow_platform_variant=allow_platform_variant)
     return {'artifacts': str(output), 'version': VERSION, 'nativeAcceptance': 'UNPROVEN: controlled public trial'}
 
 
@@ -207,7 +214,10 @@ if __name__ == '__main__':
     for name in ['cache-root', 'output', 'java-home']: parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--offline', action='store_true', help='Use verified cache only; never contact network')
     parser.add_argument('--plan', action='store_true', help='Verify cached inputs and print the build command without JVM/output writes')
+    parser.add_argument('--allow-platform-variant', action='store_true',
+                        help='Accept a byte-different but fully validated artifact from another Java/OS toolchain')
     args = parser.parse_args()
-    try: print(json.dumps(build(args.cache_root, args.output, args.java_home, args.offline, plan=args.plan)))
+    try: print(json.dumps(build(args.cache_root, args.output, args.java_home, args.offline, plan=args.plan,
+                               allow_platform_variant=args.allow_platform_variant)))
     except (ValueError, OSError, KeyError, zipfile.BadZipFile, subprocess.SubprocessError) as error:
         parser.exit(1, 'Tree release refused: ' + str(error) + '\n')
