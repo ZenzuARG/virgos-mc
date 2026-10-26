@@ -13,7 +13,9 @@
     "DhClientLevelMixin",
     "FullDataPayloadMixin",
     "FullDataPayloadReceiverMixin",
-    "FullDataRequestQueueMixin"
+    "FullDataRequestQueueMixin",
+    "RemoteWorldRetrievalQueueMixin",
+    "BackpackKeyGuardMixin"
   ],
   "server": [
     "ChunkyReadinessMixin",

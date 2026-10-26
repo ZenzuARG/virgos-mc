@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "version": "2.2.1",
+  "clientRelease": "2.2.1-r15",
+  "clientFingerprint": "virgos-client-2.2.1-r15",
+  "status": "preparation-in-progress",
+  "publication": {
+    "published": false
+  },
+  "publicDeployment": {
+    "deployed": false,
+    "preserveWorldsPlayersClaimsAndDh": true
+  },
+  "checks": {
+    "dhLiveProgressMixin": "SOURCE_AND_COMPAT_BUILD_PENDING",
+    "backpackKeyGuard": "SOURCE_AND_COMPAT_BUILD_PENDING",
+    "treeAllModdedSpecies": "UNPROVEN_MAPPING_PENDING",
+    "ci": "NOT_RUN",
+    "nativeDhTransfer": "UNPROVEN"
+  },
+  "notes": [
+    "B remains default backpack key; nested container opens are guarded client-side.",
+    "Remote queue estimate decrements on successful retrieval; server protocol is unchanged."
+  ]
+}
