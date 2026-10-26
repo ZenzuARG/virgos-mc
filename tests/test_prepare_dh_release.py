@@ -95,6 +95,82 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual(before, {p: p.read_bytes() for p in before})
         self.assertIn('--offline', self.calls[0][0])
 
+    def test_existing_corresponding_sources_preserved_and_verified_before_children(self):
+        extra = self.put(self.metadata.parent / 'sources/Existing-GPL.txt', b'full existing license')
+        current = json.loads(self.metadata.read_text())
+        current['sourceFiles'] = [{'filename': extra.name, 'local_source': 'sources/' + extra.name,
+                                   'sha256': M.sha(extra), 'size': extra.stat().st_size}]
+        self.write(self.metadata, current)
+        self.prepare()
+        staged = json.loads((self.output / 'release.json').read_text())
+        self.assertEqual(len(staged['sourceFiles']), 8)
+        self.assertEqual((self.output / 'artifacts' / extra.name).read_bytes(), extra.read_bytes())
+
+    def test_existing_source_rejection_has_no_output_or_children(self):
+        for item in [
+            {'filename': 'source.zip', 'local_source': '../outside.zip', 'sha256': '0' * 64},
+            {'filename': 'source.zip', 'local_source': 'missing.zip', 'sha256': '0' * 64},
+            {'filename': 'virgos_local_qa.zip', 'local_source': 'missing.zip', 'sha256': '0' * 64},
+        ]:
+            current = json.loads(self.metadata.read_text());current['sourceFiles'] = [item]
+            self.write(self.metadata, current)
+            with self.assertRaises((ValueError, OSError)): self.prepare()
+            self.assertFalse(self.output.exists());self.assertFalse(self.calls)
+
+    def test_tree_stages_gpl_and_server_plugin_without_client_role(self):
+        import test_tree_release_build as tree_tests
+        fixture = tree_tests.TreeReleaseTests('test_mock_build_and_strict_artifact_roles_hash_size_paths')
+        fixture.setUp()
+        with patch.dict(tree_tests.M.EXPECTED, fixture.expected, clear=True):
+            fixture.build()
+            self.write(self.root / 'pack/administration.lock.json', [{'filename': 'AuthMe.jar'},
+                {'project': 'tree-feller', 'filename': tree_tests.M.JAR, 'hash': fixture.expected[tree_tests.M.JAR],
+                 'hash_algorithm': 'sha256', 'sides': ['server'], 'mode': 'required'}])
+            with patch.object(M, 'tree_bundle', side_effect=tree_tests.M.load_artifacts):
+                self.prepare(tree_artifacts=fixture.output)
+        release = json.loads((self.output / 'release.json').read_text())
+        self.assertEqual(len(release['sourceFiles']), 9)
+        self.assertTrue((self.output / 'artifacts' / tree_tests.M.SOURCE).is_file())
+        custom = json.loads((self.output / 'custom-artifacts.lock.json').read_text())['artifacts']
+        self.assertEqual(sum('client' in item['sides'] for item in custom), 3)
+        self.assertFalse(any('TreeFeller' in item['filename'] or 'SkinsRestorer' in item['filename'] for item in custom))
+        admin = json.loads((self.output / 'administration.lock.json').read_text())
+        tree = next(item for item in admin if item.get('project') == 'tree-feller')
+        self.assertEqual(tree['local_source'], str(self.output / 'artifacts' / tree_tests.M.JAR))
+
+    def test_bad_tree_manifest_rejects_before_children(self):
+        directory = self.base / 'tree';directory.mkdir()
+        self.write(directory / 'tree-release.json', {'schema': 1, 'artifacts': []})
+        with self.assertRaises(ValueError): self.prepare(tree_artifacts=directory)
+        self.assertFalse(self.output.exists());self.assertFalse(self.calls)
+
+    def test_duplicate_existing_sources_reject_before_children(self):
+        extra = self.put(self.metadata.parent / 'license.txt', b'license')
+        record = {'filename': extra.name, 'local_source': extra.name, 'sha256': M.sha(extra)}
+        current = json.loads(self.metadata.read_text());current['sourceFiles'] = [record, record]
+        self.write(self.metadata, current)
+        with self.assertRaises(ValueError):self.prepare()
+        self.assertFalse(self.output.exists());self.assertFalse(self.calls)
+
+    def test_existing_source_hash_size_rejection_has_no_children(self):
+        extra = self.put(self.metadata.parent / 'license.txt', b'complete existing license')
+        for change in [{'sha256': '0' * 64}, {'size': 1}]:
+            item = {'filename': extra.name, 'local_source': extra.name, 'sha256': M.sha(extra), 'size': extra.stat().st_size}
+            item.update(change)
+            current = json.loads(self.metadata.read_text());current['sourceFiles'] = [item]
+            self.write(self.metadata, current)
+            with self.assertRaises(ValueError):self.prepare()
+            self.assertFalse(self.output.exists());self.assertFalse(self.calls)
+
+    def test_source_archive_traversal_rejected_before_children(self):
+        extra = self.metadata.parent / 'source.zip'
+        self.jar(extra, {'../escaped.txt': b'not safe'})
+        current = json.loads(self.metadata.read_text())
+        current['sourceFiles'] = [{'filename': extra.name, 'local_source': extra.name, 'sha256': M.sha(extra)}]
+        self.write(self.metadata, current)
+        with self.assertRaises(ValueError):self.prepare()
+        self.assertFalse(self.output.exists());self.assertFalse(self.calls)
+
     def test_bad_dependencies_reject_without_output_or_children(self):
         for relative in ['pack/tools/asm.jar', 'pack/sources/main.zip', 'pack/downloads/DistantHorizons-3.3.3-1.20.1-fabric-forge.jar']:
             path = self.cache / relative; old = path.read_bytes(); path.write_bytes(b'wrong')

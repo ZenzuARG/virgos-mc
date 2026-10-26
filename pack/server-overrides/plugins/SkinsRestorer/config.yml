@@ -1,0 +1,31 @@
+# SkinsRestorer 15.12.6 keys from the native-generated laboratory schema.
+# Matching-name visual restoration only; this does not verify account ownership.
+database:
+    type: FILE
+commands:
+    forceDefaultPermissions: false
+    disableSkinCommand: true
+    disableSkullCommand: true
+    disableGUICommand: true
+gui:
+    custom:
+        enabled: false
+    players:
+        enabled: false
+storage:
+    defaultSkins:
+        enabled: false
+        applyForPremium: false
+        list: []
+login:
+    noSkinIfLoginCanceled: true
+    alwaysApplyPremium: false
+api:
+    mineskinAPIKey: ''
+    fetchRecommendedSkins: false
+    elyByEnabled: false
+advanced:
+    disableOnJoinSkins: false
+    playerHeadChatObjects: false
+dev:
+    debug: false

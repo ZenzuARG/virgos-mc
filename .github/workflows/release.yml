@@ -71,11 +71,18 @@ jobs:
         working-directory: dev/virgos-core
         run: bash gradlew check jar codexJar -PbuildEpoch=0 --no-daemon
 
+      - name: Build pinned server-only TreeFeller and complete GPL sources
+        run: |
+          python -B scripts/build-tree-release.py \
+            --cache-root "$RUNNER_TEMP/virgos-tree-cache" \
+            --output "$RUNNER_TEMP/virgos-tree-release" --java-home "$(realpath "$JAVA_HOME")"
+
       - name: Build DH addon, patch and corresponding sources
         run: |
           python -B scripts/prepare-dh-release.py \
             --metadata "$CANDIDATE_METADATA" --cache-root "$GITHUB_WORKSPACE/.cache" \
-            --inputs-dir "$RUNNER_TEMP/virgos-release-inputs" --java-home "$(realpath "$JAVA_HOME")"
+            --inputs-dir "$RUNNER_TEMP/virgos-release-inputs" --java-home "$(realpath "$JAVA_HOME")" \
+            --tree-artifacts "$RUNNER_TEMP/virgos-tree-release"
 
       - name: Build explicit candidate installer and Modrinth pack
         run: |
@@ -109,7 +116,17 @@ jobs:
                       assert client['clientRelease'] == current['clientRelease']
                       assert client['clientFingerprint'] == current['clientFingerprint']
                       assert len([item for item in client['files'] if item.get('bundled')]) == 3
+          # Server-plugin assets remain outside client custom-mod roles.
+          tree = temporary / 'virgos-tree-release'
+          manifest = json.loads((tree / 'tree-release.json').read_text())
+          assert manifest['schema'] == 1 and len(manifest['artifacts']) == 3
+          for item in manifest['artifacts']:
+              path = tree / item['filename']
+              assert item['sides'] == ['server'] and path.stat().st_size == item['size']
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256']
           destination = Path('dist'); destination.mkdir(exist_ok=True)
+          for item in manifest['artifacts']:
+              shutil.copyfile(tree / item['filename'], destination / item['filename'])
           for name in [*[item['name'] for item in report['files']], 'release.json']:
               shutil.copyfile(output / name, destination / name)
           PY

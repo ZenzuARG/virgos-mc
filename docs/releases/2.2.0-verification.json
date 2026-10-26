@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "version": "2.2.0",
+  "clientRelease": "2.2.0-r14",
+  "clientFingerprint": "virgos-client-2.2.0-r14",
+  "status": "local-packages-verified-public-trial-pending",
+  "publication": {
+    "published": false,
+    "authorization": "human-authorized-local-gh-session-source-ci-and-combined-v2.2.0-release"
+  },
+  "publicDeployment": {
+    "deployed": false,
+    "preserveWorldsPlayersClaimsAndDh": true,
+    "mode": "human-authorized-controlled-trial"
+  },
+  "checks": {
+    "addonPinsAndDependencies": "PASS",
+    "serverPluginSourcePipeline": "PASS",
+    "oneDrivePathGuardDeterministic": "PASS",
+    "actualFriendCloudProvider": "UNPROVEN",
+    "newIdentityCoreCodexBuild": "PASS_OFFLINE_PRODUCTION_CHECKS",
+    "treeReleaseHelperActualBuild": "PASS_WINDOWS_JDK_17_0_20_1",
+    "installerAndMrpack": "PASS_ACTUAL_AND_INDEPENDENT",
+    "ci": "NOT_RUN",
+    "craftsAndAdditionsBoundedNative": "PASS_PREVIOUS_IDENTITY",
+    "skinsMatchingNameBoundedNative": "PASS_LAB_ONLY",
+    "bellsAndWhistlesNative": "UNPROVEN",
+    "enchantmentIndustryNative": "UNPROVEN",
+    "combinedPackPerformance": "UNPROVEN",
+    "treeFellingClaimsReplantNative": "UNPROVEN",
+    "newIdentityDhSharedDownloadAndUpdates": "UNPROVEN",
+    "realClientDhNoneRootCause": "UNRESOLVED",
+    "offlineClientDependencyStage": "PASS_128_PINNED_ARTIFACTS",
+    "repeatedPackageBytes": "IDENTICAL",
+    "pythonSourceSuite": "PASS_88_TESTS_3_SKIPS"
+  },
+  "limitations": [
+    "Ten modded-tree catalog gaps remain; static mappings are not native growth or claim-protection acceptance.",
+    "Successful DH negotiation in a laboratory is not proof of shared-cache download or a fix for the real client's CLIENT_ONLY state.",
+    "No QA driver, trace overlay, fixture account, world or seeded client cache may enter the public release."
+  ],
+  "treeBuild": {
+    "runtimeSha256": "8a88c0ba36b806ba2459e00f125b3a7951068cb85b5ac31b398df118c03ac61f",
+    "sourcesSha256": "1cd1f907a40fb15c4c95e9e73e915b3fda96d97ce49ab86b7ded1f3a1a309264",
+    "passedProbes": 11,
+    "skippedOptionalCompatibilityProbes": 2,
+    "crossPlatformCompilerReproducibility": "UNPROVEN"
+  },
+  "runtimeArtifactsSha256": {
+    "virgos_core-2.0.0.jar": "76f0f9c42321749a911815818546b1841f203447fe67fc77f12a3af34817169d",
+    "virgos_codex-2.0.0.jar": "c15b632f54cd523ab7148820b8cdb3cd3cf4c9db2e4d335752793f7a10c458e7",
+    "DistantHorizons-3.3.3-1.20.1-fabric-forge.jar": "3aca79ff06e9522c84c3af96e7aa75bdec65432e79fa384353ccded89f37e21b",
+    "virgos_dh_compat-0.1.0.jar": "7ab0cb50e54cfb0671d9e5939cb81577e425181cb51a997edb306d029faa4ad3"
+  },
+  "localPackages": [
+    {
+      "name": "Virgos-MC-2.2.0-instalar.zip",
+      "bytes": 51979985,
+      "sha256": "b38fb03bd865c2da65fc51557093208212742b8710dc5b8cf3c6950ee021ea03"
+    },
+    {
+      "name": "Virgos-MC-2.2.0.mrpack",
+      "bytes": 51949366,
+      "sha256": "f6f97af230dcf21787a9effd2aaea4d8e586828d0309f9440be1819fce6eb58c"
+    }
+  ],
+  "packaging": {
+    "clientFiles": 131,
+    "upstreamDownloads": 128,
+    "bundledClientMods": 3,
+    "requiredClientFiles": 122,
+    "optionalClientFiles": 9,
+    "correspondingSourcePayloads": 9,
+    "qaExcluded": true,
+    "defaultMemoryMiB": 8192,
+    "independentArchiveVerification": "PASS",
+    "compatibilityClassBytesVersusPublishedR13": "IDENTICAL_RESOURCE_LINE_ENDINGS_ONLY"
+  },
+  "skippedChecks": [
+    "Two source-suite symlink-privilege tests unavailable on this machine.",
+    "Optional source-suite packaged-QA privacy inputs absent.",
+    "Two optional Tree compatibility probes not supplied by the public build helper.",
+    "Linux/JDK-vendor reproducibility, CI and native gameplay/transfer checks not performed."
+  ]
+}

@@ -360,3 +360,26 @@ tasks.register('checkIngredientCache', JavaExec) {
     }
 }
 tasks.named('check').configure { dependsOn 'checkIngredientCache' }
+
+// Isolated universal observer, never included by jar/codexJar or release tasks.
+sourceSets {
+    addonsQa {
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+sourceSets.test.compileClasspath += sourceSets.addonsQa.output
+sourceSets.test.runtimeClasspath += sourceSets.addonsQa.output
+
+tasks.register('addonsQaJar', Jar) {
+    archiveBaseName = 'virgos_addons_qa'
+    from sourceSets.addonsQa.output
+    finalizedBy 'reobfAddonsQaJar'
+}
+reobf { addonsQaJar {} }
+tasks.register('checkAddonsQa', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.addonsqa.AddonsQaTest'
+}
+tasks.named('check').configure { dependsOn 'checkAddonsQa' }

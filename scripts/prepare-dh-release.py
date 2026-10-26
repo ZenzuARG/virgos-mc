@@ -1,6 +1,7 @@
 """Prepare verified DH release inputs locally; never publish or modify release locks."""
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -101,7 +102,44 @@ def deterministic_sources(root, target):
             archive.writestr(info, source.read_bytes())
 
 
-def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=ROOT, runner=subprocess.run):
+def source_extras(metadata, current):
+    result = []
+    names = set()
+    records = current.get('sourceFiles', [])
+    if not isinstance(records, list): raise ValueError('Corresponding sources must be a list')
+    for record in records:
+        if not isinstance(record, dict): raise ValueError('Invalid corresponding source record')
+        name = filename(record['filename'])
+        relative = record.get('local_source', '')
+        if (name in names or not name.endswith(('.zip', '.txt')) or not isinstance(relative, str)
+            or not relative or '\\' in relative or ':' in relative or Path(relative).is_absolute()
+            or '..' in Path(relative).parts or 'virgos_local_qa' in name.lower() or 'trace' in name.lower()):
+            raise ValueError('Unsafe/duplicate corresponding source')
+        if not re.fullmatch(r'[a-f0-9]{64}', str(record.get('sha256', ''))): raise ValueError('Corresponding source requires SHA256')
+        path = verified(metadata.parent / relative, record)
+        if 'size' in record and (type(record['size']) is not int or record['size'] != path.stat().st_size):
+            raise ValueError('Corresponding source size mismatch')
+        if name.endswith('.zip'):
+            with zipfile.ZipFile(path) as archive:
+                if archive.testzip(): raise ValueError('Corresponding source CRC mismatch')
+                entries = set()
+                for entry in archive.infolist():
+                    if (entry.filename in entries or '\\' in entry.filename or ':' in entry.filename
+                        or entry.filename.startswith('/') or '..' in Path(entry.filename).parts
+                        or (entry.external_attr >> 16) & 0o170000 == 0o120000):
+                        raise ValueError('Unsafe/duplicate corresponding source ZIP entry')
+                    entries.add(entry.filename)
+        names.add(name);result.append((dict(record, local_source='artifacts/' + name), path))
+    return result
+
+
+def tree_bundle(directory):
+    spec = importlib.util.spec_from_file_location('tree_release_stage', ROOT / 'scripts/build-tree-release.py')
+    helper = importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
+    return helper.load_artifacts(directory)
+
+
+def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=ROOT, runner=subprocess.run, tree_artifacts=None):
     root = checked(root, 'directory'); metadata = checked(metadata); cache = checked(cache_root, 'directory')
     output = checked(inputs_dir, 'output'); java_home = checked(java_home, 'directory')
     for protected in [root, cache, metadata.parent, java_home, *[p.resolve() for p in PUBLIC]]:
@@ -117,6 +155,8 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
         or current.get('clientFingerprint') != 'virgos-client-' + release
         or type(current.get('installer')) is not int or current['installer'] < 1):
         raise ValueError('Invalid candidate release metadata')
+    extras = source_extras(metadata, current)
+    tree = tree_bundle(tree_artifacts) if tree_artifacts is not None else []
     expected = {'RELEASE': release, 'FINGERPRINT': current['clientFingerprint']}
     source = checked(root / 'dev/virgos-core/src/shared/java/mc/virgos/update/ClientRelease.java').read_text('utf-8')
     source_values = dict(re.findall(r'public\s+static\s+final\s+String\s+(RELEASE|FINGERPRINT)\s*=\s*"([^"]+)"', source))
@@ -135,6 +175,14 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
         licenses = {name: archive.read(name) for name in ['LICENSE.txt', 'LICENSE.LESSER.txt', 'LICENSE-LOGOS.txt']}
     administration = json.loads(checked(root / 'pack/administration.lock.json').read_text('utf-8'))
     administration = [item for item in administration if not item.get('filename', '').lower().startswith('distanthorizonssupport-')]
+    if tree:
+        plugin = next(record for record, _ in tree if record['kind'] == 'server-plugin')
+        matches = [item for item in administration if item.get('project') == 'tree-feller']
+        if (len(matches) != 1 or matches[0].get('hash') != plugin['sha256']
+            or matches[0].get('filename') != plugin['filename'] or matches[0].get('sides') != ['server']
+            or matches[0].get('mode') != 'required'):
+            raise ValueError('Tree server administration pin mismatch')
+
     # All identity, hash, source and output guards have passed before any child/output writes.
     wrapper = checked(root / ('dev/virgos-core/gradlew.bat' if os.name == 'nt' else 'dev/virgos-core/gradlew'))
     command = ([str(wrapper)] if os.name == 'nt' else ['bash', str(wrapper)]) + ['-p', str(root / 'dev/dh-compat'),
@@ -166,7 +214,31 @@ def prepare(metadata, cache_root, inputs_dir, java_home, offline=False, *, root=
               'Rebuild using scripts/prepare-dh-release.py and dev/dh-compat/build-artifacts.py from this release source.\n')
     (artifacts / 'DH-SOURCES.txt').write_text(notice, encoding='utf-8', newline='\n')
     source_names = [p.name for p in source_inputs] + ['DistantHorizons-' + n for n in licenses] + ['Virgos-DH-modifications-source.zip', 'DH-SOURCES.txt']
-    current['sourceFiles'] = [{'filename': n, 'local_source': 'artifacts/' + n, 'sha256': sha(artifacts / n)} for n in source_names]
+    merged = {item['filename']: item for item, _ in extras}
+    for record, path in extras:
+        target = artifacts / record['filename']
+        if target.exists() and sha(target) != sha(path): raise ValueError('Conflicting corresponding source')
+        shutil.copyfile(path, target)
+    for name in source_names:
+        generated = {'filename': name, 'local_source': 'artifacts/' + name, 'sha256': sha(artifacts / name)}
+        if name in merged and merged[name]['sha256'] != generated['sha256']:
+            raise ValueError('Conflicting generated corresponding source')
+        merged.setdefault(name, generated)
+    for record, path in tree:
+        name = record['filename']
+        if (artifacts / name).exists():
+            if record['kind'] == 'server-plugin' or sha(artifacts / name) != sha(path): raise ValueError('Duplicate Tree release artifact')
+        else: shutil.copyfile(path, artifacts / name)
+        if record['kind'] == 'server-plugin':
+            matches = [item for item in administration if item.get('project') == 'tree-feller']
+            if len(matches) != 1 or matches[0].get('hash') != record['sha256'] or matches[0].get('sides') != ['server']:
+                raise ValueError('Tree server administration pin mismatch')
+            matches[0]['local_source'] = str(output / 'artifacts' / name)
+        else:
+            extra = {'filename': name, 'local_source': 'artifacts/' + name, 'sha256': record['sha256'], 'size': record['size']}
+            if name in merged and merged[name]['sha256'] != extra['sha256']: raise ValueError('Conflicting Tree source')
+            merged.setdefault(name, extra)
+    current['sourceFiles'] = list(merged.values())
     for name, value in [('release.json', current), ('custom-artifacts.lock.json', {'schema': 1, 'artifacts': custom}),
                         ('administration.lock.json', administration), ('client-update.json', {'schema': 1, 'release': release,
                          'fingerprint': current['clientFingerprint'], 'installer': 'Virgos-MC-' + version + '-instalar.zip'})]:
@@ -180,8 +252,9 @@ if __name__ == '__main__':
     for flag in ['metadata', 'cache-root', 'inputs-dir']: parser.add_argument('--' + flag, required=True, type=Path)
     parser.add_argument('--java-home', type=Path, default=os.environ.get('JAVA_HOME'))
     parser.add_argument('--offline', action='store_true')
+    parser.add_argument('--tree-artifacts', type=Path, help='Verified external build-tree-release output; stage server-only plugin and complete GPL sources')
     arguments = parser.parse_args()
     if not arguments.java_home: parser.error('--java-home or JAVA_HOME is required')
-    try: print(json.dumps(prepare(arguments.metadata, arguments.cache_root, arguments.inputs_dir, arguments.java_home, arguments.offline)))
+    try: print(json.dumps(prepare(arguments.metadata, arguments.cache_root, arguments.inputs_dir, arguments.java_home, arguments.offline, tree_artifacts=arguments.tree_artifacts)))
     except (ValueError, OSError, KeyError, subprocess.CalledProcessError, zipfile.BadZipFile) as error:
         parser.exit(1, 'Preparation refused: ' + str(error) + '\n')

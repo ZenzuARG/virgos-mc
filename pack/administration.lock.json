@@ -49,23 +49,41 @@
     ],
     "mode": "required",
     "source": "https://github.com/DiscordSRV/DiscordSRV/releases/tag/v1.30.5"
+  },
+  {
+    "project": "skinsrestorer",
+    "version": "15.12.6",
+    "filename": "SkinsRestorer-15.12.6.jar",
+    "url": "https://github.com/SkinsRestorer/SkinsRestorer/releases/download/15.12.6/SkinsRestorer.jar",
+    "hash_algorithm": "sha256",
+    "hash": "a85b4a370f988741c9a38f4d0498262edacbf3220314790ac1c127461996359c",
+    "size": 8016648,
+    "sides": [
+      "server"
+    ],
+    "mode": "required",
+    "root": true,
+    "source": "https://github.com/SkinsRestorer/SkinsRestorer/releases/tag/15.12.6"
+  },
+  {
+    "project": "tree-feller",
+    "version": "1.33.0-virgos.3",
+    "filename": "TreeFeller-1.33.0-virgos.3.jar",
+    "url": "https://github.com/ZenzuARG/virgos-mc/releases/download/v2.2.0/TreeFeller-1.33.0-virgos.3.jar",
+    "hash_algorithm": "sha256",
+    "hash": "8a88c0ba36b806ba2459e00f125b3a7951068cb85b5ac31b398df118c03ac61f",
+    "sides": [
+      "server"
+    ],
+    "mode": "required",
+    "root": true,
+    "source": "https://github.com/ThizThizzyDizzy/tree-feller/releases/tag/v1.33.0",
+    "license": "GPL-3.0",
+    "source_archive": {
+      "filename": "TreeFeller-1.33.0-virgos.3-sources.zip",
+      "url": "https://github.com/ZenzuARG/virgos-mc/releases/download/v2.2.0/TreeFeller-1.33.0-virgos.3-sources.zip",
+      "hash_algorithm": "sha256",
+      "hash": "1cd1f907a40fb15c4c95e9e73e915b3fda96d97ce49ab86b7ded1f3a1a309264"
+    }
   }
-,
-{
-    "project":  "distant-horizons-support",
-    "project_id":  "IjY7seTG",
-    "version_id":  "R1UjEyjz",
-    "version":  "0.14.0",
-    "filename":  "DistantHorizonsSupport-0.14.0.jar",
-    "url":  "https://cdn.modrinth.com/data/IjY7seTG/versions/R1UjEyjz/DistantHorizonsSupport-0.14.0.jar",
-    "hash_algorithm":  "sha512",
-    "hash":  "b210b81df67ee36fa048406096fbc90805af81d978d6aa53f0bda91f4120d76b1b4fe6367b980b3c2036eac233c30cf86f881cf5c574b809c8635607c9ff991a",
-    "size":  454213,
-    "sides":  [
-                  "server"
-              ],
-    "mode":  "required",
-    "root":  true,
-    "source":  "https://modrinth.com/plugin/distant-horizons-support/version/0.14.0"
-}
 ]

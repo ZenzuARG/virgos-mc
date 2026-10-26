@@ -1,0 +1,1 @@
+Automatic plugin updates are disabled; use the verified release pipeline.
