@@ -8,6 +8,14 @@ from pathlib import Path
 
 SCHEMA = 1
 AUTHORIZED_LAB = Path('D:/proyectos/mc-server-lab/dh-fullpack-20261024')
+ADDON_LAB_ROOT = Path('D:/proyectos/mc-server-lab/create-addons-20261025')
+ADDON_VARIANTS = ('baseline', 'crafts', 'bells', 'cei', 'combined', 'baseline-after')
+SERVER_PLUGIN_VARIANTS = ('skins', 'forestry', 'forestry-input', 'forestry-input-v2')
+DIAGNOSTIC_VARIANTS = ('dh-diagnostic',)
+SERVER_PLUGIN_PINS = {
+    'TreeFeller-1.33.0-virgos.3.jar': '8a88c0ba36b806ba2459e00f125b3a7951068cb85b5ac31b398df118c03ac61f',
+    'SkinsRestorer-15.12.6.jar': 'a85b4a370f988741c9a38f4d0498262edacbf3220314790ac1c127461996359c',
+}
 DH_PREFIX = 'DistantHorizons-3.3.3'
 CONFIG_DIRS = {'aether', 'alexscaves_biome_generation', 'alexsmobs', 'ars_nouveau',
                'artifacts', 'bettercombat', 'betterdeserttemples', 'betterfortresses',
@@ -19,6 +27,14 @@ CONFIG_SUFFIXES = {'.toml', '.json', '.json5', '.properties', '.txt', '.html'}
 VIRGOS_FILES = {'client-update.json', 'expeditions.json', 'progression.json', 'services.json'}
 FORBIDDEN = re.compile(r'token|credential|secret|authkey|session|password|account|\.db$|\.sqlite', re.I)
 REMOTE = re.compile(r'virgos-mc\.playit|playit\.(?:gg|plus)|discord(?:app)?\.com/api/webhooks', re.I)
+
+
+def authorized_lab(path):
+    """Exact destinations only; normal link/overlap/runtime guards remain independent."""
+    requested = Path(path).absolute()
+    return requested == AUTHORIZED_LAB.absolute() or requested in {
+        (ADDON_LAB_ROOT / name).absolute()
+        for name in ADDON_VARIANTS + SERVER_PLUGIN_VARIANTS + DIAGNOSTIC_VARIANTS}
 
 
 def sha(path):
@@ -91,6 +107,30 @@ def verified_artifacts(directory, client):
     return result
 
 
+def verified_server_plugins(directory):
+    """Explicit pinned plugins are never distributed to a client or mods directory."""
+    directory = Path(directory)
+    manifest = json.loads(regular(directory / 'compat-manifest.json').read_text('utf-8'))
+    entries = manifest.get('serverPlugins', [])
+    if manifest.get('schema') != SCHEMA or not isinstance(entries, list):
+        raise ValueError('Invalid server-plugin manifest')
+    mod_names = {entry.get('filename') for entry in manifest.get('artifacts', [])}
+    result, seen = [], set()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError('Invalid server-plugin entry')
+        name = entry.get('filename')
+        if not isinstance(name, str) or name not in SERVER_PLUGIN_PINS or name in seen or name in mod_names:
+            raise ValueError('Unknown, duplicate or misplaced server plugin')
+        expected = SERVER_PLUGIN_PINS[name]
+        path = regular(directory / name)
+        if entry.get('sha256') != expected or sha(path) != expected:
+            raise ValueError('Server-plugin hash mismatch: ' + name)
+        seen.add(name)
+        result.append(path)
+    return result
+
+
 def config_allowed(relative):
     parts = relative.parts
     if FORBIDDEN.search(str(relative)) or relative.suffix.lower() not in CONFIG_SUFFIXES:
@@ -150,7 +190,17 @@ def identity(name):
     return str(uuid.UUID(bytes=hashlib.md5(('OfflinePlayer:' + name).encode()).digest(), version=3))
 
 
-def write_safety(lab):
+def skin_fixture_identity(lab, plugins):
+    """Public nickname fixture, never Microsoft login or ownership verification."""
+    name = 'SkinsRestorer-15.12.6.jar'
+    candidates = [path for path in plugins if path.name == name]
+    if (Path(lab).absolute() != (ADDON_LAB_ROOT / 'skins').absolute() or len(candidates) != 1
+            or sha(regular(candidates[0])) != SERVER_PLUGIN_PINS[name]):
+        raise ValueError('The skin fixture requires the exact skins lab and pinned SkinsRestorer')
+    return {'name': 'Notch', 'uuid': identity('Notch'), 'role': 'client2', 'ownershipVerified': False}
+
+
+def write_safety(lab, skin_fixture=None):
     lab = Path(lab)
     props = {'server-ip': '127.0.0.1', 'server-port': '25575', 'level-name': 'virgos_world',
              'online-mode': 'false', 'white-list': 'true', 'enforce-whitelist': 'true',
@@ -159,7 +209,8 @@ def write_safety(lab):
              'motd': 'Isolated DH full-pack laboratory', 'enable-jmx-monitoring': 'false'}
     write(lab / 'server/server.properties', ''.join(f'{k}={v}\n' for k, v in props.items()))
     write(lab / 'server/eula.txt', 'eula=true\n')
-    write(lab / 'server/whitelist.json', json.dumps([{'name': n, 'uuid': identity(n)} for n in ['VirgosQA1', 'VirgosQA2']]))
+    names = ['VirgosQA1', skin_fixture['name'] if skin_fixture else 'VirgosQA2']
+    write(lab / 'server/whitelist.json', json.dumps([{'name': n, 'uuid': identity(n)} for n in names]))
     write(lab / 'server/config/virgos/maintenance.json', json.dumps({
         'schema': 1, 'enabled': False, 'intervalMinutes': 120, 'idleMinutes': 10,
         'backupOnCleanStop': False, 'autoRestartOnUnexpectedExit': False}))
@@ -235,6 +286,25 @@ def validate_run(lab, role):
         raise ValueError('Lab identity mismatch')
     if role not in {'server', 'client', 'client2'}:
         raise ValueError('Invalid role')
+    fixture = manifest.get('skinFixture')
+    if fixture is not None:
+        plugin = lab / 'server/plugins/SkinsRestorer-15.12.6.jar'
+        expected_fixture = skin_fixture_identity(lab, [plugin])
+        plugin_entry = {'path': 'server/plugins/' + plugin.name, 'sha256': sha(plugin)}
+        if fixture != expected_fixture or plugin_entry not in manifest.get('files', []):
+            raise ValueError('Invalid recorded skin fixture')
+        expected_names = ['VirgosQA1', 'Notch']
+        expected_whitelist = [{'name': name, 'uuid': identity(name)} for name in expected_names]
+        if json.loads(regular(lab / 'server/whitelist.json').read_text()) != expected_whitelist:
+            raise ValueError('Skin fixture whitelist mismatch')
+        for client_role, name in [('client', 'VirgosQA1'), ('client2', 'Notch')]:
+            args = json.loads(regular(lab / (client_role + '-args.json')).read_text())
+            if not isinstance(args, list) or not all(isinstance(arg, str) for arg in args):
+                raise ValueError('Skin fixture launch identity mismatch')
+            for flag, expected in [('--username', name), ('--uuid', identity(name)), ('--accessToken', '0')]:
+                index = args.index(flag) if args.count(flag) == 1 else -1
+                if index < 0 or index + 1 >= len(args) or args[index + 1] != expected:
+                    raise ValueError('Skin fixture launch identity mismatch')
     props = dict(line.split('=', 1) for line in regular(lab / 'server/server.properties').read_text().splitlines() if '=' in line)
     expected = {'server-ip': '127.0.0.1', 'server-port': '25575', 'enable-rcon': 'false',
                 'enable-query': 'false', 'white-list': 'true', 'level-name': 'virgos_world'}

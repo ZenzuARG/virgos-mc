@@ -10,7 +10,7 @@ from pathlib import Path
 from dh_fullpack_lab import policy as p
 
 
-def client_state(status):
+def client_state(status, fixture=None, role=None):
     """Only observed title/game states establish startup; loading errors are fatal."""
     screen = status.get('screen', '')
     if not isinstance(screen, str):
@@ -20,6 +20,10 @@ def client_state(status):
     if screen == 'net.minecraft.client.gui.screens.TitleScreen':
         return 'ready'
     if screen == 'game' and status.get('name') in {'VirgosQA1', 'VirgosQA2'}:
+        return 'ready'
+    expected = {'name': 'Notch', 'uuid': p.identity('Notch'), 'role': 'client2', 'ownershipVerified': False}
+    if (screen == 'game' and role == 'client2' and fixture == expected
+            and status.get('name') == 'Notch' and status.get('uuid') == expected['uuid']):
         return 'ready'
     return 'pending'
 
@@ -98,7 +102,7 @@ def run(lab, role, lifetime=1200, boot_timeout=300):
                     if status.exists():
                         try:
                             observation = json.loads(status.read_text())
-                            current = client_state(observation)
+                            current = client_state(observation, manifest.get('skinFixture'), role)
                             if current == 'loading-error':
                                 ready = False
                                 failure = 'client loading error'
@@ -147,7 +151,7 @@ if __name__ == '__main__':
     parser.add_argument('--boot-timeout', type=int, default=300)
     args = parser.parse_args()
     try:
-        if Path(args.lab).absolute() != p.AUTHORIZED_LAB.absolute():
+        if not p.authorized_lab(args.lab):
             raise ValueError('Only the explicitly authorized full-pack destination is permitted')
         raise SystemExit(run(args.lab, args.role, args.lifetime, args.boot_timeout))
     except (ValueError, OSError, KeyError) as error:

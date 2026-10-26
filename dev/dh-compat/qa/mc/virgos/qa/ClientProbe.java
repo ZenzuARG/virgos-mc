@@ -30,7 +30,29 @@ public final class ClientProbe {
     private int ticks;
     private KeyMapping heldKey;
     private int heldTicks;
+    private final CaptureLease captureLease = new CaptureLease(new CaptureLease.Input() {
+        public void grab() { Minecraft.getInstance().mouseHandler.grabMouse(); }
+        public boolean captured() { return Minecraft.getInstance().mouseHandler.isMouseGrabbed(); }
+        public void click() {
+            Minecraft client = Minecraft.getInstance();
+            KeyMapping.click(client.options.keyAttack.getKey());
+        }
+        public void down(boolean value) {
+            Minecraft client = Minecraft.getInstance();
+            client.options.keyAttack.setDown(value);
+            if(!value) while(client.options.keyAttack.consumeClick()) { /* Drain capture-owned initial click. */ }
+            heldKey=value ? client.options.keyAttack : null;
+            heldTicks=0;
+        }
+        public void release() { Minecraft.getInstance().mouseHandler.releaseMouse(); }
+    });
+    private boolean captureReceiptPending;
     private int pendingScreenshot;
+    private final java.util.ArrayList<Long> frameIntervals = new java.util.ArrayList<>();
+    private String frameSampleId;
+    private long frameStarted, frameDeadline, lastFrame, frameCpuStart;
+    private JsonObject frameSettings;
+
     private final java.util.Set<String> allowedServers=java.util.Set.of("127.0.0.1:25575");
 
     public ClientProbe() { MinecraftForge.EVENT_BUS.register(this); }
@@ -38,18 +60,22 @@ public final class ClientProbe {
     @SubscribeEvent
     public void tick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        if(heldKey!=null && --heldTicks<=0){heldKey.setDown(false);heldKey=null;}
+        updateCapture(true);
+        if(!captureLease.active() && heldKey!=null && --heldTicks<=0){heldKey.setDown(false);heldKey=null;}
         if(++ticks % 10 != 0) return;
         Minecraft client = Minecraft.getInstance();
         long nativeWindow = client.getWindow().getWindow();
+        if (!captureLease.active()) {
         if (Boolean.getBoolean("virgos.qa.render")) {
             org.lwjgl.glfw.GLFW.glfwSetWindowAttrib(nativeWindow, org.lwjgl.glfw.GLFW.GLFW_FOCUS_ON_SHOW, org.lwjgl.glfw.GLFW.GLFW_FALSE);
             org.lwjgl.glfw.GLFW.glfwShowWindow(nativeWindow);
         } else org.lwjgl.glfw.GLFW.glfwHideWindow(nativeWindow);
-        client.mouseHandler.releaseMouse();
+        }
+        if (!captureLease.active()) client.mouseHandler.releaseMouse();
         // The QA window stays in the background while tests drive Minecraft's
         // own input/UI code. Do not open PauseScreen merely on loss of focus.
         client.options.pauseOnLostFocus=false;
+        boolean captureRequest=false;
         try {
             Files.createDirectories(folder);
             JsonObject status = new JsonObject();
@@ -104,10 +130,45 @@ public final class ClientProbe {
             if (raw.isEmpty()) return;
             JsonObject command = JsonParser.parseString(raw).getAsJsonObject();
             String action = command.get("action").getAsString();
+            captureRequest=action.equals("capture_attack");
+            if(captureLease.active() && java.util.Set.of("hold","key","keys","bind","use","attack","combat",
+                "connect","disconnect","quit","close","look","click","forge_click","type","forge_type","scroll","scale").contains(action))
+                stopCapture("other_input");
             // Never automate gameplay on any external server.
             var current = client.getCurrentServer();
             if (current != null && !allowedServers.contains(current.ip)) throw new IllegalStateException("QA restricted to Virgos-owned endpoints");
             switch (action) {
+                case "capture_attack" -> {
+                    if(heldKey!=null && !captureLease.active()) throw new IllegalStateException("Existing held input");
+                    int duration=exactCaptureInt(command,"ticks");
+                    var expected=new CaptureLease.Target(exactCaptureInt(command,"x"),exactCaptureInt(command,"y"),exactCaptureInt(command,"z"));
+                    captureLease.start(command.get("id").getAsString(),duration,expected,captureScene(client),System.nanoTime());
+                    captureReceiptPending=true;
+                    try { writeCaptureReceipt(client); }
+                    catch(Exception failure) { stopCapture("receipt_error");throw failure; }
+                }
+                case "capture_cancel" -> stopCapture("cancelled");
+                case "audit_skin" -> auditSkin(client);
+                case "sample_start" -> startFrames(client,command);
+                case "sample_stop" -> finishFrames(client,command.get("id").getAsString());
+                case "show_recipe" -> {
+                    if(client.player==null)throw new IllegalStateException("Not joined");
+                    var itemId=new net.minecraft.resources.ResourceLocation(command.get("item").getAsString());
+                    if(!BuiltInRegistries.ITEM.containsKey(itemId))throw new IllegalArgumentException("Unknown registered item");
+                    var stack=new net.minecraft.world.item.ItemStack(BuiltInRegistries.ITEM.get(itemId));
+                    var runtimeApi=Class.forName("mezz.jei.api.runtime.IJeiRuntime");
+                    var runtime=Class.forName("mezz.jei.common.Internal").getMethod("getJeiRuntime").invoke(null);
+                    var helpers=runtimeApi.getMethod("getJeiHelpers").invoke(runtime);
+                    var factory=Class.forName("mezz.jei.api.helpers.IJeiHelpers").getMethod("getFocusFactory").invoke(helpers);
+                    var role=Class.forName("mezz.jei.api.recipe.RecipeIngredientRole");
+                    Object output=role.getField("OUTPUT").get(null);
+                    Object type=Class.forName("mezz.jei.api.constants.VanillaTypes").getField("ITEM_STACK").get(null);
+                    var focus=Class.forName("mezz.jei.api.recipe.IFocusFactory").getMethod("createFocus",role,
+                        Class.forName("mezz.jei.api.ingredients.IIngredientType"),Object.class).invoke(factory,output,type,stack);
+                    var gui=runtimeApi.getMethod("getRecipesGui").invoke(runtime);
+                    Class.forName("mezz.jei.api.runtime.IRecipesGui").getMethod("show",Class.forName("mezz.jei.api.recipe.IFocus")).invoke(gui,focus);
+                }
+
                 case "connect" -> {
                     if (!(client.screen instanceof TitleScreen)) throw new IllegalStateException("Connect only from title screen");
                     String endpoint=Files.exists(folder.resolve("endpoint.txt"))?Files.readString(folder.resolve("endpoint.txt")).strip():"127.0.0.1:25575";
@@ -387,14 +448,16 @@ public final class ClientProbe {
                     Files.writeString(folder.resolve("recipes-audit.json"),JSON.toJson(result));
                 }
                 case "disconnect" -> {
+                    stopCapture("disconnect");
                     if (client.level != null) client.level.disconnect();
                     client.clearLevel();
                     client.setScreen(new TitleScreen());
                 }
-                case "quit" -> client.stop();
+                case "quit" -> {stopCapture("quit");client.stop();}
                 default -> throw new IllegalArgumentException("Unknown action: " + action);
             }
         } catch (Exception exception) {
+            if(!captureRequest) stopCapture("action_error");
             LogUtils.getLogger().error("Virgos QA action failed", exception);
             try { Files.writeString(folder.resolve("last-error.json"), JSON.toJson(Map.of("line", line, "error", exception.toString()))); }
             catch (Exception ignored) { }
@@ -403,10 +466,164 @@ public final class ClientProbe {
 
     @SubscribeEvent
     public void rendered(TickEvent.RenderTickEvent event) {
-        if(event.phase!=TickEvent.Phase.END || pendingScreenshot==0)return;
+        if(event.phase!=TickEvent.Phase.END)return;
+        updateCapture(false);
+        sampleFrame();
+        if(pendingScreenshot==0)return;
         Minecraft client=Minecraft.getInstance();
         int number=pendingScreenshot;pendingScreenshot=0;
         Screenshot.grab(client.gameDirectory,"virgos-qa-"+number+".png",client.getMainRenderTarget(),result->LogUtils.getLogger().info("QA screenshot: {}",result.getString()));
+    }
+
+    @SubscribeEvent
+    public void loggedOut(net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggingOut event) {
+        stopCapture("disconnect");
+    }
+
+    @SubscribeEvent
+    public void stopping(net.minecraftforge.event.GameShuttingDownEvent event) {
+        stopCapture("shutdown");
+    }
+
+    private static int exactCaptureInt(JsonObject command,String key) {
+        var value=command.get(key);
+        if(value==null || !value.isJsonPrimitive() || !value.getAsJsonPrimitive().isNumber())
+            throw new IllegalArgumentException("Capture requires integer " + key);
+        try { return value.getAsBigDecimal().intValueExact(); }
+        catch(ArithmeticException invalid) { throw new IllegalArgumentException("Capture requires integer " + key); }
+    }
+
+    private CaptureLease.Scene captureScene(Minecraft client) {
+        var server=client.getCurrentServer();
+        CaptureLease.Target target=null;
+        if(client.hitResult instanceof net.minecraft.world.phys.BlockHitResult hit
+            && hit.getType()==net.minecraft.world.phys.HitResult.Type.BLOCK) {
+            var pos=hit.getBlockPos();target=new CaptureLease.Target(pos.getX(),pos.getY(),pos.getZ());
+        }
+        return new CaptureLease.Scene(server==null?null:server.ip,client.isWindowActive(),
+            client.screen==null && client.level!=null && client.getConnection()!=null,
+            client.player!=null && client.player.isAlive(),target);
+    }
+
+    private void stopCapture(String reason) {
+        boolean active=captureLease.active();
+        try { captureLease.cancel(reason); }
+        finally {
+            if(active) {
+                captureReceiptPending=true;
+                try { writeCaptureReceipt(Minecraft.getInstance()); }
+                catch(Exception ignored) { /* Keep a pending receipt; never keep held input for I/O. */ }
+            }
+        }
+    }
+
+    private void updateCapture(boolean tick) {
+        if(!captureLease.active() && !captureReceiptPending)return;
+        Minecraft client=Minecraft.getInstance();
+        boolean active=captureLease.active();
+        String phase=captureLease.reason();
+        try {
+            if(tick)captureLease.tick(captureScene(client),System.nanoTime());
+            else captureLease.observe(captureScene(client),System.nanoTime());
+        } catch(RuntimeException failure) { stopCapture("observation_error"); }
+        if(active && (!captureLease.active() || !java.util.Objects.equals(phase,captureLease.reason())))captureReceiptPending=true;
+        if(captureReceiptPending) {
+            try { writeCaptureReceipt(client); }
+            catch(Exception failure) { stopCapture("receipt_error"); }
+        }
+    }
+
+    /** Client input receipt only: no server break, claim or permission verdict. */
+    private void writeCaptureReceipt(Minecraft client) throws java.io.IOException {
+        var scene=captureScene(client);
+        var receipt=new JsonObject();
+        receipt.addProperty("id",captureLease.id());
+        receipt.addProperty("state",captureLease.reason());
+        receipt.addProperty("active",captureLease.active());
+        receipt.addProperty("armed",captureLease.armed());
+        receipt.addProperty("remainingTicks",captureLease.remaining());
+        receipt.add("expectedBlock",JSON.toJsonTree(captureLease.expected()));
+        receipt.add("actualBlock",JSON.toJsonTree(scene.target()));
+        receipt.addProperty("focused",scene.focused());
+        receipt.addProperty("inGame",scene.inGame());
+        receipt.addProperty("alive",scene.alive());
+        receipt.addProperty("mouseGrabbed",client.mouseHandler.isMouseGrabbed());
+        receipt.addProperty("loopbackAllowed","127.0.0.1:25575".equals(scene.endpoint()));
+        receipt.addProperty("serverEventProven",false);
+        Files.createDirectories(folder);
+        Files.writeString(folder.resolve("capture-input.json"),JSON.toJson(receipt));
+        captureReceiptPending=false;
+    }
+
+    private void startFrames(Minecraft client, JsonObject request) throws Exception {
+        if(frameSampleId!=null)throw new IllegalStateException("Frame sample already active");
+        if(!Boolean.getBoolean("virgos.qa.render") || client.level==null || client.player==null || client.screen!=null)
+            throw new IllegalStateException("Frame sample requires render=true and an in-game scene");
+        String id=request.get("id").getAsString();
+        int seconds=request.get("seconds").getAsInt();
+        if(!id.matches("[A-Za-z0-9_-]{1,48}") || seconds<30 || seconds>300)throw new IllegalArgumentException("Invalid sample id/seconds");
+        frameSettings=new JsonObject();
+        frameSettings.addProperty("windowWidth",client.getWindow().getWidth());frameSettings.addProperty("windowHeight",client.getWindow().getHeight());
+        frameSettings.addProperty("fpsCap",client.options.framerateLimit().get());frameSettings.addProperty("vsync",client.options.enableVsync().get());
+        frameSettings.addProperty("renderDistance",client.options.renderDistance().get());frameSettings.addProperty("simulationDistance",client.options.simulationDistance().get());
+        frameSettings.addProperty("graphics",client.options.graphicsMode().get().toString());
+        frameSettings.addProperty("x",client.player.getX());frameSettings.addProperty("y",client.player.getY());frameSettings.addProperty("z",client.player.getZ());
+        frameSettings.addProperty("yaw",client.player.getYRot());frameSettings.addProperty("pitch",client.player.getXRot());
+        frameSettings.addProperty("windowActive",client.isWindowActive());
+        frameStarted=System.nanoTime();frameDeadline=frameStarted+seconds*1_000_000_000L;lastFrame=0;
+        frameCpuStart=processCpu();frameIntervals.clear();frameSampleId=id;
+    }
+    private void sampleFrame() {
+        if(frameSampleId==null)return;
+        Minecraft client=Minecraft.getInstance();long now=System.nanoTime();
+        try {
+            var current=client.getCurrentServer();
+            if(current==null || !allowedServers.contains(current.ip) || client.level==null || client.player==null || client.screen!=null)
+                throw new IllegalStateException("Sample scene interrupted");
+            if(client.player.getYRot()!=frameSettings.get("yaw").getAsFloat() || client.player.getXRot()!=frameSettings.get("pitch").getAsFloat()
+                || Math.abs(client.player.getX()-frameSettings.get("x").getAsDouble())>.01
+                || Math.abs(client.player.getY()-frameSettings.get("y").getAsDouble())>.01
+                || Math.abs(client.player.getZ()-frameSettings.get("z").getAsDouble())>.01
+                || client.getWindow().getWidth()!=frameSettings.get("windowWidth").getAsInt()
+                || client.getWindow().getHeight()!=frameSettings.get("windowHeight").getAsInt()
+                || client.options.framerateLimit().get()!=frameSettings.get("fpsCap").getAsInt()
+                || client.options.enableVsync().get()!=frameSettings.get("vsync").getAsBoolean()
+                || client.options.renderDistance().get()!=frameSettings.get("renderDistance").getAsInt()
+                || client.options.simulationDistance().get()!=frameSettings.get("simulationDistance").getAsInt())
+                throw new IllegalStateException("Fixed camera/window changed during sample");
+            if(lastFrame!=0)frameIntervals.add(now-lastFrame);lastFrame=now;
+            if(frameIntervals.size()>1_000_000)throw new IllegalStateException("Frame sample bound exceeded");
+            if(now>=frameDeadline)finishFrames(client,frameSampleId);
+        } catch(Exception error) {
+            try { var result=new JsonObject();result.addProperty("error",error.toString());writeFrameResult(frameSampleId,result); }catch(Exception ignored){}
+            frameSampleId=null;
+        }
+    }
+    private void finishFrames(Minecraft client,String id) throws Exception {
+        if(frameSampleId==null)throw new IllegalStateException("No active frame sample");
+        if(!id.matches("[A-Za-z0-9_-]{1,48}"))throw new IllegalArgumentException("Invalid sample id");
+        var sorted=new java.util.ArrayList<>(frameIntervals);java.util.Collections.sort(sorted);
+        var result=new JsonObject();result.addProperty("id",id);result.addProperty("sampleId",frameSampleId);
+        result.addProperty("boundary","Consecutive RenderTickEvent.END timestamps, in-game only");
+        result.addProperty("sampleCount",sorted.size());
+        double total=frameIntervals.stream().mapToDouble(Long::doubleValue).sum();
+        result.addProperty("averageFPS",total==0?0:sorted.size()*1e9/total);
+        result.addProperty("medianFrameMs",sorted.isEmpty()?0:sorted.get((int)Math.ceil(sorted.size()*.5)-1)/1e6);
+        result.addProperty("p95FrameMs",sorted.isEmpty()?0:sorted.get((int)Math.ceil(sorted.size()*.95)-1)/1e6);
+        double elapsed=(System.nanoTime()-frameStarted)/1e9;
+        result.addProperty("elapsedSeconds",elapsed);result.addProperty("processCpuSeconds",(processCpu()-frameCpuStart)/1e9);
+        result.addProperty("processCpuCores",(processCpu()-frameCpuStart)/1e9/elapsed);
+        result.addProperty("heapUsedBytes",Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory());
+        result.addProperty("heapMaxBytes",Runtime.getRuntime().maxMemory());result.add("settings",frameSettings);
+        writeFrameResult(id,result);frameSampleId=null;
+    }
+    private void writeFrameResult(String id,JsonObject value)throws Exception {
+        Path target=folder.resolve("frames-"+id+".json"),temp=folder.resolve("frames-"+id+".tmp");
+        Files.writeString(temp,JSON.toJson(value),java.nio.file.StandardOpenOption.CREATE_NEW);
+        Files.move(temp,target,java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+    }
+    private static long processCpu() {
+        return ((com.sun.management.OperatingSystemMXBean)java.lang.management.ManagementFactory.getOperatingSystemMXBean()).getProcessCpuTime();
     }
 
     private Object labReadSource(Object repo,Object wrapper,Path path)throws Exception {
@@ -439,6 +656,122 @@ public final class ClientProbe {
             }
         }
         return java.util.HexFormat.of().formatHex(digest.digest());
+    }
+
+    private void auditSkin(Minecraft client) throws java.io.IOException {
+        var server = client.getCurrentServer();
+        if (server == null || !allowedServers.contains(server.ip) || client.player == null
+            || !java.util.Set.of("VirgosQA1", "VirgosQA2", "Notch").contains(client.player.getGameProfile().getName())) {
+            throw new IllegalStateException("Skin observations require a connected loopback fixture player");
+        }
+        var profile = client.player.getGameProfile();
+        var connection = client.getConnection();
+        var info = connection == null ? null : connection.getPlayerInfo(profile.getId());
+        if (info == null || !profile.getId().equals(info.getProfile().getId())
+            || !profile.getName().equals(info.getProfile().getName())) {
+            throw new IllegalStateException("Local skin profile is not ready or its identity changed");
+        }
+        var result = new JsonObject();
+        result.addProperty("name", profile.getName());
+        result.addProperty("uuid", profile.getId().toString());
+        result.addProperty("ownershipVerified", false);
+        result.addProperty("profileSource", "local-player-info");
+        result.addProperty("sampleTimeMs", System.currentTimeMillis());
+        result.addProperty("skinLoaded", client.player.isSkinLoaded());
+        result.addProperty("renderedSkinLocation", client.player.getSkinTextureLocation().toString());
+        result.addProperty("model", client.player.getModelName());
+        var properties = info.getProfile().getProperties().get("textures");
+        if (properties.size() > 4) throw new IllegalStateException("Unexpected public texture property count");
+        var textures = new JsonArray();
+        for (var property : properties) {
+            if (!"textures".equals(property.getName())) {
+                throw new IllegalStateException("Unexpected public texture property type");
+            }
+            textures.add(PublicSkinTextures.read(property.getValue(), property.getSignature()));
+        }
+        result.add("textures", textures);
+        Files.writeString(folder.resolve("profile-skin.json"), JSON.toJson(result));
+    }
+
+    /** Strict public schema only; independently testable without initializing Minecraft. */
+    public static final class PublicSkinTextures {
+        private PublicSkinTextures() {}
+
+        public static JsonObject read(String value, String signature) {
+            try {
+                if (value == null || value.length() > 16384 || (signature != null
+                    && (signature.length() > 8192 || !signature.matches("[A-Za-z0-9+/=]+")))) {
+                    throw new IllegalArgumentException();
+                }
+                byte[] bytes = java.util.Base64.getDecoder().decode(value);
+                if (bytes.length > 12288) throw new IllegalArgumentException();
+                String json = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+                try (var reader = new com.google.gson.stream.JsonReader(new java.io.StringReader(json))) {
+                    uniqueKeys(reader, 0);
+                    if (reader.peek() != com.google.gson.stream.JsonToken.END_DOCUMENT) throw new IllegalArgumentException();
+                }
+                var decoded = JsonParser.parseString(json).getAsJsonObject();
+                onlyKeys(decoded, java.util.Set.of("timestamp", "profileId", "profileName", "signatureRequired", "textures"));
+                if (!text(decoded, "profileId").matches("[a-fA-F0-9]{32}")
+                    || !text(decoded, "profileName").matches("[A-Za-z0-9_]{1,16}")) throw new IllegalArgumentException();
+                if (decoded.has("timestamp") && (!decoded.get("timestamp").isJsonPrimitive()
+                    || !decoded.getAsJsonPrimitive("timestamp").isNumber())) throw new IllegalArgumentException();
+                if (decoded.has("signatureRequired") && (!decoded.get("signatureRequired").isJsonPrimitive()
+                    || !decoded.getAsJsonPrimitive("signatureRequired").isBoolean())) throw new IllegalArgumentException();
+                var textures = decoded.getAsJsonObject("textures");
+                onlyKeys(textures, java.util.Set.of("SKIN", "CAPE"));
+                for (var entry : textures.entrySet()) {
+                    var texture = entry.getValue().getAsJsonObject();
+                    onlyKeys(texture, java.util.Set.of("url", "metadata"));
+                    if (!text(texture, "url").matches("https?://textures\\.minecraft\\.net/texture/[a-fA-F0-9]{32,64}")) {
+                        throw new IllegalArgumentException();
+                    }
+                    if (texture.has("metadata")) {
+                        var metadata = texture.getAsJsonObject("metadata");
+                        onlyKeys(metadata, java.util.Set.of("model"));
+                        if (metadata.has("model") && !java.util.Set.of("slim", "default").contains(text(metadata, "model"))) {
+                            throw new IllegalArgumentException();
+                        }
+                    }
+                }
+                var output = new JsonObject();
+                output.addProperty("value", value);
+                output.addProperty("signature", signature);
+                output.add("decoded", decoded);
+                return output;
+            } catch (java.io.IOException | RuntimeException invalid) {
+                // Never echo rejected property contents or parser diagnostics into a log.
+                throw new IllegalArgumentException("Invalid public skin texture payload");
+            }
+        }
+
+        private static void uniqueKeys(com.google.gson.stream.JsonReader reader, int depth) throws java.io.IOException {
+            if (depth > 8) throw new IllegalArgumentException();
+            if (reader.peek() == com.google.gson.stream.JsonToken.BEGIN_OBJECT) {
+                reader.beginObject();
+                var names = new java.util.HashSet<String>();
+                while (reader.hasNext()) {
+                    if (!names.add(reader.nextName())) throw new IllegalArgumentException();
+                    uniqueKeys(reader, depth + 1);
+                }
+                reader.endObject();
+            } else {
+                if (reader.peek() == com.google.gson.stream.JsonToken.BEGIN_ARRAY) throw new IllegalArgumentException();
+                reader.skipValue();
+            }
+        }
+
+        private static String text(JsonObject object, String key) {
+            var value = object.get(key);
+            if (value == null || !value.isJsonPrimitive() || !value.getAsJsonPrimitive().isString()) {
+                throw new IllegalArgumentException();
+            }
+            return value.getAsString();
+        }
+
+        private static void onlyKeys(JsonObject object, java.util.Set<String> allowed) {
+            if (object == null || !allowed.containsAll(object.keySet())) throw new IllegalArgumentException();
+        }
     }
 
     private JsonObject auditItemTag(String id) {

@@ -14,12 +14,14 @@ if __name__ == '__main__':
     parser.add_argument('--lab', required=True, help='New external directory; must not exist or overlap any input')
     parser.add_argument('--java-server', required=True)
     parser.add_argument('--java-client', required=True)
+    parser.add_argument('--skin-fixture', action='store_true',
+                        help='Use the public Notch nickname for client2 only in the pinned isolated skins lab')
     args = parser.parse_args()
     try:
-        if Path(args.lab).absolute() != policy.AUTHORIZED_LAB.absolute():
+        if not policy.authorized_lab(args.lab):
             raise ValueError('Only the explicitly authorized full-pack destination is permitted')
         result = prepare(args.server_source, args.client_source, args.pack_source, args.artifacts,
-                         args.lab, args.java_server, args.java_client)
+                         args.lab, args.java_server, args.java_client, skin_fixture=args.skin_fixture)
         print(json.dumps({'phase': 'prepared', 'lab': result['lab'], 'copiedBytes': result['copiedBytes'],
                           'omitted': result['omitted']}))
     except (ValueError, OSError, KeyError) as error:

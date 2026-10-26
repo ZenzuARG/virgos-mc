@@ -16,7 +16,7 @@ def allowed(item):
     return result
 
 
-def client_args(client, lab, role):
+def client_args(client, lab, role, skin_fixture=None):
     vanilla = json.loads(p.regular(client / 'versions/1.20.1/1.20.1.json').read_text('utf-8-sig'))
     forge = json.loads(p.regular(client / 'versions/1.20.1-forge-47.4.22/1.20.1-forge-47.4.22.json').read_text('utf-8-sig'))
     index_name = vanilla['assetIndex']['id']
@@ -43,6 +43,8 @@ def client_args(client, lab, role):
             classpath.append(str(p.regular(client / 'libraries' / rel)))
     classpath.append(str(p.regular(client / 'versions/1.20.1/1.20.1.jar')))
     name = 'VirgosQA2' if role == 'client2' else 'VirgosQA1'
+    if skin_fixture and role == skin_fixture['role']:
+        name = skin_fixture['name']
     values = {'natives_directory': str(lab / role / 'natives'), 'launcher_name': 'VirgosIsolatedFullPackQA',
               'launcher_version': '1', 'classpath': ';'.join(classpath), 'classpath_separator': ';',
               'library_directory': str(client / 'libraries'), 'version_name': forge['id'],
@@ -70,7 +72,7 @@ def client_args(client, lab, role):
             '-Dforge.disableVersionCheck=true'] + expand(vanilla['arguments']['jvm'] + forge['arguments']['jvm']) + [forge['mainClass']] + expand(vanilla['arguments']['game'] + forge['arguments']['game']) + ['--width', '640', '--height', '360']
 
 
-def prepare(server, client, pack, artifacts, lab, java_server, java_client):
+def prepare(server, client, pack, artifacts, lab, java_server, java_client, skin_fixture=False):
     server, client, pack, artifacts = [Path(x).resolve() for x in [server, client, pack, artifacts]]
     lab = p.validate_destination(lab, [server, client, pack, artifacts])
     java_server, java_client = p.regular(java_server), p.regular(java_client)
@@ -79,6 +81,8 @@ def prepare(server, client, pack, artifacts, lab, java_server, java_client):
         if not isinstance(versions.get(key), str):
             raise ValueError('Missing locked server version: ' + key)
     verified = p.verified_artifacts(artifacts, client)
+    server_plugins = p.verified_server_plugins(artifacts)
+    fixture = p.skin_fixture_identity(lab, server_plugins) if skin_fixture else None
     plan, omitted = p.inventory(server, client)
     plugin_names = [source.name.lower() for source, target in plan if target.parts[:2] == ('server', 'plugins')]
     if any(not any(name.startswith(prefix) for name in plugin_names)
@@ -116,8 +120,10 @@ def prepare(server, client, pack, artifacts, lab, java_server, java_client):
     for artifact in verified:
         for side in (['client'] if artifact.name.startswith('virgos_local_qa-') else ['server', 'client']):
             selected[Path(side) / 'mods' / artifact.name] = artifact
+    for artifact in server_plugins:
+        selected[Path('server/plugins') / artifact.name] = artifact
     # Fail before creating the destination, including on missing dependencies.
-    args = {role: client_args(client, lab, role) for role in ['client', 'client2']}
+    args = {role: client_args(client, lab, role, fixture) for role in ['client', 'client2']}
     for target, source in selected.items():
         p.regular(source)
         if target.suffix.lower() in p.CONFIG_SUFFIXES | {'.js'}:
@@ -130,7 +136,7 @@ def prepare(server, client, pack, artifacts, lab, java_server, java_client):
         shutil.copy2(source, dest)
     # Independent writable game directories; libraries/assets remain read-only inputs.
     shutil.copytree(lab / 'client', lab / 'client2')
-    p.write_safety(lab)
+    p.write_safety(lab, fixture)
     server_args = ['-Xms1G', '-Xmx4G', '-Duser.home=' + str(lab / 'server/home'),
                    '-Dforge.disableVersionCheck=true', '-jar', 'ketting-server.jar',
                    '-minecraftVersion', versions['minecraft'], '-forgeVersion', versions['forge'],
@@ -155,6 +161,8 @@ def prepare(server, client, pack, artifacts, lab, java_server, java_client):
                 'selectedInputs': [{'target': target.as_posix(), 'sha256': p.sha(source)}
                                    for target, source in selected.items()],
                 'sharedReadOnly': [str(client / 'libraries'), str(client / 'assets')]}
+    if fixture is not None:
+        manifest['skinFixture'] = fixture
     p.write(lab / 'lab-manifest.json', json.dumps(manifest, indent=2))
     p.write(lab / 'status.json', '{"phase":"prepared","runtimeProof":"pending","publicWrites":false}')
     return manifest

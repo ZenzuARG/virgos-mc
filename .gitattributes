@@ -1,0 +1,2 @@
+# Preserve byte-verified upstream recipe fixtures across Windows checkouts.
+/tests/fixtures/recipe-ingredient-compat/*.json text eol=lf

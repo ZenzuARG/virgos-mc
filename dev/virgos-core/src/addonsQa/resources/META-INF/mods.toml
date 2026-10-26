@@ -1,0 +1,8 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="virgos_addons_qa"
+version="1.0.0"
+displayName="Virgos Addons Laboratory Observer"
+description="Test-only dedicated laboratory metrics and read-only block snapshots. Never distribute."
