@@ -8,6 +8,15 @@ Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $projectRoot = [IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $serverRoot = [IO.Path]::GetFullPath($ServerPath)
+$compressionName = 'Optimal'
+$policyPath = Join-Path $serverRoot 'config/virgos/maintenance.json'
+if (Test-Path -LiteralPath $policyPath) {
+    $policy = Get-Content -LiteralPath $policyPath -Raw | ConvertFrom-Json
+    if ($policy.compressionLevel -and $policy.compressionLevel -in @('Optimal','Fastest','NoCompression')) {
+        $compressionName = [string]$policy.compressionLevel
+    }
+}
+$compressionLevel = [Enum]::Parse([IO.Compression.CompressionLevel], $compressionName)
 if ($serverRoot -ne $projectRoot -and -not $serverRoot.StartsWith($projectRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
     throw 'El servidor debe estar dentro del proyecto.'
 }
@@ -70,7 +79,7 @@ $archive = New-Object IO.Compression.ZipArchive($output, [IO.Compression.ZipArch
 try {
     foreach ($file in $files | Sort-Object FullName -Unique) {
         $relative = $file.FullName.Substring($serverRoot.Length + 1).Replace('\', '/')
-        $entry = $archive.CreateEntry($relative, [IO.Compression.CompressionLevel]::Fastest)
+        $entry = $archive.CreateEntry($relative, $compressionLevel)
         # FileInfo may be stale if documentation/configuration changed after
         # enumeration. Hold one read-only handle (no shared writes) for both
         # hashing and copying, and take length from that same opened stream.

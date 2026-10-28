@@ -7,6 +7,7 @@
   "retentionCount": 2,
   "maxBackupGiB": 50,
   "manualRetentionCount": 1,
+  "compressionLevel": "Optimal",
   "autoRestartOnUnexpectedExit": true,
   "maxUnexpectedRestarts": 3,
   "restartDelaySeconds": 15
