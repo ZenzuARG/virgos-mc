@@ -1,0 +1,26 @@
+{
+  "version": "2.2.2",
+  "status": "controlled-public-trial-pending",
+  "checks": [
+    {
+      "name": "backpack-key-guard",
+      "result": "pending",
+      "evidence": "BackpackKeyGuardMixin retains B, blocks nested container opens, and debounces duplicate open/close messages for 250ms."
+    },
+    {
+      "name": "inventory-recovery",
+      "result": "passed",
+      "evidence": "Public server authoritative playerdata was preserved and inventory resynchronized without overwriting newer data."
+    },
+    {
+      "name": "dh-client-compat",
+      "result": "pending",
+      "evidence": "Existing DH payload and queue compatibility remains unchanged."
+    },
+    {
+      "name": "ci-and-public-deployment",
+      "result": "pending",
+      "evidence": "CI publication and backed-up public deployment are not yet run for this candidate."
+    }
+  ]
+}
