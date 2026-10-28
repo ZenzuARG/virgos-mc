@@ -4,8 +4,9 @@
   "intervalMinutes": 120,
   "idleMinutes": 10,
   "backupOnCleanStop": true,
-  "retentionCount": 12,
-  "maxBackupGiB": 30,
+  "retentionCount": 2,
+  "maxBackupGiB": 50,
+  "manualRetentionCount": 1,
   "autoRestartOnUnexpectedExit": true,
   "maxUnexpectedRestarts": 3,
   "restartDelaySeconds": 15

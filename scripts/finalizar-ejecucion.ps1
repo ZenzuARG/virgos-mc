@@ -43,7 +43,7 @@ if($policy.backupOnCleanStop -or $restart -or $BackupLabel -eq 'manual') {
     }
     $record=@{completed=[DateTime]::UtcNow.ToString('o');archive=$archivePath;sha256=(Get-VerifiedHash -Path $archivePath);worldFolders=$manifest.worldFolders;verifiedFiles=$manifest.files.Count}
     $record | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $root '.runtime/last-backup.json') -Encoding UTF8
-    # Retention applies only to verified automatic snapshots. Manual/upgrade backups stay intact.
+    # Retention keeps two verified automatic snapshots and one latest manual/upgrade snapshot.
     $backupRoot=[IO.Path]::GetFullPath((Join-Path $root 'backups/full'))
     $automatic=@(Get-ChildItem -LiteralPath $backupRoot -File -Filter 'virgos-*-auto.zip' | Where-Object {$_.Name -match '^virgos-\d{8}-\d{6}-auto\.zip$'} | Sort-Object LastWriteTime -Descending)
     $total=($automatic | Measure-Object Length -Sum).Sum
@@ -53,6 +53,15 @@ if($policy.backupOnCleanStop -or $restart -or $BackupLabel -eq 'manual') {
         $candidate=[IO.Path]::GetFullPath($automatic[$i].FullName)
         if([IO.Path]::GetDirectoryName($candidate) -ne $backupRoot -or $candidate -eq $archivePath) { throw 'Ruta de retencion invalida.' }
         $total-=$automatic[$i].Length
+        Remove-Item -LiteralPath $candidate
+    }
+    $manual=@(Get-ChildItem -LiteralPath $backupRoot -File -Filter 'virgos-*.zip' |
+        Where-Object {$_.Name -match '^virgos-\d{8}-\d{6}-(?!auto\.)(?:[A-Za-z0-9_-]+)\.zip$'} |
+        Sort-Object LastWriteTime -Descending)
+    $manualKeep=[Math]::Max(0,[int]$policy.manualRetentionCount)
+    for($i=$manual.Count-1;$i -ge $manualKeep;$i--) {
+        $candidate=[IO.Path]::GetFullPath($manual[$i].FullName)
+        if([IO.Path]::GetDirectoryName($candidate) -ne $backupRoot) { throw 'Ruta de retencion manual invalida.' }
         Remove-Item -LiteralPath $candidate
     }
 }
