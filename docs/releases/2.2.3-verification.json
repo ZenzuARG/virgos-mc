@@ -1,0 +1,26 @@
+{
+  "version": "2.2.3",
+  "status": "controlled-public-trial-pending",
+  "checks": [
+    {
+      "name": "dh-terminal-progress",
+      "result": "passed",
+      "evidence": "Remote retrieval accounting now observes terminal futures, preserves REQUIRES_SPLITTING until child requests finish, and the rebuilt client addon contains the active mixin."
+    },
+    {
+      "name": "backpack-safe-open",
+      "result": "passed",
+      "evidence": "B remains the backpack key from world/player inventory and is blocked inside BackpackScreen to prevent global menu indices from entering the nested-backpack packet path."
+    },
+    {
+      "name": "focused-build-checks",
+      "result": "passed",
+      "evidence": "DH compat assemble, ordering, Chunky readiness, and cached-serving checks passed. Historical native-bytecode checks are blocked by the local DH SHA fixture mismatch."
+    },
+    {
+      "name": "public-backup-and-deployment",
+      "result": "pending",
+      "evidence": "The public server will be updated only after the clean-stop backup and CI publication complete."
+    }
+  ]
+}
