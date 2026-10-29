@@ -14,7 +14,10 @@ numberOfThreads = 2
 threadRunTimeRatio = "0.5"
 
 [common.worldGenerator]
-generatorPlan = "CHUNKS_ONLY"
+# Chunky owns missing-chunk generation. DH only serves the persisted shared
+# cache here; disabling its own generator avoids unsupported-dimension injector
+# failures while preserving cached LOD delivery.
+generatorPlan = "DISABLED"
 chunkGeneratorMode = "PRE_EXISTING_ONLY"
 generationMaxChunkRadius = 625
 showGenerationProgress = "DISABLED"
