@@ -21,6 +21,11 @@
       "name": "public-backup-and-deployment",
       "result": "passed",
       "evidence": "CI run 40798256192 succeeded and published v2.2.3. The public server was clean-stopped, backed up with 8470 verified files and SHA256 9f08790a0d6253918a00e57cfa3155c5590e8037afa7ee5988691d0f4c4f45cb, updated with the new Core/DH compatibility artifacts, and restarted successfully with Done (17.939s)."
+    },
+    {
+      "name": "dh-unsupported-dimension-guard",
+      "result": "passed",
+      "evidence": "DH server generation is disabled while persisted cached LOD serving remains enabled; after the clean restart, all six DhServerLevel instances initialized without the previous WorldGeneratorInjector NullPointerException and the server reached Done (17.512s)."
     }
   ]
 }
