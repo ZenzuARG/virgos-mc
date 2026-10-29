@@ -10,7 +10,7 @@ S2. "y revisa bien la logica de la mochila, no quiero que este problema le ocurr
 ## Tasks
 - T1 [S1] inline, DONE, e957218: make remote retrieval progress terminal and verify client packaging/runtime mixin application.
 - T2 [S2] inline, DONE, e957218: block unsafe nested B path and verify source build plus runtime behavior.
-- T3 [S1,S2] inline, PENDING runtime proof: package/lab validation; public deployment only after explicit evidence and backup.
+- T3 [S1,S2] inline, DONE, 380e810: package/lab validation, GitHub v2.2.3 publication, verified public backup, and public restart.
 
 ## Log
 L1. User: "Correji ambos errores, no des por sentado que funciona el DH en el servidor porque la realidad es que no esta funcionando, esos numeros que ves estan siempre estaticos y no avanzan, nunca reconstrute el lod, y revisa bien la logica de la mochila, no quiero que este problema le ocurra a mas personas"
@@ -19,3 +19,4 @@ L3. Replaced the success-only HEAD hook with a terminal-future hook that decreme
 L4. Backpack guard now blocks B while BackpackScreen is open, preventing global menu indices such as 193 from being sent as storage-local indices. B remains available from world/player inventory.
 L5. Installed rebuilt client addon SHA256 `4A8B4E1E977847FB...` after backing up the previous `6E871D0F963...` jar to `D:\proyectos\mc-server\.runtime\client-backups\20261028-dh-backpack-fix`; public server was not changed.
 L6. Verification: `assemble` passed; `checkOrdering`, `checkChunkyReadiness`, and `checkChunkyLodServing` passed. The native `checkLevelPublication`, `checkPayloadOwnership`, and grouped-payload checks remain blocked by the repository's historical pinned-DH SHA mismatch, not by compilation. Review assessment for commit `e957218` returned medium/under_budget.
+L7. Release/deployment: v2.2.3 was published by CI run 40798256192 from source tag `v2.2.3`; the public server was backed up with 8470 verified files, updated with Core SHA `a09133f3...` and DH compat SHA `4a8b4e1e...`, passed `validar-entrega.ps1`, and restarted with `Done (17.939s)`. Worlds, player data, and DH cache were preserved.
