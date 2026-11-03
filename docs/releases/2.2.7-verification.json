@@ -1,0 +1,58 @@
+{
+  "version": "2.2.7",
+  "status": "verified-controlled-public",
+  "release": "https://github.com/ZenzuARG/virgos-mc/releases/tag/v2.2.7",
+  "workflow": "https://github.com/ZenzuARG/virgos-mc/actions/runs/41723633438",
+  "checks": [
+    {
+      "name": "operation-and-backup",
+      "result": "passed",
+      "evidence": "Server stopped cleanly; interrupted partial backups removed; previous verified backup virgos-20261103-174931-auto.zip remains with SHA256 80666f0af18bec44c6a21b93af5b28c60c95c893998279b07a49fad4fc7adb71, 8716 files and six world folders."
+    },
+    {
+      "name": "visual-mod-inventory",
+      "result": "passed",
+      "evidence": "Fresh installer verified 130 mods including Grassier Grass 1.4.5, 3D Skin Layers 1.11.4, Not Enough Animations, Eating Animations, AmbientSounds, Sound Physics, CreativeCore and GML."
+    },
+    {
+      "name": "shader-and-hotkey",
+      "result": "passed",
+      "evidence": "Fresh installer downloaded and verified ComplementaryUnbound_r5.9.3.zip; QA client log confirms Oculus using that shaderpack; keybindings pin F6 toggle, F7 selection and F8 reload."
+    },
+    {
+      "name": "client-startup",
+      "result": "passed",
+      "evidence": "One fresh QA client started Forge 1.20.1 with the full visual pack; Grassier mixin initialized, GML/Eating Animations and Sound Physics loaded, and no startup crash occurred."
+    },
+    {
+      "name": "release-gate",
+      "result": "passed",
+      "evidence": "Live and packaged gate use 2.2.7-r21/fingerprint virgos-client-2.2.7-r21; core jar and ClientRelease.java were rebuilt together; no release-mismatch appeared during public login."
+    },
+    {
+      "name": "distant-horizons-config",
+      "result": "passed",
+      "evidence": "Client seed CHUNKS_ONLY/PRE_EXISTING_ONLY/radius 256; server seed DISABLED/PRE_EXISTING_ONLY with synchronized server limits; DH 3.3.3 initialized on both sides."
+    },
+    {
+      "name": "distant-horizons-transfer",
+      "result": "passed",
+      "evidence": "Fresh client connected to public server, created Distant_Horizons_server_data/Virgos+QA cache and persisted 46 FullData rows; after disconnect/reconnect it remained in game and cache contained 47 FullData rows."
+    },
+    {
+      "name": "public-login",
+      "result": "passed",
+      "evidence": "QA VirgosQA1 joined public server twice, authenticated, connected voice chat, and no release mismatch occurred."
+    },
+    {
+      "name": "public-health",
+      "result": "passed",
+      "evidence": "scripts/comprobar.ps1 returned protocol 763, Minecraft 1.20.1, players 0/10 after QA; health-report completed successfully."
+    },
+    {
+      "name": "release-assets",
+      "result": "passed",
+      "evidence": "GitHub Actions workflow 41723633438 succeeded; v2.2.7 release contains Virgos-MC-2.2.7-instalar.zip (51985440 bytes), mrpack, release.json and TreeFeller assets."
+    }
+  ]
+}
