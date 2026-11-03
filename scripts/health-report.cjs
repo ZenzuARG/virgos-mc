@@ -22,6 +22,9 @@ async function main() {
   // Count pressure-prone entity classes without deleting or mutating entities.
   // The objective is reused so the snapshot stays bounded and machine-readable.
   const commands = [
+    // The snapshot uses scoreboard commands. Suppress their operator feedback
+    // while they run so players do not receive a chat flood every ten minutes.
+    'gamerule sendCommandFeedback false',
     'spark health --memory',
     'spark tps',
     'scoreboard objectives add virgos_health dummy',
@@ -38,6 +41,7 @@ async function main() {
     'execute as @e[type=minecraft:minecart] run scoreboard players add #minecarts virgos_health 1',
     'scoreboard players get #minecarts virgos_health',
     'list',
+    'gamerule sendCommandFeedback true',
   ];
   fs.appendFileSync(commandsPath, commands.join('\n') + '\n', 'utf8');
   await sleep(3500);
