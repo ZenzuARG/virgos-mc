@@ -9607,7 +9607,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "source": "https://modrinth.com/mod/creativecore/version/ChKayKur",
       "descriptor": {
@@ -9705,7 +9705,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "source": "https://modrinth.com/mod/gml/version/s7gFqeVL",
       "descriptor": {
