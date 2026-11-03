@@ -1,7 +1,7 @@
 {
   "minecraft": "1.20.1",
   "forge": "47.4.22",
-  "status": "v3-lab-preserves-progress",
+  "status": "v3-visual-release-ready",
   "artifacts": [
     {
       "project": "alexs-caves",
@@ -5715,7 +5715,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "source": "https://modrinth.com/mod/sound-physics-remastered/version/x0sJ9PeR",
       "descriptor": {
@@ -9469,7 +9469,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "descriptor": {
         "mods": [
@@ -9554,7 +9554,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "source": "https://modrinth.com/mod/ambientsounds/version/YOYpWGZg",
       "descriptor": {
@@ -9652,7 +9652,7 @@
       "sides": [
         "client"
       ],
-      "mode": "optional",
+      "mode": "standard",
       "root": true,
       "source": "https://modrinth.com/mod/eating-animations/version/WqBpsYBv",
       "descriptor": {
@@ -10220,8 +10220,64 @@
         ],
         "embedded": []
       }
+    },
+    {
+      "project": "grassier-grass",
+      "project_id": "3jCB9cn2",
+      "version_id": "dVUjKcfu",
+      "version": "1.4.5",
+      "filename": "grassiergrass-forge-1.4.5+mc1.20.1.jar",
+      "url": "https://cdn.modrinth.com/data/3jCB9cn2/versions/dVUjKcfu/grassiergrass-forge-1.4.5%2Bmc1.20.1.jar",
+      "hash_algorithm": "sha512",
+      "hash": "847ef56e0c7fcc240a921db45ea886b80e52f26b6ee534f4e02a38cae9eb64c588782fd4fa603f5690857aa5ec183cd466a9192a6320bb6c1c25c69130821626",
+      "size": 2367748,
+      "sides": [
+        "client"
+      ],
+      "mode": "standard",
+      "root": true,
+      "source": "https://modrinth.com/mod/grassier-grass/version/dVUjKcfu",
+      "descriptor": {
+        "mods": [
+          {
+            "id": "grassiergrass",
+            "version": "1.4.5",
+            "origin": "grassiergrass-forge-1.4.5+mc1.20.1.jar"
+          }
+        ],
+        "dependencies": [],
+        "embedded": []
+      }
+    },
+    {
+      "project": "3d-skin-layers",
+      "project_id": "zV5r3pPn",
+      "version_id": "6NG8MGVh",
+      "version": "1.11.4",
+      "filename": "skinlayers3d-forge-1.11.4-mc1.20.1.jar",
+      "url": "https://cdn.modrinth.com/data/zV5r3pPn/versions/6NG8MGVh/skinlayers3d-forge-1.11.4-mc1.20.1.jar",
+      "hash_algorithm": "sha512",
+      "hash": "e47eb9baa6c54921f2bd2a7fd481f9b44c041a67060f633fa60074c44b67505d9cf8d5e8549713f7ea3ec51edaf1559e87d7b6e06932158b257f71a1cc0e2eb4",
+      "size": 2096322,
+      "sides": [
+        "client"
+      ],
+      "mode": "standard",
+      "root": true,
+      "source": "https://modrinth.com/mod/3dskinlayers/version/6NG8MGVh",
+      "descriptor": {
+        "mods": [
+          {
+            "id": "skinlayers3d",
+            "version": "1.11.4",
+            "origin": "skinlayers3d-forge-1.11.4-mc1.20.1.jar"
+          }
+        ],
+        "dependencies": [],
+        "embedded": []
+      }
     }
   ],
   "missing_declared_mod_ids": [],
-  "v3_visual_batch": "ambient-audio-and-client-animations-plus-oculus"
+  "v3_visual_batch": "grassier-grass-3d-skin-layers-unbound-audio-animations-oculus"
 }
