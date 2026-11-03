@@ -9,14 +9,14 @@ Virgos-MC v3 debe ampliar la exploración, la lectura del mundo y la progresión
 - Se conserva `virgos_world` y sus dimensiones. Antes de cambiar mods se genera una copia completa y se verifica una restauración.
 - No se cambia el seed ni se regeneran chunks existentes. Los cambios de estructuras sólo se probarán en chunks nuevos y aislados.
 - No se agregan mods que obliguen a reiniciar el progreso o que sustituyan Create, Heracles, OPAC, JEI, Jade, Lootr o AuthMe.
-- El cliente visual es opcional. Quien no quiera shaders, primera persona o audio ambiental puede desactivar esos componentes sin quedar fuera del servidor.
+ - El cliente visual mantiene sus componentes reversibles. Complementary Unbound queda activo en perfil Low y 3D Skin Layers forma parte del cliente base; primera persona y audio ambiental siguen siendo desactivables.
 - El servidor sigue usando Forge 47.4.22 sobre Ketting 0.6.1 y Java 21.
 
 ## Contenido de v3
 
 ### Presentación y audio
 
-El laboratorio ya incorpora First-person Model 2.7.3, Not Enough Animations 1.12.6, AmbientSounds 6.3.11, CreativeCore 2.12.40, Eating Animations 5.1.0 y GML 4.0.10 como opciones del cliente. Sound Physics Remastered, Ambient Environment y Better Third Person siguen siendo opcionales. Oculus 1.8.0 pasa a descargarse e instalarse para todos los clientes, pero con `enableShaders=false` y sin shader seleccionado. Complementary Reimagined r5.9.3 se descarga desde su publicación oficial durante la instalación y también queda desactivado por defecto. 3D Skin Layers queda como opción posterior porque puede producir sombras extrañas con shaders. La matriz completa de pruebas está en [v3-candidatos.md](v3-candidatos.md).
+El laboratorio ya incorpora First-person Model 2.7.3, Not Enough Animations 1.12.6, AmbientSounds 6.3.11, CreativeCore 2.12.40, Eating Animations 5.1.0 y GML 4.0.10 como opciones del cliente. Sound Physics Remastered, Ambient Environment y Better Third Person siguen siendo opcionales. Oculus 1.8.0 se descarga e instala para todos los clientes con Complementary Unbound r5.9.3 activo en perfil Low. 3D Skin Layers 1.11.4 y Grassier Grass 1.4.5 se incorporan al cliente base; ambos deben validarse con Unbound y Create. La matriz completa de pruebas está en [v3-candidatos.md](v3-candidatos.md).
 
 ### Exploración
 

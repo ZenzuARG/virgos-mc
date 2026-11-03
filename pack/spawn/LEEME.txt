@@ -24,4 +24,7 @@ Para recuperar SOLO la construccion en una copia de trabajo:
 4. Comprobar el terreno y los claims antes de sustituir el mundo publicado.
 
 No se pega ni se regenera automaticamente al arrancar el servidor.
+La revisión v5 añade `signage-plan.json`: plan de carteles, estaciones y tutorial de cinco pasos.
+Primero probar el recorrido en una copia del mundo; después exportar una nueva revisión del esquema y repetir
+la auditoría de las cuatro rutas. No editar la construcción publicada sin respaldo y promoción controlada.
 Documentacion: https://worldedit.enginehub.org/en/latest/usage/clipboard/

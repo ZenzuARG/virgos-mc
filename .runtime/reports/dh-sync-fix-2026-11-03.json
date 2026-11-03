@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "fix": "server generatorPlan=DISABLED; client generatorPlan=CHUNKS_ONLY; client LOD radius 256; persisted shared-cache serving",
+  "lab": "D:/proyectos/mc-server-lab/dh-fullpack-20261024",
+  "negotiated": {
+    "serverReady": true,
+    "synchronizeOnLoad": true,
+    "maxSyncOnLoadDistance": 625,
+    "generatorPlan": "CHUNKS_ONLY"
+  },
+  "server": {
+    "databaseBytes": 4374528,
+    "fullDataRows": 157
+  },
+  "client": {
+    "databaseBytes": 3801088,
+    "fullDataRows": 104,
+    "matchingRows": 54
+  },
+  "result": "client received remote Distant Horizons data after configuration fix",
+  "capturedUtc": "2026-11-03T18:37:03.117Z"
+}

@@ -50,7 +50,7 @@ public final class ClientProbe {
             status.addProperty("screen", client.screen == null ? "game" : client.screen.getClass().getName());
             status.addProperty("screenTitle", client.screen == null ? "" : client.screen.getTitle().getString());
             status.addProperty("line", line);
-            status.addProperty("fps", Minecraft.getFps());
+            status.addProperty("fps", client.getFps());
             status.addProperty("width", client.getWindow().getGuiScaledWidth());
             status.addProperty("height", client.getWindow().getGuiScaledHeight());
             if (client.player != null) {
@@ -192,7 +192,7 @@ public final class ClientProbe {
                 case "screenshot" -> pendingScreenshot=line;
                 case "audit_dh" -> {
                     var result=new JsonObject();
-                    result.addProperty("fps",Minecraft.getFps());
+                    result.addProperty("fps",Minecraft.getInstance().getFps());
                     result.addProperty("heapUsedMiB",(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1048576);
                     result.addProperty("dhLoaded",net.minecraftforge.fml.ModList.get().isLoaded("distanthorizons"));
                     if(net.minecraftforge.fml.ModList.get().isLoaded("distanthorizons")) {

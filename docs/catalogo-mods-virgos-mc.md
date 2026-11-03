@@ -2,7 +2,7 @@
 
 > La selección ya se implementó y su estado vigente está en [roadmap y auditoría](roadmap-auditoria.md). Este texto conserva decisiones y propuestas de diseño; para instalar y jugar seguí la [guía actual](guia-jugadores.md). Simple Voice Chat ya está integrado por UDP público; CoreProtect registra bloques con las limitaciones de restauración documentadas.
 
-Selección del 17 de octubre de 2026 para Minecraft Java 1.20.1, Forge 47.4.22 y hasta ocho jugadores. **79 mods principales, nueve opciones de presentación y una herramienta de construcción.** Oculus queda en el cliente base con shaders apagados; las demás opciones se mantienen separadas. Las bibliotecas obligatorias se suman aparte; Playit Companion ya pertenece a la base instalada.
+Selección del 17 de octubre de 2026 para Minecraft Java 1.20.1, Forge 47.4.22 y hasta ocho jugadores. **79 mods principales, nueve opciones de presentación y una herramienta de construcción.** Oculus queda en el cliente base con Complementary Unbound r5.9.3 activo en perfil Low; las demás opciones se mantienen separadas. Las bibliotecas obligatorias se suman aparte; Playit Companion ya pertenece a la base instalada.
 
 Las versiones de abajo son la selección original. Los archivos instalados y comprobados con Ketting y AuthMe están fijados en `pack/mods.lock.json`, `pack/custom-artifacts.lock.json`, `pack/administration.lock.json` y `versions.lock.json`; estos manifiestos tienen prioridad sobre el inventario de diseño.
 
@@ -149,7 +149,9 @@ El [diseño de experiencia](experiencia-virgos-mc.md) define el progreso y el [d
 
 | Componente y archivo oficial | Versión candidata | Destino | Papel en Virgos-MC |
 | --- | --- | --- | --- |
-| [Oculus](https://modrinth.com/mod/oculus/version/iQ1SwGc3) | 1.20.1-1.8.0 | Cliente | Menú y soporte de shaders disponibles; apagado por defecto para cuidar equipos modestos |
+| [Oculus](https://modrinth.com/mod/oculus/version/iQ1SwGc3) | 1.20.1-1.8.0 | Cliente | Menú y soporte de shaders; Complementary Unbound r5.9.3 se activa en perfil Low |
+| [3D Skin Layers](https://modrinth.com/mod/3dskinlayers/version/6NG8MGVh) | 1.11.4 | Cliente | Capas externas de las skins renderizadas en 3D, sin cambios de gameplay |
+| [Grassier Grass](https://modrinth.com/mod/grassier-grass) | 1.4.5 | Cliente | Pasto 3D animado por viento; compatible con Embeddium y shaders Iris, sin cambiar bloques ni gameplay |
 | [Sound Physics Remastered](https://modrinth.com/mod/sound-physics-remastered/version/x0sJ9PeR) | forge-1.20.1-1.5.1 (alpha) | Cliente | Acústica espacial configurable |
 | [Ambient Environment](https://modrinth.com/mod/ambient-environment/version/BYzQMmi7) | 11.0.0.1 | Cliente | Variación visual del ambiente |
 | [Better Third Person](https://modrinth.com/mod/better-third-person/version/XkYduFuv) | 1.9.0 | Cliente | Cámara opcional; probar combate y hechizos |

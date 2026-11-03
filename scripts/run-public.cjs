@@ -8,7 +8,7 @@ const net=require('node:net');
 const root=path.resolve(__dirname,'..');
 const stateFile=path.join(root,'.runtime/active-run.json');
 const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8').replace(/^\uFEFF/,''));
-const {classifyExit,readCheckpoint,createAudit}=require('./virgos-lifecycle.cjs');
+const {classifyExit,readCheckpoint,createAudit,isOtherProcessAlive}=require('./virgos-lifecycle.cjs');
 const audit=createAudit(root);
 async function main(restartAttempt=0){
   const base=read('versions.lock.json');
@@ -16,7 +16,7 @@ async function main(restartAttempt=0){
   if(fs.existsSync(stateFile)){
     const old=read('.runtime/active-run.json');
     const owner=old.backupInProgress?old.runner:(!old.finished?old.pid:null);
-    if(owner){try{process.kill(owner,0);throw Error('El servidor está en ejecución o verificando un respaldo.');}catch(e){if(e.code!=='ESRCH')throw e;}}
+    if(isOtherProcessAlive(owner)){throw Error('El servidor está en ejecución o verificando un respaldo.');}
   }
   const props=fs.readFileSync(path.join(root,'server.properties'),'utf8');
   if(!/^server-port=25565$/m.test(props)||!/^level-name=virgos_world$/m.test(props)||!/^online-mode=false$/m.test(props))throw Error('Configuración pública inesperada');
@@ -37,10 +37,14 @@ async function main(restartAttempt=0){
   console.log('Servidor público iniciado, PID',child.pid);
   audit('start',{runner:process.pid,javaPid:child.pid,started,javaVersion:base.java.version,collector:'ParallelGC'});
   let offset=0, intentionalStop=false;
+  const healthTimer=setInterval(()=>{
+    const health=spawn(process.execPath,[path.join(root,'scripts/health-report.cjs')],{cwd:root,windowsHide:true,stdio:'ignore'});
+    health.unref();
+  },10*60*1000);
   const timer=setInterval(()=>{const data=fs.readFileSync(commands,'utf8');if(data.length<offset)offset=0;if(data.length>offset){const chunk=data.slice(offset);if(/(?:^|\r?\n)\s*stop\s*(?:\r?\n|$)/i.test(chunk)){if(!intentionalStop)audit('stop-observed',{runner:process.pid,javaPid:child.pid,source:'public-commands.txt',started});intentionalStop=true;}child.stdin.write(chunk);offset=data.length;}},200);
   child.on('error',e=>{console.error(e);clearInterval(timer);process.exitCode=1;});
   child.on('exit',(code,signal)=>{
-    clearInterval(timer);fs.closeSync(output);
+    clearInterval(timer);clearInterval(healthTimer);fs.closeSync(output);
     const classification=classifyExit(code,intentionalStop,readCheckpoint(root),started);
     const unexpected=classification.unexpected;
     audit('exit',{runner:process.pid,javaPid:child.pid,started,code,signal,...classification});

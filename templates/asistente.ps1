@@ -77,7 +77,7 @@ $restoreTL=Button 'Restaurar TL' 210 589 140
 $copyServer=Button 'Copiar servidor' 360 589 175
 $logsButton=Button 'Abrir registros' 545 589 235
 $openLauncher=Button 'Abrir mi launcher' 30 640 220
-$help=Label 'Windows x64  /  Empeza sin shaders  /  COMO-JUGAR.txt: ayuda del juego' 274 647 505 35 9
+$help=Label 'Windows x64  /  Unbound Low activo  /  COMO-JUGAR.txt: ayuda del juego' 274 647 505 35 9
 $help.ForeColor=$muted
 function Refresh-Choice {
     $script:choice = if ($official.Checked) {'Oficial'} else {'TLauncher'}

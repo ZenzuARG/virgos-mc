@@ -114,6 +114,7 @@ if (-not $Verificar) {
         $out = [IO.Path]::GetFullPath((Join-Path $target $relative))
         if (-not $out.StartsWith($target.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Ruta invalida.' }
         if ($relative -in @('servers.dat','options.txt') -and [IO.File]::Exists($out)) { continue }
+        if ($relative -like 'shaderpacks\*.txt' -and [IO.File]::Exists($out)) { continue }
         if ($relative -eq 'config\voicechat\voicechat-client.properties' -and [IO.File]::Exists($out)) { continue }
         [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($out))
         Copy-Item -LiteralPath $file.FullName -Destination $out -Force

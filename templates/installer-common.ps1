@@ -125,6 +125,7 @@ function Disable-TLauncherShaders([string]$GameDir, [string]$BackupRoot) {
     $path = Join-Path $GameDir 'config\oculus.properties'
     if(-not [IO.File]::Exists($path)) { return $false }
     $text = [IO.File]::ReadAllText($path)
+    if($text -match '(?m)^\s*enableShaders\s*=\s*true\s*$' -and $text -match '(?m)^\s*shaderPack\s*=\s*ComplementaryUnbound_r5\.9\.3\.zip\s*$') { return $false }
     $active = ($text -match '(?m)^\s*enableShaders\s*=\s*true\s*$') -or ($text -match '(?m)^\s*shaderPack\s*=\s*\S+')
     if(-not $active) { return $false }
     $backupDir = Join-Path $BackupRoot 'tlauncher-shaders'
@@ -154,5 +155,5 @@ function Get-LauncherInstructions([string]$Launcher, [string]$GameDir, [string]$
     if ($Launcher -eq 'Oficial') {
         return "1. Abri Minecraft Launcher y entra con tu cuenta habitual.`r`n2. En Minecraft Java, elegi Virgos-MC y toca Jugar.`r`n   Si no aparece: Instalaciones > activa Modificadas.`r`n3. Multijugador > Virgos-MC.`r`n`r`nLa primera vez el launcher descarga los archivos restantes del juego."
     }
-    return "DESPUES DE INSTALAR:`r`n1. Abri tu TLauncher habitual con el boton Abrir mi launcher.`r`n2. Forge 1.20.1-forge-47.4.22 queda seleccionado. Toca Entrar al juego.`r`n3. En Minecraft: Multijugador > Virgos-MC.`r`n`r`nPreparamos carpeta, $MemoryMb MB, Forge y Java automatico (el JRE de TLauncher).`r`nLa primera entrada se prepara sin shaders para evitar cierres; luego podes activarlos desde Opciones > Shaders.`r`nNo elijas ForgeOptiFine ni otro paquete de TL MODS.`r`n`r`nLa carpeta general de TLauncher pasa a ser la de Virgos-MC.`r`nTus otras partidas se conservan. Para volver a los ajustes anteriores,`r`ncerra TLauncher y usa Restaurar TL. Instalar vuelve a activar Virgos.`r`n`r`nSi TLauncher nunca se abrio, abrilo una vez y cerralo antes de instalar."
+    return "DESPUES DE INSTALAR:`r`n1. Abri tu TLauncher habitual con el boton Abrir mi launcher.`r`n2. Forge 1.20.1-forge-47.4.22 queda seleccionado. Toca Entrar al juego.`r`n3. En Minecraft: Multijugador > Virgos-MC.`r`n`r`nPreparamos carpeta, $MemoryMb MB, Forge y Java automatico (el JRE de TLauncher).`r`nLa primera entrada usa Complementary Unbound en perfil Low; si tu equipo no lo soporta, apagalo con F6.`r`nNo elijas ForgeOptiFine ni otro paquete de TL MODS.`r`n`r`nLa carpeta general de TLauncher pasa a ser la de Virgos-MC.`r`nTus otras partidas se conservan. Para volver a los ajustes anteriores,`r`ncerra TLauncher y usa Restaurar TL. Instalar vuelve a activar Virgos.`r`n`r`nSi TLauncher nunca se abrio, abrilo una vez y cerralo antes de instalar."
 }

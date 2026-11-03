@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": "Temporada: Caminos compartidos",
+    "subtitle": "Virgos-MC · EVENTO · 1/1",
+    "icon": {
+      "type": "heracles:item",
+      "item": "minecraft:compass"
+    },
+    "description": "Elegí una expedición, marcá una ruta y compartí un hallazgo con el grupo. Este objetivo es una guía comunitaria: no entrega poder ni modifica recetas.",
+    "groups": {
+      "09 · Cooperar": {
+        "position": [
+          336,
+          0
+        ]
+      }
+    }
+  },
+  "settings": {
+    "individual_progress": true,
+    "hidden": "DEPENDENCIES_VISIBLE",
+    "unlockNotification": true,
+    "showDependencyArrow": true,
+    "repeatable": false,
+    "autoClaimRewards": false
+  },
+  "dependencies": [
+    "bienvenida"
+  ],
+  "tasks": {
+    "objetivo": {
+      "type": "heracles:check",
+      "title": "Ya compartí una ruta o hallazgo"
+    }
+  },
+  "rewards": {}
+}

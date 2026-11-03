@@ -8,6 +8,9 @@ public final class MaintenancePolicyTest {
         if(policy.due(180_000,100_000,100_000,0,true))throw new AssertionError("Minimum backup interval");
         if(policy.due(180_000,0,100_000,0,false))throw new AssertionError("No endless idle restart loop");
         if(policy.due(10,100_000,100_000,0,true))throw new AssertionError("Clock regression");
-        System.out.println("Maintenance: six empty-server scheduling checks passed");
+        if(!policy.warningDue(180_000,0,1,true,false))throw new AssertionError("Warn before idle restart");
+        if(policy.warningDue(180_000,0,1,true,true))throw new AssertionError("Warn only once");
+        if(policy.warningDue(180_000,0,0,true,false))throw new AssertionError("No warning after empty");
+        System.out.println("Maintenance: nine scheduling checks passed");
     }
 }

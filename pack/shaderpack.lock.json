@@ -1,9 +1,9 @@
 {
-  "name": "Complementary Shaders - Reimagined",
+  "name": "Complementary Shaders - Unbound",
   "version": "r5.9.3",
-  "filename": "ComplementaryReimagined_r5.9.3.zip",
-  "url": "https://cdn.modrinth.com/data/HVnmMxH1/versions/Bqen1mJX/ComplementaryReimagined_r5.9.3.zip",
-  "sha512": "45304b1d7862afdb2177b7e6226fc9c6737911d17a4ad46cc9c519ca4deb935f05072cd337cd8b19a15bb8062b57b54eceec7bdee4cd572d94858e2946d37d85",
-  "source": "https://modrinth.com/shader/complementary-reimagined/version/Bqen1mJX",
-  "defaultEnabled": false
+  "filename": "ComplementaryUnbound_r5.9.3.zip",
+  "url": "https://cdn.modrinth.com/data/R6NEzAwj/versions/B1kyfoUZ/ComplementaryUnbound_r5.9.3.zip",
+  "sha512": "a085d1d8cda67cd17a2b414eeba48bbd809da069f269bab46246235ec8fe714a275013c70d0504527b0987d810deddddba4564332414ab3b3bd7435932ff808c",
+  "source": "https://modrinth.com/shader/complementary-unbound/version/B1kyfoUZ",
+  "defaultEnabled": true
 }

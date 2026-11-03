@@ -9,4 +9,7 @@ public record MaintenancePolicy(long intervalMillis,long idleMillis) {
         return players==0&&activitySinceBackup&&emptySince>=0&&now>=emptySince&&now>=lastBackup
             &&now-emptySince>=idleMillis&&now-lastBackup>=intervalMillis;
     }
+    public boolean warningDue(long now,long lastBackup,int players,boolean activitySinceBackup,boolean alreadyWarned) {
+        return players>0&&activitySinceBackup&&!alreadyWarned&&now>=lastBackup&&now-lastBackup>=intervalMillis;
+    }
 }

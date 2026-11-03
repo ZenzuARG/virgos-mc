@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "world": "virgos_world",
+  "policy": "Run only after a verified full backup and a completed spark baseline; each job uses scripts/pregen-managed.py with --confirm.",
+  "jobs": [
+    {"id": "spawn", "world": "minecraft:overworld", "center": [672, 752], "radius": 768, "reason": "Bastion, four gates, amphitheatre and immediate routes"},
+    {"id": "north-route", "world": "minecraft:overworld", "center": [672, 600], "radius": 512, "reason": "North departure and return corridor"},
+    {"id": "south-route", "world": "minecraft:overworld", "center": [672, 1000], "radius": 512, "reason": "Arena and south departure corridor"},
+    {"id": "east-route", "world": "minecraft:overworld", "center": [824, 736], "radius": 512, "reason": "East workshop and village corridor"},
+    {"id": "west-route", "world": "minecraft:overworld", "center": [520, 736], "radius": 512, "reason": "West departure corridor"},
+    {"id": "nether", "world": "minecraft:the_nether", "center": [0, 0], "radius": 768, "reason": "Only after the public Nether routes are selected"},
+    {"id": "end", "world": "minecraft:the_end", "center": [0, 0], "radius": 512, "reason": "Only after the public End approach is selected"},
+    {"id": "aether", "world": "aether:the_aether", "center": [0, 0], "radius": 512, "reason": "Only after the first Aether route is selected"},
+    {"id": "twilight", "world": "twilightforest:twilight_forest", "center": [0, 0], "radius": 512, "reason": "Only after the first Twilight route is selected"}
+  ]
+}

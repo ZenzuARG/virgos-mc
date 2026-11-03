@@ -26,8 +26,11 @@ for item in lock['artifacts']:
     if 'client' not in item['sides'] or item['mode'] in ['tool','optional']:continue
     expected.add(item['filename'])
     shutil.copy2(ROOT/'.cache/pack/downloads'/item['filename'],target/'mods'/item['filename'])
-qa=ROOT/'dev/virgos-core/build/libs/virgos_local_qa-0.1.0.jar'
-shutil.copy2(qa,target/'mods'/qa.name);expected.add(qa.name)
+qa_candidates=sorted((ROOT/'dev/virgos-core/build/libs').glob('virgos_local_qa-*.jar'))
+if not qa_candidates: raise SystemExit('Build the QA probe before preparing an isolated client.')
+qa=qa_candidates[-1]
+qa_name='virgos_local_qa-0.1.0.jar'
+shutil.copy2(qa,target/'mods'/qa_name);expected.add(qa_name)
 if {p.name for p in (target/'mods').glob('*.jar')}-expected:raise SystemExit('Unexpected secondary QA mods; inspect before launch.')
 for source in (ROOT/'pack/client-overrides').rglob('*'):
     if source.is_file():

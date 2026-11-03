@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "revision": "v5-guidance",
+  "world": "virgos_world",
+  "center": [672, 114, 736],
+  "principles": [
+    "One action per sign",
+    "Short lines readable with shaders or vanilla rendering",
+    "Every route names a return point",
+    "No sign promises a reward or protection rule that the server does not enforce"
+  ],
+  "stations": [
+    {"id": "plaza-start", "position": [672, 115, 736], "title": "BASTIÓN VIRGOS", "lines": ["Empezá en Heracles", "Leé el Códice", "Volvé a la plaza"]},
+    {"id": "archive", "position": [620, 116, 700], "title": "ARCHIVO", "lines": ["Guías y misiones", "Objetivos individuales", "Consultá el Códice"]},
+    {"id": "workshop", "position": [724, 116, 700], "title": "TALLER", "lines": ["Create y máquinas", "Probá sin bloquear", "Dejá libre el paso"]},
+    {"id": "inn", "position": [620, 116, 772], "title": "POSADA", "lines": ["Cocina y descanso", "Acordá horarios", "Usá voz si querés"]},
+    {"id": "garden", "position": [724, 116, 772], "title": "PATIO", "lines": ["Prepará expediciones", "Marcá tu ruta", "Revisá provisiones"]},
+    {"id": "north-route", "position": [672, 116, 600], "title": "RUTA NORTE", "lines": ["Exploración", "Marcá el regreso", "No cierres el acceso"]},
+    {"id": "south-route", "position": [672, 116, 872], "title": "RUTA SUR", "lines": ["Anfiteatro y arena", "Prepará el equipo", "Volvé por el camino"]},
+    {"id": "west-route", "position": [520, 116, 736], "title": "RUTA OESTE", "lines": ["Terreno abierto", "Protegé tu base", "Respetá los claims"]},
+    {"id": "east-route", "position": [824, 116, 736], "title": "RUTA ESTE", "lines": ["Talleres y aldeas", "Compartí hallazgos", "Dejá libre la salida"]}
+  ],
+  "tutorial": [
+    {"step": 1, "station": "plaza-start", "goal": "Abrir Heracles y leer bienvenida"},
+    {"step": 2, "station": "archive", "goal": "Elegir una ruta de progreso"},
+    {"step": 3, "station": "workshop", "goal": "Identificar Create, JEI y seguridad"},
+    {"step": 4, "station": "garden", "goal": "Preparar comida, cama y mapa"},
+    {"step": 5, "station": "north-route", "goal": "Cruzar una salida y registrar el regreso"}
+  ],
+  "qa": {
+    "walkRoutes": ["north", "south", "east", "west"],
+    "requiresVanillaClientReadability": true,
+    "requiresNoClaimBlockage": true,
+    "requiresBackupBeforePromotion": true
+  }
+}

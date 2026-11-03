@@ -1550,7 +1550,7 @@
       "tipo_publicacion": "release",
       "fuente": "https://modrinth.com/mod/oculus/version/iQ1SwGc3",
       "modrinth_version_id": "iQ1SwGc3",
-      "papel": "Menú y soporte de shaders; Oculus se instala, pero el shaderpack queda apagado por defecto.",
+ "papel": "Menú y soporte de shaders; Oculus se instala con Complementary Unbound en perfil Low por defecto.",
       "dependencias_publicadas": [
         {
           "version_id": null,

@@ -11,11 +11,11 @@ import java.time.Instant;
 /** The wrapper backs up only after Minecraft and all plugin databases have closed. */
 public final class Maintenance {
     private MaintenancePolicy policy;
-    private boolean enabled,managed,played,requested;
+    private boolean enabled,managed,played,requested,maintenanceWarned;
     private long lastBackup,emptySince=-1;
     private MinecraftServer server;
     public void initialize(MinecraftServer server) {
-        this.server=server;enabled=false;managed=false;played=false;requested=false;
+        this.server=server;enabled=false;managed=false;played=false;requested=false;maintenanceWarned=false;
         try {
             Path config=Path.of("config/virgos/maintenance.json");
             if(!Files.exists(config))return;
@@ -37,7 +37,14 @@ public final class Maintenance {
     public void tick() {
         if(!enabled||!managed||requested)return;
         int players=server.getPlayerCount();long now=System.currentTimeMillis();
-        if(players>0){played=true;emptySince=-1;return;}
+        if(players>0){
+            played=true;emptySince=-1;
+            if(policy.warningDue(now,lastBackup,players,played,maintenanceWarned)){
+                server.getPlayerList().broadcastSystemMessage(Component.literal("Mantenimiento programado: cuando el servidor quede vacío se guardará una copia completa y se reiniciará. No se expulsará a nadie."), false);
+                maintenanceWarned=true;
+            }
+            return;
+        }
         if(emptySince<0)emptySince=now;
         if(policy.due(now,lastBackup,emptySince,players,played))request(null);
     }

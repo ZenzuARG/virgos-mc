@@ -39,9 +39,43 @@ Cada archivo se lee con un único acceso que impide escrituras durante su hash y
 5. Java y las bibliotecas se reconstruyen desde las versiones fijadas o se copian desde una instalación verificada. En esta PC, `scripts/verify-restored-server.cjs` arranca únicamente una copia ya aislada bajo `.lab/restore-check`, audita el spawn y la apaga.
 6. Recién después de comprobar la copia se planifica el reemplazo de producción, con el servidor detenido. El restaurador no lo hace automáticamente y `deploy-release.py` no debe reutilizarse sobre un mundo en uso.
 
+La última prueba real del 3 de noviembre de 2026 restauró 8.572 archivos y arrancó una copia aislada en
+`127.0.0.1:25576`, sin túnel público. La copia sin reparar expuso una discrepancia del Bastión; la misma prueba
+con `node scripts/verify-restored-server.cjs <carpeta> --rebuild-bastion` reconstruyó el candidato aislado y pasó
+la auditoría de 147.542 bloques y las cuatro rutas sin diferencias. Este modo nunca promueve cambios a producción;
+esa decisión sigue requiriendo una ventana de mantenimiento y un respaldo previo.
+
 ## Diagnóstico
 
 `comprobar-publico.bat` consulta `virgos-mc.playit.plus`. `virgos status`, desde consola, muestra autenticación, progreso, arena, proyectos, voz y mantenimiento. `forge tps` mide los ticks actuales. `scripts/audit-project.py` genera un informe del inventario, balance, misiones y cobertura de respaldo.
+
+El runner gestionado genera además una instantánea automática cada diez minutos en `.runtime/health/`. Incluye `spark health --memory`, `spark tps`, `list` y contadores acotados de entidades totales, ítems tirados, aldeanos y minecarts mediante un objetivo de scoreboard reutilizable. No elimina ni modifica entidades; sólo registra las líneas de evidencia del log. Estos informes son locales: no suben datos ni credenciales a ningún servicio.
+
+### Auditoría de rendimiento reproducible
+
+Con el servidor iniciado mediante el runner gestionado, ejecutá uno de estos escenarios desde PowerShell:
+
+```powershell
+python scripts/audit-performance.py exploration --seconds 300
+python scripts/audit-performance.py create --seconds 300
+python scripts/audit-performance.py multiplayer --seconds 300
+```
+
+El script no cambia `view-distance=8` ni `simulation-distance=6`. Captura `spark health --memory`, `spark tps` y un perfil acotado, y deja el informe en `.runtime/performance-audit/`. El escenario debe reproducirse durante la ventana; el perfil sólo se considera evidencia después de revisar su enlace o archivo guardado.
+
+### Pregeneración controlada
+
+La pregeneración nunca se inicia automáticamente ni sobre una suposición de alcance. Primero hacé un respaldo completo y verificá que no haya jugadores conectados; después usá un radio acotado y confirmá explícitamente:
+
+```powershell
+python scripts/pregen-managed.py --world minecraft:overworld --center 672 752 --radius 768 --seconds 600 --label spawn --confirm
+```
+
+Para Nether, End o dimensiones de mods cambiá `--world` y elegí un centro/radio documentados. El script pausa al detectar un jugador, deja el resultado en `.runtime/pregen/` y no promueve ni borra tareas anteriores.
+
+Los trabajos propuestos están enumerados en `pack/pregen-plan.json`. Los de dimensiones y rutas remotas son
+intencionalmente candidatos: no se ejecutan hasta que el grupo haya fijado el destino público y exista un respaldo
+posterior al cierre de worldgen.
 
 AuthMe usa SQLite con `DataSource.caching: false` y consultas asíncronas. Esto evita que un registro nuevo lea una entrada negativa antigua de su caché. Las sesiones automáticas por IP siguen desactivadas; cada conexión requiere contraseña. Un cambio de esta opción necesita reiniciar el servidor. OPAC utiliza `primaryPartySystem = "default"`, su sistema de grupos integrado, con claims de propiedad individual.
 

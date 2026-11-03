@@ -1,0 +1,46 @@
+# Server operations and player experience polish
+Branch: current worktree | Delivery: inline work units | Runner: PowerShell + Node + Python checks
+
+## Specs
+
+1. **S1 — Auditoría real de rendimiento.** User request: "Medir con `spark` durante exploración, fábricas grandes de Create y varios jugadores. No tocar `view-distance=8` ni `simulation-distance=6` a ciegas." Acceptance: add a reproducible evidence workflow that records these scenarios and keeps the current distances unchanged until measurements justify a change.
+2. **S2 — Pregenerar terreno.** User request: "Usar `Chunky` para spawn, rutas principales y dimensiones. Reduce muchísimo los tirones cuando alguien explora zonas nuevas." Acceptance: document and script bounded Chunky jobs for the spawn, routes, and each active dimension without starting destructive or public-world mutations automatically.
+3. **S3 — Operación más sólida.** User request: "Reinicio programado con aviso dentro del juego. Prueba real de restauración de backups. Reporte automático de TPS, memoria y entidades problemáticas." Acceptance: add an explicit maintenance workflow that broadcasts, checkpoints, verifies restore in isolation, and emits a machine-readable health report.
+4. **S4 — Eventos sin inflar el pack.** User request: "Usar KubeJS + Heracles para temporadas, expediciones y objetivos comunitarios. Más contenido sin sumar otro mod pesado." Acceptance: add a small, reversible seasonal/event scaffold using existing KubeJS and Heracles data surfaces; no new mod artifact.
+5. **S5 — Pulido del spawn.** User request: "Mejorar señalización, tutorial inicial y recorrido de bienvenida. Esto suele mejorar más la experiencia que agregar diez mods nuevos." Acceptance: improve the spawn guidance artifacts and checklist while preserving the existing Bastion geometry and protected routes.
+
+## Tasks
+
+- T1 (S1): Add performance audit runner/report schema — inline — complete (Spark captures for exploration, two players, and a controlled Create kinetic layout; distances 8/6 unchanged) — commit: TBD
+- T2 (S2): Add bounded pregeneration plan and operator commands — inline — complete (all nine production jobs completed with zero players and reports) — commit: TBD
+- T3 (S3): Add maintenance broadcast/health/restore verification workflow — inline — complete (health snapshots, scheduled warning, and passing isolated restore/rebuild proof) — commit: TBD
+- T4 (S4): Add KubeJS + Heracles event scaffold — inline — complete (JSON/JS checks and runtime load/sync verified) — commit: TBD
+- T5 (S5): Polish spawn guidance and acceptance checklist — inline — complete (nine v5 stations promoted and verified in production; geometry unchanged) — commit: TBD
+
+## Log
+
+L1. User request received: "trabaja en todos los puntos que me comentaste, y puli cada uno de ellos:" followed by S1-S5 above.
+L2. Existing repository evidence: managed runner, automatic verified full backups, restore verifier, spark/Chunky artifacts, KubeJS scripts, Heracles quest data, and Bastion spawn documentation already exist. Work should extend these surfaces rather than add redundant systems.
+L3. T1 added `scripts/audit-performance.py`; it refuses to run unless the managed server is live and `view-distance=8` plus `simulation-distance=6` are unchanged. It queues `spark health --memory`, `spark tps`, and a bounded profiler command, then writes a scenario-labelled report under `.runtime/performance-audit/`.
+L4. T2 added `scripts/pregen-managed.py`; it requires explicit `--confirm`, a managed live server, a demonstrated zero-player state, bounded namespaced world/radius/time arguments, and writes a report under `.runtime/pregen/`. It pauses when a player joins or the time budget expires.
+L5. T3 added `scripts/health-report.cjs` and schedules it every ten minutes from `scripts/run-public.cjs`; snapshots queue Spark health/TPS, bounded scoreboard entity counts, and player list commands and write raw evidence under `.runtime/health/`.
+L6. T4 added a lightweight KubeJS seasonal announcement (`kubejs/server_scripts/virgos_events.js`) plus a mirrored Heracles check quest `virgos_temporada_1.json`; it adds no recipes, entities, items, or new mod artifacts.
+L7. A real restore drill restored 8,572 files from `backups/full/virgos-20261102-223450-auto.zip`, booted the recovered server on localhost port 25576, and stopped cleanly. The untouched copy exposed 100 missing, 100 differing blocks and 200 route failures; the same isolated drill with `--rebuild-bastion` rebuilt the candidate and passed the audit of 147,542 blocks and four routes with zero findings. Production was never touched.
+L8. T3 added a maintenance warning in Virgos Core when the automatic backup interval is reached while players are still online; the restart still waits for an empty server and idle grace period.
+L9. `scripts/verify-restored-server.cjs --rebuild-bastion` now grants a 15-minute isolated rebuild budget and records a passing repaired-spawn report. The corrected candidate still requires an explicit production maintenance/promotion step; no automatic promotion was added.
+L10. The passing repaired report is `.lab/reports/restore-runtime-verification.json`: exitCode 0, 147,542 blocks checked, six restored world folders, and zero missing/different/blocked/route findings. This is lab evidence only; live player performance and production promotion remain open.
+- L11 (2026-11-03): la preparación QA llegó al menú principal con tres instancias, pero el usuario indicó que es excesivo; se detuvieron las tres instancias y el servidor de laboratorio de forma limpia. La siguiente validación usará una sola instancia cliente y comandos/escenarios del servidor; no se volverán a lanzar tres Minecraft simultáneamente.
+- L12 (2026-11-03): la verificación en laboratorio mostró que Spark 1.10.53 usa `spark health --memory`; `spark health show --memory` falla con `Expected flag at position 0`. También `forge track` y `forge help` no son comandos válidos en este servidor Ketting, así que el reporte automático queda con Spark health/TPS y `list`, evitando comandos inválidos.
+- L13 (2026-11-03): se verificó una ventana real con dos clientes (`VirgosQA1`, `VirgosQA2`); `list` informó 2 jugadores y Spark devolvió TPS/perfil (`https://spark.lucko.me/1V39jbCDyd`). El segundo cliente fue aceptado después de sincronizar `virgos_codex` y desactivar backups sólo en el laboratorio para evitar una pausa de 16:52 min durante la QA.
+- L14 (2026-11-03): se validó el contador de salud en el laboratorio: 119 entidades totales, 8 ítems tirados, 0 aldeanos y 0 minecarts. `scripts/health-report.cjs` ahora registra esos cuatro valores junto con Spark y `list`, sin borrar entidades.
+- L15 (2026-11-03): la ventana multijugador real produjo `There are 2 of a max of 10 players online`, dos clientes autenticados y un perfil Spark con enlace `https://spark.lucko.me/1V39jbCDyd`; la teletransportación de ambos generó una alerta de atraso de 9,969 ms, evidencia útil para el baseline. La validación Create queda pendiente de una fábrica real cargada; no se presentó un sustituto sintético como evidencia equivalente.
+- L16 (2026-11-03): se guardó `.runtime/performance-audit/20261103-lab.json` con distancias verificadas 8/6, evidencia multijugador/exploración y el escenario Create marcado explícitamente como pendiente; no se falseó una fábrica sintética.
+
+- L17 (2026-11-03): se completó un escenario Create controlado en laboratorio, no producción: motor creativo + 64 ejes + 64 ruedas dentadas grandes + 64 crafters + 64 embudos, con chunks forzados sólo en el lab. Spark registró TPS 20.0, p95 4.2 ms, máximo 22.9 ms, memoria 2.6/6.0 GB y perfil `https://spark.lucko.me/OgaDffoKcM`. La primera variante de estado `facing=up` fue rechazada; se corrigió colocando crafters con estado por defecto.
+- L18 (2026-11-03): `.runtime/performance-audit/20261103-create-lab.json` conserva la evidencia y distingue explícitamente este escenario controlado de una fábrica de jugadores en producción.
+
+- L19 (2026-11-03): se agregó `scripts/promote-spawn-guidance.py`, con confirmación explícita, backup ZIP existente, servidor gestionado y cero jugadores; encola las estaciones de `signage-plan.json` y deja informe de promoción sin reconstruir geometría ni prometer recompensas.
+- L20 (2026-11-03): se agregó `docs/ventana-mantenimiento.md` con el orden exacto para health report, nueve jobs Chunky y promoción v5; cada paso exige cero jugadores y detiene la ventana ante un fallo.
+- L21 (2026-11-03): con autorización explícita se inició el runner público después de alinear `mods/virgos_core-2.0.0.jar` con `pack/custom-artifacts.lock.json`; la validación de entrega pasó. Se ejecutaron y completaron los nueve jobs Chunky de producción: spawn 9.409 chunks, cuatro rutas 4.225 cada una, Nether 9.409, End/Aether/Twilight 4.225 cada uno.
+- L22 (2026-11-03): se promovieron las 9 estaciones de señalización v5 en producción usando `backups/full/virgos-20261102-223450-auto.zip`; la primera pasada dejó textos vacíos por escapes `\\u`, se corrigió el generador SNBT y la segunda pasada quedó verificada con `data get block` en las nueve estaciones. Health report post-cambio: 20 TPS, 2.4/7.1 GB, 111 entidades, 8 ítems, 0 aldeanos, 0 minecarts y 0 jugadores.
+

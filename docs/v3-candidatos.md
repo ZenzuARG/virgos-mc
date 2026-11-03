@@ -8,7 +8,7 @@ Esta lista es el alcance de pruebas de la v3. El servidor y el mundo actual se c
 | --- | --- | --- | --- | --- |
 | Rendimiento | ModernFix, FerriteCore, Embeddium, Entity Culling, ImmediatelyFast, Dynamic FPS | Cliente; varias piezas también en servidor | Instalados | Base de rendimiento. Se miden arranque, FPS y memoria antes de sumar otra optimización. |
 | Rendimiento | FastSuite, Placebo, Clumps | Servidor/cliente según el archivo | Instalados | Reducen trabajo de recetas y entidades de experiencia; se mantienen porque ya pasaron la prueba de arranque. |
-| Render | Oculus 1.8.0 + Embeddium | Cliente | **Instalado por defecto, shaders apagados** | Oculus queda disponible para quien tenga margen. `enableShaders=false` y `shaderPack=` son la configuración inicial. |
+| Render | Oculus 1.8.0 + Embeddium | Cliente | **Instalado por defecto, Unbound Low activo** | `enableShaders=true`, `shaderPack=ComplementaryUnbound_r5.9.3.zip` y ajustes persistidos en el archivo `.txt` del shader. |
 | Render | First-person Model 2.7.3 | Cliente opcional | En laboratorio | Mejora la lectura de manos y cuerpo en primera persona. |
 | Animación | Not Enough Animations 1.12.6 | Cliente opcional | En laboratorio | Añade animaciones de interacción sin cambiar estadísticas ni combate. |
 | Cámara | Better Third Person 1.9.0 | Cliente opcional | En laboratorio | Cámara alternativa; se valida con Create, hechizos y monturas. |
@@ -17,13 +17,14 @@ Esta lista es el alcance de pruebas de la v3. El servidor y el mundo actual se c
 | Audio | AmbientSounds 6.3.11 + CreativeCore 2.12.40 | Cliente opcional | **Añadido a v3-lab** | Paisaje sonoro por bioma; se prueba junto con Sound Physics para evitar duplicación molesta. |
 | Animación | Eating Animations 5.1.0 + GML 4.0.10 | Cliente opcional | **Añadido a v3-lab** | Feedback visual de comida y pociones; sin impacto en recetas ni balance. |
 
-Oculus se instala como mod de cliente para que el menú y el soporte estén disponibles. El paquete de shader se descarga desde su publicación oficial durante la instalación y se deja sin seleccionar; activar shaders sigue siendo una decisión del jugador.
+Oculus se instala como mod de cliente y el instalador descarga Complementary Unbound r5.9.3 desde su publicación oficial. El perfil Low y el estilo Unbound se aplican en la primera instalación; si el jugador ya tiene un archivo de ajustes para ese shader, se conserva.
 
 ## Lote B — candidatos para una segunda prueba
 
 | Componente | Motivo | Riesgo o condición |
 | --- | --- | --- |
-| 3D Skin Layers 1.9.0 Forge | Capas de skin en 3D, sólo cliente | La propia página documenta sombras extrañas con shaders; probarlo con Oculus antes de incluirlo. |
+| 3D Skin Layers 1.11.4 Forge | Capas de skin en 3D, sólo cliente | Incluido en el cliente base; validar sombras y modelos de Create con Unbound Low. |
+| Grassier Grass 1.4.5 | Pasto 3D con viento, sólo cliente | Incluido en el cliente base; medir coste con Unbound Low y Embeddium. |
 | Better F3 | Depura el HUD y deja la información esencial más legible | Licencia ARR y cambio de interfaz; sólo se agrega si el grupo lo prefiere. |
 | Entity Model Features + Entity Texture Features | Más modelos y texturas animadas | Puede cruzarse con Oculus y resourcepacks; requiere una prueba de arranque y de mobs de Alex. |
 | Euphoria Patcher | Perfiles visuales para Complementary | Se reserva para la prueba con shaders; no se instala en equipos de bajo rendimiento. |

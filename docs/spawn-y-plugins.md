@@ -82,3 +82,15 @@ CoreProtect no se usará como garantía universal de restauración de máquinas 
 - Misiones iniciales que conduzcan desde la plaza hasta la primera base y aventura.
 - Buen rendimiento mirando la plaza, usando el taller y cruzando los arcos sin shaders.
 - Reaparición, reconexión, claims y restauración comprobados con cuentas de prueba.
+
+### Revisión v5 de orientación
+
+`pack/spawn/signage-plan.json` fija una capa de orientación independiente de la geometría: plaza, archivo,
+taller, posada, patio y las cuatro rutas tienen un mensaje corto y una salida de regreso. El tutorial de cinco
+pasos lleva a una persona nueva desde Heracles hasta una primera salida sin prometer recompensas ni protección
+que el servidor no aplique. La promoción exige copia completa, lectura con cliente vanilla y las cuatro rutas
+de `scripts/qa-spawn.py`.
+
+La promoción controlada se encola con `scripts/promote-spawn-guidance.py`. Requiere un servidor gestionado,
+un ZIP de backup existente, cero jugadores y `--confirm`; escribe un informe en `.runtime/spawn-promotion/`.
+No reconstruye el Bastión ni cambia recompensas, claims o reglas de protección.

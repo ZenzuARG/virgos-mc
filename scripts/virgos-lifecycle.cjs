@@ -36,4 +36,9 @@ function createAudit(root) {
     } catch (error) { console.error('No se pudo escribir auditoria de control:', error.code || 'IO_ERROR'); }
   };
 }
-module.exports = { validCheckpoint, classifyExit, readCheckpoint, createAudit };
+function isOtherProcessAlive(owner, currentPid = process.pid, probe = process.kill) {
+  if (!owner || owner === currentPid) return false;
+  try { probe(owner, 0); return true; }
+  catch (error) { if (error && error.code === 'ESRCH') return false; throw error; }
+}
+module.exports = { validCheckpoint, classifyExit, readCheckpoint, createAudit, isOtherProcessAlive };

@@ -6,6 +6,8 @@ const path=require('node:path');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
+const rebuildBastion=process.argv.includes('--rebuild-bastion');
+const verificationTimeoutMs=rebuildBastion?900000:300000;
 const allowed=fs.realpathSync(path.join(root,'.lab','restore-check'))+path.sep;
 if(!process.argv[2])throw Error('Provide the recovered folder.');
 const cwd=fs.realpathSync(path.resolve(process.argv[2]));
@@ -47,17 +49,33 @@ async function main(){
   const child=spawn(path.join(root,'.runtime',base.java.folder,'bin','java.exe'),args,{cwd,stdio:['pipe',output,output],windowsHide:true});
   fs.writeFileSync(stateFile,JSON.stringify({pid:child.pid,started:new Date(started).toISOString()}));
   console.log('Recovered server booting locally on 25576, PID',child.pid);
-  let requested=false,stopping=false,timeout=false,audit=null,bootReady=false;
+  let requested=false,stopping=false,timeout=false,audit=null,bootReady=false,buildRequested=false;
   const stop=()=>{if(!stopping){stopping=true;child.stdin.write('save-all flush\nstop\n');}};
   const poll=setInterval(()=>{
     try{
       const log=fs.readFileSync(serverLog,'utf8');
       bootReady=log.includes('Done (') && log.includes('Virgos: AuthMe bridge ready');
-      if(bootReady&&!requested){requested=true;child.stdin.write('virgos status\nvirgos audit\n');console.log('Recovered world is ready; checking the saved spawn.');}
+      if(bootReady&&!requested){
+        requested=true;
+        if(rebuildBastion){
+          buildRequested=true;
+          child.stdin.write('virgos build bastion\n');
+          console.log('Recovered world is ready; rebuilding the isolated Bastion candidate.');
+        } else child.stdin.write('virgos status\n');
+        // Let all restored dimensions finish their first post-boot chunk pass
+        // before auditing the Bastion. Auditing immediately after Done can
+        // classify still-loading terrain as missing or blocked.
+        setTimeout(()=>{if(!stopping&&!rebuildBastion){child.stdin.write('virgos audit\n');console.log('Recovered world settled; checking the saved spawn.');}},15000);
+      }
+      if(buildRequested&&!stopping&&log.includes('Virgos Bastion construction complete:')){
+        buildRequested=false;
+        child.stdin.write('virgos audit\n');
+        console.log('Isolated Bastion rebuild completed; checking the repaired spawn.');
+      }
       if(requested&&fs.existsSync(auditPath)&&fs.statSync(auditPath).mtimeMs>=started){
         audit=JSON.parse(fs.readFileSync(auditPath,'utf8'));stop();
       }
-      if(Date.now()-started>300000&&!stopping){timeout=true;console.log('Recovery verification timed out; requesting a clean stop.');stop();}
+      if(Date.now()-started>verificationTimeoutMs&&!stopping){timeout=true;console.log('Recovery verification timed out; requesting a clean stop.');stop();}
     }catch(error){console.error(error.message);timeout=true;stop();}
   },1000);
   child.on('error',error=>{clearInterval(poll);fs.closeSync(output);console.error(error);process.exitCode=1;});
