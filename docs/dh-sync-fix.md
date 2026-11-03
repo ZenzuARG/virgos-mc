@@ -6,9 +6,9 @@ La semilla de cliente no habilitaba explícitamente la generación/sincronizaci�
 
 ## Cambio
 
-- El servidor deja generatorPlan = DISABLED para que Chunky controle la generación de chunks faltantes; DH solo sirve el caché LOD persistido. El cliente mantiene generatorPlan = CHUNKS_ONLY para consumir los LOD remotos.
+- El servidor mantiene enableDistantGeneration = true y generatorPlan = CHUNKS_ONLY con chunkGeneratorMode = PRE_EXISTING_ONLY: DH puede enviar los LOD persistidos y solo procesa chunks que ya existen; Chunky sigue siendo responsable de pregenerar el terreno. El cliente mantiene enableDistantGeneration = true para solicitar y guardar los LOD remotos.
 - Cliente: radio LOD: 256 chunks; la generación local queda desactivada (generationMaxChunkRadius = 0).
-- Servidor: generatorPlan = DISABLED, chunkGeneratorMode = PRE_EXISTING_ONLY, radio realtime 256 y rate limits 16; esto evita el inyector de dimensiones no soportadas y conserva la entrega del caché.
+- Servidor: generatorPlan = CHUNKS_ONLY, chunkGeneratorMode = PRE_EXISTING_ONLY, radio realtime 256 y rate limits 16; el modo preexistente evita generar dimensiones nuevas y mantiene activa la entrega del caché.
 - view-distance=8 y simulation-distance=6 no cambiaron.
 
 ## Evidencia aislada

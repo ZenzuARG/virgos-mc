@@ -5,6 +5,7 @@ numberOfThreads = 2
 threadRunTimeRatio = "0.5"
 
 [common.worldGenerator]
+enableDistantGeneration = true
 generatorPlan = "CHUNKS_ONLY"
 chunkGeneratorMode = "PRE_EXISTING_ONLY"
 generationMaxChunkRadius = 0
