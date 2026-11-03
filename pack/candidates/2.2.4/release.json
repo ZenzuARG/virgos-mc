@@ -1,0 +1,11 @@
+{
+  "version": "2.2.4",
+  "installer": 18,
+  "clientRelease": "2.2.4-r18",
+  "clientFingerprint": "virgos-client-2.2.4-r18",
+  "status": "release-candidate",
+  "minecraft": "1.20.1",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "verification": "docs/releases/2.2.4-verification.json"
+}
