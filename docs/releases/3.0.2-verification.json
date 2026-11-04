@@ -1,0 +1,30 @@
+{
+  "version": "3.0.2",
+  "status": "candidate",
+  "checks": [
+    {
+      "name": "dh-handshake",
+      "result": "passed",
+      "evidence": "Live QA audit reported serverReady=true after a clean client/server session."
+    },
+    {
+      "name": "aggressive-lod-sync",
+      "result": "passed",
+      "evidence": "FullData increased from 4617 to 5480 rows in 60 seconds (863 rows/minute); SQLite grew from 271298560 to 318672896 bytes."
+    },
+    {
+      "name": "client-memory-policy",
+      "result": "passed",
+      "evidence": "Installer memory suite passed 8/8 checks; supported allocations are 8192, 10240 and 12288 MiB."
+    },
+    {
+      "name": "visual-client-startup",
+      "result": "passed",
+      "evidence": "QA client loaded DH, Grassier Grass and the visual stack without a startup crash."
+    }
+  ],
+  "notes": [
+    "Full server cache convergence is asynchronous; the measured backlog projected approximately 2h25m at the aggressive rate.",
+    "Release publication remains subject to the repository's normal tag and asset checks."
+  ]
+}
