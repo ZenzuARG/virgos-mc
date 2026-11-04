@@ -17,6 +17,7 @@ Test runner: `dev/virgos-core/gradlew.bat -p dev/dh-compat` plus fresh public QA
 
 - T1 — Map native DH handshake and payload ownership; route: inline; status: complete; evidence: client sends SessionConfig/RequestLevelInit with no server response; native server state queues messages until player registration.
 - T2 — Remove the premature server-side constructor config send and restore native request/response negotiation; route: inline; status: complete; commit: pending.
+- T5 — Permit only the two native DH handshake messages through the pre-auth payload guard; route: inline; status: complete; commit: pending.
 - T3 — Implement server-first merge policy and regression probes; route: inline; status: pending; commit: pending.
 - T4 — Fresh/old client end-to-end QA and release packaging; route: inline; status: partial; commit: pending.
 
@@ -27,3 +28,5 @@ Test runner: `dev/virgos-core/gradlew.bat -p dev/dh-compat` plus fresh public QA
 - 2026-11-04: Official client debug log confirmed `SessionConfigMessage` and `RequestLevelInitMessage` were sent, but no server response arrived. The custom `DhServerPlayerStateMixin` constructor send was removed; the native `SessionConfigMessage` handler remains authoritative.
 - 2026-11-04: Rebuilt the compatibility addon successfully, restarted the public server, and confirmed DH initializes as `SERVER_ONLY`; the installed official client still had the previous addon hash, so a new 3.0.3 installer was built externally with the corrected 31416-byte addon. Client reconnect verification remains pending.
 - 2026-11-04: The official client was synchronized in place with the corrected addon after backing up the previous jar; both client and server now report SHA256 `450674...`. A fresh client connection is still required to verify `serverReady=true` and LOD row growth.
+- 2026-11-04: Root cause identified: AuthBridge intercepted every pre-auth custom payload and swallowed DH's `distant_horizons:msg` session-config and level-init request before AuthMe login. The guard now permits only DH protocol version 16 message IDs 4 and 3, each once, with a bounded payload; all other DH messages remain blocked.
+- 2026-11-04: Core tests pass and the public server was restarted with the patched core jar. The prior client connection was necessarily dropped by the restart; reconnect verification is pending.

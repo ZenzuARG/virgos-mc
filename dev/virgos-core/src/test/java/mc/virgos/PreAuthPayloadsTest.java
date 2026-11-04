@@ -16,6 +16,12 @@ public final class PreAuthPayloadsTest {
         return data;
     }
 
+    private static FriendlyByteBuf dh(int messageId) {
+        var data = new FriendlyByteBuf(Unpooled.buffer());
+        data.writeByte(16).writeShort(messageId);
+        return data;
+    }
+
     public static void main(String[] args) {
         var guard = new PreAuthPayloads();
         var data = hello();
@@ -43,6 +49,22 @@ public final class PreAuthPayloadsTest {
             check(!guard.allow("voicechat:request_secret", data), "Voice hello remains single-use");
             data.writeByte(1);
             check(!new PreAuthPayloads().allow("voicechat:request_secret", data), "Voice payload size stays bounded");
+
+            var dhConfig = dh(4);
+            var dhRequest = dh(3);
+            try {
+                var dhGuard = new PreAuthPayloads();
+                check(dhGuard.allow("distant_horizons:msg", dhConfig), "DH session config must reach the native handshake");
+                check(!dhGuard.allow("distant_horizons:msg", dhConfig), "DH session config remains single-use");
+                check(dhGuard.allow("distant_horizons:msg", dhRequest), "DH level-init request must reach the native handshake");
+                check(!dhGuard.allow("distant_horizons:msg", dhRequest), "DH level-init request remains single-use");
+                check(!new PreAuthPayloads().allow("distant_horizons:msg", dh(2)), "DH server responses stay blocked pre-auth");
+                check(!new PreAuthPayloads().allow("distant_horizons:msg", dh(99)), "Unknown DH messages stay blocked pre-auth");
+                check(!new PreAuthPayloads().allow("distant_horizons:msg", new FriendlyByteBuf(Unpooled.buffer().writeByte(16).writeShort(4).writeZero(8_193))), "Oversized DH payloads stay blocked");
+            } finally {
+                dhConfig.release();
+                dhRequest.release();
+            }
         } finally {
             data.release();
         }
