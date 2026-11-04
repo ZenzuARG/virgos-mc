@@ -1,5 +1,9 @@
 _version = 5
 
+[server]
+# Match the server's aggressive initial LOD transfer profile (KB/s per player).
+playerBandwidthLimit = 2048
+
 [common.multiThreading]
 numberOfThreads = 2
 threadRunTimeRatio = "0.5"
