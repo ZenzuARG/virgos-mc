@@ -97,6 +97,13 @@ public final class AuthBridge {
                         super.channelRead(context, message);
                         return;
                     }
+                    // Forge's DH SimpleChannel must traverse the native Netty pipeline;
+                    // manually invoking packet.handle() bypasses its channel dispatch.
+                    // DH packets are bounded, read-only LOD negotiation/data requests.
+                    if (payload.getIdentifier().toString().equals("distant_horizons:msg")) {
+                        super.channelRead(context, message);
+                        return;
+                    }
                     if (pending.incrementAndGet() > 128) {
                         pending.decrementAndGet();
                         ReferenceCountUtil.safeRelease(payload.getData());

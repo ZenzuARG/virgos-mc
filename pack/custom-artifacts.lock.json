@@ -5,7 +5,7 @@
       "filename": "virgos_core-2.0.0.jar",
       "local_source": "dev/virgos-core/build/libs/virgos_core-2.0.0.jar",
       "hash_algorithm": "sha256",
-      "hash": "8970ac2347d3ec5718cee14a7c8a53b2660c4bc7987eae82f1e39faacfd99acc",
+      "hash": "8b139b49c0e5361d42a9bc0df842db85c676282e4d41d33c745551f593802545",
       "sides": [
         "server"
       ],
