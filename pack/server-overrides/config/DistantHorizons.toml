@@ -6,8 +6,8 @@ realTimeUpdateDistanceRadiusInChunks = 256
 maxSyncOnLoadRequestDistance = 625
 synchronizeOnLoad = true
 maxGenerationRequestDistance = 625
-generationRequestRateLimit = 16
-syncOnLoadRateLimit = 16
+	generationRequestRateLimit = 200
+syncOnLoadRateLimit = 200
 
 [common.multiThreading]
 numberOfThreads = 2
@@ -26,3 +26,5 @@ showGenerationProgress = "DISABLED"
 [client.advanced.autoUpdater]
 enableAutoUpdater = false
 enableSilentUpdates = false
+
+

@@ -8,18 +8,16 @@
   ],
   "client": [
     "ConnectionMixin",
-    "DhClientWorldMixin",
-    "SharedApiMixin",
     "DhClientLevelMixin",
     "FullDataPayloadMixin",
-    "FullDataPayloadReceiverMixin",
-    "FullDataRequestQueueMixin",
     "RemoteWorldRetrievalQueueMixin",
     "BackpackKeyGuardMixin"
   ],
   "server": [
     "ChunkyReadinessMixin",
-    "GroupedFullDataPayloadMixin"
+    "DhServerPlayerStateMixin"
   ],
-  "injectors": { "defaultRequire": 1 }
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

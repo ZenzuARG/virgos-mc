@@ -20,15 +20,15 @@ function Write-JsonAtomic($Path, $Value) {
 function Get-VirgosClientMemoryMb { return 8192 }
 
 function Resolve-VirgosClientMemoryMb([int]$RequestedMemoryMb) {
-    if ($RequestedMemoryMb -lt 4096 -or $RequestedMemoryMb -gt 8192) { throw 'Memoria no valida.' }
-    # Managed installations upgrade legacy selections without changing setter APIs.
-    return Get-VirgosClientMemoryMb
+    if ($RequestedMemoryMb -in @(4096,5120,6144)) { return Get-VirgosClientMemoryMb }
+    if ($RequestedMemoryMb -notin @(8192,10240,12288)) { throw 'Memoria no valida. Usa 8192, 10240 o 12288 MB.' }
+    return $RequestedMemoryMb
 }
 
 function Update-VirgosClientMemoryPreference([string]$Path) {
     $prefs=Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json
     if (-not $prefs -or $prefs -is [Array] -or $prefs -is [string]) { throw 'Las preferencias no son validas.' }
-    if ($prefs.memoryMb -ne (Get-VirgosClientMemoryMb)) {
+    if ($prefs.memoryMb -notin @(8192,10240,12288)) {
         Copy-Item -LiteralPath $Path -Destination ($Path+'.memoria-'+[Guid]::NewGuid().ToString('N')+'.bak')
         $prefs | Add-Member -NotePropertyName memoryMb -NotePropertyValue (Get-VirgosClientMemoryMb) -Force
         Write-JsonAtomic $Path $prefs
@@ -107,7 +107,7 @@ function Get-VerifiedDownload([string]$Url, [string]$Path, [string]$Hash, [strin
 }
 
 function Set-VirgosProfile([string]$Path, [string]$GameDir, [string]$JavaPath, [int]$MemoryMb) {
-    if ($MemoryMb -lt 4096 -or $MemoryMb -gt 8192) { throw 'Memoria fuera del rango permitido.' }
+    if ($MemoryMb -notin @(8192,10240,12288)) { throw 'Memoria fuera del rango permitido.' }
     if ([IO.File]::Exists($Path)) {
         $data = [IO.File]::ReadAllText($Path) | ConvertFrom-Json
         if (-not $data -or $data -is [Array] -or $data -is [string]) { throw 'El archivo de perfiles del launcher no es valido.' }

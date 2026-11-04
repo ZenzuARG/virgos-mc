@@ -111,17 +111,16 @@ Check 'Invalid allocation is rejected before profile/settings writes' {
         Assert ($caught -and [IO.File]::ReadAllText($tl) -eq 'fixture sentinel' -and -not [IO.Directory]::Exists((Join-Path $tlRoot 'backups'))) 'Invalid allocation modified TLauncher or created a backup.'
     }
 }
-Check 'Explicit low-level legacy allocations remain supported' {
+Check 'Explicit low-level allocations are rejected below the new minimum' {
     foreach($legacy in @(4096,5120,6144)) {
         $base=Join-Path $scratch ('legacy-'+$legacy);[void][IO.Directory]::CreateDirectory($base)
         $profile=Join-Path $base 'launcher_profiles.json'
-        Set-VirgosProfile $profile 'D:\Fixture' 'D:\java.exe' $legacy
-        $stored=Get-Content -LiteralPath $profile -Raw -Encoding UTF8 | ConvertFrom-Json
-        Assert ($stored.profiles.'virgos-mc-1.20.1'.javaArgs.Contains('-Xmx'+$legacy+'M')) 'Explicit legacy profile allocation changed.'
+        $caught=$false;try { Set-VirgosProfile $profile 'D:\Fixture' 'D:\java.exe' $legacy } catch { $caught=$true }
+        Assert ($caught -and -not [IO.File]::Exists($profile)) 'Explicit legacy profile allocation was accepted.'
         $tl=Join-Path $base 'tlauncher-2.0.properties'
         [IO.File]::WriteAllText($tl,"# TLauncher configuration file`r`nsettings.version=3`r`nminecraft.gamedir=C:\\Fixture`r`n",$script:Utf8)
-        [void](Set-VirgosTLauncher $tl 'D:\Fixture' $legacy (Join-Path $base 'backup'))
-        Assert ((Get-TLProperty ([IO.File]::ReadAllText($tl)) 'minecraft.memory.ram2') -eq [string]$legacy) 'Explicit legacy TLauncher allocation changed.'
+        $caught=$false;try { Set-VirgosTLauncher $tl 'D:\Fixture' $legacy (Join-Path $base 'backup') } catch { $caught=$true }
+        Assert ($caught -and (Get-TLProperty ([IO.File]::ReadAllText($tl)) 'minecraft.gamedir' -eq 'C:\\Fixture') -and -not [IO.Directory]::Exists((Join-Path $base 'backup'))) 'Explicit legacy TLauncher allocation was accepted.'
     }
 }
 Write-JsonAtomic (Join-Path $scratch 'result.json') @{passed=($failures.Count -eq 0);checks=$checks.ToArray();failures=$failures.ToArray();scratch=$scratch}

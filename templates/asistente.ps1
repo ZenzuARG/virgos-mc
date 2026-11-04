@@ -133,8 +133,8 @@ $options.Add_Click({
     }
     $boxes[0].Text=$script:installRoot; $boxes[1].Text=$script:officialRoot; $boxes[2].Text=$script:tlConfig
     $ram=New-Object Windows.Forms.ComboBox; $ram.DropDownStyle='DropDownList'; $ram.SetBounds(18,250,300,30)
-    [void]$ram.Items.AddRange(@('8 GB (8192 MB) - configuracion del paquete'))
-    $ram.SelectedIndex=0; $ram.Enabled=$false; $dlg.Controls.Add($ram)
+    [void]$ram.Items.AddRange(@('8 GB (8192 MB) - recomendado','10 GB (10240 MB)','12 GB (12288 MB)'))
+    $ram.SelectedIndex=@(8192,10240,12288).IndexOf([int]$script:memoryMb); if($ram.SelectedIndex -lt 0){$ram.SelectedIndex=0}; $ram.Enabled=$true; $dlg.Controls.Add($ram)
     $save=New-Object Windows.Forms.Button; $save.Text='Guardar'; $save.SetBounds(500,312,145,34); $dlg.Controls.Add($save)
     $save.Add_Click({
         try {
@@ -143,7 +143,7 @@ $options.Add_Click({
             $script:officialRoot=[IO.Path]::GetFullPath($boxes[1].Text).TrimEnd('\')
             $script:tlConfig=[IO.Path]::GetFullPath($boxes[2].Text)
             if($script:installRoot -eq [IO.Path]::GetPathRoot($script:installRoot).TrimEnd('\')) { throw 'Elegi una subcarpeta, por ejemplo D:\Juegos\Virgos-MC.' }
-            $script:memoryMb=Get-VirgosClientMemoryMb
+            $script:memoryMb=@(8192,10240,12288)[$ram.SelectedIndex]
             $dlg.DialogResult='OK'; $dlg.Close()
         } catch { [void][Windows.Forms.MessageBox]::Show($dlg,$_.Exception.Message,'Revisa la carpeta') }
     })

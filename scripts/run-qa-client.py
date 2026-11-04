@@ -14,7 +14,7 @@ BASE = ROOT / 'client/standard'
 parser = argparse.ArgumentParser()
 parser.add_argument('--account', choices=['VirgosQA1', 'VirgosQA2','VirgosQA3'], default='VirgosQA1')
 parser.add_argument('--instance', choices=['standard','secondary','tertiary','v2','dh'], default='standard')
-parser.add_argument('--memory-mb',type=int,choices=[4096,5120,6144],default=6144)
+parser.add_argument('--memory-mb',type=int,choices=[8192,10240,12288],default=8192)
 parser.add_argument('--server', choices=['lab','public','local-public'], default='lab')
 options=parser.parse_args()
 name = options.account
