@@ -39,13 +39,13 @@
       "filename": "virgos_dh_compat-0.1.0.jar",
       "local_source": "dev/dh-compat/build/libs/virgos_dh_compat-0.1.0.jar",
       "hash_algorithm": "sha256",
-      "hash": "651d0ef76dd9180c40887f06d5ad97a1f973363c17e7e0f3a7bbe0434d6e00b0",
+      "hash": "5a85cb25b3cb894d86eb0827d4f18698cf46e4816766435b412f7825a2132da1",
       "sides": [
         "client",
         "server"
       ],
       "mode": "required",
-      "size": 32187
+      "size": 32209
     }
   ]
 }

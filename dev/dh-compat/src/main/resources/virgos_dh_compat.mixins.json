@@ -10,12 +10,15 @@
     "ConnectionMixin",
     "DhClientLevelMixin",
     "FullDataPayloadMixin",
+    "FullDataPayloadReceiverMixin",
+    "FullDataRequestQueueMixin",
     "RemoteWorldRetrievalQueueMixin",
     "BackpackKeyGuardMixin"
   ],
   "server": [
     "ChunkyReadinessMixin",
-    "DhServerPlayerStateMixin"
+    "DhServerPlayerStateMixin",
+    "GroupedFullDataPayloadMixin"
   ],
   "injectors": {
     "defaultRequire": 1
