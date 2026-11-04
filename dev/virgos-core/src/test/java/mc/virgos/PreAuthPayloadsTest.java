@@ -55,12 +55,12 @@ public final class PreAuthPayloadsTest {
             try {
                 var dhGuard = new PreAuthPayloads();
                 check(dhGuard.allow("distant_horizons:msg", dhConfig), "DH session config must reach the native handshake");
-                check(!dhGuard.allow("distant_horizons:msg", dhConfig), "DH session config remains single-use");
+                check(dhGuard.allow("distant_horizons:msg", dhConfig), "DH session config may be retried before authentication");
                 check(dhGuard.allow("distant_horizons:msg", dhRequest), "DH level-init request must reach the native handshake");
-                check(!dhGuard.allow("distant_horizons:msg", dhRequest), "DH level-init request remains single-use");
-                check(!new PreAuthPayloads().allow("distant_horizons:msg", dh(2)), "DH server responses stay blocked pre-auth");
-                check(!new PreAuthPayloads().allow("distant_horizons:msg", dh(99)), "Unknown DH messages stay blocked pre-auth");
-                check(!new PreAuthPayloads().allow("distant_horizons:msg", new FriendlyByteBuf(Unpooled.buffer().writeByte(16).writeShort(4).writeZero(8_193))), "Oversized DH payloads stay blocked");
+                check(new PreAuthPayloads().allow("distant_horizons:msg", dh(2)), "DH server responses remain on the bounded read-only channel");
+                check(new PreAuthPayloads().allow("distant_horizons:msg", dh(99)), "DH future message IDs remain forward-compatible");
+                check(!new PreAuthPayloads().allow("distant_horizons:msg", new FriendlyByteBuf(Unpooled.buffer().writeByte(15).writeShort(4))), "Wrong DH protocol versions stay blocked");
+                check(!new PreAuthPayloads().allow("distant_horizons:msg", new FriendlyByteBuf(Unpooled.buffer().writeByte(16).writeShort(4).writeZero(65_537))), "Oversized DH payloads stay blocked");
             } finally {
                 dhConfig.release();
                 dhRequest.release();

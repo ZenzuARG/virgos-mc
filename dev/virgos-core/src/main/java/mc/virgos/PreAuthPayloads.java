@@ -7,10 +7,8 @@ import mc.virgos.update.UpdateProtocol;
 public final class PreAuthPayloads {
     private boolean voiceHandshakeSeen;
     private boolean clientHandshakeSeen;
-    private boolean dhSessionConfigSeen;
-    private boolean dhLevelInitRequestSeen;
     private static final int MAX_HELLO_BYTES = 1 + 2 * (2 + 160 * 3);
-    private static final int MAX_DH_HANDSHAKE_BYTES = 8 * 1024;
+    private static final int MAX_DH_PAYLOAD_BYTES = 64 * 1024;
 
     public boolean allow(String channel, FriendlyByteBuf data) {
         if (!voiceHandshakeSeen && channel.equals("voicechat:request_secret") && data.readableBytes() == 4) {
@@ -22,30 +20,23 @@ public final class PreAuthPayloads {
             return true;
         }
         if (channel.equals("distant_horizons:msg")) {
-            return allowDistantHorizonsHandshake(data);
+            return allowDistantHorizonsPayload(data);
         }
         return false;
     }
 
-    private boolean allowDistantHorizonsHandshake(FriendlyByteBuf data) {
-        if (data.readableBytes() < 3 || data.readableBytes() > MAX_DH_HANDSHAKE_BYTES) return false;
+    private boolean allowDistantHorizonsPayload(FriendlyByteBuf data) {
+        if (data.readableBytes() < 3 || data.readableBytes() > MAX_DH_PAYLOAD_BYTES) return false;
         var view = new FriendlyByteBuf(data.duplicate());
         try {
             // Forge DH uses a one-byte protocol version followed by a two-byte message id.
-            if (view.readUnsignedByte() != 16) return false;
-            int messageId = view.readUnsignedShort();
-            if (messageId == 4 && !dhSessionConfigSeen) {
-                dhSessionConfigSeen = true;
-                return true;
-            }
-            if (messageId == 3 && !dhLevelInitRequestSeen) {
-                dhLevelInitRequestSeen = true;
-                return true;
-            }
+            // DH messages are read-only LOD negotiation/data requests; allowing the bounded
+            // channel before AuthMe is required so the client can complete serverReady and
+            // request the server snapshot before the user runs /login.
+            return view.readUnsignedByte() == 16;
         } catch (RuntimeException malformed) {
             return false;
         }
-        return false;
     }
 
     private static boolean isClientHello(FriendlyByteBuf data) {
