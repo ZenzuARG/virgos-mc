@@ -17,7 +17,6 @@
   ],
   "server": [
     "ChunkyReadinessMixin",
-    "DhServerPlayerStateMixin",
     "GroupedFullDataPayloadMixin"
   ],
   "injectors": {
