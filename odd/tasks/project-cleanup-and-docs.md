@@ -29,7 +29,7 @@ Checks: bounded reference scan and Markdown readback.
 - T1 [S1] inline — inventory and remove only approved disposable artifacts; status DONE (removed `.mixin.out/`, preserved high-risk/runtime data); commit N/A
 - T2 [S2,S4] inline — reconcile README/player/source docs and stale ephemeral links; status DONE (published 2.2.2 separated from candidate 3.0.3; historical `.lab` evidence labeled local); commit N/A
 - T3 [S3] inline — optimize TownServices metadata allocations while preserving the uncommitted fix; status DONE (static menu metadata preserves wording and fallback behavior); commit N/A
-- T4 [S1-S4] inline — run focused checks, record cleanup manifest, and close work unit; status DONE (offline Gradle check passed; commit recorded below); commit pending amend
+- T4 [S1-S4] inline — run focused checks, record cleanup manifest, and close work unit; status DONE (offline Gradle check passed); commit `d678887`
 
 ## Log
 L1. User request: "Limpiemos un poco el proyecto, borremos cosas innecesarias, optimicemos codigo y actualicemos informacion"
@@ -38,6 +38,6 @@ L3. Existing uncommitted `TownServices.java` menu resilience work must be preser
 L4. T1 removed only ignored `.mixin.out/` build output. The incomplete 6.5 GB post-stop backup remains pending explicit cleanup; all world, backup, runtime, cache, artifact, report, and crash evidence was preserved.
 L5. T2 updated README, player installation, source-maintenance, Discord, and implementation notes without promoting candidate 3.0.3 or rewriting release locks. T3 moved immutable menu metadata to a static record table; the uncommitted actor guard and clickable fallback remain intact.
 L6. Offline Gradle `check` passed on 2026-11-05: 20 actionable tasks, including all Virgos Core checks and tests; only existing deprecation warnings were reported.
-L7. Work-unit commit created as `chore: clean project metadata and menu allocations`; final hash is recorded in the closing report after the task document is amended.
+L7. Work-unit commit `d678887` created as `chore: clean project metadata and menu allocations`; the task document itself is closed in a follow-up documentation commit.
 
 Risk: none (the TownServices change preserves existing command wording, click behavior, and fallback output while moving immutable metadata to static storage).
