@@ -12,4 +12,4 @@
 - `virgos-reports/` and `crash-reports/` — audit/crash evidence still referenced by scripts or historical verification.
 - `.runtime/`, `backups/`, `simplebackups/`, and `virgos_world*/` — operational state, rollback evidence, backups, and live world data.
 - `.atl/` — local skill-registry metadata.
-- `backups/full/virgos-20261105-102236-auto.zip.partial` — incomplete backup retained pending explicit cleanup decision.
+- `backups/full/virgos-20261105-102236-auto.zip.partial` — incomplete 6.11 GiB backup removed after explicit user authorization; it was never verified or used for recovery.

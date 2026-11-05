@@ -39,5 +39,6 @@ L4. T1 removed only ignored `.mixin.out/` build output. The incomplete 6.5 GB po
 L5. T2 updated README, player installation, source-maintenance, Discord, and implementation notes without promoting candidate 3.0.3 or rewriting release locks. T3 moved immutable menu metadata to a static record table; the uncommitted actor guard and clickable fallback remain intact.
 L6. Offline Gradle `check` passed on 2026-11-05: 20 actionable tasks, including all Virgos Core checks and tests; only existing deprecation warnings were reported.
 L7. Work-unit commit `d678887` created as `chore: clean project metadata and menu allocations`; the task document itself is closed in a follow-up documentation commit.
+L8. User explicitly authorized deleting the incomplete `backups/full/virgos-20261105-102236-auto.zip.partial`; it was removed after confirming the path stayed inside the workspace. The verified prior backup remains intact.
 
 Risk: none (the TownServices change preserves existing command wording, click behavior, and fallback output while moving immutable metadata to static storage).
