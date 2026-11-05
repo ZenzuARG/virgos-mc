@@ -198,7 +198,7 @@ if dh_helper.is_file():template_names.append('dh-client-settings.ps1')
 elif explicit:raise ValueError('Candidate requires the paired DH helper and seed')
 if not explicit:
     output=ROOT/('dist/v2-preview' if options.candidate_v2 else ('dist/v12-preview' if options.candidate_v12 else 'dist'));output.mkdir(exist_ok=True)
-allow={'config','resourcepacks','shaderpacks'}
+allow={'assets','config','resourcepacks','shaderpacks'}
 overrides={}
 for file in (ROOT/'pack/client-overrides').rglob('*'):
     if not file.is_file():continue
