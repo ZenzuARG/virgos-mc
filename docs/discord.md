@@ -1,5 +1,7 @@
 # Discord de Virgos-MC
 
+> Las rutas `.lab/...` mencionadas en la evidencia histórica son locales/ignoradas y no forman parte de la instalación ni de la entrega a jugadores.
+
 Destino: **LaLechebanda → #virgos-mc**. Servidor `736709362206113802`, canal de texto `1561436921006137527` y aplicación Virgos-MC `1561500718144299008`.
 
 La integración está **activa desde el 18/10/2026** y usa DiscordSRV 1.30.5 únicamente en el servidor. El instalador de los jugadores no cambia. [Abrir el canal](https://discord.com/channels/736709362206113802/1561436921006137527).

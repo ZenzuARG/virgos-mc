@@ -22,6 +22,18 @@ import java.nio.file.*;
 
 /** Eight physical player shops. Reservations precede creation and survive moving a shop. */
 public final class TownServices {
+    private record MenuEntry(String topic, Item item, String label) {}
+    private static final MenuEntry[] MENU_ENTRIES={
+        new MenuEntry("inicio",Items.BOOK,"Primeros pasos"),
+        new MenuEntry("progreso",Items.COMPASS,"Mi progreso"),
+        new MenuEntry("bases",Items.OAK_DOOR,"Proteger mi base"),
+        new MenuEntry("mercado",Items.EMERALD,"Mercado y trueque"),
+        new MenuEntry("encargos",Items.PAPER,"Encargos sin apuro"),
+        new MenuEntry("fotografia",Items.SPYGLASS,"Fotografía"),
+        new MenuEntry("navegacion",Items.OAK_BOAT,"Viajes en barco"),
+        new MenuEntry("musica",Items.NOTE_BLOCK,"Música en grupo"),
+        new MenuEntry("expediciones",Items.IRON_SWORD,"Expediciones cooperativas")
+    };
     private MinecraftServer server;
     private JsonObject config, reservations;
     private Path file;
@@ -113,20 +125,32 @@ public final class TownServices {
     }
     public static int menu(CommandSourceStack source) {
         var p=source.getPlayer();if(p==null||!VirgosCore.AUTH.authenticated(p))return 0;
-        String[] topics={"inicio","progreso","bases","mercado","encargos","fotografia","navegacion","musica","expediciones"};
-        Item[] items={Items.BOOK,Items.COMPASS,Items.OAK_DOOR,Items.EMERALD,Items.PAPER,Items.SPYGLASS,Items.OAK_BOAT,Items.NOTE_BLOCK,Items.IRON_SWORD};
-        String[] labels={"Primeros pasos","Mi progreso","Proteger mi base","Mercado y trueque","Encargos sin apuro","Fotografía","Viajes en barco","Música en grupo","Expediciones cooperativas"};
         p.openMenu(new SimpleMenuProvider((id,inventory,player)->{
             var icons=new SimpleContainer(27);
-            for(int i=0;i<topics.length;i++){var item=new ItemStack(items[i]);item.setHoverName(Component.literal("§6"+labels[i]));icons.setItem(9+i,item);}
+            for(int i=0;i<MENU_ENTRIES.length;i++){
+                var entry=MENU_ENTRIES[i];
+                var item=new ItemStack(entry.item());
+                item.setHoverName(Component.literal("§6"+entry.label()));
+                icons.setItem(9+i,item);
+            }
             return new ChestMenu(MenuType.GENERIC_9x3,id,inventory,icons,3) {
                 @Override public void clicked(int slot,int button,ClickType click,Player actor) {
-                    if(actor!=p||!VirgosCore.AUTH.authenticated(p))return;
-                    if(click==ClickType.PICKUP&&button==0&&slot>=9&&slot<18){p.closeContainer();PlayerGuide.show(p.createCommandSourceStack(),topics[slot-9]);}
+                    if(actor==null||!actor.getUUID().equals(p.getUUID())||!VirgosCore.AUTH.authenticated(p))return;
+                    if(click==ClickType.PICKUP&&button==0&&slot>=9&&slot<18){
+                        p.closeContainer();
+                        PlayerGuide.show(p.createCommandSourceStack(),MENU_ENTRIES[slot-9].topic());
+                    }
                 }
                 @Override public ItemStack quickMoveStack(Player actor,int slot){return ItemStack.EMPTY;}
                 @Override public boolean stillValid(Player actor){return actor==p&&VirgosCore.AUTH.authenticated(p);}
             };
-        },Component.literal("Virgos · Pueblo y aventuras")));return 1;
+        },Component.literal("Virgos · Pueblo y aventuras")));
+        // Keep a reliable fallback for clients that fail to render or route custom menu clicks.
+        var fallback=Component.literal("§6Virgos — elegí una guía: ");
+        for(var entry:MENU_ENTRIES) {
+            fallback.append(Component.literal("§b["+entry.label()+"] ").withStyle(s->s.withClickEvent(new net.minecraft.network.chat.ClickEvent(net.minecraft.network.chat.ClickEvent.Action.RUN_COMMAND,"/virgos guia "+entry.topic()))));
+        }
+        p.sendSystemMessage(fallback);
+        return 1;
     }
 }

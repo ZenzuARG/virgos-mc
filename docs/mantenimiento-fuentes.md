@@ -16,7 +16,7 @@ $env:GRADLE_USER_HOME = 'D:\proyectos\mc-server\.cache\gradle'
 
 El wrapper fija Gradle 8.8 y `gradle.properties` fija Minecraft, Forge y la versión propia. La primera reconstrucción requiere Internet para las dependencias de Gradle/Forge. El ZIP conserva el JAR de Voice Chat usado para compilar en la ruta esperada. En esta instalación, con las dependencias presentes, `--offline check` fue satisfactorio.
 
-Los JAR publicados son `virgos_core-2.0.0.jar` y `virgos_codex-2.0.0.jar`; sus SHA256 están en `pack/custom-artifacts.lock.json`. Un JAR recompilado puede tener otro hash por las fechas de empaquetado: no reemplazar el publicado ni actualizar el lock sin validar el nuevo resultado. Los hashes de la candidata v2 y las pruebas públicas están en `.lab/v2/acceptance.json` y `.lab/v2/final.json`. El archivo privado incluye también el parche de CoreProtect, su original y `scripts/PatchCoreProtect.java`.
+Los JAR publicados siguen siendo `virgos_core-2.0.0.jar` y `virgos_codex-2.0.0.jar`; sus SHA256 están en `pack/custom-artifacts.lock.json`. Un JAR recompilado puede tener otro hash por las fechas de empaquetado: no reemplazar el publicado ni actualizar el lock sin validar el nuevo resultado. Las rutas `.lab/v2/acceptance.json` y `.lab/v2/final.json` son evidencia local/ignorada, no insumos obligatorios para reconstruir. El archivo privado incluye también el parche de CoreProtect, su original y `scripts/PatchCoreProtect.java`.
 
 ## Parche de Playit
 
@@ -28,4 +28,4 @@ La reconstrucción aislada de cierre produjo exactamente el SHA256 fijado en `ve
 
 `scripts/build-client-release.py` usa `templates/`, los locks y `pack/client-overrides`. Requiere las descargas fijadas en `.cache/pack/downloads` y los instaladores Java/Forge que comprueba por hash. Esas descargas se pueden recuperar mediante la preparación del paquete; no forman parte de esta copia de fuentes. El ZIP para amigos se conserva tal como fue probado en `dist/` dentro del archivo privado.
 
-Para la entrega vigente, compartí `dist/Virgos-MC-2.0.0-instalar.zip`. Los clientes no necesitan Gradle, las fuentes ni los respaldos del servidor.
+Para la entrega vigente, compartí `Virgos-MC-2.2.2-instalar.zip` desde el release publicado. `dist/` conserva salidas históricas y la candidata 3.0.3; no las presentes como publicación estable sin completar la promoción. Los clientes no necesitan Gradle, las fuentes ni los respaldos del servidor.

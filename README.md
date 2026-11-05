@@ -1,12 +1,12 @@
 # Virgos-MC
 
-Servidor y paquete **2.0.0**, instalador revisión **11**, para Minecraft Java **1.20.1**, Forge **47.4.22** y Ketting **0.6.1**. Proyecto: `D:\proyectos\mc-server`. [Revisión final para jugar](docs/revision-2.0.md).
+Servidor y paquete publicado **2.2.2**, instalador revisión **16**, para Minecraft Java **1.20.1**, Forge **47.4.22** y Ketting **0.6.1**. La candidata **3.0.3** permanece separada para validación y no reemplaza la publicación estable. Proyecto: `D:\proyectos\mc-server`. [Revisión final para jugar](docs/revision-2.0.md).
 
 **Dirección: `virgos-mc.playit.plus`**, sin puerto. En esta PC también funciona `localhost:25565`. Hace falta el cliente completo con Forge; un cliente vanilla no puede entrar.
 
 ## Jugar
 
-1. Compartí el `Virgos-MC-2.0.0-instalar.zip` generado en `dist/` o en el release de GitHub. Tus amigos extraen todo y abren **EMPEZAR.bat**. Eligen TLauncher u oficial; el asistente descarga Java 17 para el perfil oficial y usa el Java automático de TLauncher para ese perfil. Para actualizar desde una versión anterior, elijan la misma carpeta y **Revisar / reparar**.
+1. Compartí el instalador publicado **Virgos-MC-2.2.2-instalar.zip** desde el release de GitHub. Los archivos de `dist/` pueden ser históricos o candidatos y no deben compartirse como publicación estable. Tus amigos extraen todo y abren **EMPEZAR.bat**. Eligen TLauncher u oficial; el asistente descarga Java 17 para el perfil oficial y usa el Java automático de TLauncher para ese perfil. Para actualizar desde una versión anterior, elijan la misma carpeta y **Revisar / reparar**.
 2. Seguí [la guía de jugadores](docs/guia-jugadores.md): el perfil oficial se configura automáticamente; TLauncher también configura automáticamente carpeta, Forge y memoria, con un botón para restaurar sus ajustes anteriores. La guía de instalación y el manual del juego ahora están separados.
 3. Entrá al dominio. La primera vez usá `/register contraseña contraseña`; después, `/login contraseña`. Conservá siempre el mismo nombre exacto.
 4. Abrí el códice con **J**. El pueblo amurallado tiene cuatro arcos para salir caminando, taller y cocina públicos. El camino sur lleva al anfiteatro cooperativo.
