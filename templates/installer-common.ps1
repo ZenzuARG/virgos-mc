@@ -66,15 +66,21 @@ function Get-ManagedUpgradePlan([string]$GameDir, $Manifest) {
         }
     }
     $obsolete = New-Object Collections.Generic.List[string]
+    $foreign = New-Object Collections.Generic.List[string]
     if (Test-Path -LiteralPath $mods) {
         if ((Get-Item -LiteralPath $mods).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'La carpeta mods no puede ser un enlace.' }
         foreach ($file in Get-ChildItem -LiteralPath $mods -File -Filter '*.jar') {
             if ($file.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Un mod no puede ser un enlace.' }
             if ($file.Name -in $known) { continue }
-            if (-not $oldFiles.ContainsKey($file.Name)) { throw 'La carpeta contiene otros mods. Elegi una carpeta nueva para Virgos-MC.' }
+            if (-not $oldFiles.ContainsKey($file.Name)) { $foreign.Add($file.Name); continue }
             if ((Get-FileDigest $file.FullName) -ne $oldFiles[$file.Name]) { throw "El mod anterior $($file.Name) fue modificado. Se conserva; revisalo antes de actualizar." }
             $obsolete.Add($file.Name)
         }
+    }
+    if ($foreign.Count -gt 0) {
+        $sample = [string]::Join(', ', @($foreign | Select-Object -First 5))
+        $suffix = if ($foreign.Count -gt 5) { ' y otros' } else { '' }
+        throw "La carpeta contiene $($foreign.Count) mods ajenos al pack ($sample$suffix). Elegi una carpeta nueva para Virgos-MC; no mezcles la instancia existente de TLauncher."
     }
     return @($obsolete.ToArray())
 }
