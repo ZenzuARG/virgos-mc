@@ -53,6 +53,7 @@ class TreeReleaseTests(unittest.TestCase):
             'pinned-inputs/TreeFeller-1.33.0.jar': (self.cache / names[0]).read_bytes()})
         (self.fake / M.LICENSE).write_bytes(self.license)
         self.expected = {n: M.H.sha(self.fake / n) for n in M.EXPECTED}
+        self.expected[M.LICENSE] = hashlib.sha256(self.license.replace(b'\r\n', b'\n')).hexdigest()
         self.calls = []
 
     def zip(self, path, entries):
@@ -142,6 +143,10 @@ class TreeReleaseTests(unittest.TestCase):
         self.assertIn("mineskinAPIKey: ''", source)
         self.assertNotIn('Notch', source)
         self.assertTrue((ROOT / 'pack/server-overrides/plugins/SkinsRestorer/noautoupdate.txt').is_file())
+
+    def test_windows_license_line_endings_match_platform_independent_release_pin(self):
+        with patch.object(M, 'FORK_SHA256', M.source_fingerprint(self.module)):
+            M.load_pin(self.root)
 
 
 if __name__ == '__main__':unittest.main()
