@@ -28,4 +28,4 @@ La reconstrucción aislada de cierre produjo exactamente el SHA256 fijado en `ve
 
 `scripts/build-client-release.py` usa `templates/`, los locks y `pack/client-overrides`. Requiere las descargas fijadas en `.cache/pack/downloads` y los instaladores Java/Forge que comprueba por hash. Esas descargas se pueden recuperar mediante la preparación del paquete; no forman parte de esta copia de fuentes. El ZIP para amigos se conserva tal como fue probado en `dist/` dentro del archivo privado.
 
-Para la entrega vigente, compartí `Virgos-MC-2.2.2-instalar.zip` desde el release publicado. `dist/` conserva salidas históricas y la candidata 3.0.3; no las presentes como publicación estable sin completar la promoción. Los clientes no necesitan Gradle, las fuentes ni los respaldos del servidor.
+Para la entrega vigente, compartí `Virgos-MC-3.0.3-instalar.zip` desde el release publicado. `dist/` conserva salidas históricas y la publicación 3.0.3; compartí únicamente los artefactos verificados. Los clientes no necesitan Gradle, las fuentes ni los respaldos del servidor.
