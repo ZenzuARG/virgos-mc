@@ -66,7 +66,7 @@ class RecipeIngredientCompatTests(unittest.TestCase):
             "ingredients": [
                 {"item": "create:experience_nugget"},
                 {"tag": "forge:gems/lapis"},
-                {"item": "forge:gems/amethyst"},
+                {"tag": "forge:gems/amethyst"},
             ],
             "results": [{"item": "irons_spellbooks:arcane_essence"}],
         })
