@@ -1,6 +1,6 @@
-# Three pinned Create addons for a controlled public trial
+# Six pinned Create addons for a controlled public trial
 
-The production mod lock adds exactly three unmodified upstream JARs on both the
+The production mod lock adds exactly six unmodified upstream JARs on both the
 client and server. Existing entries, versions and download hashes are preserved.
 This is package preparation, not proof that a public deployment has occurred.
 
@@ -9,10 +9,13 @@ This is package preparation, not proof that a public deployment has occurred.
 | Crafts & Additions | forge-1.20.1-1.3.3 | 1.20.1-1.3.3 | Bounded processing/energy/JEI trial passed |
 | Bells & Whistles | 0.4.5-1.20.x, Create6 | 0.4.3-1.20.x | Functional trial pending |
 | Enchantment Industry | 1.4.1 | 1.4.1-for-create-6.0.8 | Functional trial pending |
+| Netherless | 2.0.0 | 2.0.0 | Static compatibility; gameplay trial pending |
+| Diesel Generators | 1.20.1-1.3.12 | 1.20.1-1.3.12 | Static compatibility; gameplay trial pending |
+| Enhanced Mastery | 1.0.0 | 1.0.0 | Static compatibility; recipe typo patched locally; gameplay trial pending |
 
 Bells deliberately retains its actual internal version rather than rewriting a
 third-party JAR. The exact pinned files, primary download URLs, SHA-512, sizes,
-Forge descriptors and dependency ranges are in `pack/mods.lock.json`. All three
+Forge descriptors and dependency ranges are in `pack/mods.lock.json`. All six
 fit the existing Create6.0.8/Forge47.4.22 dependency graph. Static compatibility
 is not a whole-pack runtime or performance approval.
 

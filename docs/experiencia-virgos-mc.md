@@ -87,11 +87,13 @@ La selección comprende 79 mods principales, cuatro opciones visuales y WorldEdi
 | Construcción | Supplementaries, Amendments, Chipped, Handcrafted y seis módulos de Macaw | Variedad de edificios, puentes, tejados, muebles e iluminación |
 | Viajes y tesoros | Waystones, Lootr, selección de Artifacts | Reunirse rápido, conservar botín para todos y encontrar recompensas especiales |
 
-**Conexiones propuestas entre mods:** Create fabrica suministros de expedición; las cuevas aportan componentes para algunas mejoras; la cocina prepara alimentos útiles para el grupo; la magia aporta control y apoyo. Estas conexiones se implementarían con recetas y recompensas concretas, manteniendo cortos los requisitos entre ramas.
+**Conexiones propuestas entre mods:** Create fabrica suministros de expedición; las cuevas aportan componentes para algunas mejoras; la cocina prepara alimentos útiles para el grupo; la magia aporta control y apoyo. Create: Enhanced Mastery agrega una línea de automatización para esencia, salvamento arcano, runas y orbes de Iron's Spells. Estas conexiones se implementarían con recetas y recompensas concretas, manteniendo cortos los requisitos entre ramas.
 
 La mochila básica debería llegar pronto. Las mejoras de apilado, alimentación automática y almacenamiento dentro de otras mochilas necesitan límites: comodidad temprana no tiene que significar capacidad prácticamente infinita.
 
 Iron's Spells permite ajustar hechizos individualmente. Sus versiones recientes de 1.20.1 cambiaron el sistema de configuración de hechizos a JSON; los ajustes deben escribirse para la versión fijada, sin copiar configuraciones antiguas. [Cambios oficiales de Iron's Spells](https://iron.wiki/changelog/).
+
+La primera pasada conservadora mantiene intacta la progresión personal y aplica sólo pequeños costes y esperas a los picos de movilidad, control y daño: `teleport` (maná ×1.15, 20 s), `black_hole` (×1.15, potencia ×0.95, 20 s), `starfall` (×1.15, potencia ×0.95, 25 s), `earthquake` (×1.10, potencia ×0.95, 20 s) y `summon_vex` (×1.15, 30 s). El resto de hechizos conserva sus valores originales hasta tener evidencia de juego real.
 
 Regions Unexplored queda elegido como único gran paquete de biomas del Overworld. Biomes O' Plenty, Terralith, Tectonic y When Dungeons Arise quedan fuera de esta versión. Se ajustará la separación de las estructuras elegidas antes de generar el mundo definitivo.
 

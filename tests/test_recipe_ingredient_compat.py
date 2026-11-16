@@ -59,6 +59,18 @@ class RecipeIngredientCompatTests(unittest.TestCase):
         self.assertIn({"id": "brewinandchewin:flaxen_cheese_wedge", "required": False}, mild)
         self.assert_mirrored("delightful/recipes/food/sweet_berry_cheesecake_from_cheese.json", expected)
 
+    def test_enhanced_mastery_repairs_arcane_essence_namespace(self):
+        self.assert_mirrored("enhancedmastery/recipes/mixing/arcane_essence.json", {
+            "type": "create:mixing",
+            "heatRequirement": "heated",
+            "ingredients": [
+                {"item": "create:experience_nugget"},
+                {"tag": "forge:gems/lapis"},
+                {"item": "forge:gems/amethyst"},
+            ],
+            "results": [{"item": "irons_spellbooks:arcane_essence"}],
+        })
+
 
 if __name__ == "__main__":
     unittest.main()

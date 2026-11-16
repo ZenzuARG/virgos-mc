@@ -40,6 +40,7 @@ El [diseño de experiencia](experiencia-virgos-mc.md) define el progreso y el [d
 | --- | --- | --- | --- |
 | [Iron's Spells 'n Spellbooks](https://modrinth.com/mod/irons-spells-n-spellbooks/version/hZaEegS9) | 1.20.1-3.16.3 | Cliente y servidor | Magia de combate y apoyo; costes y potencia por nivel |
 | [Ars Nouveau](https://modrinth.com/mod/ars-nouveau/version/Hw2aD01e) | 4.12.7 | Cliente y servidor | Magia creativa y de utilidad; limitar vuelo y automatización avanzada |
+| [Create: Enhanced Mastery](https://modrinth.com/mod/create-enhanced-mastery/version/1.0.0) | 1.0.0 | Cliente y servidor | Automatizar esencia, runas y orbes de Iron's Spells con Create |
 | [Better Combat](https://modrinth.com/mod/better-combat/version/rnhiaw3t) | 1.9.0+1.20.1-forge | Cliente y servidor | Único sistema principal de animaciones y ataques cuerpo a cuerpo |
 | [Simply Swords](https://modrinth.com/mod/simply-swords/version/Na6e94J1) | 1.70.2-1.20.1 | Cliente y servidor | Estilos de armas; ajustar efectos únicos y abundancia |
 | [L_Ender's Cataclysm](https://www.curseforge.com/minecraft/mc-mods/lendercataclysm/files/all?page=1&pageSize=20&version=1.20.1) | 3.31 | Cliente y servidor | Grandes jefes; revisar terreno destruido y poder de sus recompensas |
@@ -56,6 +57,8 @@ El [diseño de experiencia](experiencia-virgos-mc.md) define el progreso y el [d
 | [Create Deco](https://modrinth.com/mod/create-deco/version/e9gaSRMd) | 2.0.3-1.20.1-forge | Cliente y servidor | Acabados de talleres, fábricas y estaciones |
 | [Create: Copycats+](https://modrinth.com/mod/copycats/version/LlMxIysb) | 3.0.10+mc.1.20.1-forge | Cliente y servidor | Formas con materiales personalizados; limitar uso masivo en zonas densas |
 | [Create: Central Kitchen](https://modrinth.com/mod/create-central-kitchen/version/jMB94kRJ) | 1.5.1 | Cliente y servidor | Conectar procesamiento de comida con Create |
+| [Create: Netherless](https://modrinth.com/mod/create-netherless/version/htwdYiKv) | 2.0.0 | Cliente y servidor | Automatizar recursos del Nether, incluido netherrack, con maquinaria de Create |
+| [Create: Diesel Generators](https://modrinth.com/mod/create-diesel-generators/version/DTQVvA5H) | 1.20.1-1.3.12 | Cliente y servidor | Petróleo, refinería y motores diésel para ampliar la industria |
 | [Ars Creo](https://modrinth.com/mod/ars-creo/version/bLLhDnY2) | 4.3.0 | Cliente y servidor | Conectar Ars con Create; revisar torretas y permisos de terreno |
 
 ## Cocina y pesca
@@ -164,7 +167,7 @@ El [diseño de experiencia](experiencia-virgos-mc.md) define el progreso y el [d
 
 ## Conexiones y versiones que deben permanecer juntas
 
-Create queda en **6.0.8**. Se revisaron los descriptores de los archivos candidatos: Central Kitchen 1.5.1 exige Create desde 6.0.8 hasta antes de 6.1.0 y Forge desde 47.4.10; Copycats+ 3.0.10 exige Create 6.0.7 o superior; Ars Creo 4.3.0 y KubeJS Create build 8 declaran Create 6 o superior. Nuestra versión de Forge satisface esos rangos. Esto verifica requisitos declarados, no todos los comportamientos durante el juego. [Central Kitchen](https://modrinth.com/mod/create-central-kitchen), [Copycats+](https://modrinth.com/mod/copycats), [Ars Creo](https://modrinth.com/mod/ars-creo), [KubeJS Create](https://modrinth.com/mod/kubejs-create).
+Create queda en **6.0.8**. Se revisaron los descriptores de los archivos candidatos: Central Kitchen 1.5.1 exige Create desde 6.0.8 hasta antes de 6.1.0 y Forge desde 47.4.10; Copycats+ 3.0.10 exige Create 6.0.7 o superior; Netherless 2.0.0 y Diesel Generators 1.20.1-1.3.12 declaran compatibilidad con Create 6; Ars Creo 4.3.0 y KubeJS Create build 8 declaran Create 6 o superior. Nuestra versión de Forge satisface esos rangos. Esto verifica requisitos declarados, no todos los comportamientos durante el juego. [Central Kitchen](https://modrinth.com/mod/create-central-kitchen), [Create: Netherless](https://modrinth.com/mod/create-netherless/version/htwdYiKv), [Create: Diesel Generators](https://modrinth.com/mod/create-diesel-generators/version/DTQVvA5H), [Copycats+](https://modrinth.com/mod/copycats), [Ars Creo](https://modrinth.com/mod/ars-creo), [KubeJS Create](https://modrinth.com/mod/kubejs-create).
 
 Steam 'n' Rails se seleccionó en su archivo C6 y Create Deco 2.0.3 anuncia la actualización a Create 6. Connected 1.2.3 entra en la franja declarada para Create 6.0.7 o superior. No actualizar uno de estos componentes aisladamente sin revisar los demás. [Steam 'n' Rails](https://modrinth.com/mod/create-steam-n-rails/version/1.7.3+forge-mc1.20.1), [Create Deco](https://modrinth.com/mod/create-deco/version/2.0.3-1.20.1-forge), [Connected](https://modrinth.com/mod/create-connected).
 

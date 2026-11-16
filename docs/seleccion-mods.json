@@ -8,7 +8,7 @@
   "estado": "seleccion_de_diseno_no_instalada",
   "combinacion_probada": false,
   "dependencias_resueltas": false,
-  "alcance": "79 mods seleccionados, 4 opcionales de cliente y 1 herramienta de construcción; no cuenta bibliotecas ni Playit Companion ya instalado",
+  "alcance": "82 mods seleccionados, 4 opcionales de cliente y 1 herramienta de construcción; no cuenta bibliotecas ni Playit Companion ya instalado",
   "mods": [
     {
       "slug": "alexs-caves",
@@ -578,6 +578,72 @@
         {
           "version_id": null,
           "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-netherless",
+      "nombre": "Create: Netherless",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "2.0.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-netherless/version/htwdYiKv",
+      "modrinth_version_id": "htwdYiKv",
+      "papel": "Automatizar recursos del Nether, incluido netherrack, con maquinaria de Create",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-diesel-generators",
+      "nombre": "Create: Diesel Generators",
+      "categoria": "Ingeniería y conexiones",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.20.1-1.3.12",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-diesel-generators/version/DTQVvA5H",
+      "modrinth_version_id": "DTQVvA5H",
+      "papel": "Petróleo, refinería y motores diésel para ampliar la industria",
+      "dependencias_publicadas": [
+        {
+          "version_id": "8amzvn9x",
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "slug": "create-enhanced-mastery",
+      "nombre": "Create: Enhanced Mastery",
+      "categoria": "Integración y balance",
+      "destino": "Cliente y servidor",
+      "estado": "seleccionado",
+      "version_candidata": "1.0.0",
+      "tipo_publicacion": "release",
+      "fuente": "https://modrinth.com/mod/create-enhanced-mastery/version/1.0.0",
+      "modrinth_version_id": "uCI0GdFn",
+      "papel": "Automatizar componentes de Iron's Spells con Create sin saltar los rangos personales",
+      "dependencias_publicadas": [
+        {
+          "version_id": null,
+          "project_id": "LNytGWDc",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "s4OWxYQQ",
           "file_name": null,
           "dependency_type": "required"
         }
