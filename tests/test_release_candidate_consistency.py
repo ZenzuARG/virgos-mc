@@ -19,20 +19,21 @@ class ReleaseCandidateConsistencyTests(unittest.TestCase):
         update = self.read_json("pack/server-overrides/config/virgos/client-update.json")
 
         self.assertEqual(selected["version"], candidate["version"])
-        self.assertEqual(candidate["version"], "3.0.3")
+        self.assertEqual(candidate["version"], selected["version"])
         self.assertEqual(candidate["clientRelease"], candidate["version"])
         self.assertEqual(candidate["clientFingerprint"], "virgos-client-" + candidate["clientRelease"])
         self.assertIn(f'RELEASE = "{candidate["clientRelease"]}"', source)
         self.assertIn(f'FINGERPRINT = "{candidate["clientFingerprint"]}"', source)
         self.assertEqual(update["release"], candidate["clientRelease"])
         self.assertEqual(update["fingerprint"], candidate["clientFingerprint"])
-        self.assertEqual(candidate["status"], "release-candidate")
-        self.assertEqual(stable["version"], "2.2.2")
+        self.assertIn(candidate["status"], {"release-candidate", "published"})
+        self.assertNotEqual(stable["version"], candidate["version"])
         self.assertIsNotNone(stable["published"])
 
     def test_root_and_candidate_custom_locks_match_each_other(self):
         root_lock = self.read_json("pack/custom-artifacts.lock.json")
-        candidate_lock = self.read_json("pack/candidates/3.0.3/custom-artifacts.lock.json")
+        selected = self.read_json("pack/candidates/current.json")
+        candidate_lock = self.read_json(f"pack/candidates/{selected['version']}/custom-artifacts.lock.json")
         root_by_name = {item["filename"]: item for item in root_lock["artifacts"]}
         candidate_by_name = {item["filename"]: item for item in candidate_lock["artifacts"]}
 

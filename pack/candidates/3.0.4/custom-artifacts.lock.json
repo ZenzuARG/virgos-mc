@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "filename": "virgos_core-2.0.0.jar",
+      "local_source": "artifacts/virgos_core-2.0.0.jar",
+      "hash_algorithm": "sha256",
+      "hash": "17c4afcfdd88b30c5c309665f2af315078db215b8321dee66ca21f3c6883700b",
+      "sides": [
+        "server"
+      ],
+      "mode": "required"
+    },
+    {
+      "filename": "virgos_codex-2.0.0.jar",
+      "local_source": "artifacts/virgos_codex-2.0.0.jar",
+      "hash_algorithm": "sha256",
+      "hash": "78c7f65648d3e3c29c1d7be1b9ba79a8188908c15dea644223c51bcf47676111",
+      "sides": [
+        "client"
+      ],
+      "mode": "required"
+    },
+    {
+      "filename": "DistantHorizons-3.3.3-1.20.1-fabric-forge.jar",
+      "local_source": "artifacts/DistantHorizons-3.3.3-1.20.1-fabric-forge.jar",
+      "hash_algorithm": "sha256",
+      "hash": "3aca79ff06e9522c84c3af96e7aa75bdec65432e79fa384353ccded89f37e21b",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "mode": "required"
+    },
+    {
+      "filename": "virgos_dh_compat-0.1.0.jar",
+      "local_source": "artifacts/virgos_dh_compat-0.1.0.jar",
+      "hash_algorithm": "sha256",
+      "hash": "8f150f3944d68db075560a639c0593e3315f2448f4cec5ecfa809ddfcf12644d",
+      "sides": [
+        "client",
+        "server"
+      ],
+      "mode": "required"
+    }
+  ]
+}

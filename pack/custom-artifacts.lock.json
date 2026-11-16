@@ -5,23 +5,23 @@
       "filename": "virgos_core-2.0.0.jar",
       "local_source": "dev/virgos-core/build/libs/virgos_core-2.0.0.jar",
       "hash_algorithm": "sha256",
-      "hash": "d9160bc94ebd46950ab996d92fa4425c401a1006bed3cff8b90cbc156874e022",
+      "hash": "17c4afcfdd88b30c5c309665f2af315078db215b8321dee66ca21f3c6883700b",
       "sides": [
         "server"
       ],
       "mode": "required",
-      "size": 146865
+      "size": 147344
     },
     {
       "filename": "virgos_codex-2.0.0.jar",
       "local_source": "dev/virgos-core/build/libs/virgos_codex-2.0.0.jar",
       "hash_algorithm": "sha256",
-      "hash": "75bdf73027fb24c31cc8bcf6606cd0c8611e221a30ec4cea5e453ed3b7f72a98",
+      "hash": "78c7f65648d3e3c29c1d7be1b9ba79a8188908c15dea644223c51bcf47676111",
       "sides": [
         "client"
       ],
       "mode": "required",
-      "size": 63797
+      "size": 63796
     },
     {
       "filename": "DistantHorizons-3.3.3-1.20.1-fabric-forge.jar",

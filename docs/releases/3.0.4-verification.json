@@ -1,0 +1,29 @@
+{
+  "version": "3.0.4",
+  "status": "candidate",
+  "checks": [
+    {
+      "name": "menu-diagnostics",
+      "result": "pending-runtime",
+      "evidence": "Focused static regression tests cover AuthMe, client-handshake, and /login diagnostics; a real player session is still required after restart."
+    },
+    {
+      "name": "core-build",
+      "result": "passed",
+      "evidence": "Offline Gradle check, jar, and codexJar completed successfully with buildEpoch=0."
+    },
+    {
+      "name": "release-package",
+      "result": "passed",
+      "evidence": "Deterministic candidate build produced Virgos-MC-3.0.4-instalar.zip (SHA-256 3a4b2d856eb8ef47f3f7ee938e1c4fc90fdf741bcf8b7da936bd8f2831f9738b) and Virgos-MC-3.0.4.mrpack (SHA-256 89f64b4770f48da29decdfccdf221f2ab6d23e404898b50b21420fe6e1dd082e); manifest contains 133 required and 3 optional files."
+    },
+    {
+      "name": "release-candidate-consistency",
+      "result": "passed",
+      "evidence": "Candidate identity, server update manifest, root/custom artifact locks, menu regressions, Create addon locks, recipe compatibility, and conservative magic config tests passed."
+    }
+  ],
+  "notes": [
+    "TreeFeller was not rebuilt locally because this machine has no Java 17 compiler; the GitHub workflow remains the authoritative full release gate."
+  ]
+}
