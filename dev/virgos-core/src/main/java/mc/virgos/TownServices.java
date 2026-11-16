@@ -32,7 +32,8 @@ public final class TownServices {
         new MenuEntry("fotografia",Items.SPYGLASS,"Fotografía"),
         new MenuEntry("navegacion",Items.OAK_BOAT,"Viajes en barco"),
         new MenuEntry("musica",Items.NOTE_BLOCK,"Música en grupo"),
-        new MenuEntry("expediciones",Items.IRON_SWORD,"Expediciones cooperativas")
+        new MenuEntry("expediciones",Items.IRON_SWORD,"Expediciones cooperativas"),
+        new MenuEntry("permisos",Items.CHEST,"Permisos de mi parcela")
     };
     private MinecraftServer server;
     private JsonObject config, reservations;
@@ -134,20 +135,21 @@ public final class TownServices {
             source.sendFailure(Component.literal("Usá /login primero para abrir el menú."));return 0;
         }
         p.openMenu(new SimpleMenuProvider((id,inventory,player)->{
-            var icons=new SimpleContainer(27);
+            var icons=new SimpleContainer(36);
             for(int i=0;i<MENU_ENTRIES.length;i++){
                 var entry=MENU_ENTRIES[i];
                 var item=new ItemStack(entry.item());
                 item.setHoverName(Component.literal("§6"+entry.label()));
                 icons.setItem(9+i,item);
             }
-            return new ChestMenu(MenuType.GENERIC_9x3,id,inventory,icons,3) {
+            return new ChestMenu(MenuType.GENERIC_9x4,id,inventory,icons,4) {
                 @Override public void clicked(int slot,int button,ClickType click,Player actor) {
                     if(actor==null||!actor.getUUID().equals(p.getUUID())||!VirgosCore.AUTH.authenticated(p))return;
-                    if(click==ClickType.PICKUP&&button==0&&slot>=9&&slot<18){
+                    if(click==ClickType.PICKUP&&button==0&&slot>=9&&slot<9+MENU_ENTRIES.length){
                         var topic=MENU_ENTRIES[slot-9].topic();
                         p.closeContainer();
-                        PlayerGuide.show(p.createCommandSourceStack(),topic);
+                        if(topic.equals("permisos")) VirgosCore.CLAIM_PERMISSIONS.open(p.createCommandSourceStack());
+                        else PlayerGuide.show(p.createCommandSourceStack(),topic);
                     }
                 }
                 @Override public ItemStack quickMoveStack(Player actor,int slot){return ItemStack.EMPTY;}
