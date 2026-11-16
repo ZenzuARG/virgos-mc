@@ -17,9 +17,8 @@ class MenuAndBackpackRegressionTest(unittest.TestCase):
         text = self.source('dev/virgos-core/src/main/java/mc/virgos/TownServices.java')
         clicked = text.split('public void clicked', 1)[1].split('public ItemStack quickMoveStack', 1)[0]
         self.assertIn('PlayerGuide.show', clicked)
-        self.assertIn('var server=p.getServer()', clicked)
-        self.assertIn('server.execute', clicked)
         self.assertLess(clicked.index('closeContainer'), clicked.index('PlayerGuide.show'))
+        self.assertNotIn('server.execute', clicked)
 
     def test_virgos_menu_explains_auth_and_client_gate_failures(self):
         text = self.source('dev/virgos-core/src/main/java/mc/virgos/TownServices.java')

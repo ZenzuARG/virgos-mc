@@ -147,8 +147,7 @@ public final class TownServices {
                     if(click==ClickType.PICKUP&&button==0&&slot>=9&&slot<18){
                         var topic=MENU_ENTRIES[slot-9].topic();
                         p.closeContainer();
-                        var server=p.getServer();
-                        if(server!=null)server.execute(()->PlayerGuide.show(p.createCommandSourceStack(),topic));
+                        PlayerGuide.show(p.createCommandSourceStack(),topic);
                     }
                 }
                 @Override public ItemStack quickMoveStack(Player actor,int slot){return ItemStack.EMPTY;}
