@@ -12,9 +12,9 @@ Branch: `codex/project-cleanup-and-docs`; delivery: `ask-on-risk`; test runner: 
 
 ## Tasks
 
-- T1 [S1,S2] inline — reconcile current uncommitted feature changes and update release identity; status DONE; commit pending
-- T2 [S3] inline — build deterministic Core/Codex and candidate installer/MRPack; status DONE; commit pending
-- T3 [S4] inline — run focused/full validation and stage release evidence; status DONE; commit pending
+- T1 [S1,S2] inline — reconcile current uncommitted feature changes and update release identity; status DONE; commits `d77ff2e`, `4d85c63`
+- T2 [S3] inline — build deterministic Core/Codex and candidate installer/MRPack; status DONE; commit `4fde69d`
+- T3 [S4] inline — run focused/full validation and stage release evidence; status DONE; commit `4fde69d`
 - T4 [S4] inline — publish tag/release only after remote authorization; status BLOCKED ON AUTHORIZATION; commit pending
 
 ## Log
