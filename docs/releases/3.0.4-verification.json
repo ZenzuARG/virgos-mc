@@ -1,6 +1,6 @@
 {
   "version": "3.0.4",
-  "status": "candidate",
+  "status": "published",
   "checks": [
     {
       "name": "menu-diagnostics",
@@ -15,7 +15,7 @@
     {
       "name": "release-package",
       "result": "passed",
-      "evidence": "Deterministic candidate build produced Virgos-MC-3.0.4-instalar.zip (SHA-256 3a4b2d856eb8ef47f3f7ee938e1c4fc90fdf741bcf8b7da936bd8f2831f9738b) and Virgos-MC-3.0.4.mrpack (SHA-256 89f64b4770f48da29decdfccdf221f2ab6d23e404898b50b21420fe6e1dd082e); manifest contains 133 required and 3 optional files."
+      "evidence": "Published GitHub Actions artifacts are Virgos-MC-3.0.4-instalar.zip (SHA-256 2b5f2526b57f1d213b5dcb00c100228cac9bca9a60dbcb4b7ab1577918ab1fdd) and Virgos-MC-3.0.4.mrpack (SHA-256 63480009fd64db51860cf8a0a54c7e3eb92196a24a7c0fa422e3c3d72ce0f12f); manifest contains 133 required and 3 optional files."
     },
     {
       "name": "release-candidate-consistency",
@@ -24,6 +24,6 @@
     }
   ],
   "notes": [
-    "TreeFeller was not rebuilt locally because this machine has no Java 17 compiler; the GitHub workflow remains the authoritative full release gate."
+    "GitHub Actions run 43788209072 completed successfully and published v3.0.4 with the verified installer and MRPack assets. TreeFeller was rebuilt by the hosted Java 17 release gate."
   ]
 }

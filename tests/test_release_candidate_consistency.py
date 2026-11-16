@@ -27,7 +27,10 @@ class ReleaseCandidateConsistencyTests(unittest.TestCase):
         self.assertEqual(update["release"], candidate["clientRelease"])
         self.assertEqual(update["fingerprint"], candidate["clientFingerprint"])
         self.assertIn(candidate["status"], {"release-candidate", "published"})
-        self.assertNotEqual(stable["version"], candidate["version"])
+        if candidate["status"] == "published":
+            self.assertEqual(stable["version"], candidate["version"])
+        else:
+            self.assertNotEqual(stable["version"], candidate["version"])
         self.assertIsNotNone(stable["published"])
 
     def test_root_and_candidate_custom_locks_match_each_other(self):
