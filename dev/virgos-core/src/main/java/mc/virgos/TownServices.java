@@ -124,7 +124,15 @@ public final class TownServices {
         }catch(Exception e){VirgosCore.LOG.error("NPC installation failed",e);return 0;}
     }
     public static int menu(CommandSourceStack source) {
-        var p=source.getPlayer();if(p==null||!VirgosCore.AUTH.authenticated(p))return 0;
+        var p=source.getPlayer();
+        if(p==null){source.sendFailure(Component.literal("Este menú sólo se puede abrir dentro del juego."));return 0;}
+        if(!VirgosCore.AUTH.ready()){source.sendFailure(Component.literal("AuthMe está en mantenimiento; el menú queda bloqueado."));return 0;}
+        if(VirgosCore.UPDATE_GATE==null||!VirgosCore.UPDATE_GATE.accepted(p)){
+            source.sendFailure(Component.literal("Actualizá el paquete Virgos-MC antes de usar el menú."));return 0;
+        }
+        if(!VirgosCore.AUTH.authenticated(p)){
+            source.sendFailure(Component.literal("Usá /login primero para abrir el menú."));return 0;
+        }
         p.openMenu(new SimpleMenuProvider((id,inventory,player)->{
             var icons=new SimpleContainer(27);
             for(int i=0;i<MENU_ENTRIES.length;i++){

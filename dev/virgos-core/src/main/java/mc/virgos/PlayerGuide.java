@@ -134,7 +134,15 @@ public final class PlayerGuide {
     }
     public static int show(CommandSourceStack source,String topic) {
         var player=source.getPlayer();
-        if(player!=null&&!VirgosCore.AUTH.authenticated(player))return 0;
+        if(player!=null){
+            if(!VirgosCore.AUTH.ready()){source.sendFailure(Component.literal("AuthMe está en mantenimiento; la guía queda bloqueada."));return 0;}
+            if(VirgosCore.UPDATE_GATE==null||!VirgosCore.UPDATE_GATE.accepted(player)){
+                source.sendFailure(Component.literal("Actualizá el paquete Virgos-MC antes de abrir la guía."));return 0;
+            }
+            if(!VirgosCore.AUTH.authenticated(player)){
+                source.sendFailure(Component.literal("Usá /login primero para abrir la guía."));return 0;
+            }
+        }
         var page=PAGES.get(topic);
         if(page==null){source.sendFailure(Component.literal("Tema desconocido. Usá /virgos guia."));return 0;}
         source.sendSuccess(()->Component.literal("§6Virgos · "+page.title()),false);

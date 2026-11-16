@@ -21,6 +21,22 @@ class MenuAndBackpackRegressionTest(unittest.TestCase):
         self.assertIn('server.execute', clicked)
         self.assertLess(clicked.index('closeContainer'), clicked.index('PlayerGuide.show'))
 
+    def test_virgos_menu_explains_auth_and_client_gate_failures(self):
+        text = self.source('dev/virgos-core/src/main/java/mc/virgos/TownServices.java')
+        menu = text.split('public static int menu', 1)[1].split('\n    }', 1)[0]
+        self.assertIn('VirgosCore.UPDATE_GATE.accepted(p)', menu)
+        self.assertIn('source.sendFailure', menu)
+        self.assertIn('Actualizá el paquete Virgos-MC', menu)
+        self.assertIn('Usá /login', menu)
+
+    def test_virgos_guide_explains_auth_and_client_gate_failures(self):
+        text = self.source('dev/virgos-core/src/main/java/mc/virgos/PlayerGuide.java')
+        show = text.split('public static int show', 1)[1].split('var page=PAGES', 1)[0]
+        self.assertIn('VirgosCore.UPDATE_GATE.accepted(player)', show)
+        self.assertIn('source.sendFailure', show)
+        self.assertIn('Actualizá el paquete Virgos-MC', show)
+        self.assertIn('Usá /login', show)
+
 
 if __name__ == '__main__':
     unittest.main()
