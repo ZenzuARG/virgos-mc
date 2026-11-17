@@ -117,18 +117,39 @@ public final class ClaimPermissionsPrototype {
         }, Component.literal("Permisos · " + group.label)));
     }
 
+    static List<com.mojang.authlib.GameProfile> memberCandidates(java.util.UUID owner,
+            List<com.mojang.authlib.GameProfile> known, List<com.mojang.authlib.GameProfile> online) {
+        var players = new java.util.LinkedHashMap<java.util.UUID, com.mojang.authlib.GameProfile>();
+        java.util.stream.Stream.concat(known.stream(), online.stream())
+            .filter(profile -> profile.getId() != null && !profile.getId().equals(owner)
+                && profile.getName() != null && !profile.getName().isBlank())
+            .forEach(profile -> players.put(profile.getId(), profile));
+        return players.values().stream().sorted(java.util.Comparator
+            .comparing(com.mojang.authlib.GameProfile::getName, String.CASE_INSENSITIVE_ORDER)
+            .thenComparing(profile -> profile.getId().toString())).toList();
+    }
+
     private void openMemberPicker(ServerPlayer player, ClaimPermissionService.Group group) {
+        openMemberPicker(player, group, 0);
+    }
+
+    private void openMemberPicker(ServerPlayer player, ClaimPermissionService.Group group, int requestedPage) {
         ClaimPermissionService.Context context = service.current(player);
         if (context == null) { player.closeContainer(); return; }
-        List<ServerPlayer> players = player.server.getPlayerList().getPlayers().stream().filter(p -> !p.getUUID().equals(player.getUUID())).limit(7).toList();
+        var candidates = memberCandidates(player.getUUID(), VirgosCore.PROFILES.knownPlayers(),
+            player.server.getPlayerList().getPlayers().stream().map(ServerPlayer::getGameProfile).toList());
+        int page = Math.max(0, Math.min(requestedPage, Math.max(0, (candidates.size() - 1) / 7)));
+        var players = candidates.subList(page * 7, Math.min(candidates.size(), page * 7 + 7));
         player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
             SimpleContainer icons = new SimpleContainer(27);
             put(icons, 4, Items.NAME_TAG, "§6Integrantes · " + group.label, "§7Clic para agregar o quitar");
             for (int i = 0; i < players.size(); i++) {
-                ServerPlayer target = players.get(i);
-                boolean included = service.members(context, group).contains(target.getUUID());
-                put(icons, 10 + i, Items.PLAYER_HEAD, (included ? "§a✓ " : "§c✗ ") + target.getGameProfile().getName(), included ? "§7Pertenece al grupo" : "§7No pertenece al grupo");
+                com.mojang.authlib.GameProfile target = players.get(i);
+                boolean included = service.members(context, group).contains(target.getId());
+                put(icons, 10 + i, Items.PLAYER_HEAD, (included ? "§a✓ " : "§c✗ ") + target.getName(), included ? "§7Pertenece al grupo" : "§7No pertenece al grupo");
             }
+            if (page > 0) put(icons, 18, Items.ARROW, "§ePágina anterior", "§7Ver más jugadores");
+            if ((page + 1) * 7 < candidates.size()) put(icons, 20, Items.ARROW, "§ePágina siguiente", "§7Ver más jugadores");
             put(icons, 22, Items.ARROW, "§eVolver al grupo", "§7Guardar y volver");
             put(icons, 26, Items.BARRIER, "§cCerrar", "§7Volver al juego");
             return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
@@ -136,12 +157,14 @@ public final class ClaimPermissionsPrototype {
                     if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
                     ServerPlayer editor = (ServerPlayer) actor;
                     if (slot >= 10 && slot < 10 + players.size()) {
-                        ServerPlayer target = players.get(slot - 10);
-                        boolean included = service.members(context, group).contains(target.getUUID());
+                        com.mojang.authlib.GameProfile target = players.get(slot - 10);
+                        boolean included = service.members(context, group).contains(target.getId());
                         boolean saved = service.setMember(context, group, target, !included);
                         editor.sendSystemMessage(Component.literal(saved ? "§aIntegrantes actualizados." : "§cNo se pudo guardar el integrante."));
-                        openMemberPicker(editor, group);
-                    } else if (slot == 22) openGroup(editor, group);
+                        openMemberPicker(editor, group, page);
+                    } else if (slot == 18 && page > 0) openMemberPicker(editor, group, page - 1);
+                    else if (slot == 20 && (page + 1) * 7 < candidates.size()) openMemberPicker(editor, group, page + 1);
+                    else if (slot == 22) openGroup(editor, group);
                     else if (slot == 26) editor.closeContainer();
                 }
                 @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }

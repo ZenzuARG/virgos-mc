@@ -39,7 +39,13 @@ User report: "En uno de los clientes el menu de P no cambio y en el otro sale el
 Acceptance: P opens the Spanish parcel permission action, migrating both observed old defaults while preserving unrelated personal controls.
 Checks: shipped-policy migration regression; client build; real client shortcut probe.
 
+### S8 — One-client release verification
+User request: "Usá la RAM mínima necesaria y un solo cliente a la vez. Terminá el release correcto y verificá que P abra el menú, permita agregar jugadores y que los permisos de cofres persistan después de reconectar."
+Acceptance: Exactly one graphical client alternates the QA identities; P opens the Spanish menu, an offline known player can be added, and chest access and membership survive reconnect. Client embedded identity, installer, locks and live server policy agree.
+Checks: Known-player regression; full Gradle check/jar/codexJar/qaJar; verified release package; sequential live-client UI and chest checks.
+
 ## Tasks
+- T6 · S8 · inline · in progress · Risk: items 2, 5 (membership and release delivery); independent verifier required
 - T1 · S1-S3 · inline · complete · commit: 4b72d9a
 - T2 · S4 · inline · reopened (runtime defects found) · commit: e659137
 - T3 · S5 · inline · partial · commit: pending (public startup verified; interactive permission smoke test pending)
@@ -48,6 +54,7 @@ Checks: shipped-policy migration regression; client build; real client shortcut 
 - T4 · S6 · inline · in progress · Risk: items 1, 2, 5 (persistent authorization and deployment) · independent verifier required
 
 ## Log
+- L11 (2026-11-16): "Usá la RAM mínima necesaria y un solo cliente a la vez. Terminá el release correcto y verificá que P abra el menú, permita agregar jugadores y que los permisos de cofres persistan después de reconectar."
 - L2 (2026-11-16): Added `/virgos permisos`, a 3-screen chest-menu prototype, and a Virgos menu entry. Gradle `compileJava` passed with existing deprecation warnings.
 - L3 (2026-11-16): "Puli todo el sistema, analizalo de punta a punta y lo implementamos y probamos en el servidor publico, pero por eso mismo quiero que este bien pulido todo, asi lo implementamos de una vez, luego hare pruebas y ajustamos cosas"
 - L4 (2026-11-16): Public deployment is authorized for the server represented by this workspace using the local authenticated session, but only after artifact rebuild, backup, isolated QA, and release preflight.
@@ -60,3 +67,7 @@ Checks: shipped-policy migration regression; client build; real client shortcut 
 - L8 (2026-11-16): S7 reproduced from saved controls: standard P is vanilla Social Interactions; secondary P is OPAC. No client parcel action exists. Closed both QA clients to free RAM. Public E2E remains failed at oversized console preflight, not proved.
 
 - L9 (2026-11-16): S7 RED: P must open parcel permissions. GREEN: checkCodexKeys codexJar and full check. Independent artifact verification passed, SHA98af3f96a15aa7e3d6a9caba91e87f277a0467a28192d0fcf060938621ddc66a. Both observed legacy bindings migrate; custom modifiers and J survive. Runtime proof remains unavailable:4GiB QA1 stalled in allocation/GC and timed out after claiming, before menu. Both QA processes stopped; fixture unclaimed, blocks removed, force-load ticket removed. Public client release still3.0.4; new client shortcut NOT publicly distributed. Need agreed test RAM budget before further client launches.
+
+- L10: Shortcut committed a0f91ac. Native assessment: medium, review_due=false, under_budget. New Codex preserved under .lab/artifacts; restored old built artifact from verified3.0.5 candidate so root lock remains consistent until full client release. Public client shortcut not distributed.
+
+- L12: Added known offline member selection using existing PlayerProfiles registry, UUID deduplication and seven-entry pages. GameProfile member overload reuses existing sync/save. RED: knownPlayers missing. GREEN: full check jar codexJar qaJar. Independent verifier found no change-caused blockers; package3.0.6/installer25 identity, hashes, P policy, QA exclusion and source licenses verified. Live proof remains pending. Single-client QA helper can switch only fixed QA identities while fully disconnected;4GiB previously failed,6GiB is minimum previously stable heap.

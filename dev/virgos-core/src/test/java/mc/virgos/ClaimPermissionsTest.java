@@ -7,6 +7,33 @@ import java.util.UUID;
 /** Regression checks that do not require starting a Minecraft server. */
 public final class ClaimPermissionsTest {
     public static void main(String[] args) throws Exception {
+        PlayerProfiles registry = new PlayerProfiles();
+        Field registryData = PlayerProfiles.class.getDeclaredField("profiles");
+        registryData.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        var known = (java.util.Map<UUID, JsonObject>) registryData.get(registry);
+        UUID owner = UUID.randomUUID();
+        for (int i = 0; i < 10; i++) {
+            JsonObject row = new JsonObject();
+            row.addProperty("name", "Known" + i);
+            known.put(i == 0 ? owner : UUID.randomUUID(), row);
+        }
+        @SuppressWarnings("unchecked")
+        var profiles = (java.util.List<com.mojang.authlib.GameProfile>) PlayerProfiles.class
+            .getMethod("knownPlayers").invoke(registry);
+        if (profiles.size() != 10) throw new AssertionError("Known offline profiles must be selectable");
+        try { profiles.clear(); throw new AssertionError("Known profile snapshots must be immutable"); }
+        catch (UnsupportedOperationException expected) { }
+        var selection = ClaimPermissionsPrototype.class.getDeclaredMethod("memberCandidates", UUID.class,
+            java.util.List.class, java.util.List.class);
+        selection.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        var candidates = (java.util.List<com.mojang.authlib.GameProfile>) selection.invoke(null, owner,
+            profiles, java.util.List.of(profiles.get(1)));
+        if (candidates.size() != 9 || candidates.stream().anyMatch(p -> p.getId().equals(owner)))
+            throw new AssertionError("Candidates must deduplicate UUIDs and exclude the owner");
+        if (candidates.subList(7, candidates.size()).size() != 2)
+            throw new AssertionError("Players beyond the first page must remain reachable");
         ClaimPermissionService service = new ClaimPermissionService();
         var context = new ClaimPermissionService.Context(null, null, UUID.randomUUID(), "main", "test:main", "Test");
         Field field = ClaimPermissionService.class.getDeclaredField("data");

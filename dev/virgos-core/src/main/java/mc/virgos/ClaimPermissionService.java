@@ -157,17 +157,21 @@ public final class ClaimPermissionService {
     }
 
     public boolean setMember(Context context, Group group, ServerPlayer target, boolean included) {
+        return setMember(context, group, target.getGameProfile(), included);
+    }
+
+    public boolean setMember(Context context, Group group, com.mojang.authlib.GameProfile target, boolean included) {
         JsonObject before = data.deepCopy();
         try {
             JsonObject groupData = groupData(context, group.id, true);
             JsonArray members = groupData.getAsJsonArray("members");
             for (int i = members.size() - 1; i >= 0; i--) {
-                if (target.getUUID().toString().equals(members.get(i).getAsJsonObject().get("id").getAsString())) members.remove(i);
+                if (target.getId().toString().equals(members.get(i).getAsJsonObject().get("id").getAsString())) members.remove(i);
             }
             if (included) {
                 JsonObject member = new JsonObject();
-                member.addProperty("id", target.getUUID().toString());
-                member.addProperty("name", target.getGameProfile().getName());
+                member.addProperty("id", target.getId().toString());
+                member.addProperty("name", target.getName());
                 members.add(member);
             }
             sync(context);

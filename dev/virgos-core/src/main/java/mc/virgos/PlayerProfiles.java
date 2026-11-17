@@ -33,6 +33,14 @@ public final class PlayerProfiles {
             }
         }catch(Exception error){VirgosCore.LOG.error("Could not load player profiles",error);}
     }
+    /** Known authenticated identities, without private gameplay data. */
+    public List<com.mojang.authlib.GameProfile> knownPlayers() {
+        return profiles.entrySet().stream()
+            .filter(entry -> entry.getValue().has("name"))
+            .map(entry -> new com.mojang.authlib.GameProfile(entry.getKey(), entry.getValue().get("name").getAsString()))
+            .toList();
+    }
+
     private long stat(ServerPlayer player,ResourceLocation key){return Math.max(0,player.getStats().getValue(Stats.CUSTOM.get(key)));}
     @SuppressWarnings("unchecked") private void quests(ServerPlayer player,JsonObject result){
         try{
