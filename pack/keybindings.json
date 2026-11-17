@@ -69,14 +69,18 @@
       "context": "contextual"
     },
     "gui.xaero_pac_key_open_menu": {
-      "key": "key.keyboard.p",
-      "previous": [],
+      "key": "key.keyboard.apostrophe",
+      "previous": [
+        "key.keyboard.p"
+      ],
       "repairUnbound": false,
       "context": "global"
     },
     "key.socialInteractions": {
       "key": "key.keyboard.unknown",
-      "previous": [],
+      "previous": [
+        "key.keyboard.p"
+      ],
       "repairUnbound": false,
       "context": "global"
     },
@@ -286,6 +290,12 @@
       "key": "key.keyboard.keypad.2",
       "previous": [],
       "repairUnbound": false,
+      "context": "global"
+    },
+    "key.virgos_codex.claim_permissions": {
+      "key": "key.keyboard.p",
+      "previous": [],
+      "repairUnbound": true,
       "context": "global"
     }
   }

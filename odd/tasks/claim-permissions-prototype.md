@@ -34,11 +34,17 @@ User request: "Arreglá la prueba automatizada y verificá de punta a punta que 
 Acceptance: Two QA accounts exercise the real UI and chest protection before/after reconnect; assert saved membership and permissions; report failures honestly and restore temporary claims/blocks.
 Checks: focused regression tests, Gradle check, real Forge client E2E and independent security verification.
 
+### S7 — Correct the parcel shortcut
+User report: "En uno de los clientes el menu de P no cambio y en el otro sale el menu de jugadores original de minecraft, o algo parecido, pero no permite modificar permisos de nada"
+Acceptance: P opens the Spanish parcel permission action, migrating both observed old defaults while preserving unrelated personal controls.
+Checks: shipped-policy migration regression; client build; real client shortcut probe.
+
 ## Tasks
 - T1 · S1-S3 · inline · complete · commit: 4b72d9a
 - T2 · S4 · inline · reopened (runtime defects found) · commit: e659137
 - T3 · S5 · inline · partial · commit: pending (public startup verified; interactive permission smoke test pending)
 
+- T5 · S7 · inline · in progress · Risk: item 5 (client artifact delivery)
 - T4 · S6 · inline · in progress · Risk: items 1, 2, 5 (persistent authorization and deployment) · independent verifier required
 
 ## Log
@@ -50,3 +56,7 @@ Checks: focused regression tests, Gradle check, real Forge client E2E and indepe
 - L1 (2026-11-16): "Sí, hagámoslo exclusivamente dentro del juego y dejemos el panel web sólo para administradores. Empecemos por el prototipo de la pantalla de permisos de parcelas."
 
 - L7: S6 requested automated proof. Found null service initialization, incorrect main-config resolution, false booleans treated as enabled, and a stale QA2 mod set. Prior startup-only evidence did not verify the UI.
+
+- L8 (2026-11-16): S7 reproduced from saved controls: standard P is vanilla Social Interactions; secondary P is OPAC. No client parcel action exists. Closed both QA clients to free RAM. Public E2E remains failed at oversized console preflight, not proved.
+
+- L9 (2026-11-16): S7 RED: P must open parcel permissions. GREEN: checkCodexKeys codexJar and full check. Independent artifact verification passed, SHA98af3f96a15aa7e3d6a9caba91e87f277a0467a28192d0fcf060938621ddc66a. Both observed legacy bindings migrate; custom modifiers and J survive. Runtime proof remains unavailable:4GiB QA1 stalled in allocation/GC and timed out after claiming, before menu. Both QA processes stopped; fixture unclaimed, blocks removed, force-load ticket removed. Public client release still3.0.4; new client shortcut NOT publicly distributed. Need agreed test RAM budget before further client launches.
