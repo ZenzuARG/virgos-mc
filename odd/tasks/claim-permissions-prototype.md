@@ -32,11 +32,12 @@ Checks: Gradle check/jar/codexJar; package validation; isolated lab QA; deployme
 ## Tasks
 - T1 · S1-S3 · inline · complete · commit: 4b72d9a
 - T2 · S4 · inline · complete · commit: e659137
-- T3 · S5 · inline · pending · commit: pending
+- T3 · S5 · inline · partial · commit: pending (public startup verified; interactive permission smoke test pending)
 
 ## Log
 - L2 (2026-11-16): Added `/virgos permisos`, a 3-screen chest-menu prototype, and a Virgos menu entry. Gradle `compileJava` passed with existing deprecation warnings.
 - L3 (2026-11-16): "Puli todo el sistema, analizalo de punta a punta y lo implementamos y probamos en el servidor publico, pero por eso mismo quiero que este bien pulido todo, asi lo implementamos de una vez, luego hare pruebas y ajustamos cosas"
 - L4 (2026-11-16): Public deployment is authorized for the server represented by this workspace using the local authenticated session, but only after artifact rebuild, backup, isolated QA, and release preflight.
 - L5 (2026-11-16): Added a native Open Parties and Claims adapter, persisted claim policy JSON, group membership editing, individual allow/deny/inherit exceptions, and option synchronization. `compileJava` and `check jar` passed; public rollout remains pending because the live server currently has a connected player.
+- L6 (2026-11-16): Built and deployed the locked Core artifact after a verified public backup. Startup reached `Done`, the runtime reported release 3.0.4, and the main-claim `subConfigIndex=-1` bug was fixed. Automated interactive UI verification remains partial because the QA client hit death-screen/handshake limitations; no claim permission data was left behind by the test.
 - L1 (2026-11-16): "Sí, hagámoslo exclusivamente dentro del juego y dejemos el panel web sólo para administradores. Empecemos por el prototipo de la pantalla de permisos de parcelas."
