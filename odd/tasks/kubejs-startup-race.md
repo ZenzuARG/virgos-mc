@@ -16,7 +16,7 @@ Checks: Release/hash preflight; managed stop/backup/start; activation marker, da
 
 ## Tasks
 - T1 · S1 · inline · complete · Risk: item 4 (shared-cache concurrency); independent verifier after own checks; commit 289a2c1.
-- T2 · S2 · inline · complete (release record pending commit) · Risk: item 5 (server release/deployment); commit pending.
+- T2 · S2 · inline · complete · Risk: item 5 (server release/deployment); commit 3b517a6.
 
 ## Log
 - L1 (2026-11-17): "Arreglá también el fallo de arranque de KubeJS y comprobá que el servidor reinicie bien. No abras Minecraft si no hace falta."
@@ -27,3 +27,5 @@ Checks: Release/hash preflight; managed stop/backup/start; activation marker, da
 
 - L5: Server-only3.0.7 deployed after full verified backup013107-auto.zip (10590 files/six worlds). Real guard marker observed on startup, then Done, 1/1 startup and4/4 server scripts with zero errors. Live PID37308 owns TCP25565 and has a Minecraft Server thread; read-only gametime advanced33814778 to33814823. Original datapack failure absent. No Minecraft client launched. Client3.0.6/installer25/gate unchanged. Delivery preflight and package hashes verified; proof docs/releases/3.0.7-kubejs-startup.json.
 - L6: Upstream references: https://raw.githubusercontent.com/KubeJS-Mods/KubeJS/2001/common/src/main/java/dev/latvian/mods/kubejs/script/data/GeneratedData.java and corresponding util/Lazy.java; installed build.26 bytecode, not a moving branch, is the regression oracle.
+
+- L7: T1 source289a2c1; T2 release record3b517a6. Server-only patch dist/Virgos-MC-3.0.7-server-hotfix.zip SHAec9a59bba93145fa4ea2e00e6d52244edf5e1c52d4d79d622f73f3a36f42de2f. Client archive and identity remain3.0.6. Both tasks have observed functional evidence; no Minecraft client was needed.
