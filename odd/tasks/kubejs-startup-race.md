@@ -15,8 +15,8 @@ Implementation assumption: Server-only patch 3.0.7 retains the already verified 
 Checks: Release/hash preflight; managed stop/backup/start; activation marker, datapack/script loading, server thread/readiness and absence of the recorded failure.
 
 ## Tasks
-- T1 · S1 · inline · code verified / activation pending · Risk: item 4 (shared-cache concurrency); independent verifier after own checks; commit pending.
-- T2 · S2 · inline · pending · Risk: item 5 (server release/deployment); commit pending.
+- T1 · S1 · inline · complete · Risk: item 4 (shared-cache concurrency); independent verifier after own checks; commit 289a2c1.
+- T2 · S2 · inline · complete (release record pending commit) · Risk: item 5 (server release/deployment); commit pending.
 
 ## Log
 - L1 (2026-11-17): "Arreglá también el fallo de arranque de KubeJS y comprobá que el servidor reinicie bien. No abras Minecraft si no hace falta."
@@ -24,3 +24,6 @@ Checks: Release/hash preflight; managed stop/backup/start; activation marker, da
 - L3: Mapping found no external invalidator of the same generated cache. Debug size reads are disabled and occur before publication; concurrent export remains outside this startup-only guard. Preserve every datapack and normal cache-forgetting semantics. No client launched.
 
 - L4: RED forced the installed Lazy invalidation window and reproduced ByteArrayInputStream null-buffer NPE. GREEN checkKubeJsGeneratedStreams/check/jar; packaged-helper independent probe PASS, counterfactual without only the monitor FAIL, restored packaged helper PASS. Bytecode wiring verified, require1 exact descriptor. Every existing gameplay class is byte-identical to deployed3.0.6; only two classes were added and manifest/mixin configuration changed. No Minecraft client launched. Runtime activation remains required before completion.
+
+- L5: Server-only3.0.7 deployed after full verified backup013107-auto.zip (10590 files/six worlds). Real guard marker observed on startup, then Done, 1/1 startup and4/4 server scripts with zero errors. Live PID37308 owns TCP25565 and has a Minecraft Server thread; read-only gametime advanced33814778 to33814823. Original datapack failure absent. No Minecraft client launched. Client3.0.6/installer25/gate unchanged. Delivery preflight and package hashes verified; proof docs/releases/3.0.7-kubejs-startup.json.
+- L6: Upstream references: https://raw.githubusercontent.com/KubeJS-Mods/KubeJS/2001/common/src/main/java/dev/latvian/mods/kubejs/script/data/GeneratedData.java and corresponding util/Lazy.java; installed build.26 bytecode, not a moving branch, is the regression oracle.
