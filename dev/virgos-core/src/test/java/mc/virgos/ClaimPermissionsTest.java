@@ -8,6 +8,7 @@ import java.util.UUID;
 public final class ClaimPermissionsTest {
     public static void main(String[] args) throws Exception {
         ClaimEntryFlowTest.main(args);
+        ClaimMenuPageTest.main(args);
         var nativeIds = new java.util.HashSet<String>();
         for (var permission : ClaimPermissionService.Permission.values()) {
             String id = ClaimPermissionService.nativeGroupId(permission);
@@ -42,18 +43,23 @@ public final class ClaimPermissionsTest {
             throw new AssertionError("Candidates must deduplicate UUIDs and exclude the owner");
         if (candidates.subList(7, candidates.size()).size() != 2)
             throw new AssertionError("Players beyond the first page must remain reachable");
-        ClaimPermissionService service = new ClaimPermissionService();
-        var context = new ClaimPermissionService.Context(null, null, UUID.randomUUID(), "main", "test:main", "Test");
-        Field field = ClaimPermissionService.class.getDeclaredField("data");
-        field.setAccessible(true);
+        java.nio.file.Path scratch = java.nio.file.Files.createTempDirectory("virgos-claim-service-");
+        System.out.println("SCRATCH=" + scratch);
+        var key = new ClaimPolicyStore.Key(UUID.randomUUID(), "minecraft:overworld", 0, 0, "main");
+        var context = new ClaimPermissionService.Context(null, null, key.owner(), "main", key.encoded(), "Test");
+        ClaimPolicyStore store = new ClaimPolicyStore();
+        ClaimPermissionService service = new ClaimPermissionService(store);
         JsonObject data = new JsonObject();
         JsonObject claim = new JsonObject(), groups = new JsonObject(), friends = new JsonObject(), permissions = new JsonObject();
-        data.add(context.key(), claim); claim.add("groups", groups); groups.add("amigos", friends); friends.add("permissions", permissions);
-        field.set(service, data);
+        data.add(key.legacy(), claim); claim.add("groups", groups); groups.add("amigos", friends); friends.add("permissions", permissions);
         permissions.addProperty("storage", false);
+        java.nio.file.Files.writeString(scratch.resolve("legacy.json"), data.toString());
+        if (!store.load(scratch.resolve("v2.json"), scratch.resolve("legacy.json"))) throw new AssertionError("Fixture must load");
         if (service.isGroupEnabled(context, ClaimPermissionService.Group.FRIENDS, ClaimPermissionService.Permission.STORAGE))
             throw new AssertionError("Stored false must disable chest permission");
         permissions.addProperty("storage", true);
+        java.nio.file.Files.writeString(scratch.resolve("legacy.json"), data.toString());
+        if (!store.load(scratch.resolve("v2.json"), scratch.resolve("legacy.json"))) throw new AssertionError("Fixture reload must succeed");
         if (!service.isGroupEnabled(context, ClaimPermissionService.Group.FRIENDS, ClaimPermissionService.Permission.STORAGE))
             throw new AssertionError("Stored true must enable chest permission");
         if (service.individualDecision(context, UUID.randomUUID(), ClaimPermissionService.Permission.STORAGE) != null)

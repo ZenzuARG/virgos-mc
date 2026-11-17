@@ -65,6 +65,18 @@ Para proteger el chunk en el que estás, pulsa **P → Reclamar parcela**. Al co
 
 `/virgos guia bases` muestra estos pasos y botones que preparan los comandos en el chat; revisalos antes de Enter. `/virgos guia grupo` explica cómo compartir. La party no comparte misiones ni rangos.
 
+### Áreas y permisos desde P
+
+Los chunks son independientes aunque estén pegados. En **P → Unir o separar parcelas**, puedes unir tu área con otra área propia vecina. Antes de confirmar, elige qué grupos, excepciones y permisos conservar; los ajustes de la otra área serán reemplazados. Para seleccionar un área vecina, sitúate en un chunk junto a su borde.
+
+**Separar este chunk** copia sus permisos actuales y permite cambiarlos sin afectar al resto del área. Unir o separar no cambia el dueño, no libera terrenos y no altera el número de chunks reclamados. La unidad mínima es un chunk de **16 × 16 bloques**.
+
+Cada clic guarda automáticamente. **Familia, Amigos y Visitantes** no aplican permisos por su nombre: debes configurarlos. Se suman las concesiones de los grupos y luego se aplica la excepción individual **Permitir / Denegar / Heredar**. Tanto integrantes como excepciones muestran jugadores conocidos, incluidos desconectados, con páginas. **Vista previa por jugador** muestra el resultado del panel y su origen; siguen aplicándose las restricciones generales del servidor.
+
+**Construir y romper** es un permiso de confianza: permite destruir contenedores y puede exponer los objetos que caigan, aunque no se permita abrirlos. **Hornos y tolvas** controla esos grupos de bloques registrados, no todas las máquinas del pack. Automatizaciones, entidades, explosiones y otras interfaces siguen las reglas nativas del servidor.
+
+Los ajustes anteriores se conservan como valores iniciales de solo lectura. Los cambios de áreas se guardan de forma atómica en un archivo separado. Si el archivo es inválido o no se puede guardar, el panel rechaza las ediciones; no reemplaza silenciosamente los datos anteriores.
+
 ## Elegir el próximo objetivo
 
 | Paso | Qué hacer | Qué habilita |

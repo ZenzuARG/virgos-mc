@@ -225,7 +225,7 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
                 'Implementation-Timestamp': fixedBuildTimestamp ?: new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'MixinConfigs'            : 'virgos_core.mixins.json'
+                'MixinConfigs'            : 'virgos_core.mixins.json,virgos_claim_permissions.mixins.json'
         ])
     }
 
@@ -276,6 +276,24 @@ tasks.register('checkClaimPermissions', JavaExec) {
     mainClass = 'mc.virgos.ClaimPermissionsTest'
 }
 tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
+
+['ClaimPolicyStore', 'ClaimPolicyRules', 'ClaimNativePermissions', 'ClaimNativeMixin'].each { probe ->
+    tasks.register('check' + probe, JavaExec) {
+        dependsOn testClasses
+        classpath = sourceSets.test.runtimeClasspath
+        mainClass = 'mc.virgos.' + probe + 'Test'
+    }
+    tasks.named('check').configure { dependsOn 'check' + probe }
+}
+
+tasks.register('checkClaimNativeOptions', JavaExec) {
+    dependsOn testClasses
+    // The pinned OPAC jar uses SRG names; put the matching server classes before dev mappings.
+    classpath = files('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar') + sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.ClaimNativeOptionsTest'
+    maxHeapSize = '256m'
+}
+tasks.named('check').configure { dependsOn 'checkClaimNativeOptions' }
 
 tasks.register('checkKubeJsGeneratedStreams', JavaExec) {
     dependsOn testClasses

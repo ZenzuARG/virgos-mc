@@ -10,23 +10,21 @@ import net.minecraft.world.level.storage.LevelResource;
 import xaero.pac.common.server.api.OpenPACServerAPI;
 import xaero.pac.common.server.player.data.api.ServerPlayerDataAPI;
 import xaero.pac.common.claims.player.mode.api.ClaimingModes;
-import xaero.pac.common.server.claims.player.api.IServerPlayerClaimInfoAPI;
 import xaero.pac.common.server.player.config.api.v2.IPlayerConfigAPI;
 import xaero.pac.common.server.player.config.api.v2.IPlayerConfigManagerAPI;
-import xaero.pac.common.server.player.config.api.v2.IPlayerConfigOptionSpecAPI;
-import xaero.pac.common.server.player.config.group.custom.api.ICustomPlayerConfigGroupAPI;
 import xaero.pac.common.server.player.config.group.api.IServerPlayerConfigGroupManagerAPI;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.LinkedHashMap;
+import java.util.function.Consumer;
+import com.mojang.authlib.GameProfile;
 
-/** Persists the Spanish claim policy and mirrors it into Open Parties and Claims groups. */
+/** Owns authoritative area policy; native claim ownership and legacy groups remain untouched. */
 public final class ClaimPermissionService {
     public enum Group {
         FAMILY("familia", "Familia"), FRIENDS("amigos", "Amigos"), VISITORS("visitantes", "Visitantes");
@@ -41,7 +39,7 @@ public final class ClaimPermissionService {
             "claims.protection.exceptions.groups.block.interact.Barrels",
             "claims.protection.exceptions.groups.block.interact.Ender_Chests",
             "claims.protection.exceptions.groups.block.interact.Shulker_Boxes")),
-        MACHINES("machines", "Usar máquinas", List.of(
+        MACHINES("machines", "Hornos y tolvas", List.of(
             "claims.protection.exceptions.groups.block.interact.Furnaces",
             "claims.protection.exceptions.groups.block.interact.Hoppers")),
         DOORS("doors", "Usar puertas y botones", List.of(
@@ -58,47 +56,132 @@ public final class ClaimPermissionService {
     public enum Decision { ALLOW, DENY }
 
     public record Context(IPlayerConfigAPI config, IServerPlayerConfigGroupManagerAPI groups,
-                          UUID owner, String subId, String key, String claimName) {}
+                          UUID owner, String subId, String key, String claimName, String areaId) {
+        public Context(IPlayerConfigAPI config, IServerPlayerConfigGroupManagerAPI groups, UUID owner,
+                       String subId, String key, String claimName) {
+            this(config, groups, owner, subId, key, claimName, key);
+        }
+        public ClaimPolicyStore.Key parcel() { return ClaimPolicyStore.Key.decode(key); }
+    }
 
     private MinecraftServer server;
-    private Path file;
-    private JsonObject data = new JsonObject();
+    private final ClaimPolicyStore store;
+
+    public ClaimPermissionService() { this(new ClaimPolicyStore()); }
+    ClaimPermissionService(ClaimPolicyStore store) { this.store = store; }
 
     public void initialize(MinecraftServer value) {
         server = value;
-        file = server.getWorldPath(LevelResource.ROOT).resolve("virgos-claim-permissions.json");
-        try {
-            data = Files.exists(file) ? VirgosCore.JSON.fromJson(Files.readString(file), JsonObject.class) : new JsonObject();
-            if (data == null) data = new JsonObject();
-        } catch (Exception e) {
-            data = new JsonObject();
-            VirgosCore.LOG.error("Could not load claim permissions; edits will fail closed", e);
-        }
+        Path root = server.getWorldPath(LevelResource.ROOT);
+        if (!store.load(root.resolve("virgos-claim-permissions-v2.json"), root.resolve("virgos-claim-permissions.json")))
+            VirgosCore.LOG.error("Claim policy is unavailable; edits and managed grants are blocked", store.failure());
+        ClaimProtectionHooks.bind(this::permissionAt, player -> VirgosCore.AUTH.ready()
+            && VirgosCore.AUTH.authenticated(player) && VirgosCore.UPDATE_GATE != null
+            && VirgosCore.UPDATE_GATE.accepted(player));
+    }
+
+    public boolean ready() { return store.healthy(); }
+
+    public boolean protectionEnabled(Context context) {
+        return context.config() != null
+            && xaero.pac.common.server.config.ServerConfig.CONFIG.claimsEnabled.get()
+            && Boolean.TRUE.equals(context.config().getEffective(
+                xaero.pac.common.server.player.config.api.v2.PlayerConfigOptions.PROTECT_CLAIMED_CHUNKS));
     }
 
     public Context current(ServerPlayer player) {
         if (server == null || player == null) return null;
         try {
-            OpenPACServerAPI api = OpenPACServerAPI.get(server);
-            if (api == null) return null;
-            var claim = api.getServerClaimsManager().get(player.level().dimension().location(), player.blockPosition());
-            if (claim == null || claim.getPlayerId() == null || !claim.getPlayerId().equals(player.getUUID())) return null;
-            IPlayerConfigManagerAPI manager = api.getPlayerConfigManager();
-            IPlayerConfigAPI root = manager.getLoadedConfig(claim.getPlayerId());
-            if (root == null) return null;
-            int index = claim.getSubConfigIndex();
-            if (index != -1 && !root.subConfigExists(index)) return null;
-            IPlayerConfigAPI config = root.getEffectiveSubConfig(index);
-            if (config == null) return null;
-            String subId = config.getSubId() == null ? "main" : config.getSubId();
-            IServerPlayerConfigGroupManagerAPI groups = config.getPlayerGroups();
-            if (groups == null) return null;
-            String name = api.getServerClaimsManager().getFullName(claim).getString();
-            return new Context(config, groups, claim.getPlayerId(), subId, claim.getPlayerId() + ":" + subId, name);
-        } catch (Throwable t) {
-            VirgosCore.LOG.warn("Open Parties and Claims API unavailable for claim permissions", t);
+            Context context = contextAt(player.level().dimension().location(), player.blockPosition());
+            return context != null && context.owner().equals(player.getUUID()) ? context : null;
+        } catch (RuntimeException unavailable) {
+            VirgosCore.LOG.warn("Could not resolve the current parcel", unavailable);
             return null;
         }
+    }
+
+    private Context contextAt(ResourceLocation dimension, BlockPos position) {
+        var api = OpenPACServerAPI.get(server);
+        if (api == null) throw new IllegalStateException("Claim API unavailable");
+        var claim = api.getServerClaimsManager().get(dimension, position);
+        if (claim == null || claim.getPlayerId() == null) return null;
+        var root = api.getPlayerConfigManager().getLoadedConfig(claim.getPlayerId());
+        if (root == null) throw new IllegalStateException("Claim configuration unavailable");
+        if (root.getType() == xaero.pac.common.server.player.config.api.PlayerConfigType.SERVER) return null;
+        int index = claim.getSubConfigIndex();
+        if (index != -1 && !root.subConfigExists(index)) throw new IllegalStateException("Missing claim subconfiguration");
+        var config = root.getEffectiveSubConfig(index);
+        if (config == null) throw new IllegalStateException("Missing effective claim configuration");
+        String sub = config.getSubId() == null ? "main" : config.getSubId();
+        var parcel = new ClaimPolicyStore.Key(claim.getPlayerId(), dimension.toString(),
+            position.getX() >> 4, position.getZ() >> 4, sub);
+        return new Context(config, root.getPlayerGroups(), claim.getPlayerId(), sub, parcel.encoded(),
+            api.getServerClaimsManager().getFullName(claim).getString(), store.areaId(parcel));
+    }
+
+    public ClaimPermissionDecision permissionAt(UUID actor, ResourceLocation dimension, BlockPos position, String permission) {
+        if (server == null || !ClaimPolicyRules.PERMISSIONS.contains(permission)) return ClaimPermissionDecision.NATIVE;
+        try {
+            Context target = contextAt(dimension, position);
+            if (target == null || target.owner().equals(actor)) return ClaimPermissionDecision.NATIVE;
+            if (!store.healthy()) return ClaimPermissionDecision.DENY;
+            JsonObject policy = store.policy(target.parcel());
+            return ClaimPolicyRules.decision(policy, actor, permission);
+        } catch (RuntimeException unavailable) {
+            return ClaimPermissionDecision.DENY;
+        }
+    }
+
+    public boolean sameContext(ServerPlayer player, Context expected) {
+        Context actual = current(player);
+        return actual != null && expected != null && actual.key().equals(expected.key())
+            && actual.areaId().equals(expected.areaId());
+    }
+
+    private boolean mayEdit(ServerPlayer player, Context context) {
+        return store.healthy() && player != null && VirgosCore.AUTH.ready()
+            && VirgosCore.AUTH.authenticated(player) && VirgosCore.UPDATE_GATE != null
+            && VirgosCore.UPDATE_GATE.accepted(player) && sameContext(player, context);
+    }
+
+    private boolean edit(Context context, Consumer<JsonObject> mutation) {
+        ServerPlayer player = server == null ? null : server.getPlayerList().getPlayer(context.owner());
+        return mayEdit(player, context) && store.edit(context.parcel(), mutation);
+    }
+
+    public List<ClaimPolicyStore.Key> areaMembers(Context context) {
+        return store.areaMembers(context.parcel()).stream().filter(this::owns).toList();
+    }
+
+    public List<Context> neighboringAreas(Context context) {
+        var key = context.parcel();
+        List<Context> result = new ArrayList<>();
+        for (int[] offset : new int[][]{{0, -1}, {1, 0}, {0, 1}, {-1, 0}}) {
+            try {
+                var other = contextAt(new ResourceLocation(key.dimension()),
+                    new BlockPos((key.x() + offset[0]) << 4, 0, (key.z() + offset[1]) << 4));
+                if (other != null && other.owner().equals(context.owner()) && !other.areaId().equals(context.areaId())
+                    && result.stream().noneMatch(existing -> existing.areaId().equals(other.areaId()))) result.add(other);
+            } catch (RuntimeException unavailable) { /* An unavailable neighbor is never selectable. */ }
+        }
+        return List.copyOf(result);
+    }
+
+    private boolean owns(ClaimPolicyStore.Key key) {
+        try {
+            Context actual = contextAt(new ResourceLocation(key.dimension()), new BlockPos(key.x() << 4, 0, key.z() << 4));
+            return actual != null && actual.key().equals(key.encoded());
+        } catch (RuntimeException unavailable) { return false; }
+    }
+
+    public boolean joinAreas(ServerPlayer player, Context current, Context selected, boolean keepCurrent) {
+        if (!mayEdit(player, current) || !current.owner().equals(selected.owner()) || !owns(selected.parcel())
+            || !store.areaId(selected.parcel()).equals(selected.areaId())) return false;
+        return store.join(current.parcel(), selected.parcel(), keepCurrent, this::owns);
+    }
+
+    public boolean splitParcel(ServerPlayer player, Context context) {
+        return mayEdit(player, context) && store.split(context.parcel());
     }
 
     public ClaimEntryFlow.Target claimTarget(ServerPlayer player) {
@@ -138,215 +221,128 @@ public final class ClaimPermissionService {
             impersonation == null ? null : impersonation.getClaimPlayerId(ClaimingModes.PLAYER));
     }
 
+    private JsonObject policy(Context context) {
+        JsonObject value = store.policy(context.parcel());
+        return value == null ? new JsonObject() : value;
+    }
+    public boolean hasPolicy(Context context) { return store.policy(context.parcel()) != null; }
+
     public boolean isGroupEnabled(Context context, Group group, Permission permission) {
-        JsonObject groupData = groupData(context, group.id, false);
-        if (groupData == null || !groupData.has("permissions")) return false;
-        var value = groupData.getAsJsonObject("permissions").get(permission.id);
+        var value = ClaimPolicyRules.object(groupData(policy(context), group.id, false), "permissions").get(permission.id);
         return value != null && value.getAsBoolean();
     }
 
     public Set<UUID> members(Context context, Group group) {
-        JsonObject groupData = groupData(context, group.id, false);
-        Set<UUID> result = new HashSet<>();
-        if (groupData == null || !groupData.has("members")) return result;
-        for (var element : groupData.getAsJsonArray("members")) {
-            try { result.add(UUID.fromString(element.getAsJsonObject().get("id").getAsString())); }
-            catch (Exception ignored) { }
+        Set<UUID> members = new HashSet<>();
+        var data = groupData(policy(context), group.id, false);
+        if (data.has("members")) for (var row : data.getAsJsonArray("members"))
+            members.add(UUID.fromString(row.getAsJsonObject().get("id").getAsString()));
+        return Set.copyOf(members);
+    }
+
+    public List<GameProfile> storedPlayers(Context context) {
+        var people = new LinkedHashMap<UUID, GameProfile>();
+        JsonObject data = policy(context);
+        for (Group group : Group.values()) {
+            var row = groupData(data, group.id, false);
+            if (row.has("members")) for (var entry : row.getAsJsonArray("members")) {
+                JsonObject member = entry.getAsJsonObject();
+                UUID id = UUID.fromString(member.get("id").getAsString());
+                people.put(id, new GameProfile(id, label(member, id)));
+            }
         }
-        return result;
+        ClaimPolicyRules.object(data, "individuals").entrySet().forEach(entry -> {
+            UUID id = UUID.fromString(entry.getKey());
+            people.putIfAbsent(id, new GameProfile(id, label(entry.getValue().getAsJsonObject(), id)));
+        });
+        return List.copyOf(people.values());
     }
 
     public String memberLabel(Context context, UUID uuid) {
-        for (Group group : Group.values()) {
-            JsonObject groupData = groupData(context, group.id, false);
-            if (groupData == null || !groupData.has("members")) continue;
-            for (var element : groupData.getAsJsonArray("members")) {
-                var member = element.getAsJsonObject();
-                if (uuid.toString().equals(member.get("id").getAsString())) return member.get("name").getAsString();
-            }
-        }
-        ServerPlayer online = server.getPlayerList().getPlayer(uuid);
+        for (GameProfile profile : storedPlayers(context)) if (profile.getId().equals(uuid)) return profile.getName();
+        ServerPlayer online = server == null ? null : server.getPlayerList().getPlayer(uuid);
         return online == null ? uuid.toString().substring(0, 8) : online.getGameProfile().getName();
     }
-
-    public boolean isIndividualAllowed(Context context, UUID uuid, Permission permission) {
-        JsonObject person = individuals(context, false).has(uuid.toString()) ? individuals(context, false).getAsJsonObject(uuid.toString()) : null;
-        return person != null && person.has("permissions") && person.getAsJsonObject("permissions").has(permission.id) && "ALLOW".equals(person.getAsJsonObject("permissions").get(permission.id).getAsString());
+    private static String label(JsonObject row, UUID id) {
+        return row.has("name") ? row.get("name").getAsString() : id.toString().substring(0, 8);
     }
 
+    public ClaimPolicyRules.Effective effectivePermission(Context context, UUID player, Permission permission) {
+        return ClaimPolicyRules.effective(policy(context), player, permission.id);
+    }
+    public boolean isIndividualAllowed(Context context, UUID uuid, Permission permission) {
+        return individualDecision(context, uuid, permission) == Decision.ALLOW;
+    }
     public Decision individualDecision(Context context, UUID uuid, Permission permission) {
-        JsonObject person = individuals(context, false).has(uuid.toString()) ? individuals(context, false).getAsJsonObject(uuid.toString()) : null;
-        if (person == null || !person.has("permissions") || !person.getAsJsonObject("permissions").has(permission.id)) return null;
-        return Decision.valueOf(person.getAsJsonObject("permissions").get(permission.id).getAsString());
+        for (var entry : ClaimPolicyRules.object(policy(context), "individuals").entrySet()) {
+            if (!UUID.fromString(entry.getKey()).equals(uuid)) continue;
+            var value = ClaimPolicyRules.object(entry.getValue().getAsJsonObject(), "permissions").get(permission.id);
+            return value == null ? null : Decision.valueOf(value.getAsString());
+        }
+        return null;
     }
 
     public boolean setGroupPermission(Context context, Group group, Permission permission, boolean enabled) {
-        JsonObject before = data.deepCopy();
-        try {
-            JsonObject permissions = permissions(context, group.id);
-            permissions.addProperty(permission.id, enabled);
-            sync(context);
-            save();
-            return true;
-        } catch (Throwable t) {
-            data = before;
-            VirgosCore.LOG.error("Could not update claim group permission", t);
-            return false;
-        }
+        return edit(context, row -> groupData(row, group.id, true).getAsJsonObject("permissions").addProperty(permission.id, enabled));
     }
-
     public boolean setMember(Context context, Group group, ServerPlayer target, boolean included) {
         return setMember(context, group, target.getGameProfile(), included);
     }
-
-    public boolean setMember(Context context, Group group, com.mojang.authlib.GameProfile target, boolean included) {
-        JsonObject before = data.deepCopy();
-        try {
-            JsonObject groupData = groupData(context, group.id, true);
-            JsonArray members = groupData.getAsJsonArray("members");
-            for (int i = members.size() - 1; i >= 0; i--) {
-                if (target.getId().toString().equals(members.get(i).getAsJsonObject().get("id").getAsString())) members.remove(i);
-            }
+    public boolean setMember(Context context, Group group, GameProfile target, boolean included) {
+        return edit(context, row -> {
+            JsonArray members = groupData(row, group.id, true).getAsJsonArray("members");
+            for (int i = members.size() - 1; i >= 0; i--)
+                if (target.getId().equals(UUID.fromString(members.get(i).getAsJsonObject().get("id").getAsString()))) members.remove(i);
             if (included) {
                 JsonObject member = new JsonObject();
                 member.addProperty("id", target.getId().toString());
-                member.addProperty("name", target.getName());
+                member.addProperty("name", target.getName() == null ? target.getId().toString().substring(0, 8) : target.getName());
                 members.add(member);
             }
-            sync(context);
-            save();
-            return true;
-        } catch (Throwable t) {
-            data = before;
-            VirgosCore.LOG.error("Could not update claim group membership", t);
-            return false;
-        }
+        });
     }
-
     public boolean setIndividual(Context context, ServerPlayer target, Permission permission, Decision decision) {
-        JsonObject before = data.deepCopy();
-        try {
-            JsonObject people = individuals(context, true);
-            if (!people.has(target.getUUID().toString())) people.add(target.getUUID().toString(), new JsonObject());
-            JsonObject person = people.getAsJsonObject(target.getUUID().toString());
-            person.addProperty("name", target.getGameProfile().getName());
-            if (!person.has("permissions")) person.add("permissions", new JsonObject());
-            if (decision == null) person.getAsJsonObject("permissions").remove(permission.id);
-            else person.getAsJsonObject("permissions").addProperty(permission.id, decision.name());
-            sync(context);
-            save();
-            return true;
-        } catch (Throwable t) {
-            data = before;
-            VirgosCore.LOG.error("Could not update individual claim exception", t);
-            return false;
-        }
+        return setIndividual(context, target.getGameProfile(), permission, decision);
     }
-
-    static String nativeGroupId(Permission permission) {
-        String id = "virgos_" + permission.id;
-        if (id.length() > 16) throw new IllegalArgumentException("Native claim group ID exceeds 16 characters: " + id);
-        return id;
-    }
-
-    private void sync(Context context) {
-        for (Permission permission : Permission.values()) nativeGroupId(permission);
-        for (Group group : Group.values()) ensureGroup(context, group.id);
-        for (Permission permission : Permission.values()) {
-            String nativeGroup = nativeGroupId(permission);
-            ICustomPlayerConfigGroupAPI group = ensureGroup(context, nativeGroup);
-            clearMembers(group);
-            Set<UUID> allowed = new HashSet<>();
-            for (Group source : Group.values()) if (isGroupEnabled(context, source, permission)) allowed.addAll(members(context, source));
-            JsonObject people = individuals(context, false);
-            for (var entry : people.entrySet()) {
-                JsonObject person = entry.getValue().getAsJsonObject();
-                if (!person.has("permissions") || !person.getAsJsonObject("permissions").has(permission.id)) continue;
-                UUID id = UUID.fromString(entry.getKey());
-                if ("ALLOW".equals(person.getAsJsonObject("permissions").get(permission.id).getAsString())) allowed.add(id);
-                else allowed.remove(id);
+    public boolean setIndividual(Context context, GameProfile target, Permission permission, Decision decision) {
+        return edit(context, row -> {
+            JsonObject people = mutableObject(row, "individuals");
+            JsonObject person = new JsonObject();
+            String oldKey = null;
+            for (var entry : people.entrySet()) if (UUID.fromString(entry.getKey()).equals(target.getId())) {
+                person = entry.getValue().getAsJsonObject();
+                oldKey = entry.getKey();
+                break;
             }
-            for (UUID id : allowed) group.includeMember(id, memberLabel(context, id));
-            for (String optionId : permission.optionIds) setOption(context, optionId, allowed.isEmpty() ? "N" : nativeGroup);
-        }
-        for (Group source : Group.values()) {
-            ICustomPlayerConfigGroupAPI group = ensureGroup(context, source.id);
-            clearMembers(group);
-            for (UUID id : members(context, source)) group.includeMember(id, memberLabel(context, id));
-        }
+            if (oldKey != null) people.remove(oldKey);
+            people.add(target.getId().toString(), person);
+            person.addProperty("name", target.getName() == null ? target.getId().toString().substring(0, 8) : target.getName());
+            JsonObject permissions = mutableObject(person, "permissions");
+            if (decision == null) permissions.remove(permission.id);
+            else permissions.addProperty(permission.id, decision.name());
+        });
     }
 
-    private void setOption(Context context, String id, String value) {
-        IPlayerConfigManagerAPI manager = OpenPACServerAPI.get(server).getPlayerConfigManager();
-        IPlayerConfigOptionSpecAPI option = manager.getOptionForId(id);
-        if (option == null || option.getType() != String.class) throw new IllegalStateException("Unsupported claim option: " + id);
-        @SuppressWarnings({"rawtypes", "unchecked"})
-        IPlayerConfigAPI.SetResult result = context.config().tryToSet(option, value);
-        if (result != IPlayerConfigAPI.SetResult.SUCCESS && result != IPlayerConfigAPI.SetResult.DEFAULTED)
-            throw new IllegalStateException("Could not set claim option " + id + ": " + result);
+    /** Retained only to identify legacy native groups; new policy never mutates them. */
+    static String nativeGroupId(Permission permission) { return "virgos_" + permission.id; }
+    private static JsonObject mutableObject(JsonObject parent, String name) {
+        if (!parent.has(name)) parent.add(name, new JsonObject());
+        return parent.getAsJsonObject(name);
     }
-
-    private ICustomPlayerConfigGroupAPI ensureGroup(Context context, String id) {
-        ICustomPlayerConfigGroupAPI group = context.groups().getCustom(id);
-        if (group == null) {
-            var created = context.groups().addCustom(id);
-            if (created.right().isPresent())
-                throw new IllegalStateException("Could not create claim group " + id + ": " + created.right().get());
-            group = context.groups().getCustom(id);
-        }
-        if (group == null) throw new IllegalStateException("Could not create claim group: " + id);
-        return group;
-    }
-
-    private static void clearMembers(ICustomPlayerConfigGroupAPI group) {
-        for (var member : new ArrayList<>(group.getDirectMembers())) group.excludeMember(member.getId(), member.getDisplayName());
-    }
-
-    private JsonObject claimData(Context context, boolean create) {
-        if (!data.has(context.key())) {
-            if (!create) return null;
-            data.add(context.key(), new JsonObject());
-        }
-        return data.getAsJsonObject(context.key());
-    }
-
-    private JsonObject groupData(Context context, String id, boolean create) {
-        JsonObject claim = claimData(context, create);
-        if (claim == null) return null;
-        if (!claim.has("groups")) {
-            if (!create) return null;
-            claim.add("groups", new JsonObject());
-        }
-        JsonObject groups = claim.getAsJsonObject("groups");
+    private static JsonObject groupData(JsonObject policy, String id, boolean create) {
+        JsonObject groups = create ? mutableObject(policy, "groups") : ClaimPolicyRules.object(policy, "groups");
         if (!groups.has(id)) {
-            if (!create) return null;
-            JsonObject group = new JsonObject();
-            group.add("members", new JsonArray());
-            group.add("permissions", new JsonObject());
-            groups.add(id, group);
-        }
-        return groups.getAsJsonObject(id);
-    }
-
-    private JsonObject permissions(Context context, String group) {
-        return groupData(context, group, true).getAsJsonObject("permissions");
-    }
-
-    private JsonObject individuals(Context context, boolean create) {
-        JsonObject claim = claimData(context, create);
-        if (claim == null) return new JsonObject();
-        if (!claim.has("individuals")) {
             if (!create) return new JsonObject();
-            claim.add("individuals", new JsonObject());
+            JsonObject row = new JsonObject();
+            row.add("members", new JsonArray());
+            row.add("permissions", new JsonObject());
+            groups.add(id, row);
         }
-        JsonObject individuals = claim.getAsJsonObject("individuals");
-        if (create) return individuals;
-        return individuals;
-    }
-
-    private void save() throws Exception {
-        Path tmp = file.resolveSibling(file.getFileName() + ".tmp");
-        Files.writeString(tmp, VirgosCore.JSON.toJson(data));
-        Files.move(tmp, file, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+        JsonObject row = groups.getAsJsonObject(id);
+        if (create) {
+            if (!row.has("members")) row.add("members", new JsonArray());
+            mutableObject(row, "permissions");
+        }
+        return row;
     }
 }
