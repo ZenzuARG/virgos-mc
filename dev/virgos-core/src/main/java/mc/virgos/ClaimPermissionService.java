@@ -85,16 +85,14 @@ public final class ClaimPermissionService {
             IPlayerConfigAPI root = manager.getLoadedConfig(claim.getPlayerId());
             if (root == null) return null;
             int index = claim.getSubConfigIndex();
-            // OpenPAC encodes the main claim config as -1 in persisted claims.
-            if (index < 0) index = 0;
-            List<String> ids = root.getSubConfigIds();
-            if (index < 0 || index >= ids.size()) return null;
-            IPlayerConfigAPI config = root.getSubConfig(ids.get(index));
+            if (index != -1 && !root.subConfigExists(index)) return null;
+            IPlayerConfigAPI config = root.getEffectiveSubConfig(index);
             if (config == null) return null;
+            String subId = config.getSubId() == null ? "main" : config.getSubId();
             IServerPlayerConfigGroupManagerAPI groups = config.getPlayerGroups();
             if (groups == null) return null;
             String name = api.getServerClaimsManager().getFullName(claim).getString();
-            return new Context(config, groups, claim.getPlayerId(), ids.get(index), claim.getPlayerId() + ":" + ids.get(index), name);
+            return new Context(config, groups, claim.getPlayerId(), subId, claim.getPlayerId() + ":" + subId, name);
         } catch (Throwable t) {
             VirgosCore.LOG.warn("Open Parties and Claims API unavailable for claim permissions", t);
             return null;
@@ -102,7 +100,10 @@ public final class ClaimPermissionService {
     }
 
     public boolean isGroupEnabled(Context context, Group group, Permission permission) {
-        return permissions(context, group.id).has(permission.id);
+        JsonObject groupData = groupData(context, group.id, false);
+        if (groupData == null || !groupData.has("permissions")) return false;
+        var value = groupData.getAsJsonObject("permissions").get(permission.id);
+        return value != null && value.getAsBoolean();
     }
 
     public Set<UUID> members(Context context, Group group) {
@@ -131,7 +132,7 @@ public final class ClaimPermissionService {
 
     public boolean isIndividualAllowed(Context context, UUID uuid, Permission permission) {
         JsonObject person = individuals(context, false).has(uuid.toString()) ? individuals(context, false).getAsJsonObject(uuid.toString()) : null;
-        return person != null && person.has("permissions") && "ALLOW".equals(person.getAsJsonObject("permissions").get(permission.id).getAsString());
+        return person != null && person.has("permissions") && person.getAsJsonObject("permissions").has(permission.id) && "ALLOW".equals(person.getAsJsonObject("permissions").get(permission.id).getAsString());
     }
 
     public Decision individualDecision(Context context, UUID uuid, Permission permission) {
@@ -182,7 +183,9 @@ public final class ClaimPermissionService {
     public boolean setIndividual(Context context, ServerPlayer target, Permission permission, Decision decision) {
         JsonObject before = data.deepCopy();
         try {
-            JsonObject person = individuals(context, true).getAsJsonObject(target.getUUID().toString());
+            JsonObject people = individuals(context, true);
+            if (!people.has(target.getUUID().toString())) people.add(target.getUUID().toString(), new JsonObject());
+            JsonObject person = people.getAsJsonObject(target.getUUID().toString());
             person.addProperty("name", target.getGameProfile().getName());
             if (!person.has("permissions")) person.add("permissions", new JsonObject());
             if (decision == null) person.getAsJsonObject("permissions").remove(permission.id);

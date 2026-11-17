@@ -264,6 +264,14 @@ sourceSets {
 }
 sourceSets.test.compileClasspath += sourceSets.codex.output
 sourceSets.test.runtimeClasspath += sourceSets.codex.output
+sourceSets.test.runtimeClasspath += files('../../mods/open-parties-and-claims-forge-1.20.1-0.33.0.jar')
+sourceSets.test.compileClasspath += files('../../mods/open-parties-and-claims-forge-1.20.1-0.33.0.jar')
+tasks.register('checkClaimPermissions', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.ClaimPermissionsTest'
+}
+tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
 tasks.register('qaJar', Jar) {
     archiveBaseName = 'virgos_local_qa'
     from sourceSets.qa.output

@@ -17,7 +17,11 @@ import java.util.List;
 
 /** In-game Spanish claim permissions UI backed by Open Parties and Claims. */
 public final class ClaimPermissionsPrototype {
-    private final ClaimPermissionService service = VirgosCore.CLAIM_PERMISSION_SERVICE;
+    private final ClaimPermissionService service;
+
+    public ClaimPermissionsPrototype(ClaimPermissionService service) {
+        this.service = java.util.Objects.requireNonNull(service, "Claim permission service");
+    }
 
     public int open(CommandSourceStack source) {
         ServerPlayer player = source.getPlayer();

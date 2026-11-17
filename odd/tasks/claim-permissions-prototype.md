@@ -29,10 +29,17 @@ Authorized scope: Rebuild and hash the Core artifact, run existing regression QA
 Acceptance: The public server starts with the new artifact and rollback evidence; existing world/player data and credentials remain preserved.
 Checks: Gradle check/jar/codexJar; package validation; isolated lab QA; deployment preflight.
 
+### S6 — Automated end-to-end proof
+User request: "Arreglá la prueba automatizada y verificá de punta a punta que el menú abra, permita agregar jugadores, guardar permisos de cofres y persista todo después de reconectar."
+Acceptance: Two QA accounts exercise the real UI and chest protection before/after reconnect; assert saved membership and permissions; report failures honestly and restore temporary claims/blocks.
+Checks: focused regression tests, Gradle check, real Forge client E2E and independent security verification.
+
 ## Tasks
 - T1 · S1-S3 · inline · complete · commit: 4b72d9a
-- T2 · S4 · inline · complete · commit: e659137
+- T2 · S4 · inline · reopened (runtime defects found) · commit: e659137
 - T3 · S5 · inline · partial · commit: pending (public startup verified; interactive permission smoke test pending)
+
+- T4 · S6 · inline · in progress · Risk: items 1, 2, 5 (persistent authorization and deployment) · independent verifier required
 
 ## Log
 - L2 (2026-11-16): Added `/virgos permisos`, a 3-screen chest-menu prototype, and a Virgos menu entry. Gradle `compileJava` passed with existing deprecation warnings.
@@ -41,3 +48,5 @@ Checks: Gradle check/jar/codexJar; package validation; isolated lab QA; deployme
 - L5 (2026-11-16): Added a native Open Parties and Claims adapter, persisted claim policy JSON, group membership editing, individual allow/deny/inherit exceptions, and option synchronization. `compileJava` and `check jar` passed; public rollout remains pending because the live server currently has a connected player.
 - L6 (2026-11-16): Built and deployed the locked Core artifact after a verified public backup. Startup reached `Done`, the runtime reported release 3.0.4, and the main-claim `subConfigIndex=-1` bug was fixed. Automated interactive UI verification remains partial because the QA client hit death-screen/handshake limitations; no claim permission data was left behind by the test.
 - L1 (2026-11-16): "Sí, hagámoslo exclusivamente dentro del juego y dejemos el panel web sólo para administradores. Empecemos por el prototipo de la pantalla de permisos de parcelas."
+
+- L7: S6 requested automated proof. Found null service initialization, incorrect main-config resolution, false booleans treated as enabled, and a stale QA2 mod set. Prior startup-only evidence did not verify the UI.
