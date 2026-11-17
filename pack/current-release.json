@@ -7,7 +7,7 @@
   "quests": 244,
   "chapters": 10,
   "installer": 24,
-  "coreSha256": "17c4afcfdd88b30c5c309665f2af315078db215b8321dee66ca21f3c6883700b",
+  "coreSha256": "081ae1b4e6481cace3d73c6b198ff155b92ad781fb7db2f11f965e0728343165",
   "spawnBlueprintSha256": "a28671fb86062a932d9b7544a54c3b5507527a630a00cc4045fc23dfece35da5",
   "verification": "docs/releases/3.0.4-verification.json",
   "marketBlueprintSha256": "8aa53c4b5e05898b71066a2f835be83d1a9552cfeb00819736388b0548c7770e",
@@ -18,7 +18,7 @@
   "mrpackSha256": "63480009fd64db51860cf8a0a54c7e3eb92196a24a7c0fa422e3c3d72ce0f12f",
   "clientRelease": "3.0.4",
   "clientFingerprint": "virgos-client-3.0.4",
-  "sourceCommit": "5c07bbb872dc98ab16a17f0ecd8b46455ba8ec90",
+  "sourceCommit": "a47cf7951057f4fe6daae8f5cc0cc6e73f8478fd",
   "ciRun": 43788209072,
   "deployedAtUtc": null
 }

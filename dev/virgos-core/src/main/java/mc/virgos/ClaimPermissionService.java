@@ -85,6 +85,8 @@ public final class ClaimPermissionService {
             IPlayerConfigAPI root = manager.getLoadedConfig(claim.getPlayerId());
             if (root == null) return null;
             int index = claim.getSubConfigIndex();
+            // OpenPAC encodes the main claim config as -1 in persisted claims.
+            if (index < 0) index = 0;
             List<String> ids = root.getSubConfigIds();
             if (index < 0 || index >= ids.size()) return null;
             IPlayerConfigAPI config = root.getSubConfig(ids.get(index));
