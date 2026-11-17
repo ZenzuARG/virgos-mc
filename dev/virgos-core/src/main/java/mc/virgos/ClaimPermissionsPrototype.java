@@ -13,59 +13,20 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-/**
- * First in-game permissions screen. This is intentionally a visual prototype:
- * it does not write Open Parties and Claims data until the interaction model is
- * approved and the native claim API is wired.
- */
+/** In-game Spanish claim permissions UI backed by Open Parties and Claims. */
 public final class ClaimPermissionsPrototype {
-    private enum Group {
-        FAMILY("Familia", "Confianza alta", Items.GOLD_BLOCK),
-        FRIENDS("Amigos", "Pueden usar tu base", Items.EMERALD_BLOCK),
-        VISITORS("Visitantes", "Sólo entrar y mirar", Items.LIGHT_BLUE_WOOL);
-
-        private final String label;
-        private final String summary;
-        private final Item icon;
-
-        Group(String label, String summary, Item icon) {
-            this.label = label;
-            this.summary = summary;
-            this.icon = icon;
-        }
-    }
-
-    private enum Permission {
-        STORAGE("Abrir almacenamiento", "Cofres, barriles y shulkers", Items.CHEST),
-        MACHINES("Usar máquinas", "Hornos, tolvas y estaciones", Items.FURNACE),
-        DOORS("Usar puertas y botones", "Puertas, trampillas y palancas", Items.OAK_DOOR),
-        BUILD("Construir", "Colocar bloques", Items.BRICKS),
-        BREAK("Romper", "Destruir bloques", Items.IRON_PICKAXE),
-        ANIMALS("Interactuar con animales", "Alimentar, criar y usar", Items.WHEAT);
-
-        private final String label;
-        private final String summary;
-        private final Item icon;
-
-        Permission(String label, String summary, Item icon) {
-            this.label = label;
-            this.summary = summary;
-            this.icon = icon;
-        }
-    }
-
-    private final Map<UUID, EnumMap<Group, EnumSet<Permission>>> sessionState = new HashMap<>();
+    private final ClaimPermissionService service = VirgosCore.CLAIM_PERMISSION_SERVICE;
 
     public int open(CommandSourceStack source) {
         ServerPlayer player = source.getPlayer();
         if (!available(player)) return 0;
+        ClaimPermissionService.Context context = service.current(player);
+        if (context == null) {
+            player.sendSystemMessage(Component.literal("Parate dentro de una parcela tuya para administrar sus permisos."));
+            return 0;
+        }
         openOverview(player);
         return 1;
     }
@@ -87,99 +48,179 @@ public final class ClaimPermissionsPrototype {
         return true;
     }
 
-    private EnumMap<Group, EnumSet<Permission>> state(ServerPlayer player) {
-        return sessionState.computeIfAbsent(player.getUUID(), ignored -> {
-            EnumMap<Group, EnumSet<Permission>> initial = new EnumMap<>(Group.class);
-            for (Group group : Group.values()) initial.put(group, EnumSet.noneOf(Permission.class));
-            initial.get(Group.FAMILY).addAll(EnumSet.allOf(Permission.class));
-            initial.get(Group.FRIENDS).addAll(EnumSet.of(Permission.STORAGE, Permission.MACHINES, Permission.DOORS));
-            initial.get(Group.VISITORS).add(Permission.DOORS);
-            return initial;
-        });
-    }
-
     private void openOverview(ServerPlayer player) {
+        ClaimPermissionService.Context context = service.current(player);
+        if (context == null) { player.closeContainer(); player.sendSystemMessage(Component.literal("La parcela ya no está disponible.")); return; }
         player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
             SimpleContainer icons = new SimpleContainer(27);
-            put(icons, 4, Items.MAP, "§6Permisos de mi parcela", "§7Prototipo · todavía no guarda cambios");
-            put(icons, 10, Group.FAMILY.icon, "§eFamilia", "§7" + Group.FAMILY.summary);
-            put(icons, 12, Group.FRIENDS.icon, "§aAmigos", "§7" + Group.FRIENDS.summary);
-            put(icons, 14, Group.VISITORS.icon, "§bVisitantes", "§7" + Group.VISITORS.summary);
-            put(icons, 16, Items.PLAYER_HEAD, "§dExcepciones por jugador", "§7Un permiso especial para una persona");
+            put(icons, 4, Items.MAP, "§6Permisos de mi parcela", "§7" + context.claimName());
+            put(icons, 10, Items.GOLD_BLOCK, "§eFamilia", "§7Confianza alta");
+            put(icons, 12, Items.EMERALD_BLOCK, "§aAmigos", "§7Pueden usar tu base");
+            put(icons, 14, Items.LIGHT_BLUE_WOOL, "§bVisitantes", "§7Sólo entrar y mirar");
+            put(icons, 16, Items.PLAYER_HEAD, "§dExcepciones por jugador", "§7Permisos especiales");
             put(icons, 22, Items.BARRIER, "§cCerrar", "§7Volver al juego");
             return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
                 @Override public void clicked(int slot, int button, ClickType click, Player actor) {
                     if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
-                    if (slot == 10) openGroup((ServerPlayer) actor, Group.FAMILY);
-                    else if (slot == 12) openGroup((ServerPlayer) actor, Group.FRIENDS);
-                    else if (slot == 14) openGroup((ServerPlayer) actor, Group.VISITORS);
-                    else if (slot == 16) openExceptions((ServerPlayer) actor);
+                    if (slot == 10) openGroup((ServerPlayer) actor, ClaimPermissionService.Group.FAMILY);
+                    else if (slot == 12) openGroup((ServerPlayer) actor, ClaimPermissionService.Group.FRIENDS);
+                    else if (slot == 14) openGroup((ServerPlayer) actor, ClaimPermissionService.Group.VISITORS);
+                    else if (slot == 16) openExceptionPicker((ServerPlayer) actor);
                     else if (slot == 22) actor.closeContainer();
                 }
                 @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
                 @Override public boolean stillValid(Player actor) { return valid(actor); }
-                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor); }
+                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor) && service.current((ServerPlayer) actor) != null; }
             };
-        }, Component.literal("Permisos de mi parcela")));
+        }, Component.literal("Permisos · " + context.claimName())));
     }
 
-    private void openGroup(ServerPlayer player, Group group) {
+    private void openGroup(ServerPlayer player, ClaimPermissionService.Group group) {
+        ClaimPermissionService.Context context = service.current(player);
+        if (context == null) { player.closeContainer(); return; }
         player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
             SimpleContainer icons = new SimpleContainer(27);
-            put(icons, 4, group.icon, "§6Grupo: " + group.label, "§7" + group.summary);
-            Permission[] permissions = Permission.values();
+            put(icons, 4, group == ClaimPermissionService.Group.FAMILY ? Items.GOLD_BLOCK : group == ClaimPermissionService.Group.FRIENDS ? Items.EMERALD_BLOCK : Items.LIGHT_BLUE_WOOL,
+                "§6Grupo: " + group.label, "§7" + service.members(context, group).size() + " jugadores");
+            ClaimPermissionService.Permission[] permissions = ClaimPermissionService.Permission.values();
             for (int i = 0; i < permissions.length; i++) {
-                Permission permission = permissions[i];
-                boolean enabled = state(player).get(group).contains(permission);
-                put(icons, 10 + i, permission.icon, (enabled ? "§a✓ " : "§c✗ ") + permission.label, "§7" + permission.summary);
+                ClaimPermissionService.Permission permission = permissions[i];
+                boolean enabled = service.isGroupEnabled(context, group, permission);
+                put(icons, 10 + i, permissionIcon(permission), (enabled ? "§a✓ " : "§c✗ ") + permission.label, enabled ? "§7Permitido para este grupo" : "§7Bloqueado para este grupo");
             }
+            put(icons, 19, Items.NAME_TAG, "§fAdministrar integrantes", "§7Agregar o quitar jugadores");
             put(icons, 22, Items.ARROW, "§eVolver a grupos", "§7Elegir otra categoría");
-            put(icons, 24, Items.PAPER, "§fVista previa", "§7Ver qué puede hacer este grupo");
+            put(icons, 24, Items.PAPER, "§fVista previa", "§7Ver los permisos efectivos");
             put(icons, 26, Items.BARRIER, "§cCerrar", "§7Volver al juego");
             return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
                 @Override public void clicked(int slot, int button, ClickType click, Player actor) {
                     if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
+                    ServerPlayer target = (ServerPlayer) actor;
                     if (slot >= 10 && slot < 10 + permissions.length) {
-                        Permission selected = permissions[slot - 10];
-                        EnumSet<Permission> enabled = state((ServerPlayer) actor).get(group);
-                        if (!enabled.add(selected)) enabled.remove(selected);
-                        openGroup((ServerPlayer) actor, group);
-                    } else if (slot == 22) openOverview((ServerPlayer) actor);
-                    else if (slot == 24) preview((ServerPlayer) actor, group);
-                    else if (slot == 26) actor.closeContainer();
+                        ClaimPermissionService.Permission selected = permissions[slot - 10];
+                        boolean changed = service.setGroupPermission(context, group, selected, !service.isGroupEnabled(context, group, selected));
+                        target.sendSystemMessage(Component.literal(changed ? "§aPermiso actualizado y guardado." : "§cNo se pudo guardar el permiso."));
+                        openGroup(target, group);
+                    } else if (slot == 19) openMemberPicker(target, group);
+                    else if (slot == 22) openOverview(target);
+                    else if (slot == 24) preview(target, context, group);
+                    else if (slot == 26) target.closeContainer();
                 }
                 @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
                 @Override public boolean stillValid(Player actor) { return valid(actor); }
-                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor); }
+                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor) && service.current((ServerPlayer) actor) != null; }
             };
         }, Component.literal("Permisos · " + group.label)));
     }
 
-    private void openExceptions(ServerPlayer player) {
+    private void openMemberPicker(ServerPlayer player, ClaimPermissionService.Group group) {
+        ClaimPermissionService.Context context = service.current(player);
+        if (context == null) { player.closeContainer(); return; }
+        List<ServerPlayer> players = player.server.getPlayerList().getPlayers().stream().filter(p -> !p.getUUID().equals(player.getUUID())).limit(7).toList();
         player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
             SimpleContainer icons = new SimpleContainer(27);
-            put(icons, 4, Items.PLAYER_HEAD, "§dExcepciones por jugador", "§7Prototipo · falta conectar la lista de jugadores");
-            put(icons, 11, Items.NAME_TAG, "§fElegir jugador", "§7Después podremos buscar una cuenta y cambiar un permiso");
-            put(icons, 15, Items.PAPER, "§fVista previa individual", "§7Mostrar permisos efectivos de una persona");
+            put(icons, 4, Items.NAME_TAG, "§6Integrantes · " + group.label, "§7Clic para agregar o quitar");
+            for (int i = 0; i < players.size(); i++) {
+                ServerPlayer target = players.get(i);
+                boolean included = service.members(context, group).contains(target.getUUID());
+                put(icons, 10 + i, Items.PLAYER_HEAD, (included ? "§a✓ " : "§c✗ ") + target.getGameProfile().getName(), included ? "§7Pertenece al grupo" : "§7No pertenece al grupo");
+            }
+            put(icons, 22, Items.ARROW, "§eVolver al grupo", "§7Guardar y volver");
+            put(icons, 26, Items.BARRIER, "§cCerrar", "§7Volver al juego");
+            return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
+                @Override public void clicked(int slot, int button, ClickType click, Player actor) {
+                    if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
+                    ServerPlayer editor = (ServerPlayer) actor;
+                    if (slot >= 10 && slot < 10 + players.size()) {
+                        ServerPlayer target = players.get(slot - 10);
+                        boolean included = service.members(context, group).contains(target.getUUID());
+                        boolean saved = service.setMember(context, group, target, !included);
+                        editor.sendSystemMessage(Component.literal(saved ? "§aIntegrantes actualizados." : "§cNo se pudo guardar el integrante."));
+                        openMemberPicker(editor, group);
+                    } else if (slot == 22) openGroup(editor, group);
+                    else if (slot == 26) editor.closeContainer();
+                }
+                @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
+                @Override public boolean stillValid(Player actor) { return valid(actor); }
+                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor) && service.current((ServerPlayer) actor) != null; }
+            };
+        }, Component.literal("Integrantes · " + group.label)));
+    }
+
+    private void openExceptionPicker(ServerPlayer player) {
+        ClaimPermissionService.Context context = service.current(player);
+        if (context == null) { player.closeContainer(); return; }
+        List<ServerPlayer> players = player.server.getPlayerList().getPlayers().stream().filter(p -> !p.getUUID().equals(player.getUUID())).limit(7).toList();
+        player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
+            SimpleContainer icons = new SimpleContainer(27);
+            put(icons, 4, Items.PLAYER_HEAD, "§dExcepciones individuales", "§7Elegí un jugador conectado");
+            for (int i = 0; i < players.size(); i++) put(icons, 10 + i, Items.PLAYER_HEAD, "§f" + players.get(i).getGameProfile().getName(), "§7Configurar permisos especiales");
             put(icons, 22, Items.ARROW, "§eVolver a grupos", "§7Elegir otra categoría");
             put(icons, 26, Items.BARRIER, "§cCerrar", "§7Volver al juego");
             return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
                 @Override public void clicked(int slot, int button, ClickType click, Player actor) {
                     if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
-                    if (slot == 22) openOverview((ServerPlayer) actor);
-                    else if (slot == 26) actor.closeContainer();
-                    else if (slot == 11 || slot == 15) actor.sendSystemMessage(Component.literal("§eLas excepciones individuales se conectarán en el siguiente paso del prototipo."));
+                    ServerPlayer editor = (ServerPlayer) actor;
+                    if (slot >= 10 && slot < 10 + players.size()) openIndividual(editor, context, players.get(slot - 10));
+                    else if (slot == 22) openOverview(editor);
+                    else if (slot == 26) editor.closeContainer();
                 }
                 @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
                 @Override public boolean stillValid(Player actor) { return valid(actor); }
-                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor); }
+                private boolean valid(Player actor) { return actor == player && available((ServerPlayer) actor) && service.current((ServerPlayer) actor) != null; }
             };
-        }, Component.literal("Excepciones por jugador")));
+        }, Component.literal("Excepciones individuales")));
     }
 
-    private void preview(ServerPlayer player, Group group) {
-        String actions = state(player).get(group).stream().map(permission -> permission.label).reduce((left, right) -> left + ", " + right).orElse("Nada todavía");
-        player.sendSystemMessage(Component.literal("§6Vista previa · " + group.label + "§r: " + actions));
+    private void openIndividual(ServerPlayer editor, ClaimPermissionService.Context context, ServerPlayer target) {
+        editor.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
+            SimpleContainer icons = new SimpleContainer(27);
+            put(icons, 4, Items.PLAYER_HEAD, "§dPermisos de " + target.getGameProfile().getName(), "§7Permitir · denegar · heredar");
+            ClaimPermissionService.Permission[] permissions = ClaimPermissionService.Permission.values();
+            for (int i = 0; i < permissions.length; i++) {
+                ClaimPermissionService.Permission permission = permissions[i];
+                ClaimPermissionService.Decision decision = service.individualDecision(context, target.getUUID(), permission);
+                String status = decision == null ? "§7Heredado" : decision == ClaimPermissionService.Decision.ALLOW ? "§aPermitido" : "§cDenegado";
+                put(icons, 10 + i, permissionIcon(permission), status + " · " + permission.label, "§7Clic para cambiar");
+            }
+            put(icons, 22, Items.ARROW, "§eVolver a jugadores", "§7Elegir otra persona");
+            put(icons, 26, Items.BARRIER, "§cCerrar", "§7Volver al juego");
+            return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
+                @Override public void clicked(int slot, int button, ClickType click, Player actor) {
+                    if (!valid(actor) || click != ClickType.PICKUP || button != 0) return;
+                    ServerPlayer owner = (ServerPlayer) actor;
+                    if (slot >= 10 && slot < 10 + permissions.length) {
+                        ClaimPermissionService.Permission selected = permissions[slot - 10];
+                        ClaimPermissionService.Decision old = service.individualDecision(context, target.getUUID(), selected);
+                        ClaimPermissionService.Decision next = old == null ? ClaimPermissionService.Decision.ALLOW : old == ClaimPermissionService.Decision.ALLOW ? ClaimPermissionService.Decision.DENY : null;
+                        boolean changed = service.setIndividual(context, target, selected, next);
+                        owner.sendSystemMessage(Component.literal(changed ? "§aExcepción individual guardada." : "§cNo se pudo guardar la excepción."));
+                        openIndividual(owner, context, target);
+                    } else if (slot == 22) openExceptionPicker(owner);
+                    else if (slot == 26) owner.closeContainer();
+                }
+                @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
+                @Override public boolean stillValid(Player actor) { return valid(actor); }
+                private boolean valid(Player actor) { return actor == editor && available((ServerPlayer) actor) && service.current((ServerPlayer) actor) != null; }
+            };
+        }, Component.literal("Excepción · " + target.getGameProfile().getName())));
+    }
+
+    private void preview(ServerPlayer player, ClaimPermissionService.Context context, ClaimPermissionService.Group group) {
+        StringBuilder text = new StringBuilder("§6Vista previa · ").append(group.label).append("§r: ");
+        for (ClaimPermissionService.Permission permission : ClaimPermissionService.Permission.values()) {
+            if (service.isGroupEnabled(context, group, permission)) text.append(permission.label).append(", ");
+        }
+        player.sendSystemMessage(Component.literal(text.toString()));
+    }
+
+    private static Item permissionIcon(ClaimPermissionService.Permission permission) {
+        return switch (permission) {
+            case STORAGE -> Items.CHEST;
+            case MACHINES -> Items.FURNACE;
+            case DOORS -> Items.OAK_DOOR;
+            case BUILDING -> Items.BRICKS;
+        };
     }
 
     private static void put(SimpleContainer container, int slot, Item item, String title, String subtitle) {

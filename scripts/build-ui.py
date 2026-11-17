@@ -78,16 +78,57 @@ claims={
  'gui.xaero_claims_claim_unclaim_not_yours':'Sólo podés liberar tus propias zonas.',
  'gui.xaero_claims_claimed':'Zona protegida.','gui.xaero_claims_unclaimed':'Zona liberada.',
 }
+# Keep the permission screen focused on the actions players actually need when
+# sharing a base. The upstream labels are terse and leave chest access unclear.
+claims.update({
+ 'gui.xaero_pac_permissions_title':'Permisos de la base',
+ 'gui.xaero_pac_permission_max_claims':'Límite de zonas',
+ 'gui.xaero_pac_permission_max_forceloads':'Límite de cargas fijas',
+ 'gui.xaero_pac_permission_max_claiming_anchors':'Anclas de protección',
+ 'gui.xaero_pac_permission_claiming_anchor_range':'Alcance del ancla',
+ 'gui.xaero_pac_permission_claiming_paused':'Protección pausada',
+ 'gui.xaero_pac_permission_new_forceloads_paused':'Cargas fijas pausadas',
+ 'gui.xaero_pac_permission_server_claims':'Zonas del servidor',
+ 'gui.xaero_pac_permission_claims_teleport':'Teletransportarse a zonas',
+ 'gui.xaero_pac_permission_max_player_groups':'Máximo de grupos',
+ 'gui.xaero_pac_permission_player_group_space':'Espacio para grupos',
+ 'gui.xaero_pac_permission_comment_max_claims':'Cantidad máxima de zonas que puede proteger.',
+ 'gui.xaero_pac_permission_comment_max_forceloads':'Cantidad máxima de chunks que puede mantener cargados.',
+ 'gui.xaero_pac_permission_comment_claiming_paused':'Impide reclamar nuevas zonas.',
+ 'gui.xaero_pac_permission_comment_new_forceloads_paused':'Impide agregar nuevas cargas fijas.',
+ 'gui.xaero_pac_permission_comment_claims_teleport':'Permite ir a las zonas de otros jugadores.',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protectClaimedChunks':'Proteger mi zona',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.fullAccess':'Acceso completo a la zona',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.block.interact':'Usar: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.block.break':'Romper: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.entity.interact':'Interactuar: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.entity.blockAccess':'Abrir bloques: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.entity.playerAccess':'Acceso de jugadores: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.entity.droppedItemAccess':'Recoger objetos: %1$s',
+ 'gui.xaero_pac_player_config_playerConfig.claims.protection.exceptions.groups.item.interact':'Usar objetos: %1$s',
+ 'gui.xaero_pac_ui_player_config':'Permisos de la zona',
+ 'gui.xaero_pac_ui_my_player_config':'Mis permisos',
+ 'gui.xaero_pac_ui_other_player_config_button':'Editar permisos',
+ 'gui.xaero_pac_ui_other_player_config_name_field':'Nombre del amigo',
+ 'gui.xaero_pac_ui_other_player_config_name_title':'Amigo:',
+})
 for key in ['other_player_config_syncing','player_config_syncing','party_syncing','claims_syncing']:
     claims['gui.xaero_pac_ui_'+key]='Sincronizando…'
 for base in ['pack/client-overrides']+([] if args.staging_only else ['client/standard']):
     folder=ROOT/base/'resourcepacks'
     folder.mkdir(parents=True,exist_ok=True)
-    with zipfile.ZipFile(folder/'Virgos-MC-UI.zip','w',zipfile.ZIP_DEFLATED) as z:
-        z.writestr('pack.mcmeta',json.dumps({'pack':{'pack_format':15,'description':'Virgos-MC · Códice, bases y grupos en español'}}))
-        for lang in ['es_ar','es_es','es_mx','es_cl','es_uy','es_ve']:
-            z.writestr(f'assets/heracles/lang/{lang}.json',json.dumps(labels,ensure_ascii=False))
-            z.writestr(f'assets/openpartiesandclaims/lang/{lang}.json',json.dumps(claims,ensure_ascii=False))
+    archive=folder/'Virgos-MC-UI.zip'
+    preserved={}
+    if archive.exists():
+        with zipfile.ZipFile(archive) as old:
+            preserved={name:old.read(name) for name in old.namelist()}
+    preserved['pack.mcmeta']=json.dumps({'pack':{'pack_format':15,'description':'Virgos-MC · Códice, bases y grupos en español'}},ensure_ascii=False).encode()
+    for lang in ['es_ar','es_es','es_mx','es_cl','es_uy','es_ve']:
+        preserved[f'assets/heracles/lang/{lang}.json']=json.dumps(labels,ensure_ascii=False).encode()
+        preserved[f'assets/openpartiesandclaims/lang/{lang}.json']=json.dumps(claims,ensure_ascii=False).encode()
+    with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+        for name,data in preserved.items():
+            z.writestr(name,data)
     fancy=ROOT/base/'config/fancymenu/options.txt'
     if not fancy.exists():
         fancy.parent.mkdir(parents=True,exist_ok=True)

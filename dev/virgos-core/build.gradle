@@ -162,6 +162,17 @@ dependencies {
     }
     compileOnly files(voicechatApi)
 
+    // Open Parties and Claims is a required production mod. Keep its public API
+    // compile-only so the Core jar does not bundle or duplicate the runtime mod.
+    def openPacApi = file('../../mods/open-parties-and-claims-forge-1.20.1-0.33.0.jar')
+    if (!openPacApi.exists()) {
+        openPacApi = file('../../.cache/pack/downloads/open-parties-and-claims-forge-1.20.1-0.33.0.jar')
+    }
+    if (!openPacApi.exists()) {
+        throw new GradleException('Open Parties and Claims API jar is required to build Virgos Core')
+    }
+    compileOnly files(openPacApi)
+
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")

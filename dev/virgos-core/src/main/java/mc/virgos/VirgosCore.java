@@ -44,6 +44,7 @@ public final class VirgosCore {
     public static ClientUpdateServer UPDATE_GATE;
     public static final TownServices TOWN = new TownServices();
     public static final ClaimPermissionsPrototype CLAIM_PERMISSIONS = new ClaimPermissionsPrototype();
+    public static final ClaimPermissionService CLAIM_PERMISSION_SERVICE = new ClaimPermissionService();
     public static final PlayerProfiles PROFILES = new PlayerProfiles();
     private final Set<UUID> greeted = new HashSet<>();
     private final WorldTools worldTools = new WorldTools();
@@ -67,6 +68,7 @@ public final class VirgosCore {
         COMMUNITY.initialize(event.getServer());
         MAINTENANCE.initialize(event.getServer());
         TOWN.initialize(event.getServer());
+        CLAIM_PERMISSION_SERVICE.initialize(event.getServer());
         PROFILES.initialize(event.getServer());
         try {
             Path folder = Path.of("virgos-reports");
