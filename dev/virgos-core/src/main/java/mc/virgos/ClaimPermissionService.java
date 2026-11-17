@@ -204,10 +204,17 @@ public final class ClaimPermissionService {
         }
     }
 
+    static String nativeGroupId(Permission permission) {
+        String id = "virgos_" + permission.id;
+        if (id.length() > 16) throw new IllegalArgumentException("Native claim group ID exceeds 16 characters: " + id);
+        return id;
+    }
+
     private void sync(Context context) {
+        for (Permission permission : Permission.values()) nativeGroupId(permission);
         for (Group group : Group.values()) ensureGroup(context, group.id);
         for (Permission permission : Permission.values()) {
-            String nativeGroup = "virgos_perm_" + permission.id;
+            String nativeGroup = nativeGroupId(permission);
             ICustomPlayerConfigGroupAPI group = ensureGroup(context, nativeGroup);
             clearMembers(group);
             Set<UUID> allowed = new HashSet<>();
@@ -243,7 +250,9 @@ public final class ClaimPermissionService {
     private ICustomPlayerConfigGroupAPI ensureGroup(Context context, String id) {
         ICustomPlayerConfigGroupAPI group = context.groups().getCustom(id);
         if (group == null) {
-            context.groups().addCustom(id);
+            var created = context.groups().addCustom(id);
+            if (created.right().isPresent())
+                throw new IllegalStateException("Could not create claim group " + id + ": " + created.right().get());
             group = context.groups().getCustom(id);
         }
         if (group == null) throw new IllegalStateException("Could not create claim group: " + id);

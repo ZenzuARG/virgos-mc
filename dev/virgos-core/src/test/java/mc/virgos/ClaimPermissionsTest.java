@@ -7,6 +7,13 @@ import java.util.UUID;
 /** Regression checks that do not require starting a Minecraft server. */
 public final class ClaimPermissionsTest {
     public static void main(String[] args) throws Exception {
+        var nativeIds = new java.util.HashSet<String>();
+        for (var permission : ClaimPermissionService.Permission.values()) {
+            String id = ClaimPermissionService.nativeGroupId(permission);
+            if (!xaero.pac.common.player.config.group.custom.CustomPlayerConfigGroupData.isValidId(id))
+                throw new AssertionError("Native group ID rejected by OPAC: " + id);
+            if (!nativeIds.add(id)) throw new AssertionError("Native group IDs must be unique");
+        }
         PlayerProfiles registry = new PlayerProfiles();
         Field registryData = PlayerProfiles.class.getDeclaredField("profiles");
         registryData.setAccessible(true);
