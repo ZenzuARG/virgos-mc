@@ -8,6 +8,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.storage.LevelResource;
 import xaero.pac.common.server.api.OpenPACServerAPI;
+import xaero.pac.common.server.player.data.api.ServerPlayerDataAPI;
+import xaero.pac.common.claims.player.mode.api.ClaimingModes;
 import xaero.pac.common.server.claims.player.api.IServerPlayerClaimInfoAPI;
 import xaero.pac.common.server.player.config.api.v2.IPlayerConfigAPI;
 import xaero.pac.common.server.player.config.api.v2.IPlayerConfigManagerAPI;
@@ -97,6 +99,43 @@ public final class ClaimPermissionService {
             VirgosCore.LOG.warn("Open Parties and Claims API unavailable for claim permissions", t);
             return null;
         }
+    }
+
+    public ClaimEntryFlow.Target claimTarget(ServerPlayer player) {
+        var chunk = player.chunkPosition();
+        String dimension = player.level().dimension().location().toString();
+        ClaimEntryFlow.State state = ClaimEntryFlow.State.UNAVAILABLE;
+        try {
+            if (server != null) {
+                var api = OpenPACServerAPI.get(server);
+                if (api != null) {
+                    var claim = api.getServerClaimsManager().get(player.level().dimension().location(), chunk.x, chunk.z);
+                    state = ClaimEntryFlow.classify(claim != null, claim == null ? null : claim.getPlayerId(), player.getUUID());
+                }
+            }
+        } catch (RuntimeException failure) {
+            VirgosCore.LOG.warn("Could not inspect the claim-menu target", failure);
+        }
+        return new ClaimEntryFlow.Target(dimension, chunk.x, chunk.z, state);
+    }
+
+    public ClaimEntryFlow.Result claimHere(ServerPlayer player, ClaimEntryFlow.Target opened,
+                                          java.util.function.BooleanSupplier admitted) {
+        return ClaimEntryFlow.claim(opened, () -> claimTarget(player),
+            () -> admitted.getAsBoolean() && personalClaimMode(player),
+            // Preserve native limits, protection checks and selected personal subconfiguration.
+            // Never use a console source, elevate permissions or call the unguarded manager claim API.
+            () -> server.getCommands().performPrefixedCommand(player.createCommandSourceStack().withSuppressedOutput(), "oclaims claim"));
+    }
+
+    private boolean personalClaimMode(ServerPlayer player) {
+        var nativeData = ServerPlayerDataAPI.from(player);
+        if (nativeData == null) return false;
+        var impersonation = nativeData.getClaimsImpersonationInfo();
+        return ClaimEntryFlow.personalModeAllowed(nativeData.isClaimsAdminMode() || nativeData.isClaimsServerMode()
+                || nativeData.isClaimsModeratorMode(), nativeData.getClaimingMode() == ClaimingModes.PLAYER,
+            player.getUUID(), impersonation == null ? null : impersonation.getPlayerId(),
+            impersonation == null ? null : impersonation.getClaimPlayerId(ClaimingModes.PLAYER));
     }
 
     public boolean isGroupEnabled(Context context, Group group, Permission permission) {

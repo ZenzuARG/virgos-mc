@@ -26,13 +26,47 @@ public final class ClaimPermissionsPrototype {
     public int open(CommandSourceStack source) {
         ServerPlayer player = source.getPlayer();
         if (!available(player)) return 0;
-        ClaimPermissionService.Context context = service.current(player);
-        if (context == null) {
-            player.sendSystemMessage(Component.literal("Parate dentro de una parcela tuya para administrar sus permisos."));
-            return 0;
+        var target = service.claimTarget(player);
+        switch (target.state()) {
+            case FREE -> openClaimEntry(player, target);
+            case OWNED -> openOverview(player);
+            case OTHER -> player.sendSystemMessage(Component.literal("Esta parcela pertenece a otra persona. No puedes reclamarla ni modificar sus permisos."));
+            case UNAVAILABLE -> player.sendSystemMessage(Component.literal("No se pudo consultar la parcela. Inténtalo de nuevo más tarde."));
         }
-        openOverview(player);
-        return 1;
+        return target.state() == ClaimEntryFlow.State.FREE || target.state() == ClaimEntryFlow.State.OWNED ? 1 : 0;
+    }
+
+    private void openClaimEntry(ServerPlayer player, ClaimEntryFlow.Target target) {
+        player.openMenu(new SimpleMenuProvider((id, inventory, ignored) -> {
+            SimpleContainer icons = new SimpleContainer(27);
+            put(icons, 4, Items.MAP, "§6Parcela sin reclamar", "§7Parcela: " + target.x() + ", " + target.z());
+            put(icons, 13, Items.GRASS_BLOCK, "§aReclamar parcela", "§7Protege este terreno y abre sus permisos");
+            put(icons, 22, Items.BARRIER, "§cCerrar", "§7No se reclamará ningún terreno");
+            return new ChestMenu(MenuType.GENERIC_9x3, id, inventory, icons, 3) {
+                @Override public void clicked(int slot, int button, ClickType click, Player actor) {
+                    if (actor != player || click != ClickType.PICKUP || button != 0) return;
+                    if (slot == 22) { player.closeContainer(); return; }
+                    if (slot != 13) return;
+                    // A delayed or repeated packet must not reclaim after this screen has closed.
+                    if (player.containerMenu != this) return;
+                    var result = service.claimHere(player, target, () -> available(player));
+                    player.closeContainer();
+                    switch (result) {
+                        case OWNED -> {
+                            player.sendSystemMessage(Component.literal("Parcela reclamada. Ya puedes configurar sus permisos."));
+                            if (available(player)) openOverview(player);
+                        }
+                        case STALE -> player.sendSystemMessage(Component.literal("La parcela o tu ubicación cambió. Pulsa P de nuevo para revisar el terreno actual."));
+                        case DENIED -> player.sendSystemMessage(Component.literal("No se puede reclamar ahora. Inicia sesión y utiliza el modo de reclamación personal, sin modo administrativo ni suplantación."));
+                        case FAILED -> player.sendSystemMessage(Component.literal("No se pudo reclamar la parcela. Revisa tu límite de parcelas y las restricciones de la zona. Los permisos no se han abierto."));
+                    }
+                }
+                @Override public ItemStack quickMoveStack(Player actor, int slot) { return ItemStack.EMPTY; }
+                @Override public boolean stillValid(Player actor) {
+                    return actor == player && available(player) && target.sameChunk(service.claimTarget(player));
+                }
+            };
+        }, Component.literal("Reclamar parcela")));
     }
 
     private boolean available(ServerPlayer player) {

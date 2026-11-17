@@ -7,6 +7,7 @@ import java.util.UUID;
 /** Regression checks that do not require starting a Minecraft server. */
 public final class ClaimPermissionsTest {
     public static void main(String[] args) throws Exception {
+        ClaimEntryFlowTest.main(args);
         var nativeIds = new java.util.HashSet<String>();
         for (var permission : ClaimPermissionService.Permission.values()) {
             String id = ClaimPermissionService.nativeGroupId(permission);

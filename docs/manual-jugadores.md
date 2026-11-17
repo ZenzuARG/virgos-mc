@@ -53,13 +53,13 @@ El Códice tiene una categoría propia en **Opciones → Controles → Códice d
 
 La prioridad de los valores predeterminados es Códice, acciones de mods y accesos de plugins. Los shaders quedan en **F6–F8** para no interferir con hechizos, curios y voz. Las combinaciones de JEI dentro del inventario y los modificadores contextuales de Create se conservan: no son acciones globales simultáneas. Los controles personales se conservan; si todavía se solapan, el juego avisa y el instalador deja `virgos-keybinding-conflicts.json` para revisarlos en Controles. Una tecla que desactivaste se mantiene desactivada, salvo el acceso principal al Códice.
 
-Para proteger el chunk en el que estás: `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisá los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
+Para proteger el chunk en el que estás, pulsa **P → Reclamar parcela**. Al confirmarse el reclamo se abren sus permisos. También puedes usar `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisa los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
 
 ## Proteger la primera base
 
 1. Alejate del spawn. **F3+G** muestra los límites de los chunks, columnas de 16 × 16 bloques.
-2. Parate en un chunk libre y escribí `/oclaims claim`. Leé la confirmación: si hubo error, no está protegido.
-3. Repetí en cada chunk que ocupe tu casa, huerta o máquinas. **P** abre la pantalla de bases y grupos.
+2. En un chunk libre, pulsa **P** y selecciona **Reclamar parcela**. Si el reclamo se confirma, se abren directamente sus permisos; si falla, no se considera protegido.
+3. Repite en cada chunk que ocupe tu casa, huerta o máquinas. En una parcela tuya, **P** abre directamente sus permisos. En terreno ajeno no permite reclamar ni modificar permisos. Si cambias de chunk o dimensión con el menú abierto, vuelve a pulsar **P** antes de reclamar.
 4. Revisá los permisos de acceso y construcción. Probá con un cofre vacío y un amigo antes de guardar objetos valiosos.
 5. Para liberar únicamente el chunk actual: `/oclaims unclaim`. Al hacerlo, pierde esa protección.
 

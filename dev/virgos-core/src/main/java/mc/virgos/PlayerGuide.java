@@ -75,14 +75,14 @@ public final class PlayerGuide {
             Map.of("Ver mi avance", "/virgos progreso"));
         page("bases", "Proteger tu base", List.of(
             "1. Alejate del Bastión y de terrenos ajenos. F3+G muestra chunks de 16 × 16.",
-            "2. Parate en el chunk que querés proteger y prepará /oclaims claim abajo.",
-            "3. Leé la confirmación; P abre bases y grupos. Repetí para todos los chunks de tu casa.",
+            "2. En un chunk libre, pulsa P y selecciona Reclamar parcela.",
+            "3. Si el reclamo se confirma, se abren sus permisos. Repite en cada chunk de tu base. /oclaims claim sigue disponible como alternativa.",
             "Disponés de 25 chunks personales; no quedan cargados permanentemente.",
             "Revisá permisos de cofres, máquinas y construcción antes de invitar a alguien.",
             "Liberar quita la protección del chunk actual. Usalo sólo si estás seguro del lugar."),
             Map.of("Preparar reclamo", "/oclaims claim", "Preparar liberación", "/oclaims unclaim"));
         page("grupo", "Compartir con confianza", List.of(
-            "P abre Open Parties and Claims: usá sus pantallas de grupo y configuración de protección.",
+            "P abre los permisos de tu parcela: Familia, Amigos, Visitantes y excepciones por jugador.",
             "Invitá sólo personas de confianza y revisá qué permite tu configuración a los miembros.",
             "Probá acceso a un cofre vacío y construcción con un amigo antes de guardar objetos valiosos.",
             "Ser parte de una party no comparte misiones ni rangos. Cada uno reclama sus recompensas.",
