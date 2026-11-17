@@ -1,0 +1,23 @@
+{
+  "minecraft": "1.20.1",
+  "forge": "47.4.22",
+  "ketting": "0.6.1",
+  "clientRelease": "3.0.6",
+  "clientFingerprint": "virgos-client-3.0.6",
+  "installer": 26,
+  "installerSha256": "101a42292e5465e4ff79502249807fba9512774d5528c2f392013192aac833f2",
+  "mrpackSha256": "90490ae3f5a4ef57fffdd51d1e6df634fc627029b9247beb1b3c910a7a697f3e",
+  "requiredClientInstaller": "Virgos-MC-3.0.6-instalar.zip",
+  "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json",
+  "version": "3.0.8",
+  "serverOnlyHotfix": true,
+  "status": "deployed-verified",
+  "published": null,
+  "sourceCommit": "1269996f150dd84c17d3ce48b6914f8fdc365a42",
+  "coreSha256": "21d3e46679976604dccf2ed917028944d3f3a909dacecd69ca768d02d29630eb",
+  "verification": "docs/releases/3.0.8-claim-entry.json",
+  "clientUpdateRequired": false,
+  "deployedAtUtc": "2026-11-17T14:53:01.994547+00:00",
+  "activatedAtUtc": "2026-11-17T14:53:25.446Z",
+  "verifiedAtUtc": "2026-11-17T14:56:34.976716+00:00"
+}
