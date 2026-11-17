@@ -2,7 +2,7 @@
 
 Requires one standard QA client running with the current client pack and their existing
 cached credentials. Uses native UI actions, not direct permission-file writes.
-Run with --public to explicitly authorize public temporary fixtures.
+Run with --public --single-client to authorize isolated public temporary fixtures.
 """
 from pathlib import Path
 import argparse
@@ -43,13 +43,18 @@ def state(account):
 
 def action(account, command):
     folder = FOLDERS[account]
+    error_path = folder/'last-error.json'
+    try:
+        previous_error_stamp = error_path.stat().st_mtime_ns
+    except FileNotFoundError:
+        previous_error_stamp = None
     path = folder/'commands.jsonl'
     with path.open('a', encoding='utf8') as stream:
         stream.write(json.dumps(command) + '\n')
     line = len(path.read_text('utf8').splitlines())
     wait(lambda: state(account).get('line', 0) >= line, 'QA action acknowledgment')
-    error = read(folder/'last-error.json')
-    if error.get('line') == line:
+    error = read(error_path)
+    if error.get('line') == line and error_path.stat().st_mtime_ns != previous_error_stamp:
         raise RuntimeError('QA driver rejected action: ' + error.get('error', 'unknown'))
     return state(account)
 
@@ -131,8 +136,19 @@ def policy(owner):
     return read(ROOT/'virgos_world/virgos-claim-permissions.json').get(owner+':main', {})
 
 
+def empty_hotbar_index(rows):
+    for row in rows:
+        if 36 <= row['slot'] < 45 and 'id:"minecraft:air"' in row['item']:
+            return row['slot'] - 36
+    raise AssertionError('No empty hotbar slot; never discard QA inventory to manufacture a chest test')
+
+
 def chest(allowed):
     action(2, {'action': 'close'})
+    rows = slots(2)
+    assert read(FOLDERS[2]/'slots.json')['menu'].endswith('InventoryMenu'), 'Expected closed-container inventory'
+    index = empty_hotbar_index(rows)
+    action(2, {'action': 'key', 'name': 'key.hotbar.'+str(index+1)})
     action(2, {'action': 'look', 'yaw': 180, 'pitch': 20})
     action(2, {'action': 'use'})
     time.sleep(1)
@@ -140,6 +156,12 @@ def chest(allowed):
     assert opened == allowed, f'Chest access: expected {allowed}, got {state(2).get("screen")}'
     if opened:
         assert state(2).get('screenTitle') in ('Cofre', 'Chest'), 'Unexpected container'
+
+
+def fresh_log(offset):
+    with (ROOT/'logs/latest.log').open('rb') as stream:
+        stream.seek(offset)
+        return stream.read().decode('utf8', errors='replace')
 
 
 def position(account):
@@ -181,7 +203,9 @@ def main():
     read_nbt = runpy.run_path(str(ROOT/'scripts/inspect-nbt.py'))['read_nbt']
     for path in (ROOT/'virgos_world/data/openpartiesandclaims/player-claims').glob('*.nbt'):
         claims = read_nbt(path)[''].get('dimensions', {}).get('minecraft:overworld', {}).get('claims', [])
-        assert not any(p['x'] == 62 and p['z'] == 62 for c in claims for p in c['positions']), 'Fixture chunk already claimed'
+        if any(p['x'] == 62 and p['z'] == 62 for c in claims for p in c['positions']):
+            assert path.stem == '13e2e728-2a7a-36a6-84ee-5c289cf4cc02', 'Fixture snapshot belongs to another player'
+        # A QA snapshot may lag unclaim. Fresh native claim success below is authoritative.
     owner_id = '13e2e728-2a7a-36a6-84ee-5c289cf4cc02'
     human = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in
              (ROOT/'virgos_world/data/openpartiesandclaims/player-configs').glob('*.toml')
@@ -200,14 +224,16 @@ def main():
             server(f'execute if block {x} {y} {z} minecraft:air run say {token}')
             wait(lambda token=token: token in (ROOT/'logs/latest.log').read_text('utf8', errors='replace'),
                  'fixture air preflight '+str(index), seconds=15)
+        claim_offset = (ROOT/'logs/latest.log').stat().st_size
+        action(1, {'action': 'command', 'value': 'oclaims claim'})
+        wait(lambda: 'Successfully claimed the chunk at (62, 62)' in fresh_log(claim_offset),
+             'fresh native QA claim success')
+        claimed = True
+        # Never place fixture blocks before the live claim operation confirms ownership.
         server('fill 998 249 998 1002 249 1002 minecraft:glass')
         server('setblock 1000 250 998 minecraft:chest[facing=south]')
         created = True
         position(1)
-        action(1, {'action': 'command', 'value': 'oclaims claim'})
-        wait(lambda: 'Successfully claimed the chunk at (62, 62)' in
-             (ROOT/'logs/latest.log').read_text('utf8', errors='replace'), 'QA claim created')
-        claimed = True
         open_friends()
         checks.append('P-opens-Spanish-permission-menu')
         if policy(owner_id).get('groups', {}).get('amigos', {}).get('permissions', {}).get('storage'):
@@ -306,6 +332,67 @@ def test_cleanup_without_clients():
         finally:
             namespace.update(original)
     print('PASS: dead-client cleanup still removes fixtures and writes failure report')
+
+
+def test_stale_driver_error():
+    """A prior launch's error line is not an error in the current action."""
+    import tempfile
+    namespace = action.__globals__
+    original = {key: namespace[key] for key in ('FOLDERS', 'wait')}
+    with tempfile.TemporaryDirectory(prefix='claim-driver-') as scratch:
+        folder = Path(scratch)
+        (folder/'commands.jsonl').write_text('', 'utf8')
+        (folder/'status.json').write_text(json.dumps({'line': 1}), 'utf8')
+        error = folder/'last-error.json'
+        error.write_text(json.dumps({'line': 1, 'error': 'old failure'}), 'utf8')
+        try:
+            namespace.update(FOLDERS={1: folder}, wait=lambda test, *_args: test())
+            action(1, {'action': 'slots'})
+            (folder/'status.json').write_text(json.dumps({'line': 2}), 'utf8')
+            def fresh_error(test, *_args):
+                error.write_text(json.dumps({'line': 2, 'error': 'current failure'}), 'utf8')
+                return test()
+            namespace['wait'] = fresh_error
+            try:
+                action(1, {'action': 'slots'})
+                raise AssertionError('A new matching driver error must not be ignored')
+            except RuntimeError as failure:
+                assert 'current failure' in str(failure)
+        finally:
+            namespace.update(original)
+    print('PASS: stale driver errors ignored and current errors detected')
+
+
+def test_empty_chest_hand():
+    rows = [{'slot': 36, 'item': '{Count:1b,id:"alexsmobs:animal_dictionary"}'},
+            {'slot': 37, 'item': '{Count:0b,id:"minecraft:air"}'},
+            {'slot': 45, 'item': '{Count:0b,id:"minecraft:air"}'}]
+    assert empty_hotbar_index(rows) == 1
+    try:
+        empty_hotbar_index([rows[0], rows[2]])
+        raise AssertionError('An empty offhand is not an empty selected hotbar slot')
+    except AssertionError as error:
+        assert 'No empty hotbar' in str(error)
+    print('PASS: chest test selects an empty hotbar slot without dropping items')
+
+
+def test_fresh_claim_evidence():
+    import tempfile
+    namespace = fresh_log.__globals__
+    original = namespace['ROOT']
+    with tempfile.TemporaryDirectory(prefix='claim-live-') as scratch:
+        root = Path(scratch); (root/'logs').mkdir()
+        path = root/'logs/latest.log'
+        marker = 'Successfully claimed the chunk at (62, 62)'
+        path.write_text(marker+'\n', 'utf8'); offset = path.stat().st_size
+        try:
+            namespace['ROOT'] = root
+            assert marker not in fresh_log(offset), 'Old native success cannot authorize new fixture writes'
+            with path.open('a', encoding='utf8') as stream: stream.write(marker+'\n')
+            assert marker in fresh_log(offset)
+        finally:
+            namespace['ROOT'] = original
+    print('PASS: only fresh native claim success authorizes fixture placement')
 
 
 if __name__ == '__main__':

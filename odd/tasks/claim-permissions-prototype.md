@@ -45,13 +45,13 @@ Acceptance: Exactly one graphical client alternates the QA identities; P opens t
 Checks: Known-player regression; full Gradle check/jar/codexJar/qaJar; verified release package; sequential live-client UI and chest checks.
 
 ## Tasks
-- T6 · S8 · inline · in progress · Risk: items 2, 5 (membership and release delivery); independent verifier required
+- T6 · S8 · inline · complete (public7-check E2E, sourcefe1af58, proof docs/releases/3.0.6-claims-verification.json) · Risk: items 2, 5 (membership and release delivery); independent verifier required
 - T1 · S1-S3 · inline · complete · commit: 4b72d9a
-- T2 · S4 · inline · reopened (runtime defects found) · commit: e659137
-- T3 · S5 · inline · partial · commit: pending (public startup verified; interactive permission smoke test pending)
+- T2 · S4 · inline · partial (group storage/reconnect verified; broader individual/no-claim/restart matrix pending) · commit: e659137
+- T3 · S5 · inline · partial · commit: pending (public3.0.6 and requested interactive scenario verified; broader matrix pending)
 
-- T5 · S7 · inline · in progress · Risk: item 5 (client artifact delivery)
-- T4 · S6 · inline · in progress · Risk: items 1, 2, 5 (persistent authorization and deployment) · independent verifier required
+- T5 · S7 · inline · complete (real P shortcut verified3.0.6) · Risk: item 5 (client artifact delivery)
+- T4 · S6 · inline · complete (single-client live UI/chest/reconnect E2E) · Risk: items 1, 2, 5 (persistent authorization and deployment) · independent verifier required
 
 ## Log
 - L11 (2026-11-16): "Usá la RAM mínima necesaria y un solo cliente a la vez. Terminá el release correcto y verificá que P abra el menú, permita agregar jugadores y que los permisos de cofres persistan después de reconectar."
@@ -75,3 +75,5 @@ Checks: Known-player regression; full Gradle check/jar/codexJar/qaJar; verified 
 - L13 (2026-11-17): User authorized review then3.0.6 public deployment and one-client proof. Native risk/readability/reliability approved995bcd8; exact acknowledgement burned targetcc05d7bb103b21fbd1e615af95f62632c1cdd6e8041d88bdac396bfa535ea67d. Nonblocking advisory: unit pagination assertion does not navigate UI; live picker traversal will provide that proof.3.0.6 release identity, isolated QA identity switching and sequential harness prepared; cleanup restores departing QA identity before each switch. Fullbackup closed00:15:15 andverificationpending; noQAclientlaunched.
 
 - L14: Real3.0.6 P shortcut opened the Spanish menu. Fixed false QA failure from a stale prior-launch error file (RED/GREEN regression). Real offline addition then exposed native GROUP_ID_TOO_LONG: every generated virgos_perm_* permission ID exceeded native16character limit. Shortened internal prefix to virgos_, validated all IDs before mutation and retained typed native errors. Public Spanish groups and JSON keys unchanged; no successfully created old IDs need migration. RED exact installed native validator rejected virgos_perm_storage; GREEN full checkClaimPermissions check jar. Independent blocker recheck passed; all nine native option IDs/types/rawgroup values and active allowlist also verified. One QA process closed before zero-player cleanstop; complete NoCompression backup pending.
+
+- L15 (2026-11-17): python scripts/qa-claim-permissions.py --public --single-client PASSED all7 livechecks: P Spanish menu, offline member add, baseline chest deny, grant opens chest, guest reconnect retains access, owner reconnect retains membership/toggle, revoke denies. Empty main hand prevents unrelated dictionary-item apply permission from invalidating the chest probe. Native NBT lag fixed in harness by requiring fresh claim success before any fixture placement. Cleanup and human-config SHA invariants passed. Native picker next-page clicks observed: 3. Single QA process1744 quit cleanly04:07:08UTC. Heap6144MiB; peakworking-set10045874176 includes native overhead, not6GBtotal. Public Coref003cb42 with sourcefe1af58. Two full verified backups retained; initial KubeJS bootstrap anomaly documented separately. Requested S6-S8 proof complete; historical broader matrix remains explicitly partial.
