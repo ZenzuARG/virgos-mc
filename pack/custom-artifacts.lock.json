@@ -5,12 +5,12 @@
       "filename": "virgos_core-2.0.0.jar",
       "local_source": "dev/virgos-core/build/libs/virgos_core-2.0.0.jar",
       "hash_algorithm": "sha256",
-      "hash": "21d3e46679976604dccf2ed917028944d3f3a909dacecd69ca768d02d29630eb",
+      "hash": "abb4fac3e68b58dd9759f9a230f209b0fa7eb5742b4b5ab7970ccc22f87f779f",
       "sides": [
         "server"
       ],
       "mode": "required",
-      "size": 189284
+      "size": 216577
     },
     {
       "filename": "virgos_codex-2.0.0.jar",

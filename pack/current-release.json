@@ -1,5 +1,5 @@
 {
-  "version": "3.0.8",
+  "version": "3.0.9",
   "published": null,
   "minecraft": "1.20.1",
   "forge": "47.4.22",
@@ -7,9 +7,9 @@
   "quests": 244,
   "chapters": 10,
   "installer": 26,
-  "coreSha256": "21d3e46679976604dccf2ed917028944d3f3a909dacecd69ca768d02d29630eb",
+  "coreSha256": "abb4fac3e68b58dd9759f9a230f209b0fa7eb5742b4b5ab7970ccc22f87f779f",
   "spawnBlueprintSha256": "a28671fb86062a932d9b7544a54c3b5507527a630a00cc4045fc23dfece35da5",
-  "verification": "docs/releases/3.0.8-claim-entry.json",
+  "verification": "docs/releases/3.0.9-claim-areas.json",
   "marketBlueprintSha256": "8aa53c4b5e05898b71066a2f835be83d1a9552cfeb00819736388b0548c7770e",
   "townAuditBlueprintSha256": "96ed153b5ce48ab969aa4e341ee82605e6bb4ee34d625514edf1c6ba145c3845",
   "clientRequired": 133,
@@ -18,14 +18,14 @@
   "mrpackSha256": "90490ae3f5a4ef57fffdd51d1e6df634fc627029b9247beb1b3c910a7a697f3e",
   "clientRelease": "3.0.6",
   "clientFingerprint": "virgos-client-3.0.6",
-  "sourceCommit": "1269996f150dd84c17d3ce48b6914f8fdc365a42",
+  "sourceCommit": "dc4cdce74c5d1b497c50cd7bdf85d84e791074b2",
   "ciRun": null,
-  "deployedAtUtc": "2026-11-17T14:53:01.994547+00:00",
+  "deployedAtUtc": "2026-11-17T17:56:35.812760+00:00",
   "serverOnlyHotfix": true,
   "requiredClientInstaller": "Virgos-MC-3.0.6-instalar.zip",
   "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json",
   "clientVerification": "docs/releases/3.0.7-client-installer.json",
   "clientUpdateRequired": false,
-  "activatedAtUtc": "2026-11-17T14:53:25.446Z",
-  "verifiedAtUtc": "2026-11-17T14:56:34.976716+00:00"
+  "activatedAtUtc": "2026-11-17T17:56:44.305Z",
+  "verifiedAtUtc": "2026-11-17T17:58:56.6251857+00:00"
 }
