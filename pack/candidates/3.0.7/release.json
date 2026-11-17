@@ -2,12 +2,13 @@
   "version": "3.0.7",
   "clientRelease": "3.0.6",
   "clientFingerprint": "virgos-client-3.0.6",
-  "installer": 25,
+  "installer": 26,
   "serverOnlyHotfix": true,
   "status": "deployed-verified",
   "sourceCommit": "289a2c1b2510222bb74cc67c0eee9294d4244243",
   "coreSha256": "b3663855c65555fac0805d603e1d56563b9469578bb6b3005693d56d6dd14cc5",
   "verification": "docs/releases/3.0.7-kubejs-startup.json",
   "deployedAtUtc": "2026-11-17T04:42:34.160076+00:00",
-  "activatedAtUtc": "2026-11-17T04:42:42.916Z"
+  "activatedAtUtc": "2026-11-17T04:42:42.916Z",
+  "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json"
 }

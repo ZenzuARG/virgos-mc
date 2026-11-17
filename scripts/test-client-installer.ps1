@@ -59,7 +59,7 @@ foreach($name in @('servers.dat','options.txt')) {
 }
 & (Join-Path $tiny 'instalar-cliente.ps1') -Destino $instance
 Assert ([IO.File]::ReadAllText((Join-Path $instance 'servers.dat')) -eq 'player data') 'Repair preserves existing server list'
-Assert ([IO.File]::ReadAllText((Join-Path $instance 'options.txt')) -eq 'player data') 'Repair preserves player controls and settings'
+Assert ([IO.File]::ReadAllText((Join-Path $instance 'options.txt')) -eq "player data`nmipmapLevels:0`n") 'Repair preserves player settings except managed zero mipmaps'
 $manifest.version='0.2.0-rc1'; Write-JsonAtomic (Join-Path $tiny 'cliente.lock.json') $manifest
 [IO.File]::WriteAllText((Join-Path $instance 'options.txt'),"renderDistance:7`nkey_key.push_to_talk:key.keyboard.left.alt`n")
 $voiceDir=Join-Path $instance 'config\voicechat'; [void][IO.Directory]::CreateDirectory($voiceDir)

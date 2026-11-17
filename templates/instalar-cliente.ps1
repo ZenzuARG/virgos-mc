@@ -122,6 +122,8 @@ if (-not $Verificar) {
     if($null -ne $dhPlan) { Write-VirgosDhSettingsPlan $dhPlan }
     Write-TextAtomic (Join-Path $target 'virgos-cliente.lock.json') ([IO.File]::ReadAllText($manifestPath))
     if($null -ne $controlsPlan) { Write-VirgosKeyBindingsPlan $controlsPlan }
+    # Read after control migration so forcing mipmaps off cannot undo new bindings.
+    Set-VirgosClientGraphicsDefaults (Join-Path $target 'options.txt')
     # Add only the new voice controls on upgrade. Preserve existing custom bindings.
     # ConvertFrom-Json returns either one object or an array for files, so do
     # not rely on member enumeration when deciding whether this is an older

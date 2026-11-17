@@ -6,7 +6,7 @@
   "ketting": "0.6.1",
   "quests": 244,
   "chapters": 10,
-  "installer": 25,
+  "installer": 26,
   "coreSha256": "b3663855c65555fac0805d603e1d56563b9469578bb6b3005693d56d6dd14cc5",
   "spawnBlueprintSha256": "a28671fb86062a932d9b7544a54c3b5507527a630a00cc4045fc23dfece35da5",
   "verification": "docs/releases/3.0.7-kubejs-startup.json",
@@ -14,8 +14,8 @@
   "townAuditBlueprintSha256": "96ed153b5ce48ab969aa4e341ee82605e6bb4ee34d625514edf1c6ba145c3845",
   "clientRequired": 133,
   "clientOptional": 3,
-  "installerSha256": "1c99fbdd9211451e784abbcca0ed394324d7a3114d7fd02423ce42b6b4021267",
-  "mrpackSha256": "40bc32f8aa99fadc95c024e59f4243bb2af769f45d9153f08d42a8a404b8acc9",
+  "installerSha256": "101a42292e5465e4ff79502249807fba9512774d5528c2f392013192aac833f2",
+  "mrpackSha256": "90490ae3f5a4ef57fffdd51d1e6df634fc627029b9247beb1b3c910a7a697f3e",
   "clientRelease": "3.0.6",
   "clientFingerprint": "virgos-client-3.0.6",
   "sourceCommit": "289a2c1b2510222bb74cc67c0eee9294d4244243",
@@ -23,5 +23,7 @@
   "deployedAtUtc": "2026-11-17T04:42:34.160076+00:00",
   "serverOnlyHotfix": true,
   "requiredClientInstaller": "Virgos-MC-3.0.6-instalar.zip",
-  "activatedAtUtc": "2026-11-17T04:42:42.916Z"
+  "activatedAtUtc": "2026-11-17T04:42:42.916Z",
+  "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json",
+  "clientVerification": "docs/releases/3.0.7-client-installer.json"
 }

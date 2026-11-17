@@ -51,8 +51,15 @@ jobs:
           tag = os.environ.get('REQUESTED_TAG') or (os.environ['REF_NAME'] if os.environ['REF_TYPE'] == 'tag' else '')
           if tag and tag != 'v' + version:
               raise SystemExit('Publication tag must match the selected candidate version')
+          # A server-only hotfix may retain the previous client compatibility gate.
+          client_path = Path(metadata.get('clientPackagingMetadata', path.as_posix()))
+          if client_path.is_absolute() or '..' in client_path.parts:
+              raise SystemExit('Client packaging metadata must stay inside the repository')
+          client = json.loads(client_path.read_text())
+          assert client['clientRelease'] == metadata['clientRelease']
+          assert client['installer'] == metadata['installer']
           with open(os.environ['GITHUB_ENV'], 'a') as stream:
-              stream.write('CANDIDATE_METADATA=' + path.as_posix() + '\n')
+              stream.write('CANDIDATE_METADATA=' + client_path.as_posix() + '\n')
           PY
 
       - name: Cache locked client downloads

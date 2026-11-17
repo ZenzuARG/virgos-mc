@@ -61,9 +61,15 @@ class ClientReleaseContentsTest(unittest.TestCase):
                 common = archive.read("asistente/installer-common.ps1").decode("utf-8-sig")
                 self.assertIn("function Get-VirgosClientMemoryMb { return 8192 }", common)
                 options = archive.read("asistente/overrides/options.txt").decode("utf-8")
+                self.assertIn("mipmapLevels:0", options.splitlines())
+                defaults = archive.read("asistente/overrides/config/defaultoptions/options.txt").decode("utf-8")
+                self.assertIn("mipmapLevels:0", defaults.splitlines())
                 self.assertIn("key_key.virgos_codex.open:key.keyboard.j", options)
                 self.assertIn("key_iris.keybind.reload:key.keyboard.f8", options)
                 self.assertFalse(any("virgos_local_qa" in name or "/saves/" in name for name in archive.namelist()))
+            with zipfile.ZipFile(fixture / "dist/Virgos-MC-2.0.0.mrpack") as archive:
+                for name in ["overrides/options.txt", "overrides/config/defaultoptions/options.txt"]:
+                    self.assertIn("mipmapLevels:0", archive.read(name).decode("utf-8").splitlines())
             # Legacy CLI retains its payloads and its original file-mtime behavior.
             legacy = fixture / 'dist/Virgos-MC-2.0.0-instalar.zip'
             with zipfile.ZipFile(legacy) as archive:
