@@ -172,6 +172,11 @@ dependencies {
         throw new GradleException('Open Parties and Claims API jar is required to build Virgos Core')
     }
     compileOnly files(openPacApi)
+    def kubeJsApi = file('../../mods/kubejs-forge-2001.6.5-build.26.jar')
+    if (!kubeJsApi.exists()) kubeJsApi = file('../../.cache/pack/downloads/kubejs-forge-2001.6.5-build.26.jar')
+    if (!kubeJsApi.exists()) throw new GradleException('The pinned KubeJS jar is required for its generated-stream compatibility check')
+    compileOnly files(kubeJsApi)
+    testImplementation files(kubeJsApi)
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -272,6 +277,13 @@ tasks.register('checkClaimPermissions', JavaExec) {
     mainClass = 'mc.virgos.ClaimPermissionsTest'
 }
 tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
+
+tasks.register('checkKubeJsGeneratedStreams', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'mc.virgos.KubeJsGeneratedStreamsTest'
+}
+tasks.named('check').configure { dependsOn 'checkKubeJsGeneratedStreams' }
 tasks.register('qaJar', Jar) {
     archiveBaseName = 'virgos_local_qa'
     from sourceSets.qa.output
