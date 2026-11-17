@@ -3,7 +3,7 @@
   "installer": 26,
   "clientRelease": "3.0.6",
   "clientFingerprint": "virgos-client-3.0.6",
-  "status": "packaging-verified-pending",
+  "status": "published-verified",
   "minecraft": "1.20.1",
   "forge": "47.4.22",
   "ketting": "0.6.1",
