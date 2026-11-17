@@ -48,6 +48,7 @@
   "sourceCommit": "fe1af58937af5bb52bcf93443dff224c5589623e",
   "coreSha256": "f003cb42999aaa08badc07a143022c229bb8cecb4e64bbd74577733cfe0e81f2",
   "codexSha256": "6fc61ac6de04ade266966997a36ae3af850655d346eaf98971978916c04572da",
-  "deployedAtUtc": "2026-11-17T03:21:03.848621+00:00",
-  "verifiedAtUtc": "2026-11-17T04:08:30.171871+00:00"
+  "deployedAtUtc": "2026-11-17T03:49:29.060Z",
+  "verifiedAtUtc": "2026-11-17T04:08:30.171871+00:00",
+  "initialDeployedAtUtc": "2026-11-17T03:21:03.848621+00:00"
 }

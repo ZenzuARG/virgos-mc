@@ -39,7 +39,7 @@
     ]
   },
   "sourceCommit": "fe1af58937af5bb52bcf93443dff224c5589623e",
-  "deployedAtUtc": "2026-11-17T03:21:03.848621+00:00",
+  "deployedAtUtc": "2026-11-17T03:49:29.060Z",
   "nativeReview": {
     "commit": "995bcd8",
     "result": "approved-and-acknowledged",
@@ -116,13 +116,14 @@
   },
   "serverPatch": {
     "file": "Virgos-MC-3.0.6-server-hotfix.zip",
-    "bytes": 176337,
-    "sha256": "1dd40e75eb073b3ed9d7846951acef1b7efec92cbea637f021bd6cdcdde06e0d"
+    "bytes": 176334,
+    "sha256": "8382414bb63d2cd7eb270fb223dc1d83238c0f6e49fc1b16247368c05b8c01ba"
   },
   "correctedCoreStartup": {
     "attempts": 1,
     "pid": 28848,
     "online": true
   },
-  "oldClientRejectionObserved": true
+  "oldClientRejectionObserved": true,
+  "initialDeployedAtUtc": "2026-11-17T03:21:03.848621+00:00"
 }
