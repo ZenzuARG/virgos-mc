@@ -1,14 +1,22 @@
 {
   "version": "3.1.0",
   "installerVersion": 28,
-  "status": "verified-local-publication-pending",
+  "status": "published",
   "clientRelease": "3.0.6",
   "clientFingerprint": "virgos-client-3.0.6",
   "publication": {
     "repository": "ZenzuARG/virgos-mc",
     "tag": "v3.1.0",
-    "published": false,
-    "blocker": "GitHub CLI has no authenticated session available"
+    "published": true,
+    "publishedAtUtc": "2026-11-18T16:03:01Z",
+    "releaseId": 450221444,
+    "url": "https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.1.0",
+    "installerUrl": "https://github.com/ZenzuARG/virgos-mc/releases/download/v3.1.0/Virgos-MC-3.1.0-instalar.zip",
+    "sourceCommit": "17d931b9c8d394b2ca6562e2cc8147fc88d339f5",
+    "sourceBranch": "codex/release-3.1.0",
+    "remoteSha256Verified": true,
+    "anonymousPageAndInstallerHttpStatus": 200,
+    "workflowRunsAtPublication": []
   },
   "artifacts": [
     {
