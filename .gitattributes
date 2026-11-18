@@ -1,2 +1,5 @@
 # Preserve byte-verified upstream recipe fixtures across Windows checkouts.
 /tests/fixtures/recipe-ingredient-compat/*.json text eol=lf
+
+# Hash-pinned corresponding sources and notices must survive Windows checkout unchanged.
+/pack/candidates/3.1.0/sources/* -text
