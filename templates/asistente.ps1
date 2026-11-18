@@ -5,7 +5,7 @@ Add-Type -AssemblyName System.Drawing
 . (Join-Path $PSScriptRoot 'tlauncher-settings.ps1')
 [Windows.Forms.Application]::EnableVisualStyles()
 $script:worker = $null
-$script:choice = 'TLauncher'
+$script:choice = ''
 $script:installRoot = Join-Path $env:LOCALAPPDATA 'Virgos-MC'
 $script:officialRoot = Join-Path $env:APPDATA '.minecraft'
 $script:tlConfig = Find-TLauncherSettingsPath
@@ -20,11 +20,19 @@ $script:prefsPath = Join-Path $env:LOCALAPPDATA 'Virgos-MC-Instalador\preferenci
 if (-not $PreviewPath -and [IO.File]::Exists($script:prefsPath)) {
     try {
         $prefs = Update-VirgosClientMemoryPreference $script:prefsPath
+        if (-not [IO.Path]::IsPathRooted([string]$prefs.installRoot) -or
+            -not [IO.Path]::IsPathRooted([string]$prefs.officialRoot)) { throw 'Las rutas guardadas no son válidas.' }
         $script:installRoot = $prefs.installRoot; $script:officialRoot = $prefs.officialRoot
         $script:choice = $prefs.launcher
-        if($prefs.tlauncherConfig) { $script:tlConfig=$prefs.tlauncherConfig }
+        if([IO.Path]::IsPathRooted([string]$prefs.tlauncherConfig)) { $script:tlConfig=$prefs.tlauncherConfig }
     } catch {}
 }
+$officialReady = [IO.File]::Exists((Join-Path $script:officialRoot 'launcher_profiles.json')) -or
+    [IO.File]::Exists((Join-Path $script:officialRoot 'launcher_profiles_microsoft_store.json'))
+$tlReady = $false
+try { [void](Read-TLauncherSettings $script:tlConfig); $tlReady = $true } catch {}
+$script:choice = Select-VirgosLauncher $script:choice $officialReady $tlReady
+$script:readyToPlay = [IO.File]::Exists((Join-Path $script:installRoot 'juego\virgos-cliente.lock.json'))
 $bg = [Drawing.ColorTranslator]::FromHtml('#151b27')
 $panel = [Drawing.ColorTranslator]::FromHtml('#202a3b')
 $accent = [Drawing.ColorTranslator]::FromHtml('#b3efb0')
@@ -51,7 +59,7 @@ function Button($Text,$X,$Y,$W) {
 }
 $title=Label 'VIRGOS-MC' 28 19 650 44 27
 $title.ForeColor=$accent
-$subtitle=Label 'Tu aventura empieza aca. Elegi tu launcher y prepararemos el juego.' 30 68 750 28
+$subtitle=Label 'Un solo botón prepara el juego, los mods y tu acceso a Virgos-MC.' 30 68 750 28
 $subtitle.ForeColor=$muted
 $tl=New-Object Windows.Forms.RadioButton
 $tl.Text='TLauncher'; $tl.Location=New-Object Drawing.Point(40,115); $tl.Size=New-Object Drawing.Size(310,32)
@@ -60,10 +68,11 @@ $official.Text='Minecraft Launcher oficial'; $official.Location=New-Object Drawi
 $form.Controls.AddRange(@($tl,$official))
 $description=Label '' 30 162 750 50
 $description.ForeColor=$muted
-$install=Button 'Instalar Virgos-MC' 30 221 250
+$install=Button $(if ($script:readyToPlay) {'Actualizar / reparar Virgos-MC'} else {'Instalar Virgos-MC'}) 30 221 300
 $install.BackColor=$accent; $install.ForeColor=$bg
-$options=Button 'Opciones de carpeta y memoria' 440 221 340
-$status=Label 'Cierra Minecraft y tu launcher. Despues toca Instalar.' 30 273 750 45
+$form.AcceptButton=$install
+$options=Button 'Opciones avanzadas' 550 221 230
+$status=Label 'Cierra Minecraft y tu launcher antes de continuar.' 30 273 750 45
 $progress=New-Object Windows.Forms.ProgressBar
 $progress.Location=New-Object Drawing.Point(30,324); $progress.Size=New-Object Drawing.Size(750,9)
 $form.Controls.Add($progress)
@@ -80,20 +89,28 @@ $openLauncher=Button 'Abrir mi launcher' 30 640 220
 $help=Label 'Windows x64  /  Unbound Low activo  /  COMO-JUGAR.txt: ayuda del juego' 274 647 505 35 9
 $help.ForeColor=$muted
 function Refresh-Choice {
-    $script:choice = if ($official.Checked) {'Oficial'} else {'TLauncher'}
+    $script:choice = if ($official.Checked) {'Oficial'} elseif ($tl.Checked) {'TLauncher'} else {''}
     $script:javaPath = Join-Path $script:installRoot 'runtime\jdk-17.0.20.1+1-jre\bin\javaw.exe'
     if ($script:choice -eq 'Oficial') {
-        $description.Text='Creamos un perfil Virgos-MC con Java 17, Forge y memoria configurados. Tus otros perfiles se conservan.'
+        $description.Text='Usaremos Minecraft Launcher oficial. Tus otros perfiles se conservan.'
+    } elseif ($script:choice -eq 'TLauncher') {
+        $description.Text='Usaremos TLauncher. Guardamos sus ajustes anteriores para que puedas restaurarlos.'
     } else {
-        $description.Text='Configuramos carpeta, Forge y memoria de TLauncher. Guardamos sus ajustes anteriores para que puedas restaurarlos.'
+        $description.Text='Selecciona el launcher que usas. Si aún no lo abriste, ábrelo una vez y ciérralo antes de instalar.'
     }
     $description.Text += $script:memoryWarning
-    $steps.Text=Get-LauncherInstructions $script:choice (Join-Path $script:installRoot 'juego') $script:javaPath $script:memoryMb
+    $steps.Text=if ($script:choice) {
+        Get-LauncherInstructions $script:choice (Join-Path $script:installRoot 'juego') $script:javaPath $script:memoryMb
+    } else { 'Después de instalar: abre tu launcher y entra a Multijugador → Virgos-MC.' }
+    $install.Enabled=[bool]$script:choice -and -not $script:worker
+    $openLauncher.Enabled=[bool]$script:choice -and $script:readyToPlay -and -not $script:worker
     $restoreTL.Enabled=($script:choice -eq 'TLauncher' -and -not $script:worker); $copyFolder.Enabled=($script:choice -eq 'TLauncher')
 }
+$startupChoice=$script:choice
 $official.Add_CheckedChanged({ Refresh-Choice })
 $tl.Add_CheckedChanged({ Refresh-Choice })
-if ($script:choice -eq 'Oficial') { $official.Checked=$true } else { $tl.Checked=$true }
+if ($startupChoice -eq 'Oficial') { $official.Checked=$true }
+if ($startupChoice -eq 'TLauncher') { $tl.Checked=$true }
 Refresh-Choice
 $copyFolder.Add_Click({ [Windows.Forms.Clipboard]::SetText((Join-Path $script:installRoot 'juego')); $status.Text='Carpeta copiada. Pegala en Directorio / Directory de TLauncher.' })
 $restoreTL.Add_Click({
@@ -160,7 +177,8 @@ $timer.Add_Tick({
         if($script:worker.HasExited) {
             $timer.Stop(); $install.Enabled=$true; $options.Enabled=$true; $tl.Enabled=$true; $official.Enabled=$true; $openLauncher.Enabled=$true
             if($s -and $s.state -eq 'complete' -and $script:worker.ExitCode -eq 0) {
-                $install.Text='Revisar / reparar'; Refresh-Choice
+                $script:readyToPlay=$true
+                $install.Text='Actualizar / reparar Virgos-MC'
                 $status.ForeColor=$accent
             } else {
                 $install.Text='Reintentar'; $status.ForeColor=[Drawing.Color]::LightSalmon
@@ -172,6 +190,7 @@ $timer.Add_Tick({
     } catch { $status.Text='Esperando al instalador...' }
 })
 $install.Add_Click({
+    if (-not $script:choice -or $script:worker) { return }
     try {
         $script:statusFile=Join-Path $script:installRoot 'registros\estado.json'
         $requestPath=Join-Path $script:installRoot 'registros\solicitud.json'
@@ -194,7 +213,8 @@ $form.Add_FormClosing({ param($sender,$eventArgs)
 })
 if($PreviewPath) {
     if($PreviewState -eq 'oficial') { $official.Checked=$true }
-    if($PreviewState -in @('oficial','tlauncher')) { $status.Text='Instalacion terminada. Segui los pasos de abajo para entrar.'; $progress.Value=100; $install.Text='Revisar / reparar' }
+    if($PreviewState -eq 'tlauncher') { $tl.Checked=$true }
+    if($PreviewState -in @('oficial','tlauncher')) { $script:readyToPlay=$true; Refresh-Choice; $status.Text='Instalación completada. Abre tu launcher para jugar.'; $progress.Value=100; $install.Text='Actualizar / reparar Virgos-MC' }
     if($PreviewState -eq 'error') { $status.Text='No se pudo descargar un archivo. Revisa Internet y toca Reintentar.'; $status.ForeColor=[Drawing.Color]::LightSalmon; $install.Text='Reintentar' }
     $form.CreateControl(); $form.Show(); [Windows.Forms.Application]::DoEvents()
     Start-Sleep -Milliseconds 800; [Windows.Forms.Application]::DoEvents()

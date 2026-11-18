@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "create:experience_nugget"
+    },
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "tag": "forge:gems/amethyst"
+    }
+  ],
+  "results": [
+    {
+      "item": "irons_spellbooks:arcane_essence"
+    }
+  ]
+}

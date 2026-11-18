@@ -1,0 +1,4 @@
+[rendering]
+# Preserve nearby density while reducing distant grass geometry.
+bladesPerBlock = 64
+renderRadius = 128

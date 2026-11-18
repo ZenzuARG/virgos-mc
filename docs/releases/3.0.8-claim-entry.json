@@ -1,0 +1,70 @@
+{
+  "release": "3.0.8",
+  "clientRelease": "3.0.6",
+  "installer": 26,
+  "status": "verified-public",
+  "sourceCommit": "1269996f150dd84c17d3ce48b6914f8fdc365a42",
+  "coreSha256": "21d3e46679976604dccf2ed917028944d3f3a909dacecd69ca768d02d29630eb",
+  "previousCoreSha256": "b3663855c65555fac0805d603e1d56563b9469578bb6b3005693d56d6dd14cc5",
+  "clientUpdateRequired": false,
+  "minecraftClientsLaunched": 0,
+  "checks": [
+    "ClaimEntryFlow regression RED then GREEN",
+    "focused offline checkClaimPermissions PASS",
+    "full offline check jar codexJar PASS,29 tasks",
+    "independent authorization verifier and adversarial probes PASS"
+  ],
+  "limitations": [
+    "No rendered Minecraft UI/live-world menu interaction claimed"
+  ],
+  "scope": "Only server Core changes; client gate, client artifacts and installer26 remain unchanged",
+  "deployedAtUtc": "2026-11-17T14:53:01.994547+00:00",
+  "backup": {
+    "sha256": "3814a503e4a17bd99bc08bac1bb60c368f097dcda3d254a97a47e8b9aba2941b",
+    "completed": "2026-11-17T14:49:22.0103177Z",
+    "archive": "backups/full/virgos-20261117-114030-auto.zip",
+    "verifiedFiles": 10624,
+    "worldFolders": [
+      "virgos_world",
+      "virgos_world_aether_the_aether",
+      "virgos_world_irons_spellbooks_pocket_dimension",
+      "virgos_world_nether",
+      "virgos_world_the_end",
+      "virgos_world_twilightforest_twilight_forest"
+    ]
+  },
+  "candidateIndependentVerification": "PASS",
+  "clientGateUnchanged": true,
+  "runtimePassed": true,
+  "verifiedAtUtc": "2026-11-17T14:56:34.976716+00:00",
+  "activatedAtUtc": "2026-11-17T14:53:25.446Z",
+  "publicPid": 26456,
+  "runnerPid": 9820,
+  "backupBytes": 26370334827,
+  "backupVerification": "Managed finalizer entry hashes plus archive SHA256; independent manifest counts and sizes readback",
+  "installedIndependentVerification": "PASS",
+  "clientProtocolBytesUnchanged": true,
+  "claimPolicyUnchanged": true,
+  "guardActivated": true,
+  "tcpListener": {
+    "port": 25565,
+    "ownerPid": 26456
+  },
+  "tickProbe": {
+    "first": 34513838,
+    "second": 34513897,
+    "advancing": true,
+    "command": "time query gametime (read-only)"
+  },
+  "startupScripts": {
+    "loaded": 1,
+    "total": 1,
+    "errors": 0
+  },
+  "serverScripts": {
+    "loaded": 4,
+    "total": 4,
+    "errors": 0
+  },
+  "doneLine": "[17nov2026 11:54:54.647] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (13.093s)! For help, type \"help\""
+}

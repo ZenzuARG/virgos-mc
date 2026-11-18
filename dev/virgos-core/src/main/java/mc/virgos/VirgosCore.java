@@ -43,6 +43,8 @@ public final class VirgosCore {
     public static final Maintenance MAINTENANCE = new Maintenance();
     public static ClientUpdateServer UPDATE_GATE;
     public static final TownServices TOWN = new TownServices();
+    public static final ClaimPermissionService CLAIM_PERMISSION_SERVICE = new ClaimPermissionService();
+    public static final ClaimPermissionsPrototype CLAIM_PERMISSIONS = new ClaimPermissionsPrototype(CLAIM_PERMISSION_SERVICE);
     public static final PlayerProfiles PROFILES = new PlayerProfiles();
     private final Set<UUID> greeted = new HashSet<>();
     private final WorldTools worldTools = new WorldTools();
@@ -66,6 +68,7 @@ public final class VirgosCore {
         COMMUNITY.initialize(event.getServer());
         MAINTENANCE.initialize(event.getServer());
         TOWN.initialize(event.getServer());
+        CLAIM_PERMISSION_SERVICE.initialize(event.getServer());
         PROFILES.initialize(event.getServer());
         try {
             Path folder = Path.of("virgos-reports");
@@ -157,6 +160,7 @@ public final class VirgosCore {
         root.then(PROFILES.command("perfil"));
         root.then(PlayerGuide.command("ayuda"));
         root.then(Commands.literal("menu").executes(c->TownServices.menu(c.getSource())));
+        root.then(Commands.literal("permisos").executes(c->CLAIM_PERMISSIONS.open(c.getSource())));
         root.then(TOWN.commands());
         root.then(TOWN.adminCommands());
         root.then(Commands.literal("checkpoint").requires(source->source.hasPermission(2)).executes(context->MAINTENANCE.request(context.getSource())));

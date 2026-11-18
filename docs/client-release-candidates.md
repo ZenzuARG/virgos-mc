@@ -79,9 +79,30 @@ Candidate validation requires Python 3.11 or later for the standard-library TOML
 ```
 
 Version must be a safe three-part release version, optionally with a prerelease
-suffix. Installer must be a positive integer. Client release must equal the version
-or begin with `<version>-`; fingerprint must equal `virgos-client-<clientRelease>`.
+suffix. Installer must be a positive integer. Client release is an independently pinned safe wire identity (up to128 characters);
+it can retain an earlier compatible release while the installer version advances.
+Fingerprint must equal `virgos-client-<clientRelease>`. Verify the pinned Codex
+identity against the server admission policy before publishing; changing packaging
+metadata does not change embedded identities or update the server.
+
+Candidate metadata can additionally pin a verified surface snapshot via
+`surfaceMap: {"local_source": "installer27-artifacts/Virgos-Superficie-Xaero.zip", "sha256": "..."}`.
+The paired `pack/candidates/3.0.6/installer27.json` and
+`installer27-artifacts.lock.json` retain the live 3.0.6 wire identity. Stage the
+hash-matching Codex JAR and the original `cm$converted` surface archive in the
+ignored `installer27-artifacts/` directory next to the metadata. The Windows
+installer adds the snapshot only if its dedicated Xaero folder is absent; the
+MRPack puts it in `virgos-extras` for manual import, outside active Xaero data.
 Minecraft/Forge remain pinned to 1.20.1/47.4.22 in the mod lock.
+
+### Additional client-only pins
+
+Explicit metadata may contain `additionalMods`, a list of ordinary upstream lock
+entries for required client-only dependencies. Their filenames must be unique across
+the base lock and bundled artifacts. Cache hashes and download metadata follow the
+same validation as base entries; duplicates or non-client entries reject before output.
+This lets a release pin a small client delta without copying the complete mods lock.
+Omitting the field preserves the previous build behavior.
 
 ### Custom artifact lock
 
@@ -124,7 +145,7 @@ Manifest project IDs are `virgos-codex`, `distant-horizons`, and `virgos-dh-comp
 The installer accepts only those project/filename pairs, validates bundled hashes
 before mutation and never downloads these components.
 
-JAR bytes—including original licenses/notices—are bundled unchanged. The installer
+JAR bytesâ€”including original licenses/noticesâ€”are bundled unchanged. The installer
 uses `asistente/bundled/`; MRPack uses `overrides/mods/`. Bundled components are required
 and have no network download URL. Preserve source/license notices when preparing the
 pinned inputs; this builder neither invents nor strips them.

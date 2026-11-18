@@ -27,6 +27,8 @@ import java.util.Map;
 public final class CodexKeyBindings {
     public static final KeyMapping OPEN = new KeyMapping(ManagedKeyPolicy.CODEX,
         KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, "key.categories.virgos_codex");
+    public static final KeyMapping CLAIM_PERMISSIONS = new KeyMapping("key.virgos_codex.claim_permissions",
+        KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.categories.virgos_codex");
     private static boolean repaired;
     private static String conflictNotice;
 
@@ -36,6 +38,7 @@ public final class CodexKeyBindings {
     public static final class Registration {
         @SubscribeEvent public static void register(RegisterKeyMappingsEvent event) {
             event.register(OPEN);
+            event.register(CLAIM_PERMISSIONS);
         }
     }
 
@@ -55,6 +58,11 @@ public final class CodexKeyBindings {
             }
             while (OPEN.consumeClick()) {
                 if (client.player != null && client.screen == null) VirgosCodex.openCodex();
+            }
+            while (CLAIM_PERMISSIONS.consumeClick()) {
+                if (client.player != null && client.screen == null) {
+                    client.player.connection.sendCommand("virgos permisos");
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ const {classifyExit,readCheckpoint,createAudit,isOtherProcessAlive}=require('./v
 const audit=createAudit(root);
 async function main(restartAttempt=0){
   const base=read('versions.lock.json');
+  execFileSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'scripts/apply-treefeller-config.ps1'),'-Root',root],{cwd:root,windowsHide:true,stdio:'pipe'});
   execFileSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(root,'scripts/validar-entrega.ps1'),'-ServerPath',root,'-Quiet'],{cwd:root,windowsHide:true,stdio:'pipe'});
   if(fs.existsSync(stateFile)){
     const old=read('.runtime/active-run.json');

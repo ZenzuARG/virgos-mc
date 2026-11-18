@@ -1,0 +1,9 @@
+# Minecraft 1.20.1 has no COPPER_AXE material. Keep only materials
+# understood by the server's Bukkit API.
+tools:
+    - WOODEN_AXE
+    - STONE_AXE
+    - IRON_AXE
+    - GOLDEN_AXE
+    - DIAMOND_AXE
+    - NETHERITE_AXE

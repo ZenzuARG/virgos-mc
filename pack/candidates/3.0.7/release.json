@@ -1,0 +1,17 @@
+{
+  "version": "3.0.7",
+  "clientRelease": "3.0.6",
+  "clientFingerprint": "virgos-client-3.0.6",
+  "installer": 26,
+  "serverOnlyHotfix": true,
+  "status": "published-verified",
+  "sourceCommit": "289a2c1b2510222bb74cc67c0eee9294d4244243",
+  "coreSha256": "b3663855c65555fac0805d603e1d56563b9469578bb6b3005693d56d6dd14cc5",
+  "verification": "docs/releases/3.0.7-kubejs-startup.json",
+  "deployedAtUtc": "2026-11-17T04:42:34.160076+00:00",
+  "activatedAtUtc": "2026-11-17T04:42:42.916Z",
+  "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json",
+  "published": "2026-11-17T05:16:22Z",
+  "releaseUrl": "https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.0.7",
+  "packagingSourceCommit": "d5aac1de826d9912427ab79a6b8abd74444e1847"
+}

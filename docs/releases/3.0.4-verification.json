@@ -1,0 +1,29 @@
+{
+  "version": "3.0.4",
+  "status": "published",
+  "checks": [
+    {
+      "name": "menu-diagnostics",
+      "result": "pending-runtime",
+      "evidence": "Focused static regression tests cover AuthMe, client-handshake, and /login diagnostics; a real player session is still required after restart."
+    },
+    {
+      "name": "core-build",
+      "result": "passed",
+      "evidence": "Offline Gradle check, jar, and codexJar completed successfully with buildEpoch=0."
+    },
+    {
+      "name": "release-package",
+      "result": "passed",
+      "evidence": "Published GitHub Actions artifacts are Virgos-MC-3.0.4-instalar.zip (SHA-256 2b5f2526b57f1d213b5dcb00c100228cac9bca9a60dbcb4b7ab1577918ab1fdd) and Virgos-MC-3.0.4.mrpack (SHA-256 63480009fd64db51860cf8a0a54c7e3eb92196a24a7c0fa422e3c3d72ce0f12f); manifest contains 133 required and 3 optional files."
+    },
+    {
+      "name": "release-candidate-consistency",
+      "result": "passed",
+      "evidence": "Candidate identity, server update manifest, root/custom artifact locks, menu regressions, Create addon locks, recipe compatibility, and conservative magic config tests passed."
+    }
+  ],
+  "notes": [
+    "GitHub Actions run 43788209072 completed successfully and published v3.0.4 with the verified installer and MRPack assets. TreeFeller was rebuilt by the hosted Java 17 release gate."
+  ]
+}

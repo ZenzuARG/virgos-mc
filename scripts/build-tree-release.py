@@ -49,6 +49,18 @@ def source_fingerprint(module):
     return digest.hexdigest()
 
 
+def normalized_license_data(data):
+    data = data.replace(b'\r\n', b'\n')
+    if b'\r' in data:
+        raise ValueError('Unexpected license line ending')
+    return data
+
+
+def normalized_license_bytes(path):
+    """Release pins use the platform-independent LF form of the GPL text."""
+    return normalized_license_data(Path(path).read_bytes())
+
+
 def load_pin(root):
     module = H.checked(root / 'dev/tree-feller', 'directory')
     for path in module.rglob('*'):
@@ -58,7 +70,12 @@ def load_pin(root):
     pin = json.loads(H.checked(module / 'UPSTREAM.json').read_text())
     if pin['modified_version'] != VERSION or pin['license'] != 'GPL-3.0':
         raise ValueError('Unsupported Tree release identity/license')
-    H.verified(module / 'LICENSE', {'sha256': EXPECTED[LICENSE]})
+    license_hashes = {
+        hashlib.sha256(module.joinpath('LICENSE').read_bytes()).hexdigest(),
+        hashlib.sha256(normalized_license_bytes(module / 'LICENSE')).hexdigest(),
+    }
+    if EXPECTED[LICENSE] not in license_hashes:
+        raise ValueError('Locked input hash mismatch: LICENSE')
     for name, digest in pin['resources'].items():
         path = H.checked(module / 'resources' / H.filename(name))
         if hashlib.sha256(fork_bytes(module, path)).hexdigest() != digest: raise ValueError('Frozen catalog resource hash mismatch')
@@ -104,7 +121,7 @@ def validate_archives(paths, module, pin):
         roots = {name.split('/')[0] for name in names}
         if len(roots) != 1: raise ValueError('Expected one upstream source root')
         prefix = roots.pop() + '/'
-        if archive.read(prefix + 'LICENSE') != (module / 'LICENSE').read_bytes():
+        if normalized_license_data(archive.read(prefix + 'LICENSE')) != normalized_license_bytes(module / 'LICENSE'):
             raise ValueError('Incomplete or changed GPL license')
         for patchfile in sorted((module / 'patches').glob('*.json')):
             patch = json.loads(patchfile.read_text())
@@ -151,7 +168,8 @@ def load_artifacts(directory, allow_platform_variant=False):
     with zipfile.ZipFile(directory / SOURCE) as archive:
         if archive.testzip(): raise ValueError('Tree source CRC mismatch')
         for name in ['upstream/LICENSE', 'virgos-fork/LICENSE']:
-            if archive.read(name) != (directory / LICENSE).read_bytes(): raise ValueError('Incomplete GPL source license')
+            if normalized_license_data(archive.read(name)) != normalized_license_bytes(directory / LICENSE):
+                raise ValueError('Incomplete GPL source license')
         for name in ['virgos-fork/build.py', 'pinned-inputs/source.zip', 'pinned-inputs/TreeFeller-1.33.0.jar']:
             if not archive.read(name): raise ValueError('Incomplete corresponding source')
     return result
@@ -195,7 +213,7 @@ def build(cache_root, output, java_home, offline=False, *, root=ROOT, runner=sub
             target.parent.mkdir(parents=True, exist_ok=True);target.write_bytes(fork_bytes(module, path))
     if source_fingerprint(build_module) != FORK_SHA256: raise ValueError('External frozen source copy mismatch')
     runner(command, cwd=source_root, check=True)
-    shutil.copyfile(module / 'LICENSE', output / LICENSE)
+    (output / LICENSE).write_bytes(normalized_license_bytes(module / 'LICENSE'))
     records = [{'filename': name, 'local_source': name, 'kind': KINDS[name], 'sides': ['server'],
                 'sha256': H.sha(output / name), 'size': (output / name).stat().st_size} for name in EXPECTED]
     for record in records:

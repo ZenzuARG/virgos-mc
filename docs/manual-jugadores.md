@@ -8,11 +8,11 @@ El pueblo del spawn tiene cuatro arcos que salen caminando al mundo. La plaza, e
 
 **Dormir:** alcanza con que una sola persona se acueste para pasar la noche en el mundo principal, aunque los demás sigan explorando. Se mantienen las condiciones normales de uso de las camas, como no tener monstruos cerca.
 
-**Si no sabés qué hacer:** pulsá **J → 01 · Empezar → Empezá por acá**. `/virgos guia` abre ayuda por temas; `/virgos progreso` muestra el próximo paso. No hace falta completar todos los mods.
+**Si no sabes qué hacer:** abre el Códice con **J** y selecciona **Empezar**. La ruta muestra el siguiente paso, los requisitos y el progreso que ya tienes. `/virgos guia` abre ayuda por temas; `/virgos progreso` muestra el próximo paso. No hace falta completar todos los mods.
 
 **Nuevo en 2.0:** mundo y progreso nuevos, con Terralith, aldeas integradas, grandes mazmorras y nuevas rutas de jefes. El códice reúne **244 misiones y guías en diez capítulos**: Empezar, Tu hogar, Create, Magia, Explorar, Cocina, Aventuras, Jefes, Cooperar y El pueblo. `/virgos menu` reúne la ayuda.
 
-La lista muestra el nombre y estado de cada misión. Usá la búsqueda del capítulo, los filtros **Pendientes / Para reclamar** y las flechas de página. Clic en una misión abre sus objetivos, explicación y recompensas. **A+ / A−** ajustan el tamaño de la interfaz; la rueda recorre páginas y, sobre los capítulos, las secciones que no entren en pantalla. **Ver mapa original** conserva la vista de conexiones de Heracles.
+Selecciona una misión para ver sus objetivos y recompensas. Volver a una ruta conserva tu lugar. **Ver mapa original** conserva la vista de conexiones de Heracles; es distinto del mapa del mundo que se abre con **M**.
 
 ## Tu perfil y el de tus amigos
 
@@ -53,17 +53,29 @@ El Códice tiene una categoría propia en **Opciones → Controles → Códice d
 
 La prioridad de los valores predeterminados es Códice, acciones de mods y accesos de plugins. Los shaders quedan en **F6–F8** para no interferir con hechizos, curios y voz. Las combinaciones de JEI dentro del inventario y los modificadores contextuales de Create se conservan: no son acciones globales simultáneas. Los controles personales se conservan; si todavía se solapan, el juego avisa y el instalador deja `virgos-keybinding-conflicts.json` para revisarlos en Controles. Una tecla que desactivaste se mantiene desactivada, salvo el acceso principal al Códice.
 
-Para proteger el chunk en el que estás: `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisá los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
+Para proteger el chunk en el que estás, pulsa **P → Reclamar parcela**. Al confirmarse el reclamo se abren sus permisos. También puedes usar `/oclaims claim`; para liberarlo: `/oclaims unclaim`. Hay 25 chunks personales y no hay carga permanente. Revisa los permisos antes de invitar amigos a tu party. Las misiones siguen siendo individuales.
 
 ## Proteger la primera base
 
 1. Alejate del spawn. **F3+G** muestra los límites de los chunks, columnas de 16 × 16 bloques.
-2. Parate en un chunk libre y escribí `/oclaims claim`. Leé la confirmación: si hubo error, no está protegido.
-3. Repetí en cada chunk que ocupe tu casa, huerta o máquinas. **P** abre la pantalla de bases y grupos.
+2. En un chunk libre, pulsa **P** y selecciona **Reclamar parcela**. Si el reclamo se confirma, se abren directamente sus permisos; si falla, no se considera protegido.
+3. Repite en cada chunk que ocupe tu casa, huerta o máquinas. En una parcela tuya, **P** abre directamente sus permisos. En terreno ajeno no permite reclamar ni modificar permisos. Si cambias de chunk o dimensión con el menú abierto, vuelve a pulsar **P** antes de reclamar.
 4. Revisá los permisos de acceso y construcción. Probá con un cofre vacío y un amigo antes de guardar objetos valiosos.
 5. Para liberar únicamente el chunk actual: `/oclaims unclaim`. Al hacerlo, pierde esa protección.
 
 `/virgos guia bases` muestra estos pasos y botones que preparan los comandos en el chat; revisalos antes de Enter. `/virgos guia grupo` explica cómo compartir. La party no comparte misiones ni rangos.
+
+### Áreas y permisos desde P
+
+Los chunks son independientes aunque estén pegados. En **P → Unir o separar parcelas**, puedes unir tu área con otra área propia vecina. Antes de confirmar, elige qué grupos, excepciones y permisos conservar; los ajustes de la otra área serán reemplazados. Para seleccionar un área vecina, sitúate en un chunk junto a su borde.
+
+**Separar este chunk** copia sus permisos actuales y permite cambiarlos sin afectar al resto del área. Unir o separar no cambia el dueño, no libera terrenos y no altera el número de chunks reclamados. La unidad mínima es un chunk de **16 × 16 bloques**.
+
+Cada clic guarda automáticamente. **Familia, Amigos y Visitantes** no aplican permisos por su nombre: debes configurarlos. Se suman las concesiones de los grupos y luego se aplica la excepción individual **Permitir / Denegar / Heredar**. Tanto integrantes como excepciones muestran jugadores conocidos, incluidos desconectados, con páginas. **Vista previa por jugador** muestra el resultado del panel y su origen; siguen aplicándose las restricciones generales del servidor.
+
+**Construir y romper** es un permiso de confianza: permite destruir contenedores y puede exponer los objetos que caigan, aunque no se permita abrirlos. **Hornos y tolvas** controla esos grupos de bloques registrados, no todas las máquinas del pack. Automatizaciones, entidades, explosiones y otras interfaces siguen las reglas nativas del servidor.
+
+Los ajustes anteriores se conservan como valores iniciales de solo lectura. Los cambios de áreas se guardan de forma atómica en un archivo separado. Si el archivo es inválido o no se puede guardar, el panel rechaza las ediciones; no reemplaza silenciosamente los datos anteriores.
 
 ## Elegir el próximo objetivo
 

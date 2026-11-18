@@ -2,5 +2,6 @@
   "key.virgos_codex.open": "Open Codex",
   "key.categories.virgos_codex": "Virgos Codex",
   "virgos_codex.shortcut": "Codex [%s]",
-  "virgos_codex.controls.conflicts": "Personal key conflicts were preserved (%s). Review Options > Controls."
+  "virgos_codex.controls.conflicts": "Personal key conflicts were preserved (%s). Review Options > Controls.",
+  "key.virgos_codex.claim_permissions": "Parcel permissions"
 }

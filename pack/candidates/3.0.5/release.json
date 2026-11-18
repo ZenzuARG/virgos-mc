@@ -1,0 +1,8 @@
+{
+  "version": "3.0.5",
+  "status": "public-qa",
+  "serverOnlyHotfix": true,
+  "clientRelease": "3.0.4",
+  "coreSha256": "9c11af2e586a26ca857f7f08563187c6f395dea3c43f717b3f94c8e797b3740b",
+  "sourceCommit": "ea030257465bc493d83a1666f80e8c2f92ecee85"
+}

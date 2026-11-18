@@ -1,0 +1,5 @@
+{
+  "irons_spellbooks:mana_cost_multiplier": 1.15,
+  "irons_spellbooks:power_multiplier": 0.95,
+  "irons_spellbooks:cooldown_in_seconds": 20.0
+}

@@ -1,6 +1,6 @@
 # Instalar Virgos-MC
 
-1. Descargá **Virgos-MC-2.0.0-instalar.zip** y elegí **Extraer todo**.
+1. Descargá el instalador publicado **Virgos-MC-3.0.4-instalar.zip** desde el release de GitHub y elegí **Extraer todo**. La versión vigente del grupo es 3.0.4.
 2. Abrí **EMPEZAR.bat**. Cerrá Minecraft y tu launcher.
 3. Elegí **TLauncher** o **Minecraft Launcher oficial** y tocá **Instalar Virgos-MC**.
 4. Esperá a que termine y seguí los pasos de la ventana. Después, en el juego: **Multijugador → Virgos-MC**.

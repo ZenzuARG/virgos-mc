@@ -1,0 +1,78 @@
+{
+  "version": "3.1.0",
+  "installerVersion": 28,
+  "status": "published",
+  "clientRelease": "3.0.6",
+  "clientFingerprint": "virgos-client-3.0.6",
+  "publication": {
+    "repository": "ZenzuARG/virgos-mc",
+    "tag": "v3.1.0",
+    "published": true,
+    "publishedAtUtc": "2026-11-18T16:03:01Z",
+    "releaseId": 450221444,
+    "url": "https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.1.0",
+    "installerUrl": "https://github.com/ZenzuARG/virgos-mc/releases/download/v3.1.0/Virgos-MC-3.1.0-instalar.zip",
+    "sourceCommit": "17d931b9c8d394b2ca6562e2cc8147fc88d339f5",
+    "sourceBranch": "codex/release-3.1.0",
+    "remoteSha256Verified": true,
+    "anonymousPageAndInstallerHttpStatus": 200,
+    "workflowRunsAtPublication": []
+  },
+  "artifacts": [
+    {
+      "name": "Virgos-MC-3.1.0-instalar.zip",
+      "bytes": 382523105,
+      "sha256": "58be8d5c7703fac37a2e025598fd90f21196eb6c6be0a614030651e7fc010055"
+    },
+    {
+      "name": "Virgos-MC-3.1.0.mrpack",
+      "bytes": 382489614,
+      "sha256": "f5d2ff9e8f331b89d70c188b4db8aa4ffd58d4c38965c07a0827056bd504a124"
+    }
+  ],
+  "requiredMods": 134,
+  "optionalMods": 3,
+  "checks": {
+    "candidateRegression": {
+      "passed": 17
+    },
+    "installerFixtureWindowsPowerShell51": "passed",
+    "keybindings": "passed",
+    "dhSettings": "passed",
+    "memoryPowerShell7": {
+      "passed": 8
+    },
+    "packagedAssistantWindowsPowerShell51": "parse passed",
+    "mipmapUpgrade": "passed",
+    "dhSharedDefaults": "passed",
+    "releaseSelection": "passed",
+    "independentVerification": "passed; no new blockers; existing valid packaging byte-identical to baseline5063792",
+    "reproducibleBuild": "Final, reduced and small-overlay builds produce identical ZIP/MRPack SHA256",
+    "pinnedNotices": "Git blobs and working files match original metadata SHA256; -text prevents Windows conversion",
+    "additionalMods": "independent CLI probes passed; absent field preserves baseline bytes; collisions/non-required/nonclient reject before mutation",
+    "nativeReview": {
+      "status": "approved-and-acknowledged",
+      "lineage": "review-4a2e0572aa2097c0",
+      "target": "sha256:ba031c3725befe11a8f0100c7ef8fc1a0e64fc387323200cfd8bab6b83cf5b63",
+      "authority": "burned",
+      "blockingFindings": 0,
+      "advisories": [
+        "Additional-mod filename collisions are compared case-sensitively; current pins have no such collision.",
+        "Interrupted first grass seed copy may require manual recovery before repair.",
+        "Release-note verification wording requires status-only correction."
+      ]
+    }
+  },
+  "knownLimitations": [
+    "No new in-game FPS benchmark; user waived grass128 measurement.",
+    "ModernFix/GrassierGrass advisory and seed-oil cosmetic artifact retained.",
+    "Unchanged source assistant parsing fixture fails under WindowsPowerShell5.1 without BOM; distributed BOM script parses successfully.",
+    "Existing global3.0.10 candidate consistency tests fail due wire/package identity and stale rootCodex size; these unrelated records remain untouched."
+  ],
+  "server": {
+    "restarted": false,
+    "coreSha256": "5e5886f3cbb6f3ae00e63fb08cf092d26ade9bad503947fb5bd88fb5d82d6a18",
+    "policyChanged": false
+  },
+  "personalClientChanged": false
+}

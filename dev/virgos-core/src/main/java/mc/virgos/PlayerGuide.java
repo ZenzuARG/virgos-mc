@@ -75,14 +75,16 @@ public final class PlayerGuide {
             Map.of("Ver mi avance", "/virgos progreso"));
         page("bases", "Proteger tu base", List.of(
             "1. Alejate del Bastión y de terrenos ajenos. F3+G muestra chunks de 16 × 16.",
-            "2. Parate en el chunk que querés proteger y prepará /oclaims claim abajo.",
-            "3. Leé la confirmación; P abre bases y grupos. Repetí para todos los chunks de tu casa.",
+            "2. En un chunk libre, pulsa P y selecciona Reclamar parcela.",
+            "3. Si el reclamo se confirma, se abren sus permisos. Repite en cada chunk de tu base. /oclaims claim sigue disponible como alternativa.",
+            "P → Unir o separar parcelas: los chunks pegados son independientes salvo que los unas. Al separar se copian sus permisos sin liberar el terreno.",
             "Disponés de 25 chunks personales; no quedan cargados permanentemente.",
             "Revisá permisos de cofres, máquinas y construcción antes de invitar a alguien.",
             "Liberar quita la protección del chunk actual. Usalo sólo si estás seguro del lugar."),
             Map.of("Preparar reclamo", "/oclaims claim", "Preparar liberación", "/oclaims unclaim"));
         page("grupo", "Compartir con confianza", List.of(
-            "P abre Open Parties and Claims: usá sus pantallas de grupo y configuración de protección.",
+            "P abre los permisos de tu parcela: Familia, Amigos, Visitantes y excepciones por jugador.",
+            "Los grupos suman permisos; las excepciones permiten, deniegan o heredan. Hay jugadores desconectados, páginas y vista previa por persona.",
             "Invitá sólo personas de confianza y revisá qué permite tu configuración a los miembros.",
             "Probá acceso a un cofre vacío y construcción con un amigo antes de guardar objetos valiosos.",
             "Ser parte de una party no comparte misiones ni rangos. Cada uno reclama sus recompensas.",
@@ -134,7 +136,15 @@ public final class PlayerGuide {
     }
     public static int show(CommandSourceStack source,String topic) {
         var player=source.getPlayer();
-        if(player!=null&&!VirgosCore.AUTH.authenticated(player))return 0;
+        if(player!=null){
+            if(!VirgosCore.AUTH.ready()){source.sendFailure(Component.literal("AuthMe está en mantenimiento; la guía queda bloqueada."));return 0;}
+            if(VirgosCore.UPDATE_GATE==null||!VirgosCore.UPDATE_GATE.accepted(player)){
+                source.sendFailure(Component.literal("Actualizá el paquete Virgos-MC antes de abrir la guía."));return 0;
+            }
+            if(!VirgosCore.AUTH.authenticated(player)){
+                source.sendFailure(Component.literal("Usá /login primero para abrir la guía."));return 0;
+            }
+        }
         var page=PAGES.get(topic);
         if(page==null){source.sendFailure(Component.literal("Tema desconocido. Usá /virgos guia."));return 0;}
         source.sendSuccess(()->Component.literal("§6Virgos · "+page.title()),false);

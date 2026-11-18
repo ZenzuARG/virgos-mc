@@ -1,7 +1,6 @@
 package mc.virgos.dhcompat.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,11 +30,6 @@ public abstract class BackpackKeyGuardMixin {
             return;
         }
         if (now - virgos$lastActionMs < 250L) {
-            callback.setReturnValue(false);
-            return;
-        }
-        if (screen instanceof AbstractContainerScreen<?> &&
-                !screen.getClass().getName().contains("BackpackScreen")) {
             callback.setReturnValue(false);
             return;
         }

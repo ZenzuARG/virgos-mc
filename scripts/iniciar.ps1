@@ -15,6 +15,7 @@ $launcher = Join-Path $root 'ketting-server.jar'
 $eula = Join-Path $root 'eula.txt'
 
 try {
+    & (Join-Path $PSScriptRoot 'apply-treefeller-config.ps1') -Root $root | Write-Host
     & (Join-Path $PSScriptRoot 'validar-entrega.ps1') -ServerPath $root -Quiet
     if ($ValidateOnly) { Write-Output 'Java, launcher, todos los mods/plugins y EULA comprobados.'; exit 0 }
     $serverLease=Enter-ServerLock -Root $root

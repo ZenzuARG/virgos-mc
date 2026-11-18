@@ -232,6 +232,25 @@ public final class ClientProbe {
                     result.add("recipes",JSON.toJsonTree(client.getConnection().getRecipeManager().getRecipes().stream().map(recipe->recipe.getId().toString()).sorted().toList()));
                     Files.writeString(folder.resolve("recipes-audit.json"),JSON.toJson(result));
                 }
+                case "qa_identity" -> {
+                    if (!(client.screen instanceof TitleScreen) || client.level != null
+                        || client.player != null || client.getConnection() != null)
+                        throw new IllegalStateException("Switch QA identity only while fully disconnected");
+                    String name = command.get("name").getAsString();
+                    if (!java.util.Set.of("VirgosQA1", "VirgosQA2").contains(name))
+                        throw new IllegalArgumentException("Only fixed local QA identities are allowed");
+                    var uuid = java.util.UUID.nameUUIDFromBytes(("OfflinePlayer:" + name)
+                        .getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                    var user = new net.minecraft.client.User(name, uuid.toString(), "0",
+                        java.util.Optional.empty(), java.util.Optional.empty(), net.minecraft.client.User.Type.LEGACY);
+                    var field = java.util.Arrays.stream(Minecraft.class.getDeclaredFields())
+                        .filter(candidate -> candidate.getType() == net.minecraft.client.User.class)
+                        .findFirst().orElseThrow();
+                    field.setAccessible(true);
+                    field.set(client, user);
+                    if (!name.equals(client.getUser().getName()) || !uuid.equals(client.getUser().getProfileId()))
+                        throw new IllegalStateException("QA identity replacement did not take effect");
+                }
                 case "disconnect" -> {
                     if (client.level != null) client.level.disconnect();
                     client.clearLevel();

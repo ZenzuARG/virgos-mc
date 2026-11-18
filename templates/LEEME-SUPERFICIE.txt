@@ -1,0 +1,13 @@
+ACTUALIZAR: cierra Minecraft, extrae este ZIP y abre EMPEZAR.
+Pulsa Actualizar / reparar Virgos-MC. El asistente reutiliza la carpeta
+guardada y conserva el progreso del Códice: no tienes que repetir misiones.
+
+CÓDICE: abre con J. Elige una ruta para ver por dónde empezar, sus requisitos
+y tus misiones. Mi perfil sigue en el Códice.
+
+MAPA: abre con M y elige el mapa de superficie en las opciones de selección
+de mapa. El asistente lo deja separado y no sobrescribe tus mapas ni puntos
+de ruta. Puedes volver al mapa anterior cuando quieras. La superficie es una
+captura del 17/11/2026; no se actualiza automáticamente.
+
+AYUDA: /virgos menu. VOZ: O para ajustes y Bloq Mayús para hablar.

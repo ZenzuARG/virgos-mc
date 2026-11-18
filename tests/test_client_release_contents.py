@@ -61,9 +61,15 @@ class ClientReleaseContentsTest(unittest.TestCase):
                 common = archive.read("asistente/installer-common.ps1").decode("utf-8-sig")
                 self.assertIn("function Get-VirgosClientMemoryMb { return 8192 }", common)
                 options = archive.read("asistente/overrides/options.txt").decode("utf-8")
+                self.assertIn("mipmapLevels:0", options.splitlines())
+                defaults = archive.read("asistente/overrides/config/defaultoptions/options.txt").decode("utf-8")
+                self.assertIn("mipmapLevels:0", defaults.splitlines())
                 self.assertIn("key_key.virgos_codex.open:key.keyboard.j", options)
                 self.assertIn("key_iris.keybind.reload:key.keyboard.f8", options)
                 self.assertFalse(any("virgos_local_qa" in name or "/saves/" in name for name in archive.namelist()))
+            with zipfile.ZipFile(fixture / "dist/Virgos-MC-2.0.0.mrpack") as archive:
+                for name in ["overrides/options.txt", "overrides/config/defaultoptions/options.txt"]:
+                    self.assertIn("mipmapLevels:0", archive.read(name).decode("utf-8").splitlines())
             # Legacy CLI retains its payloads and its original file-mtime behavior.
             legacy = fixture / 'dist/Virgos-MC-2.0.0-instalar.zip'
             with zipfile.ZipFile(legacy) as archive:
@@ -153,6 +159,8 @@ class CandidateReleaseTest(unittest.TestCase):
             self.assertEqual(manifest['clientRelease'], '2.1.0-r1')
             self.assertEqual(manifest['clientFingerprint'], 'virgos-client-2.1.0-r1')
             self.assertIn('asistente/dh-client-settings.ps1', archive.namelist())
+            self.assertNotIn('asistente/surface-map.ps1', archive.namelist())
+            self.assertNotIn('surfaceMapSha256', manifest)
             self.assertIn('enableAutoUpdater = false', archive.read('asistente/overrides/config/DistantHorizons.toml').decode())
             custom = [x for x in manifest['files'] if x.get('bundled')]
             self.assertEqual(len(custom), 3)
@@ -167,6 +175,82 @@ class CandidateReleaseTest(unittest.TestCase):
                                  (self.inputs / item['filename']).read_bytes())
         self.assertEqual(before, {p: p.read_bytes() for p in before})
         self.assertFalse((self.source / 'dist').exists())
+
+    def test_package_version_can_preserve_compatible_wire_identity(self):
+        self.metadata.update(version='3.1.0', clientRelease='3.0.6',
+                             clientFingerprint='virgos-client-3.0.6')
+        self.write(self.inputs / 'release.json', self.metadata)
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-3.1.0-instalar.zip') as archive:
+            manifest = json.loads(archive.read('asistente/cliente.lock.json'))
+            self.assertEqual(manifest['version'], '3.1.0')
+            self.assertEqual(manifest['clientRelease'], '3.0.6')
+            self.assertIn(b'renderRadius = 128', archive.read('asistente/overrides/config/grassiergrass-client.toml'))
+            self.assertIn(b'bladesPerBlock = 64', archive.read('asistente/overrides/config/grassiergrass-client.toml'))
+            modernfix = archive.read('asistente/overrides/config/modernfix-mixins.properties')
+            self.assertIn(b'mixin.perf.dynamic_resources=true', modernfix)
+            self.assertIn(b'mixin.perf.smart_ingredient_sync=false', modernfix)
+            self.assertEqual(manifest['clientFingerprint'], 'virgos-client-3.0.6')
+
+    def test_independent_wire_identity_still_rejects_unsafe_or_mismatched_values(self):
+        for release, fingerprint in [('../3.0.6', 'virgos-client-../3.0.6'),
+                                     ('3.0.6', 'virgos-client-3.1.0')]:
+            self.metadata.update(clientRelease=release, clientFingerprint=fingerprint)
+            self.write(self.inputs / 'release.json', self.metadata)
+            self.assertNotEqual(self.invoke().returncode, 0)
+            self.assertFalse(self.output.exists())
+
+    def test_candidate_can_pin_a_small_additional_client_mod_without_copying_base_lock(self):
+        item = dict(self.mods['artifacts'][0], filename='extra.jar', project='extra')
+        (self.downloads / 'extra.jar').write_bytes((self.downloads / 'fixture.jar').read_bytes())
+        self.metadata['additionalMods'] = [item]
+        self.write(self.inputs / 'release.json', self.metadata)
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0-instalar.zip') as archive:
+            names = [x['filename'] for x in json.loads(archive.read('asistente/cliente.lock.json'))['files']]
+            self.assertEqual(names.count('extra.jar'), 1)
+            self.assertEqual(names.count('fixture.jar'), 1)
+
+    def test_additional_mods_reject_duplicates_and_nonclient_entries_before_output(self):
+        for item in [self.mods['artifacts'][0],
+                     dict(self.mods['artifacts'][0], filename='extra.jar', sides=['server'])]:
+            self.metadata['additionalMods'] = [item]
+            self.write(self.inputs / 'release.json', self.metadata)
+            self.assertNotEqual(self.invoke().returncode, 0)
+            self.assertFalse(self.output.exists())
+
+    def make_surface(self, entry='cm$converted/-1_2.zip'):
+        path = self.inputs / 'surface.zip'
+        with zipfile.ZipFile(path, 'w') as archive:
+            archive.writestr(entry, b'tile fixture')
+        self.metadata['surfaceMap'] = {'local_source': path.name,
+                                       'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        self.write(self.inputs / 'release.json', self.metadata)
+        return path
+
+    def test_surface_payload_is_separate_and_pinned_in_both_installers(self):
+        payload = self.make_surface().read_bytes()
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0-instalar.zip') as archive:
+            manifest = json.loads(archive.read('asistente/cliente.lock.json'))
+            self.assertEqual(manifest['surfaceMapSha256'], hashlib.sha256(payload).hexdigest())
+            self.assertEqual(archive.read('asistente/Virgos-Superficie-Xaero.zip'), payload)
+            self.assertIn('asistente/surface-map.ps1', archive.namelist())
+            self.assertNotIn('asistente/overrides/xaero', archive.namelist())
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0.mrpack') as archive:
+            self.assertEqual(archive.read('overrides/virgos-extras/Virgos-Superficie-Xaero.zip'), payload)
+            self.assertIn('overrides/virgos-extras/IMPORTAR-MAPA.txt', archive.namelist())
+            self.assertFalse(any(name.startswith('overrides/xaero/') for name in archive.namelist()))
+
+    def test_rejects_unexpected_surface_member_before_creating_output(self):
+        self.make_surface('cm$converted/../waypoints.txt')
+        result = self.invoke()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Surface map', result.stderr)
+        self.assertFalse(self.output.exists())
 
     def test_explicit_archives_reproduce_bytes_in_separate_outputs(self):
         first = self.invoke()

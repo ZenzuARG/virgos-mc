@@ -1,5 +1,7 @@
 # Implementación de Virgos-MC
 
+> Este documento conserva un registro histórico. Las rutas `.lab/...` y sus informes son evidencia local/ignorada; para el estado vigente consultá el roadmap y los manifiestos de `pack/`.
+
 ## Auditoría de recetas — 2026-10-20
 
 Se retiraron las exclusiones de recetas de KubeJS y se habilitaron las opciones nativas de fabricación de Lightman's Currency. El servidor conserva las recetas de los mods tal como las entrega cada mod; las condiciones internas de esos mods siguen siendo la autoridad. `pack/disabled-recipes.json` queda vacío y la mejora de mochilas de Sophisticated Backpacks vuelve a mostrar la progresión de hierro, oro y diamante en JEI.

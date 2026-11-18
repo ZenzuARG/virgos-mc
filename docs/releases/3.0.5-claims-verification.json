@@ -1,0 +1,26 @@
+{
+  "release": "3.0.5",
+  "status": "incomplete",
+  "coreCommit": "ea030257465bc493d83a1666f80e8c2f92ecee85",
+  "coreSha256": "9c11af2e586a26ca857f7f08563187c6f395dea3c43f717b3f94c8e797b3740b",
+  "backup": "backups/full/virgos-20261116-225805-auto.zip",
+  "verified": [
+    "Gradle check jar",
+    "native review approved and acknowledged",
+    "full backup integrity",
+    "public startup version3.0.5",
+    "two QA identities authenticated"
+  ],
+  "pending": [
+    "public client shortcut update",
+    "menu opening via P",
+    "add player through menu",
+    "chest permission enforcement",
+    "reconnect persistence"
+  ],
+  "latestFailure": "QA1 allocation stalls with4GiB heap; timeout before menu assertion",
+  "qaClientsClosed": true,
+  "temporaryFixtureRemoved": true,
+  "shortcutFixCommit": "a0f91ac",
+  "shortcutFixPubliclyDistributed": false
+}

@@ -1,0 +1,82 @@
+{
+  "release": "3.0.7",
+  "clientRelease": "3.0.6",
+  "status": "verified-public",
+  "sourceCommit": "289a2c1b2510222bb74cc67c0eee9294d4244243",
+  "coreSha256": "b3663855c65555fac0805d603e1d56563b9469578bb6b3005693d56d6dd14cc5",
+  "checks": [
+    "deterministic native invalidation RED reproduced null-buffer NPE",
+    "focused regression GREEN",
+    "full Gradle check and jar GREEN",
+    "independent packaged probe PASS and unsafe counterfactual FAIL",
+    "all existing gameplay class bytes unchanged from3.0.6"
+  ],
+  "activationMarker": "Virgos: synchronized KubeJS generated-resource streams active",
+  "runtimePassed": true,
+  "minecraftClientsLaunched": 0,
+  "limitations": [
+    "Exact original failing resource ID was not logged",
+    "Concurrent resource export remains outside the startup read guard"
+  ],
+  "backup": {
+    "sha256": "190ff17370fc1d9ed11ae55ab3cfa8290d8f8a4cba8091c56f42eac50994eba7",
+    "completed": "2026-11-17T04:40:08.9130965Z",
+    "archive": "backups/full/virgos-20261117-013107-auto.zip",
+    "verifiedFiles": 10590,
+    "worldFolders": [
+      "virgos_world",
+      "virgos_world_aether_the_aether",
+      "virgos_world_irons_spellbooks_pocket_dimension",
+      "virgos_world_nether",
+      "virgos_world_the_end",
+      "virgos_world_twilightforest_twilight_forest"
+    ]
+  },
+  "deployedAtUtc": "2026-11-17T04:42:34.160076+00:00",
+  "previousCoreSha256": "f003cb42999aaa08badc07a143022c229bb8cecb4e64bbd74577733cfe0e81f2",
+  "pinnedKubeJs": {
+    "file": "kubejs-forge-2001.6.5-build.26.jar",
+    "sha256": "1769312192fbf9d72f45054ba61130523bfb471b5f480a4bff8c210ec09400bb"
+  },
+  "inheritedGameplayProof": "docs/releases/3.0.6-claims-verification.json",
+  "tickProbe": {
+    "first": 33814778,
+    "second": 33814823,
+    "advancing": true,
+    "commands": "time query gametime (read-only)"
+  },
+  "verifiedAtUtc": "2026-11-17T04:46:43.749992+00:00",
+  "activatedAtUtc": "2026-11-17T04:42:42.916Z",
+  "publicPid": 37308,
+  "guardActivated": true,
+  "serverThreadObserved": true,
+  "tcpListener": {
+    "port": 25565,
+    "ownerPid": 37308
+  },
+  "startupScripts": {
+    "loaded": 1,
+    "total": 1,
+    "errors": 0
+  },
+  "serverScripts": {
+    "loaded": 4,
+    "total": 4,
+    "errors": 0
+  },
+  "doneLine": "[01:44:14] [Server thread/INFO] [minecraft/DedicatedServer]: Done (14.816s)! For help, type \"help\"",
+  "activationLine": "[01:43:36] [main/INFO] [de.la.mo.ku.sc.da.GeneratedData/]: Virgos: synchronized KubeJS generated-resource streams active",
+  "clientUpdateRequired": false,
+  "existingGameplayClassesByteIdentical": true,
+  "sourceAssessment": {
+    "base": "d0cc041",
+    "risk": "medium",
+    "reviewDue": false,
+    "reason": "under_budget"
+  },
+  "serverPatch": {
+    "file": "Virgos-MC-3.0.7-server-hotfix.zip",
+    "bytes": 178035,
+    "sha256": "ec9a59bba93145fa4ea2e00e6d52244edf5e1c52d4d79d622f73f3a36f42de2f"
+  }
+}

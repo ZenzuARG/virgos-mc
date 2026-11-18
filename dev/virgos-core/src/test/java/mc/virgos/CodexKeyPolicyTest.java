@@ -10,7 +10,34 @@ public final class CodexKeyPolicyTest {
         if (!condition) throw new AssertionError(message);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        var shipped = new LinkedHashMap<String, ManagedKeyPolicy.Binding>();
+        try (var stream = CodexKeyPolicyTest.class.getResourceAsStream("/virgos-keybindings.json")) {
+            check(stream != null, "Shipped controls policy must be available");
+            var root = com.google.gson.JsonParser.parseReader(new java.io.InputStreamReader(stream,
+                java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject();
+            root.getAsJsonObject("bindings").entrySet().forEach(entry -> {
+                var row = entry.getValue().getAsJsonObject();
+                var previous = new java.util.ArrayList<String>();
+                row.getAsJsonArray("previous").forEach(value -> previous.add(value.getAsString()));
+                shipped.put(entry.getKey(), new ManagedKeyPolicy.Binding(row.get("key").getAsString(),
+                    previous, row.get("repairUnbound").getAsBoolean(), row.get("context").getAsString()));
+            });
+        }
+        String parcels = "key.virgos_codex.claim_permissions";
+        String opac = "gui.xaero_pac_key_open_menu";
+        String social = "key.socialInteractions";
+        for (var saved : List.of(Map.of(opac, "key.keyboard.apostrophe", social, "key.keyboard.p"),
+                                  Map.of(opac, "key.keyboard.p", social, ManagedKeyPolicy.UNBOUND))) {
+            var upgraded = ManagedKeyPolicy.migrate(saved, shipped);
+            check("key.keyboard.p".equals(upgraded.get(parcels)), "P must open parcel permissions");
+            check(!"key.keyboard.p".equals(upgraded.get(opac)), "Original OPAC must release legacy P");
+            check(!"key.keyboard.p".equals(upgraded.get(social)), "Social interactions must release legacy P");
+            check(upgraded.equals(ManagedKeyPolicy.migrate(upgraded, shipped)), "Parcel migration must be idempotent");
+        }
+        var personal = Map.of(parcels, "key.keyboard.u:CONTROL", opac, "key.keyboard.k", social, "key.keyboard.o");
+        var preserved = ManagedKeyPolicy.migrate(personal, shipped);
+        personal.forEach((name, key) -> check(key.equals(preserved.get(name)), "Custom control must survive: " + name));
         var policy = new LinkedHashMap<String, ManagedKeyPolicy.Binding>();
         policy.put(ManagedKeyPolicy.CODEX, new ManagedKeyPolicy.Binding("key.keyboard.j", List.of(), true, "global"));
         policy.put(ManagedKeyPolicy.LEGACY, new ManagedKeyPolicy.Binding(ManagedKeyPolicy.UNBOUND, List.of(), false, "legacy"));

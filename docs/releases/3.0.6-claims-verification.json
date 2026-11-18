@@ -1,0 +1,129 @@
+{
+  "release": "3.0.6",
+  "status": "verified-public",
+  "checks": [
+    "candidate-artifacts-match-locked-hashes",
+    "verified-Virgos-MC-3.0.6-instalar.zip",
+    "verified-Virgos-MC-3.0.6.mrpack",
+    "native-group-identifiers-accepted-by-installed-OPAC-validator"
+  ],
+  "runtimePassed": true,
+  "files": [
+    {
+      "name": "Virgos-MC-3.0.6-instalar.zip",
+      "bytes": 50974905,
+      "sha256": "1c99fbdd9211451e784abbcca0ed394324d7a3114d7fd02423ce42b6b4021267"
+    },
+    {
+      "name": "Virgos-MC-3.0.6.mrpack",
+      "bytes": 50944058,
+      "sha256": "40bc32f8aa99fadc95c024e59f4243bb2af769f45d9153f08d42a8a404b8acc9"
+    }
+  ],
+  "coreSha256": "f003cb42999aaa08badc07a143022c229bb8cecb4e64bbd74577733cfe0e81f2",
+  "codexSha256": "6fc61ac6de04ade266966997a36ae3af850655d346eaf98971978916c04572da",
+  "maxConcurrentQaClients": 1,
+  "qaHeapMb": 6144,
+  "backup": {
+    "sha256": "de2e20d02b05cb7962c514b81580ad1bba2cde73ffad8aac21323601bfc78e4b",
+    "completed": "2026-11-17T03:46:40.3653477Z",
+    "archive": "backups/full/virgos-20261117-003823-auto.zip",
+    "verifiedFiles": 10582,
+    "worldFolders": [
+      "virgos_world",
+      "virgos_world_aether_the_aether",
+      "virgos_world_irons_spellbooks_pocket_dimension",
+      "virgos_world_nether",
+      "virgos_world_the_end",
+      "virgos_world_twilightforest_twilight_forest"
+    ]
+  },
+  "sourceCommit": "fe1af58937af5bb52bcf93443dff224c5589623e",
+  "deployedAtUtc": "2026-11-17T03:49:29.060Z",
+  "nativeReview": {
+    "commit": "995bcd8",
+    "result": "approved-and-acknowledged",
+    "advisories": [
+      "Unit pagination test does not navigate actual UI; live test pending"
+    ]
+  },
+  "publicPid": 36264,
+  "bootstrap": {
+    "attempts": 2,
+    "firstFailure": "KubeJS GeneratedData.get null bytes before opening world",
+    "identicalRetryOnline": true,
+    "rootCauseConfirmed": false,
+    "evidence": ".lab/reports/3.0.6-startup-failure.log"
+  },
+  "backupHistory": [
+    {
+      "sha256": "54bab800489612f8faadf574524944bb8a7bdc56a0a4bc6dbe5bb2134c2f894c",
+      "completed": "2026-11-17T03:18:24.3226811Z",
+      "archive": "backups/full/virgos-20261117-000021-auto.zip",
+      "verifiedFiles": 10582,
+      "worldFolders": [
+        "virgos_world",
+        "virgos_world_aether_the_aether",
+        "virgos_world_irons_spellbooks_pocket_dimension",
+        "virgos_world_nether",
+        "virgos_world_the_end",
+        "virgos_world_twilightforest_twilight_forest"
+      ]
+    }
+  ],
+  "runtimeFailures": [
+    "stale QA driver error matched reused command line, fixed with mtime regression",
+    "native permission group IDs exceeded16characters, shortened and validated"
+  ],
+  "completedAtUtc": "2026-11-17T04:08:30.171871+00:00",
+  "e2e": {
+    "passed": true,
+    "checks": [
+      "P-opens-Spanish-permission-menu",
+      "offline-player-added-through-menu",
+      "foreign-chest-denied-before-grant",
+      "saved-chest-permission-enforced",
+      "chest-access-survives-reconnect",
+      "saved-membership-and-chest-toggle-survive-owner-reconnect",
+      "revoked-chest-access-denied"
+    ],
+    "cleanup": true,
+    "maxConcurrentClients": 1,
+    "cleanupErrors": [],
+    "humanConfigUnchanged": true
+  },
+  "qaClientClosed": {
+    "pid": 1744,
+    "name": "VirgosQA1",
+    "finished": "2026-11-17T04:07:08.646093+00:00",
+    "exitCode": 0
+  },
+  "qaPeakWorkingSetBytes": 10045874176,
+  "physicalShortcut": "P",
+  "memberPickerNextPageClicks": 3,
+  "interactionPrecondition": "Empty main hand; held item-use permissions are separate from chest permissions",
+  "limitations": [
+    "Initial KubeJS datapack bootstrap failed once; identical retry succeeded; root cause not confirmed",
+    "Individual override, no-claim and server-restart persistence matrices were not part of this reconnect scenario"
+  ],
+  "qaSourceCommit": "6badc0e095c684c600dcfc6f4b8cd2beff54dea5",
+  "sourceAssessment": {
+    "base": "995bcd8",
+    "risk": "medium",
+    "reviewDue": false,
+    "reason": "under_budget",
+    "changedLines": 322
+  },
+  "serverPatch": {
+    "file": "Virgos-MC-3.0.6-server-hotfix.zip",
+    "bytes": 176334,
+    "sha256": "8382414bb63d2cd7eb270fb223dc1d83238c0f6e49fc1b16247368c05b8c01ba"
+  },
+  "correctedCoreStartup": {
+    "attempts": 1,
+    "pid": 28848,
+    "online": true
+  },
+  "oldClientRejectionObserved": true,
+  "initialDeployedAtUtc": "2026-11-17T03:21:03.848621+00:00"
+}

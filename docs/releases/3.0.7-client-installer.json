@@ -1,0 +1,88 @@
+{
+  "version": "3.0.7",
+  "clientRelease": "3.0.6",
+  "installerVersion": 26,
+  "required": 133,
+  "optional": 3,
+  "upstreamBytes": 756879254,
+  "overrideFiles": 21,
+  "files": [
+    {
+      "name": "Virgos-MC-3.0.6-instalar.zip",
+      "bytes": 50975224,
+      "sha256": "101a42292e5465e4ff79502249807fba9512774d5528c2f392013192aac833f2"
+    },
+    {
+      "name": "Virgos-MC-3.0.6.mrpack",
+      "bytes": 50944053,
+      "sha256": "90490ae3f5a4ef57fffdd51d1e6df634fc627029b9247beb1b3c910a7a697f3e"
+    },
+    {
+      "name": "Virgos-MC-3.0.7-server-hotfix.zip",
+      "bytes": 178035,
+      "sha256": "ec9a59bba93145fa4ea2e00e6d52244edf5e1c52d4d79d622f73f3a36f42de2f"
+    }
+  ],
+  "status": "verified-packaged-offline",
+  "verifiedAtUtc": "2026-11-17T05:12:00.014047+00:00",
+  "minecraftClientsLaunched": 0,
+  "serverRestarted": false,
+  "checks": {
+    "clientSuite": {
+      "passed": 14
+    },
+    "workflowSelection": {
+      "passed": 1,
+      "redBeforeFix": true
+    },
+    "independentVerifier": "PASS",
+    "archiveCrcSourcesAndRoles": "PASS",
+    "fullOriginalManifestOfflineCli": "PASS (133 required mods and shader)",
+    "verifyOnlyAllInstanceHashesUnchanged": true,
+    "existingMipmaps4To0": true,
+    "otherPreferencesPreserved": true,
+    "repeatOptionsIdempotent": true,
+    "installerPowerShellSuite": "PASS after stale fixture expectation corrected"
+  },
+  "limitations": [
+    "No Minecraft rendering or FPS measurement; no new gameplay claim",
+    "Existing clients must run installer26 to apply the setting"
+  ],
+  "clientPackagingMetadata": "pack/candidates/3.0.6/installer26.json",
+  "publication": {
+    "url": "https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.0.7",
+    "id": 448174977,
+    "tag": "v3.0.7",
+    "publishedAt": "2026-11-17T05:16:22Z",
+    "tagCommit": "d5aac1de826d9912427ab79a6b8abd74444e1847",
+    "latestVerified": true,
+    "assets": [
+      {
+        "name": "release.json",
+        "bytes": 854,
+        "digest": "sha256:3c0a2a002665eb8b05ca950b2e3fa3b45108c8bbe6ee1c780255afb5856aad84"
+      },
+      {
+        "name": "Virgos-MC-3.0.6-instalar.zip",
+        "bytes": 50975224,
+        "digest": "sha256:101a42292e5465e4ff79502249807fba9512774d5528c2f392013192aac833f2"
+      },
+      {
+        "name": "Virgos-MC-3.0.6.mrpack",
+        "bytes": 50944053,
+        "digest": "sha256:90490ae3f5a4ef57fffdd51d1e6df634fc627029b9247beb1b3c910a7a697f3e"
+      },
+      {
+        "name": "Virgos-MC-3.0.7-server-hotfix.zip",
+        "bytes": 178035,
+        "digest": "sha256:ec9a59bba93145fa4ea2e00e6d52244edf5e1c52d4d79d622f73f3a36f42de2f"
+      }
+    ]
+  },
+  "nativeReview": {
+    "lineage": "review-c27ab0d7f5fd3a52",
+    "result": "approved-no-findings",
+    "acknowledged": true,
+    "authority": "burned"
+  }
+}

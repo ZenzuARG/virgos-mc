@@ -17,7 +17,34 @@ function Write-JsonAtomic($Path, $Value) {
     else { [IO.File]::Move($temp, $Path) }
 }
 
+function Set-VirgosClientGraphicsDefaults([string]$OptionsPath) {
+    # Only this managed graphics preference overrides an existing player choice.
+    $original=if([IO.File]::Exists($OptionsPath)){[IO.File]::ReadAllText($OptionsPath)}else{''}
+    $pattern='(?m)^mipmapLevels:[^\r\n]*'
+    if([regex]::IsMatch($original,$pattern)) {
+        $changed=[regex]::Replace($original,$pattern,'mipmapLevels:0')
+    } else {
+        $newline=if($original.Contains("`r`n")){"`r`n"}else{"`n"}
+        $separator=if($original.Length -gt 0 -and -not $original.EndsWith("`n")){$newline}else{''}
+        $changed=$original+$separator+'mipmapLevels:0'+$newline
+    }
+    if($changed -cne $original) {
+        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($OptionsPath))
+        Write-TextAtomic $OptionsPath $changed
+    }
+}
+
 function Get-VirgosClientMemoryMb { return 8192 }
+
+function Select-VirgosLauncher([string]$SavedLauncher, [bool]$OfficialReady, [bool]$TLauncherReady) {
+    switch ($SavedLauncher) {
+        'Oficial' { if ($OfficialReady) { return 'Oficial' }; return '' }
+        'TLauncher' { if ($TLauncherReady) { return 'TLauncher' }; return '' }
+    }
+    if ($OfficialReady -and -not $TLauncherReady) { return 'Oficial' }
+    if ($TLauncherReady -and -not $OfficialReady) { return 'TLauncher' }
+    return ''
+}
 
 function Resolve-VirgosClientMemoryMb([int]$RequestedMemoryMb) {
     if ($RequestedMemoryMb -in @(4096,5120,6144)) { return Get-VirgosClientMemoryMb }

@@ -1,0 +1,66 @@
+{
+  "release": "3.0.9",
+  "clientRelease": "3.0.6",
+  "installer": 26,
+  "status": "verified-public",
+  "sourceCommit": "dc4cdce74c5d1b497c50cd7bdf85d84e791074b2",
+  "coreSha256": "abb4fac3e68b58dd9759f9a230f209b0fa7eb5742b4b5ab7970ccc22f87f779f",
+  "previousCoreSha256": "21d3e46679976604dccf2ed917028944d3f3a909dacecd69ca768d02d29630eb",
+  "clientUpdateRequired": false,
+  "minecraftClientsLaunched": 0,
+  "checks": [
+    "34-task full offline suite PASS",
+    "independent native integration probes PASS",
+    "four-lens native review and targeted retention validation approved/acknowledged"
+  ],
+  "limitations": [
+    "No rendered Minecraft UI or live-world player interactions claimed"
+  ],
+  "scope": "Server Core only; client3.0.6 and installer26 unchanged",
+  "deployedAtUtc": "2026-11-17T17:56:35.812760+00:00",
+  "backup": {
+    "completed": "2026-11-17T17:51:07.0063468Z",
+    "sha256": "2728034c426defd494b348ada44ca11e7ea99a092b31026aa5628138019ed1aa",
+    "verifiedFiles": 10708,
+    "worldFolders": [
+      "virgos_world",
+      "virgos_world_aether_the_aether",
+      "virgos_world_irons_spellbooks_pocket_dimension",
+      "virgos_world_nether",
+      "virgos_world_the_end",
+      "virgos_world_twilightforest_twilight_forest"
+    ],
+    "archive": "backups/full/virgos-20261117-143901-auto.zip"
+  },
+  "backupBytes": 26381472096,
+  "backupVerification": "Managed finalizer entry hashes and archive SHA256; independent manifest count/size readback",
+  "clientGateUnchanged": true,
+  "claimPolicyUnchanged": true,
+  "runtimePassed": true,
+  "verifiedAtUtc": "2026-11-17T17:58:56.6251857+00:00",
+  "activatedAtUtc": "2026-11-17T17:56:44.305Z",
+  "publicPid": 43760,
+  "runnerPid": 4832,
+  "guardActivated": true,
+  "installedIndependentVerification": "PASS",
+  "clientProtocolBytesUnchanged": true,
+  "startupScripts": {
+    "loaded": 1,
+    "total": 1,
+    "errors": 0
+  },
+  "serverScripts": {
+    "loaded": 4,
+    "total": 4,
+    "errors": 0
+  },
+  "tickProbe": {
+    "second": 34709792,
+    "first": 34709729,
+    "advancing": true
+  },
+  "tcpListener": {
+    "port": 25565,
+    "ownerPid": 43760
+  }
+}
