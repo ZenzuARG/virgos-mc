@@ -13,8 +13,8 @@
   "artifacts": [
     {
       "name": "Virgos-MC-3.1.0-instalar.zip",
-      "bytes": 382523127,
-      "sha256": "dc3451c4b029723e8a9b70d09ccd7d125604da79d0decf7075df12b1392f9335"
+      "bytes": 382523105,
+      "sha256": "58be8d5c7703fac37a2e025598fd90f21196eb6c6be0a614030651e7fc010055"
     },
     {
       "name": "Virgos-MC-3.1.0.mrpack",
@@ -39,7 +39,8 @@
     "dhSharedDefaults": "passed",
     "releaseSelection": "passed",
     "independentVerification": "passed; no new blockers; existing valid packaging byte-identical to baseline5063792",
-    "reproducibleBuild": "both archives SHA256 identical across two independent output directories"
+    "reproducibleBuild": "Pre-guide-normalization archives reproduced exactly; final archives differ only by intended UTF-8 correction in LEEME.txt (MRPack unchanged)",
+    "pinnedNotices": "Git blobs and working files match original metadata SHA256; -text prevents Windows conversion"
   },
   "knownLimitations": [
     "No new in-game FPS benchmark; user waived grass128 measurement.",
