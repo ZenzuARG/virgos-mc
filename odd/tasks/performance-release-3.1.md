@@ -9,10 +9,10 @@ S3. "Bien, teniendo en cuenta todas las mejoras y ajustes, larguemos la version 
 S4. "Esta largada de version significa tambien crear el release con el instalador correspondiente" Deliver the published release and its corresponding one-click installer ZIP, not just metadata.
 
 ## Tasks
-- T1 S1-S3 inline â€” pin candidate inputs and balanced seeds, preserve upgrade preferences; complete locally. Risk:item5 installer/dependencies. Mapping delegated read-only because release inputs exceed bounded inline evidence.
-- T2 S1-S4 inline â€” focused regression, build reproducible package and isolated installer tests; complete (15 Python regressions; installer WindowsPowerShell5.1; controls/DH/memory passed). No live launcher/original install mutation.
-- T3 S1-S4 independent verifier â€” inspect actual archives, upgrade/fresh install and wire compatibility; PASS, no new blockers. Risk:item5.
-- T4 S3-S4 inline â€” scoped commit/review per native mode, publish new release/assets without overwriting existing release; pending (CLI not authenticated). No server rollout authorized.
+- T1 S1-S3 inline — pin candidate inputs and balanced seeds, preserve upgrade preferences; complete locally. Risk:item5 installer/dependencies. Mapping delegated read-only because release inputs exceed bounded inline evidence.
+- T2 S1-S4 inline — focused regression, build reproducible package and isolated installer tests; complete (15 Python regressions; installer WindowsPowerShell5.1; controls/DH/memory passed). No live launcher/original install mutation.
+- T3 S1-S4 independent verifier — inspect actual archives, upgrade/fresh install and wire compatibility; PASS, no new blockers. Risk:item5.
+- T4 S3-S4 inline — scoped commit/review per native mode, publish new release/assets without overwriting existing release; pending (CLI not authenticated). No server rollout authorized.
 
 ## Log
 L1. "Okey, hagamos algo, si ya tenemos todo optimizado y solucionado, larguemos un release nuevo, misma solucion de 1 solo click para instalar el juego, pero implementar todo lo nuevo y los ajustes que hicimos"
@@ -24,3 +24,5 @@ L5. Frozen installer27 Codex hash matches actual test and current built JAR;3.0.
 L6. Package/wire identity decoupled without changing admission policy:3.1.0 package, installer28, wire3.0.6. RED new compatible identity rejected; GREEN15 packaging tests passed. Grass preservation RED failed then GREEN actual installer fixture passed. Existing behavior differential independently byte-identical versus5063792. No server or original-client mutation.
 L7. Independent verifier PASS all local S1-S4 checks; published deliverable still pending. Actual ZIP382523127bytes SHA256dc3451c4b029723e8a9b70d09ccd7d125604da79d0decf7075df12b1392f9335. MRPack382489614bytes SHA256f5d2ff9e8f331b89d70c188b4db8aa4ffd58d4c38965c07a0827056bd504a124. Output: external system-temp virgos-release-3.1.0-r28. Existing global candidate consistency2failures and source-only WindowsPowerShell5.1 encoding fixture are unrelated; actual distributed BOM scripts pass.
 L8. Portable GitHub CLI exists but reports no authenticated session. No GitHub mutation; no credentials from other channels inspected. Native high-risk assessment requires explicit untracked selection; use committed-only scoped unit to exclude unrelated work. Risk:item5 installer/dependencies. Rollback: remove candidate3.1.0, restore seed/template/builder changes; deployed server/data unchanged.
+
+L9. Local release commit e326302; Windows source-byte preservation fix d98a202. Both LGPL notice blobs now match their original pinned SHA256 after disabling checkout conversion. No license whitespace was edited. Final UTF-8 guide normalization preserves unchanged copy. Rebuild final archives after that guide-only correction.
