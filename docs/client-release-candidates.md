@@ -81,6 +81,15 @@ Candidate validation requires Python 3.11 or later for the standard-library TOML
 Version must be a safe three-part release version, optionally with a prerelease
 suffix. Installer must be a positive integer. Client release must equal the version
 or begin with `<version>-`; fingerprint must equal `virgos-client-<clientRelease>`.
+
+Candidate metadata can additionally pin a verified surface snapshot via
+`surfaceMap: {"local_source": "installer27-artifacts/Virgos-Superficie-Xaero.zip", "sha256": "..."}`.
+The paired `pack/candidates/3.0.6/installer27.json` and
+`installer27-artifacts.lock.json` retain the live 3.0.6 wire identity. Stage the
+hash-matching Codex JAR and the original `cm$converted` surface archive in the
+ignored `installer27-artifacts/` directory next to the metadata. The Windows
+installer adds the snapshot only if its dedicated Xaero folder is absent; the
+MRPack puts it in `virgos-extras` for manual import, outside active Xaero data.
 Minecraft/Forge remain pinned to 1.20.1/47.4.22 in the mod lock.
 
 ### Custom artifact lock

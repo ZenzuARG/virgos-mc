@@ -8,11 +8,11 @@ El pueblo del spawn tiene cuatro arcos que salen caminando al mundo. La plaza, e
 
 **Dormir:** alcanza con que una sola persona se acueste para pasar la noche en el mundo principal, aunque los demás sigan explorando. Se mantienen las condiciones normales de uso de las camas, como no tener monstruos cerca.
 
-**Si no sabés qué hacer:** pulsá **J → 01 · Empezar → Empezá por acá**. `/virgos guia` abre ayuda por temas; `/virgos progreso` muestra el próximo paso. No hace falta completar todos los mods.
+**Si no sabes qué hacer:** abre el Códice con **J** y selecciona **Empezar**. La ruta muestra el siguiente paso, los requisitos y el progreso que ya tienes. `/virgos guia` abre ayuda por temas; `/virgos progreso` muestra el próximo paso. No hace falta completar todos los mods.
 
 **Nuevo en 2.0:** mundo y progreso nuevos, con Terralith, aldeas integradas, grandes mazmorras y nuevas rutas de jefes. El códice reúne **244 misiones y guías en diez capítulos**: Empezar, Tu hogar, Create, Magia, Explorar, Cocina, Aventuras, Jefes, Cooperar y El pueblo. `/virgos menu` reúne la ayuda.
 
-La lista muestra el nombre y estado de cada misión. Usá la búsqueda del capítulo, los filtros **Pendientes / Para reclamar** y las flechas de página. Clic en una misión abre sus objetivos, explicación y recompensas. **A+ / A−** ajustan el tamaño de la interfaz; la rueda recorre páginas y, sobre los capítulos, las secciones que no entren en pantalla. **Ver mapa original** conserva la vista de conexiones de Heracles.
+Selecciona una misión para ver sus objetivos y recompensas. Volver a una ruta conserva tu lugar. **Ver mapa original** conserva la vista de conexiones de Heracles; es distinto del mapa del mundo que se abre con **M**.
 
 ## Tu perfil y el de tus amigos
 

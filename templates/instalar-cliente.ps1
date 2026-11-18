@@ -13,6 +13,18 @@ if ([IO.File]::Exists($shaderManifestPath)) {
 }
 $target = [IO.Path]::GetFullPath($Destino)
 if ($manifest.minecraft -ne '1.20.1' -or $manifest.forge -ne '47.4.22') { throw 'Version de paquete desconocida.' }
+$surfaceArchive = $null
+if (-not $Verificar -and $manifest.PSObject.Properties['surfaceMapSha256']) {
+    $surfaceArchive = Join-Path $PSScriptRoot 'Virgos-Superficie-Xaero.zip'
+    $surfaceHelper = Join-Path $PSScriptRoot 'surface-map.ps1'
+    if ($manifest.surfaceMapSha256 -cnotmatch '^[a-f0-9]{64}$' -or
+        -not [IO.File]::Exists($surfaceHelper) -or -not [IO.File]::Exists($surfaceArchive) -or
+        (Get-FileHash -LiteralPath $surfaceArchive -Algorithm SHA256).Hash -ne $manifest.surfaceMapSha256) {
+        throw 'El paquete del mapa no coincide. Extrae nuevamente el ZIP.'
+    }
+    . $surfaceHelper
+    [void](Get-VirgosSurfaceMapTarget $target)
+}
 $controlsPlan=$null
 if(-not $Verificar) {
     # Reject invalid controls before staging downloads, replacing mods or writing the lock.
@@ -120,6 +132,10 @@ if (-not $Verificar) {
         Copy-Item -LiteralPath $file.FullName -Destination $out -Force
     }
     if($null -ne $dhPlan) { Write-VirgosDhSettingsPlan $dhPlan }
+    if($surfaceArchive) {
+        Set-InstallStatus 93 'Preparando el mapa de superficie separado...'
+        Install-VirgosSurfaceMap $target $surfaceArchive
+    }
     Write-TextAtomic (Join-Path $target 'virgos-cliente.lock.json') ([IO.File]::ReadAllText($manifestPath))
     if($null -ne $controlsPlan) { Write-VirgosKeyBindingsPlan $controlsPlan }
     # Read after control migration so forcing mipmaps off cannot undo new bindings.

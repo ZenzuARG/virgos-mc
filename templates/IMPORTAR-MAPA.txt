@@ -1,0 +1,12 @@
+MAPA DE SUPERFICIE — MRPACK
+
+1. Cierra Minecraft y abre la carpeta de la instancia de Virgos-MC.
+2. En virgos-extras, extrae Virgos-Superficie-Xaero.zip. Renombra la
+   carpeta extraída cm$converted a cm$virgos_surface_20261117.
+3. Coloca esa carpeta en xaero/world-map/Multiplayer_virgos-mc.playit.plus/null/.
+   Si la carpeta cm$virgos_surface_20261117 ya existe allí, no la reemplaces.
+4. Entra al servidor y pulsa M. Abre las opciones de selección de mapa y elige
+   el mapa de superficie. Puedes volver al mapa anterior desde el mismo menú.
+
+No reemplaces otras carpetas, configuraciones ni puntos de ruta. Este mapa es
+una captura del 17/11/2026; no se actualiza automáticamente.

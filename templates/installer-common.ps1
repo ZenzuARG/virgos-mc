@@ -36,6 +36,16 @@ function Set-VirgosClientGraphicsDefaults([string]$OptionsPath) {
 
 function Get-VirgosClientMemoryMb { return 8192 }
 
+function Select-VirgosLauncher([string]$SavedLauncher, [bool]$OfficialReady, [bool]$TLauncherReady) {
+    switch ($SavedLauncher) {
+        'Oficial' { if ($OfficialReady) { return 'Oficial' }; return '' }
+        'TLauncher' { if ($TLauncherReady) { return 'TLauncher' }; return '' }
+    }
+    if ($OfficialReady -and -not $TLauncherReady) { return 'Oficial' }
+    if ($TLauncherReady -and -not $OfficialReady) { return 'TLauncher' }
+    return ''
+}
+
 function Resolve-VirgosClientMemoryMb([int]$RequestedMemoryMb) {
     if ($RequestedMemoryMb -in @(4096,5120,6144)) { return Get-VirgosClientMemoryMb }
     if ($RequestedMemoryMb -notin @(8192,10240,12288)) { throw 'Memoria no valida. Usa 8192, 10240 o 12288 MB.' }

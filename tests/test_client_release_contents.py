@@ -159,6 +159,8 @@ class CandidateReleaseTest(unittest.TestCase):
             self.assertEqual(manifest['clientRelease'], '2.1.0-r1')
             self.assertEqual(manifest['clientFingerprint'], 'virgos-client-2.1.0-r1')
             self.assertIn('asistente/dh-client-settings.ps1', archive.namelist())
+            self.assertNotIn('asistente/surface-map.ps1', archive.namelist())
+            self.assertNotIn('surfaceMapSha256', manifest)
             self.assertIn('enableAutoUpdater = false', archive.read('asistente/overrides/config/DistantHorizons.toml').decode())
             custom = [x for x in manifest['files'] if x.get('bundled')]
             self.assertEqual(len(custom), 3)
@@ -173,6 +175,37 @@ class CandidateReleaseTest(unittest.TestCase):
                                  (self.inputs / item['filename']).read_bytes())
         self.assertEqual(before, {p: p.read_bytes() for p in before})
         self.assertFalse((self.source / 'dist').exists())
+
+    def make_surface(self, entry='cm$converted/-1_2.zip'):
+        path = self.inputs / 'surface.zip'
+        with zipfile.ZipFile(path, 'w') as archive:
+            archive.writestr(entry, b'tile fixture')
+        self.metadata['surfaceMap'] = {'local_source': path.name,
+                                       'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+        self.write(self.inputs / 'release.json', self.metadata)
+        return path
+
+    def test_surface_payload_is_separate_and_pinned_in_both_installers(self):
+        payload = self.make_surface().read_bytes()
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0-instalar.zip') as archive:
+            manifest = json.loads(archive.read('asistente/cliente.lock.json'))
+            self.assertEqual(manifest['surfaceMapSha256'], hashlib.sha256(payload).hexdigest())
+            self.assertEqual(archive.read('asistente/Virgos-Superficie-Xaero.zip'), payload)
+            self.assertIn('asistente/surface-map.ps1', archive.namelist())
+            self.assertNotIn('asistente/overrides/xaero', archive.namelist())
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0.mrpack') as archive:
+            self.assertEqual(archive.read('overrides/virgos-extras/Virgos-Superficie-Xaero.zip'), payload)
+            self.assertIn('overrides/virgos-extras/IMPORTAR-MAPA.txt', archive.namelist())
+            self.assertFalse(any(name.startswith('overrides/xaero/') for name in archive.namelist()))
+
+    def test_rejects_unexpected_surface_member_before_creating_output(self):
+        self.make_surface('cm$converted/../waypoints.txt')
+        result = self.invoke()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Surface map', result.stderr)
+        self.assertFalse(self.output.exists())
 
     def test_explicit_archives_reproduce_bytes_in_separate_outputs(self):
         first = self.invoke()

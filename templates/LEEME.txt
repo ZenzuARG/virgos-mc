@@ -2,8 +2,8 @@ VIRGOS-MC - EMPEZA ACA
 
 1. Clic derecho en el ZIP > Extraer todo.
 2. Abri EMPEZAR.bat (no hace falta ejecutarlo como administrador).
-3. Elegi TLauncher o Minecraft Launcher oficial y toca Instalar.
-4. Espera y segui los pasos que aparecen al terminar.
+3. Pulsa Instalar Virgos-MC. Si no hay un launcher seleccionado, elige el que usas.
+4. Al terminar, pulsa Abrir mi launcher y entra al servidor Virgos-MC.
 
 La primera vez descarga Java, Forge y los mods. Puede tardar varios minutos.
 Necesitas Windows de 64 bits, Internet, unos 10 GB libres y tu launcher instalado.

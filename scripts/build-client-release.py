@@ -10,6 +10,7 @@ import zipfile
 import struct
 import argparse
 import re
+from io import BytesIO
 
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
@@ -21,6 +22,8 @@ for flag in ['release-metadata','custom-lock','mods-lock','output','downloads','
 options=parser.parse_args()
 explicit=any(getattr(options,name) is not None for name in ['release_metadata','custom_lock','mods_lock','output','downloads','runtime_cache'])
 source_payloads={}
+surface_map=None
+SURFACE_ARCHIVE='Virgos-Superficie-Xaero.zip'
 
 
 class ReproducibleZip:
@@ -58,6 +61,22 @@ def safe_filename(name):
     if not isinstance(name,str) or not re.fullmatch(r'[A-Za-z0-9_.+ ()-]+',name) or name in {'.','..'}:
         raise ValueError('Candidate unsafe filename')
     return name
+
+def load_surface_map(spec, directory):
+    relative=Path(spec['local_source'])
+    if relative.is_absolute() or '..' in relative.parts:
+        raise ValueError('Surface map path rejected')
+    source=safe_path(directory/relative)
+    payload=source.read_bytes()
+    if hashlib.sha256(payload).hexdigest()!=spec['sha256']:
+        raise ValueError('Surface map hash mismatch')
+    with zipfile.ZipFile(BytesIO(payload)) as archive:
+        names=archive.namelist()
+        if (not names or len(set(names))!=len(names)
+                or any(not re.fullmatch(r'cm\$converted/-?[0-9]+_-?[0-9]+\.zip', name) for name in names)
+                or archive.testzip() is not None):
+            raise ValueError('Surface map contains unexpected or damaged tiles')
+    return payload
 
 def candidate_artifacts(lock,path):
     import tomllib
@@ -121,6 +140,8 @@ if explicit:
         or not (release==version or release.startswith(version+'-'))
         or current.get('clientFingerprint')!='virgos-client-'+release):raise ValueError('Candidate release identity mismatch')
     if type(current.get('installer')) is not int or current['installer']<1:raise ValueError('Candidate installer must be a positive integer')
+    if 'surfaceMap' in current:
+        surface_map=load_surface_map(current['surfaceMap'], metadata_path.parent)
     # Distribute pinned upstream sources and local modifications alongside patched binaries.
     for item in current.get('sourceFiles',[]):
         name=safe_filename(item['filename'])
@@ -185,12 +206,19 @@ for item in custom:
     client.append({'filename':name,'sha512':hashlib.sha512(content).hexdigest(),'optional':False,'project':'virgos-codex','source':'Virgos-MC','bundled':True})
 index={'formatVersion':1,'game':'minecraft','versionId':VERSION,'name':'Virgos-MC','summary':'Exploracion, magia e industria; cliente para el servidor Virgos-MC.','files':files,'dependencies':{'minecraft':lock['minecraft'],'forge':lock['forge']}}
 manifest={'version':VERSION,'installerVersion':INSTALLER,'clientRelease':current.get('clientRelease',VERSION),'clientFingerprint':current.get('clientFingerprint',''),'minecraft':lock['minecraft'],'forge':lock['forge'],'files':client}
+if surface_map is not None:
+    manifest['surfaceMapSha256']=current['surfaceMap']['sha256']
+    index['versionId']=f'{VERSION}-r{INSTALLER}'
 runtime=json.loads((ROOT/'pack/client-runtime.lock.json').read_text('utf-8'))
 assert runtime['minecraftJson']['url'].startswith('https://piston-meta.mojang.com/')
 for spec,folder in [(runtime['java'],runtime_cache if explicit else ROOT/'.cache'),(runtime['forge'],runtime_cache/'pack' if explicit else ROOT/'.cache/pack')]:
     if explicit:safe_filename(spec['file']);safe_path(folder/spec['file'])
     assert hashlib.sha256((folder/spec['file']).read_bytes()).hexdigest()==spec['hash']
 template_names=['instalar-cliente.ps1','instalar-cliente.bat','installer-common.ps1','client-keybindings.ps1','tlauncher-settings.ps1','install-launcher.ps1','asistente.ps1']
+if surface_map is not None:
+    template_names.append('surface-map.ps1')
+    surface_guide=safe_path(ROOT/'templates/IMPORTAR-MAPA.txt').read_bytes()
+    surface_readme=safe_path(ROOT/'templates/LEEME-SUPERFICIE.txt').read_text('utf-8')
 dh_helper=ROOT/'templates/dh-client-settings.ps1'
 dh_seed=ROOT/'pack/client-overrides/config/DistantHorizons.toml'
 if dh_helper.is_file()!=dh_seed.is_file():raise ValueError('DH helper and seed must be supplied together')
@@ -231,11 +259,17 @@ with archive_type(output/f'Virgos-MC-{VERSION}.mrpack','w',zipfile.ZIP_DEFLATED)
     for name,content in overrides.items():archive.writestr(name,content)
     for name,content in bundled.items():archive.writestr('overrides/mods/'+name,content)
     for name,content in source_payloads.items():archive.writestr('sources/'+name,content)
+    if surface_map is not None:
+        # Launchers may overwrite overrides. Ship only an inert archive and instructions there.
+        archive.writestr('overrides/virgos-extras/'+SURFACE_ARCHIVE,surface_map)
+        archive.writestr('overrides/virgos-extras/IMPORTAR-MAPA.txt',surface_guide)
 zip_name=f'Virgos-MC-{VERSION}-instalar.zip'
 with archive_type(output/zip_name,'w',zipfile.ZIP_DEFLATED) as archive:
     archive.writestr('asistente/cliente.lock.json',json.dumps(manifest,ensure_ascii=False,indent=2))
     for name,content in bundled.items():archive.writestr('asistente/bundled/'+name,content)
     for name,content in source_payloads.items():archive.writestr('sources/'+name,content)
+    if surface_map is not None:
+        archive.writestr('asistente/'+SURFACE_ARCHIVE,surface_map)
     for name in template_names:
         content=(ROOT/'templates'/name).read_text('utf-8-sig')
         archive.writestr('asistente/'+name,content.replace('\r\n','\n').replace('\n','\r\n').encode('utf-8-sig' if name.endswith('.ps1') else 'ascii'))
@@ -243,7 +277,10 @@ with archive_type(output/zip_name,'w',zipfile.ZIP_DEFLATED) as archive:
     archive.write(ROOT/'pack/keybindings.json','asistente/keybindings.json')
     archive.write(ROOT/'pack/shaderpack.lock.json','asistente/shaderpack.lock.json')
     for name in ['EMPEZAR.bat','LEEME.txt']:
-        archive.writestr(name,(ROOT/'templates'/name).read_text('utf-8').replace('\r\n','\n').replace('\n','\r\n'))
+        content=(ROOT/'templates'/name).read_text('utf-8')
+        if name=='LEEME.txt' and surface_map is not None:
+            content=content.split('ACTUALIZAR A 2.0:',1)[0]+surface_readme
+        archive.writestr(name,content.replace('\r\n','\n').replace('\n','\r\n'))
     archive.writestr('COMO-JUGAR.txt',(ROOT/'docs/manual-jugadores.md').read_text('utf-8').encode('utf-8-sig'))
     for name,content in overrides.items():archive.writestr('asistente/'+name,content)
 report={'version':VERSION,'installerVersion':INSTALLER,'required':sum(not x['optional'] for x in client),'optional':sum(x['optional'] for x in client),'upstreamBytes':sum(x['fileSize'] for x in files),'overrideFiles':len(overrides),'files':[]}
@@ -251,6 +288,7 @@ for file in [output/zip_name,output/f'Virgos-MC-{VERSION}.mrpack']:
     with zipfile.ZipFile(file) as archive:
         assert archive.testzip() is None
         assert not any('virgos_local_qa' in n or 'playit' in n.lower() or '/saves/' in n for n in archive.namelist())
-    report['files'].append({'name':file.name,'bytes':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()})
+    with file.open('rb') as stream:
+        report['files'].append({'name':file.name,'bytes':file.stat().st_size,'sha256':hashlib.file_digest(stream,'sha256').hexdigest()})
 (output/'release.json').write_text(json.dumps(report,indent=2),'utf-8')
 print(json.dumps(report,indent=2))

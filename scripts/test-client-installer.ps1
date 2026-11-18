@@ -12,6 +12,11 @@ $testRoot=Join-Path ([IO.Path]::GetTempPath()) ('virgos-installer-unit-'+[Guid]:
 Write-Host ('SCRATCH='+$testRoot)
 $checks=New-Object Collections.Generic.List[string]
 function Assert($Condition,$Message) { if(-not $Condition) { throw $Message }; $checks.Add($Message) }
+Assert ((Select-VirgosLauncher '' $true $false) -eq 'Oficial') 'Official selected when it is the only initialized launcher'
+Assert ((Select-VirgosLauncher '' $false $true) -eq 'TLauncher') 'TLauncher selected when it is the only initialized launcher'
+Assert (-not (Select-VirgosLauncher '' $true $true) -and -not (Select-VirgosLauncher '' $false $false)) 'No risky automatic selection when both or neither launcher is ready'
+Assert ((Select-VirgosLauncher 'TLauncher' $true $true) -eq 'TLauncher') 'Valid saved choice takes precedence'
+Assert (-not (Select-VirgosLauncher 'TLauncher' $true $false)) 'Unavailable saved launcher does not silently switch to another launcher'
 $tlFixture=Join-Path $testRoot 'tlauncher-2.0.properties'
 [IO.File]::WriteAllText($tlFixture,"# TLauncher configuration file`r`nsettings.version=3`r`nminecraft.gamedir=C:\Existing Games\Minecraft`r`n")
 Assert ((Read-TLauncherSettings $tlFixture) -match 'settings.version=3') 'TLauncher without RAM keys is accepted'
@@ -142,6 +147,43 @@ Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
 & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
 foreach($entry in $embeddedManifest.files) {
     Assert ((Get-FileDigest (Join-Path $game ('mods\'+$entry.filename))) -eq $entry.sha512) ('Known bundled role installed without network: '+$entry.project)
+}
+$mapHelper = Join-Path $package 'asistente\surface-map.ps1'
+if (Test-Path -LiteralPath $mapHelper) {
+    Copy-Item -LiteralPath $mapHelper -Destination $embedded
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $surfaceFile = Join-Path $embedded 'Virgos-Superficie-Xaero.zip'
+    $zip = [IO.Compression.ZipFile]::Open($surfaceFile, [IO.Compression.ZipArchiveMode]::Create)
+    try {
+        $writer = [IO.StreamWriter]::new($zip.CreateEntry('cm$converted/-1_2.zip').Open())
+        try { $writer.Write('surface tile') } finally { $writer.Dispose() }
+    } finally { $zip.Dispose() }
+    $embeddedManifest.surfaceMapSha256 = (Get-FileHash -LiteralPath $surfaceFile).Hash.ToLowerInvariant()
+    Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
+    $xaeroRoot = Join-Path $game 'xaero\world-map\Multiplayer_virgos-mc.playit.plus\null'
+    $separate = Join-Path $xaeroRoot 'cm$virgos_surface_20261117'
+    $personal = Join-Path $xaeroRoot 'personal'
+    [void][IO.Directory]::CreateDirectory($personal)
+    [IO.File]::WriteAllText((Join-Path $personal '-1_2.zip'), 'personal tile')
+    [IO.File]::WriteAllText((Join-Path $xaeroRoot 'map-selection.txt'), 'personal')
+    & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game -Verificar
+    Assert (-not (Test-Path -LiteralPath $separate)) 'Verify-only does not write the map'
+    & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
+    $tile = Join-Path $separate '-1_2.zip'
+    Assert ([IO.File]::ReadAllText($tile) -eq 'surface tile') 'Repair installs the separate surface map'
+    [IO.File]::WriteAllText($tile, 'existing explored surface tile')
+    & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game
+    Assert (([IO.File]::ReadAllText($tile) -eq 'existing explored surface tile') -and
+        ([IO.File]::ReadAllText((Join-Path $personal '-1_2.zip')) -eq 'personal tile') -and
+        ([IO.File]::ReadAllText((Join-Path $xaeroRoot 'map-selection.txt')) -eq 'personal')) 'Repair preserves already installed surface, personal map and map selection'
+    $lockBefore = Get-FileHash -LiteralPath (Join-Path $game 'virgos-cliente.lock.json')
+    [IO.File]::AppendAllText($surfaceFile, 'tampered')
+    $caught = $false
+    try { & (Join-Path $embedded 'instalar-cliente.ps1') -Destino $game } catch { $caught = $true }
+    Assert ($caught -and (Get-FileHash -LiteralPath $lockBefore.Path).Hash -eq $lockBefore.Hash) 'Tampered map rejected before replacing installed manifest'
+    $embeddedManifest.Remove('surfaceMapSha256')
+    Write-JsonAtomic (Join-Path $embedded 'cliente.lock.json') $embeddedManifest
 }
 if(Test-Path -LiteralPath (Join-Path $embedded 'dh-client-settings.ps1')) {
     $config=Join-Path $game 'config\DistantHorizons.toml'
