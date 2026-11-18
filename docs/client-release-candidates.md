@@ -79,8 +79,11 @@ Candidate validation requires Python 3.11 or later for the standard-library TOML
 ```
 
 Version must be a safe three-part release version, optionally with a prerelease
-suffix. Installer must be a positive integer. Client release must equal the version
-or begin with `<version>-`; fingerprint must equal `virgos-client-<clientRelease>`.
+suffix. Installer must be a positive integer. Client release is an independently pinned safe wire identity (up to128 characters);
+it can retain an earlier compatible release while the installer version advances.
+Fingerprint must equal `virgos-client-<clientRelease>`. Verify the pinned Codex
+identity against the server admission policy before publishing; changing packaging
+metadata does not change embedded identities or update the server.
 
 Candidate metadata can additionally pin a verified surface snapshot via
 `surfaceMap: {"local_source": "installer27-artifacts/Virgos-Superficie-Xaero.zip", "sha256": "..."}`.
@@ -133,7 +136,7 @@ Manifest project IDs are `virgos-codex`, `distant-horizons`, and `virgos-dh-comp
 The installer accepts only those project/filename pairs, validates bundled hashes
 before mutation and never downloads these components.
 
-JAR bytes—including original licenses/notices—are bundled unchanged. The installer
+JAR bytesâ€”including original licenses/noticesâ€”are bundled unchanged. The installer
 uses `asistente/bundled/`; MRPack uses `overrides/mods/`. Bundled components are required
 and have no network download URL. Preserve source/license notices when preparing the
 pinned inputs; this builder neither invents nor strips them.

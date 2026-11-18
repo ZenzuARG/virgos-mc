@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Package)
+﻿param([Parameter(Mandatory=$true)][string]$Package)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $package=[IO.Path]::GetFullPath($Package)
@@ -65,6 +65,16 @@ foreach($name in @('servers.dat','options.txt')) {
 & (Join-Path $tiny 'instalar-cliente.ps1') -Destino $instance
 Assert ([IO.File]::ReadAllText((Join-Path $instance 'servers.dat')) -eq 'player data') 'Repair preserves existing server list'
 Assert ([IO.File]::ReadAllText((Join-Path $instance 'options.txt')) -eq "player data`nmipmapLevels:0`n") 'Repair preserves player settings except managed zero mipmaps'
+# Grass reach defaults apply only to a fresh configuration, never personal tuning.
+$grassSeed=Join-Path $tiny 'overrides\config\grassiergrass-client.toml'
+[void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($grassSeed))
+[IO.File]::WriteAllText($grassSeed,"[rendering]`nrenderRadius = 128`nbladesPerBlock = 64`n")
+$grassTarget=Join-Path $instance 'config\grassiergrass-client.toml'
+& (Join-Path $tiny 'instalar-cliente.ps1') -Destino $instance
+Assert ([IO.File]::ReadAllText($grassTarget).Contains('renderRadius = 128')) 'Fresh grass config uses the balanced reach'
+[IO.File]::WriteAllText($grassTarget,"[rendering]`nrenderRadius = 96`nbladesPerBlock = 32`n")
+& (Join-Path $tiny 'instalar-cliente.ps1') -Destino $instance
+Assert ([IO.File]::ReadAllText($grassTarget) -eq "[rendering]`nrenderRadius = 96`nbladesPerBlock = 32`n") 'Repair preserves personal grass settings'
 $manifest.version='0.2.0-rc1'; Write-JsonAtomic (Join-Path $tiny 'cliente.lock.json') $manifest
 [IO.File]::WriteAllText((Join-Path $instance 'options.txt'),"renderDistance:7`nkey_key.push_to_talk:key.keyboard.left.alt`n")
 $voiceDir=Join-Path $instance 'config\voicechat'; [void][IO.Directory]::CreateDirectory($voiceDir)

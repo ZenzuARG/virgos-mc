@@ -135,9 +135,9 @@ if explicit:
     current=json.loads(metadata_path.read_text('utf-8-sig'))
     version=current.get('version')
     if not isinstance(version,str) or not re.fullmatch(r'(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?',version):raise ValueError('Candidate version is unsafe')
+    # Package revisions may retain the tested wire identity accepted by the server.
     release=current.get('clientRelease','')
     if (not isinstance(release,str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,127}',release)
-        or not (release==version or release.startswith(version+'-'))
         or current.get('clientFingerprint')!='virgos-client-'+release):raise ValueError('Candidate release identity mismatch')
     if type(current.get('installer')) is not int or current['installer']<1:raise ValueError('Candidate installer must be a positive integer')
     if 'surfaceMap' in current:

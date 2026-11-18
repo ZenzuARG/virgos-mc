@@ -176,6 +176,31 @@ class CandidateReleaseTest(unittest.TestCase):
         self.assertEqual(before, {p: p.read_bytes() for p in before})
         self.assertFalse((self.source / 'dist').exists())
 
+    def test_package_version_can_preserve_compatible_wire_identity(self):
+        self.metadata.update(version='3.1.0', clientRelease='3.0.6',
+                             clientFingerprint='virgos-client-3.0.6')
+        self.write(self.inputs / 'release.json', self.metadata)
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-3.1.0-instalar.zip') as archive:
+            manifest = json.loads(archive.read('asistente/cliente.lock.json'))
+            self.assertEqual(manifest['version'], '3.1.0')
+            self.assertEqual(manifest['clientRelease'], '3.0.6')
+            self.assertIn(b'renderRadius = 128', archive.read('asistente/overrides/config/grassiergrass-client.toml'))
+            self.assertIn(b'bladesPerBlock = 64', archive.read('asistente/overrides/config/grassiergrass-client.toml'))
+            modernfix = archive.read('asistente/overrides/config/modernfix-mixins.properties')
+            self.assertIn(b'mixin.perf.dynamic_resources=true', modernfix)
+            self.assertIn(b'mixin.perf.smart_ingredient_sync=false', modernfix)
+            self.assertEqual(manifest['clientFingerprint'], 'virgos-client-3.0.6')
+
+    def test_independent_wire_identity_still_rejects_unsafe_or_mismatched_values(self):
+        for release, fingerprint in [('../3.0.6', 'virgos-client-../3.0.6'),
+                                     ('3.0.6', 'virgos-client-3.1.0')]:
+            self.metadata.update(clientRelease=release, clientFingerprint=fingerprint)
+            self.write(self.inputs / 'release.json', self.metadata)
+            self.assertNotEqual(self.invoke().returncode, 0)
+            self.assertFalse(self.output.exists())
+
     def make_surface(self, entry='cm$converted/-1_2.zip'):
         path = self.inputs / 'surface.zip'
         with zipfile.ZipFile(path, 'w') as archive:

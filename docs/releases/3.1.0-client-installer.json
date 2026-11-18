@@ -1,0 +1,56 @@
+{
+  "version": "3.1.0",
+  "installerVersion": 28,
+  "status": "verified-local-publication-pending",
+  "clientRelease": "3.0.6",
+  "clientFingerprint": "virgos-client-3.0.6",
+  "publication": {
+    "repository": "ZenzuARG/virgos-mc",
+    "tag": "v3.1.0",
+    "published": false,
+    "blocker": "GitHub CLI has no authenticated session available"
+  },
+  "artifacts": [
+    {
+      "name": "Virgos-MC-3.1.0-instalar.zip",
+      "bytes": 382523127,
+      "sha256": "dc3451c4b029723e8a9b70d09ccd7d125604da79d0decf7075df12b1392f9335"
+    },
+    {
+      "name": "Virgos-MC-3.1.0.mrpack",
+      "bytes": 382489614,
+      "sha256": "f5d2ff9e8f331b89d70c188b4db8aa4ffd58d4c38965c07a0827056bd504a124"
+    }
+  ],
+  "requiredMods": 134,
+  "optionalMods": 3,
+  "checks": {
+    "candidateRegression": {
+      "passed": 15
+    },
+    "installerFixtureWindowsPowerShell51": "passed",
+    "keybindings": "passed",
+    "dhSettings": "passed",
+    "memoryPowerShell7": {
+      "passed": 8
+    },
+    "packagedAssistantWindowsPowerShell51": "parse passed",
+    "mipmapUpgrade": "passed",
+    "dhSharedDefaults": "passed",
+    "releaseSelection": "passed",
+    "independentVerification": "passed; no new blockers; existing valid packaging byte-identical to baseline5063792",
+    "reproducibleBuild": "both archives SHA256 identical across two independent output directories"
+  },
+  "knownLimitations": [
+    "No new in-game FPS benchmark; user waived grass128 measurement.",
+    "ModernFix/GrassierGrass advisory and seed-oil cosmetic artifact retained.",
+    "Unchanged source assistant parsing fixture fails under WindowsPowerShell5.1 without BOM; distributed BOM script parses successfully.",
+    "Existing global3.0.10 candidate consistency tests fail due wire/package identity and stale rootCodex size; these unrelated records remain untouched."
+  ],
+  "server": {
+    "restarted": false,
+    "coreSha256": "5e5886f3cbb6f3ae00e63fb08cf092d26ade9bad503947fb5bd88fb5d82d6a18",
+    "policyChanged": false
+  },
+  "personalClientChanged": false
+}

@@ -1,4 +1,4 @@
-param([string]$Destino = (Join-Path $PSScriptRoot 'instancia'), [switch]$Opcionales, [switch]$Verificar, [string]$StatusFile)
+﻿param([string]$Destino = (Join-Path $PSScriptRoot 'instancia'), [switch]$Opcionales, [switch]$Verificar, [string]$StatusFile)
 . (Join-Path $PSScriptRoot 'installer-common.ps1')
 $script:StatusPath = $StatusFile
 $manifestPath = Join-Path $PSScriptRoot 'cliente.lock.json'
@@ -127,6 +127,7 @@ if (-not $Verificar) {
         if (-not $out.StartsWith($target.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Ruta invalida.' }
         if ($relative -in @('servers.dat','options.txt') -and [IO.File]::Exists($out)) { continue }
         if ($relative -like 'shaderpacks\*.txt' -and [IO.File]::Exists($out)) { continue }
+        if ($relative -eq 'config\grassiergrass-client.toml' -and [IO.File]::Exists($out)) { continue }
         if ($relative -eq 'config\voicechat\voicechat-client.properties' -and [IO.File]::Exists($out)) { continue }
         [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($out))
         Copy-Item -LiteralPath $file.FullName -Destination $out -Force
