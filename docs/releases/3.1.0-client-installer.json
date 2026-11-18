@@ -41,7 +41,19 @@
     "independentVerification": "passed; no new blockers; existing valid packaging byte-identical to baseline5063792",
     "reproducibleBuild": "Final, reduced and small-overlay builds produce identical ZIP/MRPack SHA256",
     "pinnedNotices": "Git blobs and working files match original metadata SHA256; -text prevents Windows conversion",
-    "additionalMods": "independent CLI probes passed; absent field preserves baseline bytes; collisions/non-required/nonclient reject before mutation"
+    "additionalMods": "independent CLI probes passed; absent field preserves baseline bytes; collisions/non-required/nonclient reject before mutation",
+    "nativeReview": {
+      "status": "approved-and-acknowledged",
+      "lineage": "review-4a2e0572aa2097c0",
+      "target": "sha256:ba031c3725befe11a8f0100c7ef8fc1a0e64fc387323200cfd8bab6b83cf5b63",
+      "authority": "burned",
+      "blockingFindings": 0,
+      "advisories": [
+        "Additional-mod filename collisions are compared case-sensitively; current pins have no such collision.",
+        "Interrupted first grass seed copy may require manual recovery before repair.",
+        "Release-note verification wording requires status-only correction."
+      ]
+    }
   },
   "knownLimitations": [
     "No new in-game FPS benchmark; user waived grass128 measurement.",
