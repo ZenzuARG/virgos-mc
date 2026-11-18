@@ -45,5 +45,21 @@
       "local_source": "sources/Virgos-DH-modifications-source.zip",
       "sha256": "2959ef9ecf8742ad4268f59b1094f3cf2c6abd7b02137cb59e7858a0b1ce8daf"
     }
+  ],
+  "additionalMods": [
+    {
+      "project": "ocuwheel",
+      "version": "1.0.2",
+      "filename": "ocuwheel-forge-1.20.1-1.0.2.jar",
+      "url": "https://edge.forgecdn.net/files/8989/714/ocuwheel-forge-1.20.1-1.0.2.jar",
+      "hash_algorithm": "sha256",
+      "hash": "4cf4597fb3a64408377b504ff648d75cf1288d0d98fa1a562bbb711285684d0a",
+      "size": 863001,
+      "sides": [
+        "client"
+      ],
+      "mode": "required",
+      "source": "https://www.curseforge.com/minecraft/mc-mods/ocuwheel/files/8989714"
+    }
   ]
 }

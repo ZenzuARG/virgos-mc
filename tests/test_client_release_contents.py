@@ -201,6 +201,26 @@ class CandidateReleaseTest(unittest.TestCase):
             self.assertNotEqual(self.invoke().returncode, 0)
             self.assertFalse(self.output.exists())
 
+    def test_candidate_can_pin_a_small_additional_client_mod_without_copying_base_lock(self):
+        item = dict(self.mods['artifacts'][0], filename='extra.jar', project='extra')
+        (self.downloads / 'extra.jar').write_bytes((self.downloads / 'fixture.jar').read_bytes())
+        self.metadata['additionalMods'] = [item]
+        self.write(self.inputs / 'release.json', self.metadata)
+        result = self.invoke()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        with zipfile.ZipFile(self.output / 'Virgos-MC-2.1.0-instalar.zip') as archive:
+            names = [x['filename'] for x in json.loads(archive.read('asistente/cliente.lock.json'))['files']]
+            self.assertEqual(names.count('extra.jar'), 1)
+            self.assertEqual(names.count('fixture.jar'), 1)
+
+    def test_additional_mods_reject_duplicates_and_nonclient_entries_before_output(self):
+        for item in [self.mods['artifacts'][0],
+                     dict(self.mods['artifacts'][0], filename='extra.jar', sides=['server'])]:
+            self.metadata['additionalMods'] = [item]
+            self.write(self.inputs / 'release.json', self.metadata)
+            self.assertNotEqual(self.invoke().returncode, 0)
+            self.assertFalse(self.output.exists())
+
     def make_surface(self, entry='cm$converted/-1_2.zip'):
         path = self.inputs / 'surface.zip'
         with zipfile.ZipFile(path, 'w') as archive:

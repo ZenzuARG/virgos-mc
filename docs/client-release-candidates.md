@@ -95,6 +95,15 @@ installer adds the snapshot only if its dedicated Xaero folder is absent; the
 MRPack puts it in `virgos-extras` for manual import, outside active Xaero data.
 Minecraft/Forge remain pinned to 1.20.1/47.4.22 in the mod lock.
 
+### Additional client-only pins
+
+Explicit metadata may contain `additionalMods`, a list of ordinary upstream lock
+entries for required client-only dependencies. Their filenames must be unique across
+the base lock and bundled artifacts. Cache hashes and download metadata follow the
+same validation as base entries; duplicates or non-client entries reject before output.
+This lets a release pin a small client delta without copying the complete mods lock.
+Omitting the field preserves the previous build behavior.
+
 ### Custom artifact lock
 
 Use schema 1 with the existing `artifacts` list shape:

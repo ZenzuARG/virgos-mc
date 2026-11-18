@@ -26,7 +26,7 @@
   "optionalMods": 3,
   "checks": {
     "candidateRegression": {
-      "passed": 15
+      "passed": 17
     },
     "installerFixtureWindowsPowerShell51": "passed",
     "keybindings": "passed",
@@ -39,8 +39,9 @@
     "dhSharedDefaults": "passed",
     "releaseSelection": "passed",
     "independentVerification": "passed; no new blockers; existing valid packaging byte-identical to baseline5063792",
-    "reproducibleBuild": "Pre-guide-normalization archives reproduced exactly; final archives differ only by intended UTF-8 correction in LEEME.txt (MRPack unchanged)",
-    "pinnedNotices": "Git blobs and working files match original metadata SHA256; -text prevents Windows conversion"
+    "reproducibleBuild": "Final, reduced and small-overlay builds produce identical ZIP/MRPack SHA256",
+    "pinnedNotices": "Git blobs and working files match original metadata SHA256; -text prevents Windows conversion",
+    "additionalMods": "independent CLI probes passed; absent field preserves baseline bytes; collisions/non-required/nonclient reject before mutation"
   },
   "knownLimitations": [
     "No new in-game FPS benchmark; user waived grass128 measurement.",

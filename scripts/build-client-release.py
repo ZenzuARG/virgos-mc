@@ -170,6 +170,16 @@ candidate_dir='.lab/v2' if options.candidate_v2 else ('.lab/v12' if options.cand
 lock=json.loads((mods_path if explicit else ROOT/(candidate_dir+'/mods.lock.json' if candidate_dir else 'pack/mods.lock.json')).read_text('utf-8'))
 if explicit and (lock.get('minecraft')!='1.20.1' or lock.get('forge')!='47.4.22'):
     raise ValueError('Candidate mods lock must retain Minecraft 1.20.1 and Forge 47.4.22')
+if explicit:
+    # Small client-only pins avoid duplicating the complete upstream lock per release.
+    additions=current.get('additionalMods',[])
+    if not isinstance(additions,list):raise ValueError('Candidate additionalMods must be a list')
+    names={item['filename'] for item in lock['artifacts']} | set(candidate_bundled)
+    for item in additions:
+        if (not isinstance(item,dict) or item.get('sides')!=['client'] or item.get('mode')!='required'
+            or item.get('filename') in names):raise ValueError('Candidate additional mod must be a unique required client artifact')
+        names.add(safe_filename(item['filename']))
+    lock['artifacts'].extend(additions)
 files=[];client=[];bundled={}
 for item in lock['artifacts']:
     if 'client' not in item['sides'] or item['mode']=='tool':continue
