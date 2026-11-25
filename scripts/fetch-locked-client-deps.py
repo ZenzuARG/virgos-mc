@@ -61,6 +61,24 @@ def main() -> None:
     lock = json.loads((ROOT / "pack/mods.lock.json").read_text(encoding="utf-8"))
     downloads = ROOT / ".cache/pack/downloads"
     client = [a for a in lock["artifacts"] if "client" in a["sides"] and a["mode"] != "tool"]
+    # Candidate-only client additions live beside the selected release metadata;
+    # include them in the verified cache before the explicit builder consumes them.
+    current_path = ROOT / 'pack/candidates/current.json'
+    if current_path.is_file():
+        version = json.loads(current_path.read_text(encoding='utf-8')).get('version')
+        metadata_path = ROOT / 'pack/candidates' / str(version) / 'release.json'
+        if metadata_path.is_file():
+            metadata = json.loads(metadata_path.read_text(encoding='utf-8'))
+            additions = metadata.get('additionalMods', [])
+            if not isinstance(additions, list):
+                raise ValueError('Candidate additionalMods must be a list')
+            known = {item.get('filename') for item in client}
+            for item in additions:
+                if (not isinstance(item, dict) or item.get('sides') != ['client']
+                        or item.get('mode') != 'required' or item.get('filename') in known):
+                    raise ValueError('Invalid or duplicate candidate additional mod')
+                client.append(item)
+                known.add(item.get('filename'))
     client_targets = [(record, downloads / record["filename"]) for record in client]
     runtime = json.loads((ROOT / "pack/client-runtime.lock.json").read_text(encoding="utf-8"))
     runtime_targets = [
