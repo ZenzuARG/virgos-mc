@@ -76,6 +76,21 @@ foreach ($folder in $folders | Select-Object -Unique) {
 $manifest = New-Object 'System.Collections.Generic.List[object]'
 $output = [IO.File]::Open($temporaryPath, [IO.FileMode]::CreateNew)
 $archive = New-Object IO.Compression.ZipArchive($output, [IO.Compression.ZipArchiveMode]::Create, $false)
+function Open-BackupSource([string]$Path) {
+    # Minecraft may release region/POI handles a moment after its clean-stop
+    # message. Retry transient sharing violations instead of invalidating a
+    # complete backup because one file is still closing.
+    $attempts = 10
+    for ($attempt = 1; $attempt -le $attempts; $attempt++) {
+        try {
+            return [IO.File]::Open($Path, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+        } catch [IO.IOException] {
+            if ($attempt -eq $attempts) { throw }
+            Start-Sleep -Milliseconds 1000
+        }
+    }
+    throw "No se pudo abrir el archivo para respaldo: $Path"
+}
 try {
     foreach ($file in $files | Sort-Object FullName -Unique) {
         $relative = $file.FullName.Substring($serverRoot.Length + 1).Replace('\', '/')
@@ -83,7 +98,7 @@ try {
         # FileInfo may be stale if documentation/configuration changed after
         # enumeration. Hold one read-only handle (no shared writes) for both
         # hashing and copying, and take length from that same opened stream.
-        $source = [IO.File]::Open($file.FullName, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+        $source = Open-BackupSource $file.FullName
         $target = $entry.Open()
         $algorithm = [Security.Cryptography.SHA256]::Create()
         try {
