@@ -15,7 +15,9 @@ S4. Verify the running server after each runtime-affecting fix and report unreso
 - T2 (S1,S3,S4): Remove invalid TreeFeller declarations and verify startup — inline; removed unsupported PALE_OAK/POPLAR entries; startup no longer logs those warnings — status: complete — commit: pending
 - T3 (S1,S4): Diagnose and fix InventoryView slot overflow with reproduction evidence — inline; root cause was Sophisticated Backpacks key B opening a mismatched menu; unbound key in client policy/default options; keybinding tests pass — status: complete — commit: pending
 - T4 (S1,S4): Clean non-fatal recipe/tag compatibility warnings where behavior is unchanged — inline; reviewed and classified as cosmetic/optional integrations; no safe source change identified — status: complete (no-op) — commit: pending
-- T5 (S1-S4): Final runtime/log audit and preserve online-mode=false — inline — status: in progress — commit: pending
+- T5 (S1-S4): Final runtime/log audit and preserve online-mode=false — inline; `validar-entrega.ps1` passed, server PID 31944 responsive, latest.log has 0 ERROR, 0 TreeFeller invalid-tree warnings, 0 InventoryView overflows in current run, and `online-mode=false` — status: complete — commit: e60e7ba
+
+Risk: item 3 (client key default changes affect the published client configuration contract); assessment: medium/under_budget, no native review due.
 
 ## Log
 L1. soluciona todos los problemas del servidor ya sean error o compatiblidades
