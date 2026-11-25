@@ -66,7 +66,7 @@
     "Ocuwheel 1.0.2",
     "Distant Horizons 3.3.3 + Virgos compatibility",
     "ModernFix dynamic resources",
-    "Backpack key unbound",
+    "Backpack B key retained with nested-screen safety guard",
     "Client defaults tuned for lower render overhead"
   ]
 }
