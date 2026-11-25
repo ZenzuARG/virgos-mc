@@ -133,7 +133,7 @@ key_gui.xaero_map_zoom_out:key.keyboard.unknown
 key_gui.xaero_quick_confirm:key.keyboard.right.shift
 key_gui.xaero_toggle_dimension:key.keyboard.unknown
 key_key.modernfix.config:key.keyboard.unknown
-key_key.sophisticatedbackpacks.open_backpack:key.keyboard.b
+key_key.sophisticatedbackpacks.open_backpack:key.keyboard.unknown
 key_key.sophisticatedbackpacks.inventory_interaction:key.keyboard.insert
 key_key.sophisticatedbackpacks.tool_swap:key.keyboard.unknown
 key_key.sophisticatedbackpacks.toggle_upgrade_3:key.keyboard.unknown

@@ -37,7 +37,7 @@
       "context": "legacy"
     },
     "key.sophisticatedbackpacks.open_backpack": {
-      "key": "key.keyboard.b",
+      "key": "key.keyboard.unknown",
       "previous": [],
       "repairUnbound": false,
       "context": "global"

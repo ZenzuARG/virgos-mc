@@ -28,6 +28,12 @@ class TreeFellerConfigTests(unittest.TestCase):
         self.assertIn("^tools:\\s*$", text)
         self.assertIn("^\\s*-\\s*COPPER_AXE\\s*$", text)
 
+    def test_normalizer_removes_unsupported_tree_declarations(self):
+        text = SCRIPT.read_text(encoding="utf-8")
+        self.assertIn("PALE_OAK_LOG", text)
+        self.assertIn("POPLAR_LOG", text)
+        self.assertIn("unsupported tree", text.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -24,7 +24,10 @@ $filtered = foreach ($line in $lines) {
     } elseif ($inTools -and $line -match '^\S' -and $line -notmatch '^\s*#') {
         $inTools = $false
     }
-    if ($inTools -and $line -match '^\s*-\s*COPPER_AXE\s*$') {
+    $unsupportedTree = $line -match '^\s*PALE_OAK_WOOD:\s*PALE_OAK_LOG\s*$' -or
+        $line -match '^\s*-\s*\[\[PALE_OAK_LOG,' -or
+        $line -match '^\s*-\s*\[\[POPLAR_LOG,'
+    if (($inTools -and $line -match '^\s*-\s*COPPER_AXE\s*$') -or $unsupportedTree) {
         $changed = $true
         continue
     }
@@ -33,7 +36,7 @@ $filtered = foreach ($line in $lines) {
 
 if ($changed) {
     Set-Content -LiteralPath $configPath -Value $filtered -Encoding UTF8
-    Write-Output 'TreeFeller config normalized: removed unsupported COPPER_AXE.'
+    Write-Output 'TreeFeller config normalized: removed unsupported COPPER_AXE and unsupported tree declarations.'
 } else {
     Write-Output 'TreeFeller config already normalized.'
 }
