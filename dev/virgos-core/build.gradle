@@ -293,20 +293,29 @@ tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
 def nativeOptionsMappedForgeName = 'forge-1.20.1-' + forge_version + '_mapped_official_1.20.1.jar'
 def nativeOptionsServerJar = file('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar')
 def nativeOptionsOverlay = layout.buildDirectory.file('native-options/forge-api-overlay.jar')
-tasks.register('nativeOptionsForgeOverlay', Jar) {
+tasks.register('nativeOptionsForgeOverlay') {
     dependsOn 'compileAddonsQaJava'
-    archiveFileName = nativeOptionsOverlay.get().asFile.name
-    destinationDirectory = nativeOptionsOverlay.get().asFile.parentFile
-    from {
+    outputs.file(nativeOptionsOverlay)
+    doLast {
         def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
         if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
-        def serverEntries = project.zipTree(nativeOptionsServerJar).files
-            .collect { it.path.replace('\\', '/') }
-            .findAll { it.contains('/net/minecraft/') }
-            .collect { it.substring(it.indexOf('/net/minecraft/') + 1) } as Set
-        project.zipTree(mapped).matching {
-            exclude { details -> details.path.startsWith('net/minecraft/') && serverEntries.contains(details.path) }
-        }
+        def serverEntries = new java.util.zip.ZipFile(nativeOptionsServerJar).entries().toList()
+            .findAll { !it.isDirectory() && it.name.startsWith('net/minecraft/') }
+            .collect { it.name } as Set
+        def output = nativeOptionsOverlay.get().asFile
+        output.parentFile.mkdirs()
+        def out = new java.util.zip.ZipOutputStream(new FileOutputStream(output))
+        try {
+            def input = new java.util.zip.ZipFile(mapped)
+            try {
+                input.entries().each { entry ->
+                    if (entry.isDirectory() || (entry.name.startsWith('net/minecraft/') && serverEntries.contains(entry.name))) return
+                    out.putNextEntry(new java.util.zip.ZipEntry(entry.name))
+                    input.getInputStream(entry).withCloseable { stream -> stream.transferTo(out) }
+                    out.closeEntry()
+                }
+            } finally { input.close() }
+        } finally { out.close() }
     }
 }
 
