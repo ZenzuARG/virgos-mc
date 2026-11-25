@@ -286,10 +286,31 @@ tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
     tasks.named('check').configure { dependsOn 'check' + probe }
 }
 
+// The pinned OPAC jar uses SRG names. ForgeGradle's mapped jar also contains
+// Minecraft classes, and its Linux CI variant can win class loading despite the
+// SRG jar being listed first. Keep Forge classes in a small overlay while letting
+// the SRG server jar provide every net.minecraft class.
+def nativeOptionsMappedForgeName = 'forge-1.20.1-' + forge_version + '_mapped_official_1.20.1.jar'
+def nativeOptionsOverlay = layout.buildDirectory.file('native-options/forge-api-overlay.jar')
+tasks.register('nativeOptionsForgeOverlay', Jar) {
+    archiveFileName = nativeOptionsOverlay.get().asFile.name
+    destinationDirectory = nativeOptionsOverlay.get().asFile.parentFile
+    from {
+        def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
+        if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
+        project.zipTree(mapped).matching { exclude 'net/minecraft/**' }
+    }
+}
+
 tasks.register('checkClaimNativeOptions', JavaExec) {
     dependsOn testClasses
-    // The pinned OPAC jar uses SRG names; put the matching server classes before dev mappings.
-    classpath = files('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar') + sourceSets.test.runtimeClasspath
+    dependsOn 'nativeOptionsForgeOverlay'
+    doFirst {
+        def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
+        if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
+        def runtimeWithoutMappedForge = sourceSets.test.runtimeClasspath.filter { it.name != nativeOptionsMappedForgeName }
+        classpath = files('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar', nativeOptionsOverlay) + runtimeWithoutMappedForge
+    }
     mainClass = 'mc.virgos.ClaimNativeOptionsTest'
     maxHeapSize = '256m'
 }
