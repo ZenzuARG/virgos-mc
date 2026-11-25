@@ -64,6 +64,11 @@ if($policy.backupOnCleanStop -or $restart -or $BackupLabel -eq 'manual') {
         if([IO.Path]::GetDirectoryName($candidate) -ne $backupRoot) { throw 'Ruta de retencion manual invalida.' }
         Remove-Item -LiteralPath $candidate
     }
+    $partialHours = if($policy.partialRetentionHours -is [int] -and $policy.partialRetentionHours -gt 0) {[int]$policy.partialRetentionHours} else {24}
+    $partialCutoff = (Get-Date).AddHours(-$partialHours)
+    Get-ChildItem -LiteralPath $backupRoot -File -Filter '*.partial' |
+        Where-Object {$_.LastWriteTime -lt $partialCutoff} |
+        ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force }
 }
 if(Test-Path -LiteralPath $requestPath) {
     Move-Item -LiteralPath $requestPath -Destination (Join-Path $root ('.runtime/checkpoint-completed-'+[Guid]::NewGuid().ToString('N')+'.json'))
