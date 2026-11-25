@@ -291,7 +291,14 @@ tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
 // SRG jar being listed first. Keep Forge classes in a small overlay while letting
 // the SRG server jar provide every net.minecraft class.
 def nativeOptionsMappedForgeName = 'forge-1.20.1-' + forge_version + '_mapped_official_1.20.1.jar'
-def nativeOptionsServerJar = file('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar')
+def nativeOptionsServerJar = {
+    def mcpRoot = new File(gradle.gradleUserHomeDir, 'caches/forge_gradle/mcp_repo')
+    def generated = mcpRoot.exists() ? fileTree(mcpRoot) { include '**/joined/rename/output.jar' }.files : []
+    def fallback = file('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar')
+    def result = generated ? generated.first() : fallback
+    if (!result.exists()) throw new GradleException('SRG Minecraft server jar is required for native options probe')
+    result
+}
 def nativeOptionsOverlay = layout.buildDirectory.file('native-options/forge-api-overlay.jar')
 tasks.register('nativeOptionsForgeOverlay') {
     dependsOn 'compileAddonsQaJava'
@@ -299,7 +306,8 @@ tasks.register('nativeOptionsForgeOverlay') {
     doLast {
         def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
         if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
-        def serverEntries = new java.util.zip.ZipFile(nativeOptionsServerJar).entries().toList()
+        def serverJar = nativeOptionsServerJar()
+        def serverEntries = new java.util.zip.ZipFile(serverJar).entries().toList()
             .findAll { !it.isDirectory() && it.name.startsWith('net/minecraft/') }
             .collect { it.name } as Set
         def output = nativeOptionsOverlay.get().asFile
@@ -325,8 +333,9 @@ tasks.register('checkClaimNativeOptions', JavaExec) {
     doFirst {
         def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
         if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
+        def serverJar = nativeOptionsServerJar()
         def runtimeWithoutMappedForge = sourceSets.test.runtimeClasspath.filter { it.name != nativeOptionsMappedForgeName }
-        classpath = files(nativeOptionsServerJar, nativeOptionsOverlay) + runtimeWithoutMappedForge
+        classpath = files(serverJar, nativeOptionsOverlay) + runtimeWithoutMappedForge
     }
     mainClass = 'mc.virgos.ClaimNativeOptionsTest'
     maxHeapSize = '256m'
