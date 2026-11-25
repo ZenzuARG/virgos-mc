@@ -294,6 +294,7 @@ def nativeOptionsMappedForgeName = 'forge-1.20.1-' + forge_version + '_mapped_of
 def nativeOptionsServerJar = file('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar')
 def nativeOptionsOverlay = layout.buildDirectory.file('native-options/forge-api-overlay.jar')
 tasks.register('nativeOptionsForgeOverlay', Jar) {
+    dependsOn 'compileAddonsQaJava'
     archiveFileName = nativeOptionsOverlay.get().asFile.name
     destinationDirectory = nativeOptionsOverlay.get().asFile.parentFile
     from {
