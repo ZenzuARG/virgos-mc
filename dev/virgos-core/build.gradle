@@ -291,6 +291,7 @@ tasks.named('check').configure { dependsOn 'checkClaimPermissions' }
 // SRG jar being listed first. Keep Forge classes in a small overlay while letting
 // the SRG server jar provide every net.minecraft class.
 def nativeOptionsMappedForgeName = 'forge-1.20.1-' + forge_version + '_mapped_official_1.20.1.jar'
+def nativeOptionsServerJar = file('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar')
 def nativeOptionsOverlay = layout.buildDirectory.file('native-options/forge-api-overlay.jar')
 tasks.register('nativeOptionsForgeOverlay', Jar) {
     archiveFileName = nativeOptionsOverlay.get().asFile.name
@@ -298,7 +299,13 @@ tasks.register('nativeOptionsForgeOverlay', Jar) {
     from {
         def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
         if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
-        project.zipTree(mapped).matching { exclude 'net/minecraft/**' }
+        def serverEntries = project.zipTree(nativeOptionsServerJar).files
+            .collect { it.path.replace('\\', '/') }
+            .findAll { it.contains('/net/minecraft/') }
+            .collect { it.substring(it.indexOf('/net/minecraft/') + 1) } as Set
+        project.zipTree(mapped).matching {
+            exclude { details -> details.path.startsWith('net/minecraft/') && serverEntries.contains(details.path) }
+        }
     }
 }
 
@@ -309,7 +316,7 @@ tasks.register('checkClaimNativeOptions', JavaExec) {
         def mapped = sourceSets.test.runtimeClasspath.find { it.name == nativeOptionsMappedForgeName }
         if (mapped == null) throw new GradleException('Mapped Forge runtime jar is required for native options probe')
         def runtimeWithoutMappedForge = sourceSets.test.runtimeClasspath.filter { it.name != nativeOptionsMappedForgeName }
-        classpath = files('../../libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar', nativeOptionsOverlay) + runtimeWithoutMappedForge
+        classpath = files(nativeOptionsServerJar, nativeOptionsOverlay) + runtimeWithoutMappedForge
     }
     mainClass = 'mc.virgos.ClaimNativeOptionsTest'
     maxHeapSize = '256m'
