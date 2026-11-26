@@ -1,8 +1,12 @@
-# Virgos-MC v3 — experiencia completa sin reinicio
+# Virgos-MC v3 — experiencia completa sin reinicio (estado publicado)
 
-## Objetivo
+## Estado actual
 
-Virgos-MC v3 debe ampliar la exploración, la lectura del mundo y la progresión sin borrar el mundo actual, los inventarios, los claims, las misiones ni las cuentas de quienes ya juegan. La entrega será única: no se publica un instalador hasta cerrar el contenido, el balance, el cliente y las pruebas.
+**v3.2.0 está publicada** en el [release oficial](https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.2.0), con instalador Windows, MRPack y `release.json`. Este documento conserva el roadmap y los criterios de validación que guiaron la implementación; las fases de publicación ya fueron completadas.
+
+## Objetivo histórico
+
+Virgos-MC v3 debía ampliar la exploración, la lectura del mundo y la progresión sin borrar el mundo actual, los inventarios, los claims, las misiones ni las cuentas de quienes ya juegan. La entrega se realizó como una publicación única luego de cerrar el contenido, el balance, el cliente y las pruebas.
 
 ## Reglas de compatibilidad
 
@@ -34,7 +38,7 @@ Las misiones personales seguirán siendo individuales. Las expediciones y los je
 
 Se revisan el perfil, el contador de tiempo, la guía de claims, la lista de recetas y el mercado para que todos expongan el mismo lenguaje. Se mantienen Lootr, Claims, el descanso con una sola persona y el perfil offline para usuarios premium y no premium.
 
-## Fases
+## Fases históricas
 
 1. **Auditoría y respaldo:** clonar mundo y configuraciones, inventariar progreso y establecer un punto de restauración.
 2. **Cliente visual:** validar primera persona, animaciones, audio, shaders y Java 21 en el cliente estándar y TLauncher.
@@ -42,7 +46,7 @@ Se revisan el perfil, el contador de tiempo, la guía de claims, la lista de rec
 4. **Balance:** probar ocho jugadores, una base con Create, una expedición y un jefe; ajustar carga, botín y tiempos.
 5. **Publicación única:** generar el instalador final, validar reparación, actualizar las instrucciones y recién entonces publicarlo en Discord.
 
-## Criterios de salida
+## Criterios de salida históricos
 
 - Arranque limpio del servidor y del cliente estándar con 117 mods requeridos y las opciones visuales verificadas.
 - Arranque de TLauncher con el mismo paquete y sin OptiFine.
