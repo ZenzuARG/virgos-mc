@@ -5,7 +5,7 @@
   "clientFingerprint": "virgos-client-3.2.0",
   "minecraft": "1.20.1",
   "forge": "47.4.22",
-  "status": "release-candidate",
+  "status": "release-ready",
   "additionalMods": [
     {
       "project": "ocuwheel",
@@ -27,6 +27,8 @@
     "Distant Horizons 3.3.3 + Virgos compatibility",
     "ModernFix dynamic resources",
     "Backpack B key retained with nested-screen safety guard",
-    "Client defaults tuned for lower render overhead"
-  ]
+    "Client defaults tuned for lower render overhead",
+    "Create/JEI ingredient-cache refresh and compatibility recipe corrections"
+  ],
+  "jeiRecipeFix": "61d6e31"
 }
