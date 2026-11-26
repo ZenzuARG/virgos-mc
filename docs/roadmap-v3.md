@@ -48,7 +48,7 @@ Se revisan el perfil, el contador de tiempo, la guía de claims, la lista de rec
 
 ## Criterios de salida históricos
 
-- Arranque limpio del servidor y del cliente estándar con 117 mods requeridos y las opciones visuales verificadas.
+- Arranque limpio del servidor y del cliente estándar con los artefactos fijados en `pack/mods.lock.json` verificados. El manifiesto actual contiene 150 artefactos: 130 con lado cliente y 118 con lado servidor, con solapamiento entre ambos lados.
 - Arranque de TLauncher con el mismo paquete y sin OptiFine.
 - Dos clientes premium/no premium pueden registrarse, iniciar sesión y conservar perfil, claims, recetas y misiones tras reiniciar.
 - No hay estructuras rotas en el spawn ni cofres de Lootr inaccesibles.
