@@ -5,7 +5,7 @@
 3. Elegí **TLauncher** o **Minecraft Launcher oficial** y tocá **Instalar Virgos-MC**.
 4. Esperá a que termine y seguí los pasos de la ventana. Después, en el juego: **Multijugador → Virgos-MC**.
 
-Necesitás Windows x64, tu launcher instalado, Internet y unos 10 GB libres. El asistente descarga Java 17 para el perfil oficial, usa el Java automático de TLauncher y prepara Forge 47.4.22 con los 116 archivos de mods y dependencias. No pide contraseñas ni permisos de administrador. La primera descarga puede tardar varios minutos; el launcher descarga los archivos restantes de Minecraft al abrir el juego.
+Necesitás Windows x64, tu launcher instalado, Internet y unos 10 GB libres. El asistente descarga Java 17 para el perfil oficial, usa el Java automático de TLauncher y prepara Forge 47.4.22 con los artefactos fijados en `pack/mods.lock.json` y sus dependencias. No pide contraseñas ni permisos de administrador. La primera descarga puede tardar varios minutos; el launcher descarga los archivos restantes de Minecraft al abrir el juego.
 
 **Launcher oficial:** se agrega el perfil **Virgos-MC**, con carpeta propia y **8192 MB (8 GB)** de memoria. Elegilo y tocá Jugar. Si no aparece, activá **Modificadas** en Instalaciones. Tenés que haber abierto el launcher e iniciado sesión al menos una vez.
 
