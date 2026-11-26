@@ -10,7 +10,7 @@ El pueblo del spawn tiene cuatro arcos que salen caminando al mundo. La plaza, e
 
 **Si no sabés qué hacer:** pulsá **J → 01 · Empezar → Empezá por acá**. `/virgos guia` abre ayuda por temas; `/virgos progreso` muestra el próximo paso. No hace falta completar todos los mods.
 
-**Nuevo en 2.0:** mundo y progreso nuevos, con Terralith, aldeas integradas, grandes mazmorras y nuevas rutas de jefes. El códice reúne **244 misiones y guías en diez capítulos**: Empezar, Tu hogar, Create, Magia, Explorar, Cocina, Aventuras, Jefes, Cooperar y El pueblo. `/virgos menu` reúne la ayuda.
+**Contenido vigente de v3.2.0:** mundo y progreso del paquete publicado, con Terralith, aldeas integradas, grandes mazmorras y rutas de jefes. El códice reúne **244 misiones y guías en diez capítulos**: Empezar, Tu hogar, Create, Magia, Explorar, Cocina, Aventuras, Jefes, Cooperar y El pueblo. `/virgos menu` reúne la ayuda.
 
 La lista muestra el nombre y estado de cada misión. Usá la búsqueda del capítulo, los filtros **Pendientes / Para reclamar** y las flechas de página. Clic en una misión abre sus objetivos, explicación y recompensas. **A+ / A−** ajustan el tamaño de la interfaz; la rueda recorre páginas y, sobre los capítulos, las secciones que no entren en pantalla. **Ver mapa original** conserva la vista de conexiones de Heracles.
 
@@ -18,7 +18,7 @@ La lista muestra el nombre y estado de cada misión. Usá la búsqueda del capí
 
 `/perfil` o **J → Mi perfil** muestra tiempo conectado, rango de Virgos, nivel de experiencia, misiones, criaturas derrotadas, muertes, distancia a pie y nadando, minería, fabricación y pesca. La pestaña **Misiones** desglosa el avance por capítulo. **Jugadores** permite consultar a quienes ya tengan registro; también funciona `/perfil Nombre` o `/estadisticas Nombre`.
 
-El tiempo incluye AFK y no da recompensas. El nivel de experiencia puede bajar al morir o encantar; el rango depende de reconocimientos del códice. Los perfiles desconectados muestran su último registro guardado. Todo corresponde al mundo v2 y su reinicio; no muestra inventarios ni ubicaciones de bases.
+El tiempo incluye AFK y no da recompensas. El nivel de experiencia puede bajar al morir o encantar; el rango depende de reconocimientos del códice. Los perfiles desconectados muestran su último registro guardado. Los perfiles corresponden al mundo activo y no muestran inventarios ni ubicaciones de bases.
 
 ## Mercado y encargos
 
@@ -75,7 +75,7 @@ Para proteger el chunk en el que estás: `/oclaims claim`; para liberarlo: `/ocl
 | Forja | Dos Especialistas con Resonancia superan la prueba | Con Especialista, glifos de Ars de nivel 3 |
 | Umbral / Maestro | Tres Especialistas con Forja superan Umbral y reclaman Maestro | Magia legendaria y glifos máximos |
 
-Los capítulos enseñan Create, Ars, Iron, Alex's Caves, hogar/mochilas, cocina, exploración y juego en grupo. Son prácticas opcionales: los objetivos de inventario se detectan sin consumir el objeto; las actividades de lectura se marcan manualmente. No dan rangos por hacer clic ni añaden premios repetibles. La v2 comienza desde cero para todos.
+Los capítulos enseñan Create, Ars, Iron, Alex's Caves, hogar/mochilas, cocina, exploración y juego en grupo. Son prácticas opcionales: los objetivos de inventario se detectan sin consumir el objeto; las actividades de lectura se marcan manualmente. No dan rangos por hacer clic ni añaden premios repetibles. La revisión histórica 2.0 comenzó desde cero para todos.
 
 **Rutas nuevas:** Explorar presenta el terreno, aldeas y mazmorras; Create incluye mecanismos de Integrated Dungeons y recursos de Alex's Caves. Jefes guía las invocaciones de Meet Your Fight y la preparación para Bosses of Mass Destruction. Aventuras cubre Aquamirae, Deep Aether, Incendium y Nullscape. Las casillas de lectura son una guía, no una verificación automática de haber vencido un jefe. Revisá JEI: las invocaciones avanzadas consumen trofeos previos y materiales de Create.
 
