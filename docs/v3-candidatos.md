@@ -1,6 +1,6 @@
-# Virgos-MC v3 — candidatos de cliente
+# Virgos-MC v3 — candidatos de cliente (matriz histórica)
 
-Esta lista es el alcance de pruebas de la v3. El servidor y el mundo actual se conservan; los mods de esta hoja que sean sólo de cliente no cambian el contenido ni obligan a reiniciar el progreso.
+Esta lista conserva el alcance y las decisiones de prueba de la v3 antes de la publicación. **El estado vigente es v3.2.0**, disponible en el [release oficial](https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.2.0). El servidor y el mundo actual se conservan; los mods de esta hoja que sean sólo de cliente no cambian el contenido ni obligan a reiniciar el progreso.
 
 ## Lote A — laboratorio actual
 
