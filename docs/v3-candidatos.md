@@ -44,4 +44,4 @@ Oculus se instala como mod de cliente y el instalador descarga Complementary Unb
 5. Medición con Complementary Reimagined en perfiles Potato/Low/Medium en una PC con margen.
 6. Revisión de `latest.log` para crashes, warnings nuevos de mixins y errores de audio.
 
-La entrega final se construye una sola vez después de cerrar este lote y la prueba de mundo. No se publica este candidato local ni se actualiza Discord todavía.
+**Nota histórica:** este lote y sus pruebas sirvieron como matriz de validación previa. La entrega final se publicó como **Virgos-MC v3.2.0 el 25/11/2026** en el [release oficial](https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.2.0). Esta documentación no representa una publicación pendiente ni requiere actualizar Discord por sí sola.
