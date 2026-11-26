@@ -1,4 +1,6 @@
-# Virgos-MC 2.0
+# Virgos-MC 2.0 (documentación histórica)
+
+> **Documento histórico:** describe la revisión 2.0 y no contiene las instrucciones vigentes de instalación. Para jugar actualmente usá el [release v3.2.0](https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.2.0) y el instalador `Virgos-MC-3.2.0-instalar.zip`.
 
 Minecraft 1.20.1, Forge 47.4.22 y Ketting 0.6.1. La v2 estrena mundo e inventarios, misiones, bases y estadísticas desde cero. Las cuentas y contraseñas, el dominio y la voz conservan su configuración. La partida 1.2 permanece respaldada.
 
@@ -25,7 +27,7 @@ Quark conserva construcción y decoración, con sistemas que se superponen desac
 
 ## Instalación
 
-Extraer **Virgos-MC-2.0.0-instalar.zip**, abrir **EMPEZAR.bat** y elegir launcher. Para actualizar, seleccionar la misma carpeta y **Revisar / reparar**. Conserva mundos locales, controles, servidores guardados y preferencias de voz. El asistente configura Forge, carpeta y memoria para el oficial y TLauncher.
+En la revisión histórica 2.0 se debía extraer **Virgos-MC-2.0.0-instalar.zip** y abrir **EMPEZAR.bat**. Para la versión vigente, usar el instalador **Virgos-MC-3.2.0-instalar.zip** del release v3.2.0. y elegir launcher. Para actualizar, seleccionar la misma carpeta y **Revisar / reparar**. Conserva mundos locales, controles, servidores guardados y preferencias de voz. El asistente configura Forge, carpeta y memoria para el oficial y TLauncher.
 
 En instalaciones nuevas elige 6 GB para equipos con al menos 16 GB de RAM, o 5 GB para equipos con 12 GB. Las actualizaciones conservan la elección anterior; se cambia en **Opciones de carpeta y memoria**. El cliente QA completó el inicio y las pruebas con 6 GB. El servidor tiene un máximo de 8 GB.
 
