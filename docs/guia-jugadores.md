@@ -1,6 +1,6 @@
 # Instalar Virgos-MC
 
-1. Descargá **Virgos-MC-2.0.0-instalar.zip** y elegí **Extraer todo**.
+1. Descargá **Virgos-MC-3.2.0-instalar.zip** desde el [release v3.2.0](https://github.com/ZenzuARG/virgos-mc/releases/tag/v3.2.0) y elegí **Extraer todo**.
 2. Abrí **EMPEZAR.bat**. Cerrá Minecraft y tu launcher.
 3. Elegí **TLauncher** o **Minecraft Launcher oficial** y tocá **Instalar Virgos-MC**.
 4. Esperá a que termine y seguí los pasos de la ventana. Después, en el juego: **Multijugador → Virgos-MC**.
@@ -25,4 +25,4 @@ Dirección alternativa para agregar el servidor: **virgos-mc.playit.plus**. Las 
 
 Si el primer ingreso muestra «Took too long to log in» o tiempo de espera agotado, volvé a Multijugador y entrá nuevamente. Se observó al iniciar las pruebas del paquete; la reconexión funcionó. Si vuelve a fallar, compartí `latest.log` con el administrador.
 
-La versión 2.0 estrena mundo y reinicia inventario, misiones, bases y estadísticas. Conservá el nombre y contraseña que ya usabas. Consultá tu progreso con `/perfil`, o el de un amigo con `/perfil Nombre`.
+La revisión histórica 2.0 estrenó mundo y reinició inventario, misiones, bases y estadísticas. La versión vigente es v3.2.0; seguí siempre el instalador del release enlazado arriba. Conservá el nombre y contraseña que ya usabas. Consultá tu progreso con `/perfil`, o el de un amigo con `/perfil Nombre`.
